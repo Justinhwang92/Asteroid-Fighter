@@ -6,8 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
-import static com.example.myfirstapp.GameView.screenRatioX;
-import static com.example.myfirstapp.GameView.screenRatioY;
+import static com.example.myfirstapp.Display.screenRatioX;
+import static com.example.myfirstapp.Display.screenRatioY;
 
 public class Bullet {
 
@@ -15,8 +15,6 @@ public class Bullet {
     Bitmap bullet;
 
     Bullet (Resources res) {
-
-        //bullet = BitmapFactory.decodeResource(res, R.drawable.bullet);
         bullet = BitmapFactory.decodeResource(res, R.drawable.bullet2);
 
         width = bullet.getWidth();

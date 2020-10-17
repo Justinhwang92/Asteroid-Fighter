@@ -6,12 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.util.Log;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private CheckBox checkBoxHarry, checkBoxMatrix, checkBoxJoker;
@@ -27,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, GameActivity.class));
+                startActivity(new Intent(MainActivity.this, Activity.class));
             }
         });
     }
