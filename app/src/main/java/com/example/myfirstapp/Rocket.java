@@ -13,7 +13,7 @@ public class Rocket {
 
     public int speed = 20;
     public boolean wasShot = true;
-    int x = 0, y, width, height, birdCounter = 1;
+    int x = 0, y, width, height, rocketCounter = 1;
     Bitmap ship;
 
     Rocket (Resources res) {
@@ -34,7 +34,7 @@ public class Rocket {
     }
 
     Bitmap getRocket() {
-        birdCounter = 1;
+        rocketCounter = 1;
         return ship;
     }
     Rect getCollisionShape () {
