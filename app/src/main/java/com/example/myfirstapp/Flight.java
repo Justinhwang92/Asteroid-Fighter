@@ -16,27 +16,21 @@ public class Flight {
     int toShoot = 0;
     boolean isGoingUp = false;
     int x, y, width, height, shootCounter = 1;
-    Bitmap flight1, flight2, shoot, dead;
+    Bitmap flight2, shoot;
     private Display display;
 
     // initializes the image and size for the spaceship,
-    // initializes the image and size for the bullet
     Flight (Display display, int screenY, Resources res) {
         this.display = display;
 
-        flight1 = BitmapFactory.decodeResource(res, R.drawable.ufo);
         flight2 = BitmapFactory.decodeResource(res, R.drawable.ufo);
 
-        width = flight1.getWidth();
-        height = flight1.getHeight();
+        width = flight2.getWidth();
+        height = flight2.getHeight();
 
         width /= 6;
         height /= 6;
 
-        width = (int) (width * screenRatioX);
-        height = (int) (height * screenRatioY);
-
-        flight1 = Bitmap.createScaledBitmap(flight1, width, height, false);
         flight2 = Bitmap.createScaledBitmap(flight2, width, height, false);
 
         shoot = BitmapFactory.decodeResource(res, R.drawable.ufo);
