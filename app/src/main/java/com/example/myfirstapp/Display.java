@@ -85,15 +85,9 @@ public class Display extends SurfaceView implements Runnable {
         if (background2.x + background2.background.getWidth() < 0) {
             background2.x = screenX;
         }
-        if (flight.isGoingUp)
-            flight.y -= 30 * screenRatioY;
-        else
-            flight.y += 30 * screenRatioY;
 
-        if (flight.y < 0)
-            flight.y = 0;
-        if (flight.y >= screenY - flight.height)
-            flight.y = screenY - flight.height;
+        flight.y = (int) (screenY / 2) - 100;
+
         List<Bullet> trash = new ArrayList<>();
         for (Bullet bullet : bullets) {
             if (bullet.x > screenX)
@@ -111,6 +105,7 @@ public class Display extends SurfaceView implements Runnable {
         }
         for (Bullet bullet : trash)
             bullets.remove(bullet);
+        // actions when ship is hit
         for (Rocket rocket : rockets) {
             rocket.x -= rocket.speed;
             if (rocket.x + rocket.width < 0) {
