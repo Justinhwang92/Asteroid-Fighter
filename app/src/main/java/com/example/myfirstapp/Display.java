@@ -10,7 +10,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,7 +21,7 @@ public class Display extends SurfaceView implements Runnable {
     private int screenX, screenY, score = 0;
     public static float screenRatioX, screenRatioY;
     private Paint paint;
-    private Rocket[] rockets;
+    private Asteroid asteroid;
     private Random random;
     private List<Bullet> bullets;
     private Flight flight;
@@ -33,7 +32,6 @@ public class Display extends SurfaceView implements Runnable {
     public Display(Activity activity, int screenX, int screenY) {
         super(activity);
         this.activity = activity;
-
         this.screenX = screenX;
         this.screenY = screenY;
         screenRatioX = 1920f / screenX;
@@ -43,23 +41,14 @@ public class Display extends SurfaceView implements Runnable {
         background2 = new Background(screenX, screenY, getResources());
 
         flight = new Flight(this, screenY, getResources());
-
         bullets = new ArrayList<>();
-
         background2.x = screenX;
-
         paint = new Paint();
         paint.setTextSize(128);
         paint.setColor(Color.WHITE);
-
-        rockets = new Rocket[4];
-
-        for (int i = 0;i < 4;i++) {
-            Rocket rocket = new Rocket(getResources());
-            rockets[i] = rocket;
-        }
+        asteroid = new Asteroid(getResources());
         random = new Random();
-    }
+}
 
     // summary method
     @Override
@@ -85,52 +74,43 @@ public class Display extends SurfaceView implements Runnable {
         if (background2.x + background2.background.getWidth() < 0) {
             background2.x = screenX;
         }
-        if (flight.isGoingUp)
-            flight.y -= 30 * screenRatioY;
-        else
-            flight.y += 30 * screenRatioY;
 
-        if (flight.y < 0)
-            flight.y = 0;
-        if (flight.y >= screenY - flight.height)
-            flight.y = screenY - flight.height;
+        flight.y = (int) (screenY / 2) - 100;
+
         List<Bullet> trash = new ArrayList<>();
         for (Bullet bullet : bullets) {
             if (bullet.x > screenX)
                 trash.add(bullet);
             bullet.x += 50 * screenRatioX;
-            for (Rocket rocket : rockets) {
-                if (Rect.intersects(rocket.getCollisionShape(),
-                        bullet.getCollisionShape())) {
-                    score++;
-                    rocket.x = -500;
-                    bullet.x = screenX + 500;
-                    rocket.wasShot = true;
-                }
+            if (Rect.intersects(asteroid.getCollisionShape(),
+                    bullet.getCollisionShape())) {
+                score++;
+                asteroid.x = -500;
+                bullet.x = screenX + 500;
+                asteroid.wasShot = true;
             }
         }
         for (Bullet bullet : trash)
             bullets.remove(bullet);
-        for (Rocket rocket : rockets) {
-            rocket.x -= rocket.speed;
-            if (rocket.x + rocket.width < 0) {
-                if (!rocket.wasShot) {
+        // actions when ship is hit
+        asteroid.x -= asteroid.speed;
+            if (asteroid.x + asteroid.width < 0) {
+                if (!asteroid.wasShot) {
                     isGameOver = true;
                     return;
                 }
                 int bound = (int) (30 * screenRatioX);
-                rocket.speed = random.nextInt(bound);
-                if (rocket.speed < 10 * screenRatioX)
-                    rocket.speed = (int) (10 * screenRatioX);
-                rocket.x = screenX;
-                rocket.y = random.nextInt(screenY - rocket.height);
-                rocket.wasShot = false;
+                asteroid.speed = random.nextInt(bound);
+                if (asteroid.speed < 10 * screenRatioX)
+                    asteroid.speed = (int) (10 * screenRatioX);
+                asteroid.x = screenX;
+                asteroid.y = (screenY - asteroid.height) / 2;
+                asteroid.wasShot = false;
             }
-            if (Rect.intersects(rocket.getCollisionShape(), flight.getCollisionShape())) {
+            if (Rect.intersects(asteroid.getCollisionShape(), flight.getCollisionShape())) {
                 isGameOver = true;
                 return;
             }
-        }
     }
 
     // allow for asteroid, bullet, background visibility
@@ -139,8 +119,7 @@ public class Display extends SurfaceView implements Runnable {
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
-            for (Rocket rocket : rockets)
-                canvas.drawBitmap(rocket.getRocket(), rocket.x, rocket.y, paint);
+            canvas.drawBitmap(asteroid.getAsteroid(), asteroid.x, asteroid.y, paint);
             canvas.drawText(score + "", screenX / 2f, 164, paint);
             if (isGameOver) {
                 isPlaying = false;
