@@ -74,14 +74,14 @@ public class Display extends SurfaceView implements Runnable {
         if (background2.x + background2.background.getWidth() < 0) {
             background2.x = screenX;
         }
-
         flight.y = (int) (screenY / 2) - 100;
 
         List<Bullet> trash = new ArrayList<>();
         for (Bullet bullet : bullets) {
             if (bullet.x > screenX)
                 trash.add(bullet);
-            bullet.x += 50 * screenRatioX;
+            // speed of the bullet
+            bullet.x += 500 * screenRatioX; //bullet.x += 50 * screenRatioX;
             if (Rect.intersects(asteroid.getCollisionShape(),
                     bullet.getCollisionShape())) {
                 score++;
@@ -99,11 +99,9 @@ public class Display extends SurfaceView implements Runnable {
                     isGameOver = true;
                     return;
                 }
-                int bound = (int) (30 * screenRatioX);
-                asteroid.speed = random.nextInt(bound);
                 if (asteroid.speed < 10 * screenRatioX)
                     asteroid.speed = (int) (10 * screenRatioX);
-                asteroid.x = screenX;
+                asteroid.x = screenX - 5000;
                 asteroid.y = (screenY - asteroid.height) / 2;
                 asteroid.wasShot = false;
             }
@@ -165,7 +163,8 @@ public class Display extends SurfaceView implements Runnable {
                 break;
             case MotionEvent.ACTION_UP:
                 flight.isGoingUp = false;
-                if (event.getX() > screenX / 2)
+                // where the user should touch to shoot
+                if (event.getX() > 0) //if (event.getX() > screenX / 2)
                     flight.toShoot++;
                 break;
         }
@@ -175,7 +174,7 @@ public class Display extends SurfaceView implements Runnable {
     // produces bullets
     public void newBullet() {
         Bullet bullet = new Bullet(getResources());
-        bullet.x = flight.x + flight.width;
+        bullet.x = (flight.x + flight.width);
         bullet.y = flight.y + (flight.height / 2);
         bullets.add(bullet);
     }

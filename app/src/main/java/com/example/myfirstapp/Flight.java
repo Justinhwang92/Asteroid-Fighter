@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
 import static com.example.myfirstapp.Display.screenRatioX;
-import static com.example.myfirstapp.Display.screenRatioY;
 
 public class Flight {
 
