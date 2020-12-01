@@ -50,12 +50,6 @@ public class Flight {
         return flight;
     }
 
-    // if we want to shoot automatically
-//    Bitmap getFlight() {
-//        display.newBullet();
-//        return shoot;
-//    }
-
     Rect getCollisionShape() {
         return new Rect(x, y, x + width, y + height);
     }
