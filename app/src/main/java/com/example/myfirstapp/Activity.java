@@ -18,7 +18,7 @@ public class Activity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
-        display = new Display(this, point.x, point.y);
+        display = new Display(this, point.x +5000, point.y);
         setContentView(display);
     }
 

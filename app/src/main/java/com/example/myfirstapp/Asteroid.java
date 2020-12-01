@@ -11,15 +11,14 @@ import static com.example.myfirstapp.Display.screenRatioY;
 
 public class Asteroid {
 
-    public int speed = 20;
+    public int speed = 8;
     public boolean wasShot = true;
     int x = 0, y, width, height, asteroidCounter = 1;
     Bitmap ship;
 
     Asteroid (Resources res) {
         ship = BitmapFactory.decodeResource(res, R.drawable.one);
-
-        width = ship.getWidth() / 6;
+        width = ship.getWidth() / 2;
         height = ship.getHeight() / 6;
 
         width = (int) (width * screenRatioX);
