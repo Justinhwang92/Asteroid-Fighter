@@ -59,8 +59,8 @@ public class Display extends SurfaceView implements Runnable {
     @Override
     public void run() {
         while (isPlaying) {
-            update ();
-            draw ();
+            update();
+            draw();
             try {
                 Thread.sleep(17);
             } catch (InterruptedException e) {
@@ -71,6 +71,7 @@ public class Display extends SurfaceView implements Runnable {
 
     // allows movements of the ship, background, bullet, and asteroids
     private void update () {
+        asteroid.crashed = false;
         background1.x -= 10 * screenRatioX;
         background2.x -= 10 * screenRatioX;
         if (background1.x + background1.background.getWidth() < 0) {
@@ -86,18 +87,22 @@ public class Display extends SurfaceView implements Runnable {
             if (bullet.x > screenX)
                 trash.add(bullet);
             // speed of the bullet
-            bullet.x += 500 * screenRatioX; //bullet.x += 50 * screenRatioX;
+            bullet.x += 500 * screenRatioX;
+            // If bullet hits asteroid
+            if (Math.abs(asteroid.x - bullet.x) < 500) {
+                asteroid.crashed = true;
+            }
             if (Rect.intersects(asteroid.getCollisionShape(), bullet.getCollisionShape())) {
                 score++;
                 asteroid.x = -500;
                 bullet.x = screenX + 500;
-                asteroid.wasShot = true;
             }
         }
+
         for (Bullet bullet : trash)
             bullets.remove(bullet);
         // actions when ship is hit
-        asteroid.x -= asteroid.speed;
+        asteroid.x -= (asteroid.speed);
             if (asteroid.x + asteroid.width < 0) {
                 if (health == 0) {
                     isGameOver = true;
@@ -109,12 +114,12 @@ public class Display extends SurfaceView implements Runnable {
                 asteroid.y = (screenY - asteroid.height) / 2;
                 asteroid.wasShot = false;
             }
+            // if asteroid hits the ship
             if (Rect.intersects(asteroid.getCollisionShape(), flight.getCollisionShape())) {
+                asteroid.crashed = true;
                 asteroid.x = -500;
                 health--;
-                return;
             }
-            System.out.println(health);
             if (health == 0) {
                 isGameOver = true;
                 return;
@@ -128,7 +133,8 @@ public class Display extends SurfaceView implements Runnable {
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
             canvas.drawBitmap(asteroid.getAsteroid(), asteroid.x, asteroid.y, paint);
-            canvas.drawText(score + "", screenX / 2f, 164, paint);
+            //canvas.drawText(score + "", screenX / 2f, 164, paint);
+            canvas.drawText(score + "", flight.x + 1400, flight.y - 450, paint);
             if (isGameOver) {
                 isPlaying = false;
                 goBack();
@@ -164,6 +170,7 @@ public class Display extends SurfaceView implements Runnable {
     }
 
     // allows movement for the ship
+    // allows shooting
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {

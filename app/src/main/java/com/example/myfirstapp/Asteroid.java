@@ -14,10 +14,13 @@ public class Asteroid {
     public int speed = 8;
     public boolean wasShot = true;
     int x = 0, y, width, height, asteroidCounter = 1;
-    Bitmap ship;
+    Bitmap ship, destroyed;
+    public boolean crashed = false;
 
     Asteroid (Resources res) {
         ship = BitmapFactory.decodeResource(res, R.drawable.one);
+        destroyed = BitmapFactory.decodeResource(res, R.drawable.explosion);
+
         width = ship.getWidth() / 2;
         height = ship.getHeight() / 6;
 
@@ -29,10 +32,16 @@ public class Asteroid {
         y = -height;
     }
 
+
     Bitmap getAsteroid() {
         asteroidCounter = 1;
+        if (crashed) {
+            x = x + 49;
+            return destroyed;
+        }
         return ship;
     }
+
     Rect getCollisionShape () {
         return new Rect(x, y, x + width, y + height);
     }
