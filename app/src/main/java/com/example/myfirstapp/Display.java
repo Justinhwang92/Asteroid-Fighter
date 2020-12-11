@@ -42,7 +42,7 @@ public class Display extends SurfaceView implements Runnable {
     private int gameplaySound;
 
     // initializes fields
-    // testing
+    // Further testing
     public Display(Activity activity, int screenX, int screenY) {
         super(activity);
         this.activity = activity;
@@ -65,7 +65,6 @@ public class Display extends SurfaceView implements Runnable {
         asteroid = new Asteroid(getResources());
         random = new Random();
         health = 3;
-
 
         gameplay = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         gameplaySound = gameplay.load(activity, raw.gameplay, 1);
