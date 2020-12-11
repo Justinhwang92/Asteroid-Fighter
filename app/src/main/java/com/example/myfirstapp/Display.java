@@ -8,11 +8,20 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.net.rtp.AudioStream;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
+
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static com.example.myfirstapp.R.*;
 
 public class Display extends SurfaceView implements Runnable {
 
@@ -29,8 +38,11 @@ public class Display extends SurfaceView implements Runnable {
     private Background background1, background2;
     private Heart heart;
     private int health;
+    private SoundPool gameplay;
+    private int gameplaySound;
 
     // initializes fields
+    // testing
     public Display(Activity activity, int screenX, int screenY) {
         super(activity);
         this.activity = activity;
@@ -53,6 +65,10 @@ public class Display extends SurfaceView implements Runnable {
         asteroid = new Asteroid(getResources());
         random = new Random();
         health = 3;
+
+
+        gameplay = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+        gameplaySound = gameplay.load(activity, raw.gameplay, 1);
 }
 
     // summary method
@@ -133,8 +149,8 @@ public class Display extends SurfaceView implements Runnable {
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
             canvas.drawBitmap(asteroid.getAsteroid(), asteroid.x, asteroid.y, paint);
-            //canvas.drawText(score + "", screenX / 2f, 164, paint);
-            canvas.drawText(score + "", flight.x + 1400, flight.y - 450, paint);
+           // canvas.drawText(score + "", screenX / 2f, 164, paint);
+           // canvas.drawText(score + "", screenX / 2f, 500, paint);
             if (isGameOver) {
                 isPlaying = false;
                 goBack();
