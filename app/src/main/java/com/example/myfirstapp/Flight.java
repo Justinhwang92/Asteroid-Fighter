@@ -12,9 +12,8 @@ import static com.example.myfirstapp.Display.screenRatioX;
 
 public class Flight {
 
-    int toShoot = 0;
-    boolean isGoingUp = false;
-    int x, y, width, height, shootCounter = 1;
+    boolean hasShot = false;
+    int x, y, width, height;
     Bitmap flight, shoot;
     private Display display;
 
@@ -39,14 +38,7 @@ public class Flight {
         x = (int) (64 * screenRatioX);
     }
 
-    // if we want to shoot manually
     Bitmap getFlight () {
-        if (toShoot != 0) {
-            shootCounter = 1;
-            toShoot--;
-            display.newBullet();
-            return shoot;
-        }
         return flight;
     }
 

@@ -31,8 +31,6 @@ public class Asteroid {
 
         y = -height;
     }
-
-
     Bitmap getAsteroid() {
         asteroidCounter = 1;
         if (crashed) {
