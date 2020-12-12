@@ -10,9 +10,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import static java.lang.Thread.*;
 
@@ -24,8 +21,6 @@ public class Display extends SurfaceView implements Runnable {
     public static float screenRatioX, screenRatioY;
     private Paint paint;
     private Asteroid asteroid;
-    private Random random;
-    private List<Bullet> bullets;
     private Flight flight;
     private Activity activity;
     private Background background1, background2;
@@ -47,13 +42,11 @@ public class Display extends SurfaceView implements Runnable {
         flight = new Flight(this, screenY, getResources());
         heart = new Heart(this, screenY, getResources());
 
-        bullets = new ArrayList<>();
         background2.x = screenX;
         paint = new Paint();
         paint.setTextSize(128);
         paint.setColor(Color.WHITE);
         asteroid = new Asteroid(getResources());
-        random = new Random();
         theBullet = new Bullet(getResources());
 }
     // summary method
