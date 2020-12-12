@@ -13,6 +13,7 @@ public class Bullet {
 
     int x, y, width, height;
     Bitmap bullet;
+    int speed = 150;
 
     Bullet (Resources res) {
         bullet = BitmapFactory.decodeResource(res, R.drawable.bullet2);
@@ -24,11 +25,14 @@ public class Bullet {
         height = (int) (height * screenRatioY);
 
         bullet = Bitmap.createScaledBitmap(bullet, width, height, false);
-
     }
 
     Rect getCollisionShape () {
         return new Rect(x, y, x + width, y + height);
+    }
+
+    Bitmap getBullet() {
+        return bullet;
     }
 
 }

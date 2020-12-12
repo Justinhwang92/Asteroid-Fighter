@@ -8,26 +8,19 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.net.rtp.AudioStream;
-import android.os.Build;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.example.myfirstapp.R.*;
+import static java.lang.Thread.*;
 
 public class Display extends SurfaceView implements Runnable {
 
     private Thread thread;
     private boolean isPlaying, isGameOver = false;
-    private int screenX, screenY, score = 0;
+    private int screenX, screenY;
     public static float screenRatioX, screenRatioY;
     private Paint paint;
     private Asteroid asteroid;
@@ -37,12 +30,9 @@ public class Display extends SurfaceView implements Runnable {
     private Activity activity;
     private Background background1, background2;
     private Heart heart;
-    private int health;
-    private SoundPool gameplay;
-    private int gameplaySound;
+    private Bullet theBullet;
 
     // initializes fields
-    // Further testing
     public Display(Activity activity, int screenX, int screenY) {
         super(activity);
         this.activity = activity;
@@ -64,12 +54,8 @@ public class Display extends SurfaceView implements Runnable {
         paint.setColor(Color.WHITE);
         asteroid = new Asteroid(getResources());
         random = new Random();
-        health = 3;
-
-        gameplay = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-        gameplaySound = gameplay.load(activity, raw.gameplay, 1);
+        theBullet = new Bullet(getResources());
 }
-
     // summary method
     @Override
     public void run() {
@@ -77,7 +63,7 @@ public class Display extends SurfaceView implements Runnable {
             update();
             draw();
             try {
-                Thread.sleep(17);
+                sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -95,50 +81,45 @@ public class Display extends SurfaceView implements Runnable {
         if (background2.x + background2.background.getWidth() < 0) {
             background2.x = screenX;
         }
-        flight.y = (int) (screenY / 2) - 100;
 
-        List<Bullet> trash = new ArrayList<>();
-        for (Bullet bullet : bullets) {
-            if (bullet.x > screenX)
-                trash.add(bullet);
-            // speed of the bullet
-            bullet.x += 500 * screenRatioX;
-            // If bullet hits asteroid
-            if (Math.abs(asteroid.x - bullet.x) < 500) {
-                asteroid.crashed = true;
-            }
-            if (Rect.intersects(asteroid.getCollisionShape(), bullet.getCollisionShape())) {
-                score++;
-                asteroid.x = -500;
-                bullet.x = screenX + 500;
-            }
+        flight.y = (screenY / 2) - 100;    // put spaceship to center
+        theBullet.y = (screenY / 2);      // bullet shoots from the center
+
+        if (flight.hasShot) {
+            theBullet.x += (theBullet.speed);
+        }
+        // allows for explosion when bullet and asteroid gets closer
+        if (Math.abs(asteroid.x - theBullet.x) < 302) {
+            asteroid.crashed = true;
+        }
+        if (Rect.intersects(asteroid.getCollisionShape(), theBullet.getCollisionShape())) {
+            asteroid.x = -500;  // asteroid regenerates on the right
+            theBullet.x = 0;   // stops bullet from continuing
+            flight.hasShot = false;
         }
 
-        for (Bullet bullet : trash)
-            bullets.remove(bullet);
-        // actions when ship is hit
-        asteroid.x -= (asteroid.speed);
-            if (asteroid.x + asteroid.width < 0) {
-                if (health == 0) {
-                    isGameOver = true;
-                    return;
-                }
-                if (asteroid.speed < 10 * screenRatioX)
-                    asteroid.speed = (int) (10 * screenRatioX);
-                asteroid.x = screenX - 5000;
-                asteroid.y = (screenY - asteroid.height) / 2;
-                asteroid.wasShot = false;
-            }
-            // if asteroid hits the ship
-            if (Rect.intersects(asteroid.getCollisionShape(), flight.getCollisionShape())) {
-                asteroid.crashed = true;
-                asteroid.x = -500;
-                health--;
-            }
-            if (health == 0) {
+        asteroid.x -= (asteroid.speed); // asteroid moves
+        if (asteroid.x + asteroid.width < 0) {
+            if (heart.lives == 0) {
                 isGameOver = true;
                 return;
             }
+            if (asteroid.speed < 10 * screenRatioX)
+                asteroid.speed = (int) (10 * screenRatioX);
+            asteroid.x = screenX - 5000;
+            asteroid.y = (screenY - asteroid.height) / 2;
+            asteroid.wasShot = false;
+        }
+        // if asteroid hits the ship
+        if (Rect.intersects(asteroid.getCollisionShape(), flight.getCollisionShape())) {
+            asteroid.crashed = true;
+            asteroid.x = -500;
+            heart.lives--;
+        }
+        if (heart.lives == 0) {
+            isGameOver = true;
+            return;
+        }
     }
 
     // allow for asteroid, bullet, background visibility
@@ -148,8 +129,8 @@ public class Display extends SurfaceView implements Runnable {
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
             canvas.drawBitmap(asteroid.getAsteroid(), asteroid.x, asteroid.y, paint);
-           // canvas.drawText(score + "", screenX / 2f, 164, paint);
-           // canvas.drawText(score + "", screenX / 2f, 500, paint);
+            canvas.drawBitmap(theBullet.getBullet(), theBullet.x, theBullet.y, paint);
+
             if (isGameOver) {
                 isPlaying = false;
                 goBack();
@@ -157,9 +138,21 @@ public class Display extends SurfaceView implements Runnable {
             }
             canvas.drawBitmap(flight.getFlight(), flight.x, flight.y, paint);
             drawLives(canvas);
-            for (Bullet bullet : bullets)
-                canvas.drawBitmap(bullet.bullet, bullet.x, bullet.y, paint);
             getHolder().unlockCanvasAndPost(canvas);
+        }
+    }
+
+    // updates the health bar
+    public void drawLives(Canvas canvas) {
+        if (heart.lives == 3) {
+            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 450, paint);
+            canvas.drawBitmap(heart.heart, flight.x + 1600, flight.y - 450, paint);
+            canvas.drawBitmap(heart.heart, flight.x + 1400, flight.y - 450, paint);
+        } else if (heart.lives == 2) {
+            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 450, paint);
+            canvas.drawBitmap(heart.heart, flight.x + 1600, flight.y - 450, paint);
+        } else if (heart.lives == 1) {
+            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 450, paint);
         }
     }
 
@@ -184,45 +177,11 @@ public class Display extends SurfaceView implements Runnable {
         }
     }
 
-    // allows movement for the ship
-    // allows shooting
+    // where the user should touch to shoot
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                if (event.getX() < screenX / 2) {
-                    flight.isGoingUp = true;
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                flight.isGoingUp = false;
-                // where the user should touch to shoot
-                if (event.getX() > 0) //if (event.getX() > screenX / 2)
-                    flight.toShoot++;
-                break;
-        }
+        if (event.getX() > 0)
+            flight.hasShot = true;
         return true;
-    }
-
-    // produces bullets
-    public void newBullet() {
-        Bullet bullet = new Bullet(getResources());
-        bullet.x = (flight.x + flight.width);
-        bullet.y = flight.y + (flight.height / 2);
-        bullets.add(bullet);
-    }
-
-    // updates the health bar
-    public void drawLives(Canvas canvas) {
-        if (health == 3) {
-            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 450, paint);
-            canvas.drawBitmap(heart.heart, flight.x + 1600, flight.y - 450, paint);
-            canvas.drawBitmap(heart.heart, flight.x + 1400, flight.y - 450, paint);
-        } else if (health == 2) {
-            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 450, paint);
-            canvas.drawBitmap(heart.heart, flight.x + 1600, flight.y - 450, paint);
-        } else if (health == 1) {
-            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 450, paint);
-        }
     }
 }
