@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myMenuPlayer = MediaPlayer.create(this, R.raw.intro_ibragame);
+        myMenuPlayer.setLooping(true);
         myMenuPlayer.start();
 
         final MediaPlayer menuClickPlayer = MediaPlayer.create(this, R.raw.menu_option_clicked);

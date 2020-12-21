@@ -217,6 +217,7 @@ public class Display extends SurfaceView implements Runnable {
         activity.getMyConstantSong().stop();
         //begin boss music
         MediaPlayer bossPlayer = MediaPlayer.create(activity, R.raw.boss_ibragame);
+        bossPlayer.setLooping(true);
         bossPlayer.start();
     }
 
