@@ -105,6 +105,8 @@ public class Display extends SurfaceView implements Runnable {
 
         if (Rect.intersects(asteroid.getCollisionShape(), theBullet.getCollisionShape())) {
             if (!asteroid.bossStageBegins) {
+                MediaPlayer asteroidCrashPlayer = MediaPlayer.create(activity, R.raw.basic_explosion);
+                asteroidCrashPlayer.start();
                 asteroid.x = -500;  // asteroid regenerates on the right
             }
             theScore++;
