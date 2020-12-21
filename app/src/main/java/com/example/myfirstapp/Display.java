@@ -1,4 +1,4 @@
-/**
+/*
  * This class represents the display of the game
  */
 package com.example.myfirstapp;
@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
@@ -16,7 +17,7 @@ import static java.lang.Thread.*;
 public class Display extends SurfaceView implements Runnable {
 
     private Thread thread;
-    private boolean isPlaying, isGameOver = false;
+    private boolean isPlaying, isGameOver, isBossMusic = false;
     private int screenX, screenY;
     public static float screenRatioX, screenRatioY;
     private Paint paint;
@@ -74,6 +75,13 @@ public class Display extends SurfaceView implements Runnable {
             asteroid.y = (screenY - asteroid.height) / 2 - 250; //adjust boss to center
         }
 
+        if(theScore >= 10)
+        {
+            if(!isBossMusic)
+            {
+                playBossMusic();
+            }
+        }
         asteroid.crashed = false;
         background1.x -= 10 * screenRatioX;
         background2.x -= 10 * screenRatioX;
@@ -97,6 +105,8 @@ public class Display extends SurfaceView implements Runnable {
 
         if (Rect.intersects(asteroid.getCollisionShape(), theBullet.getCollisionShape())) {
             if (!asteroid.bossStageBegins) {
+                MediaPlayer asteroidCrashPlayer = MediaPlayer.create(activity, R.raw.basic_explosion);
+                asteroidCrashPlayer.start();
                 asteroid.x = -500;  // asteroid regenerates on the right
             }
             theScore++;
@@ -121,9 +131,16 @@ public class Display extends SurfaceView implements Runnable {
             asteroid.crashed = true;
             asteroid.x = -500;
             heart.lives--;
+            //plays heart is lost sound
+            MediaPlayer heartLostPlayer = MediaPlayer.create(activity, R.raw.spaceship_lost_life);
+            heartLostPlayer.start();
+
             theScore--;
         }
         if (heart.lives == 0) {
+            //plays all lives lost sound
+            MediaPlayer deadPlayer = MediaPlayer.create(activity, R.raw.lost_all_lives);
+            deadPlayer.start();
             isGameOver = true;
             return;
         }
@@ -192,12 +209,27 @@ public class Display extends SurfaceView implements Runnable {
             e.printStackTrace();
         }
     }
+    //start playing the boss music instead of regular
+    public void playBossMusic()
+    {
+        isBossMusic = true;
+        //stop regular music
+        activity.getMyConstantSong().stop();
+        //begin boss music
+        MediaPlayer bossPlayer = MediaPlayer.create(activity, R.raw.boss_ibragame);
+        bossPlayer.start();
+    }
 
     // where the user should touch to shoot
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getX() > 0)
+        //plays lazer sound whenever lazer is shot
+        MediaPlayer lazerPlayer = MediaPlayer.create(activity, R.raw.spaceship_lazer);
+        lazerPlayer.start();
+
+        if (event.getX() > 0) {
             flight.hasShot = true;
+        }
         return true;
     }
 }
