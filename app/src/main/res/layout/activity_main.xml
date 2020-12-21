@@ -24,9 +24,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="                     Asteroid Fighter"
+        android:textAlignment="center"
+        android:text="Asteroid Fighter"
         android:textColor="#ffffff"
-        android:textSize="120px" />
+        android:textSize="120px"
+        android:gravity="center_horizontal" />
 
 
 </RelativeLayout>
