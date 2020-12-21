@@ -37,7 +37,6 @@ public class Asteroid {
         asteroidCounter = 1;
         if (crashed) {
             if (!bossStageBegins) {
-                x = x + 49;
                 return destroyed;
             } else {
                 x = x + 100;

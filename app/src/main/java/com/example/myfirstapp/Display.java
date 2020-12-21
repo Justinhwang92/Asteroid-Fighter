@@ -46,12 +46,12 @@ public class Display extends SurfaceView implements Runnable {
 
         background2.x = screenX;
         paint = new Paint();
-        paint.setTextSize(128);
+        paint.setTextSize(64);
         paint.setColor(Color.WHITE);
         asteroid = new Asteroid(getResources());
         theBullet = new Bullet(getResources());
 
-        theScore = 0;
+        theScore = -1;
 }
     // summary method
     @Override
@@ -99,7 +99,7 @@ public class Display extends SurfaceView implements Runnable {
             theBullet.x += (theBullet.speed);
         }
         // allows for explosion when bullet and asteroid gets closer
-        if (Math.abs(asteroid.x - theBullet.x) < 302) {
+        if (Math.abs(asteroid.x - theBullet.x) < 300) {
             asteroid.crashed = true;
         }
 
@@ -152,7 +152,8 @@ public class Display extends SurfaceView implements Runnable {
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
-            canvas.drawText("Score: "+theScore, flight.x + 750, flight.y - 300, paint);
+            //canvas.drawText("Score: "+theScore, flight.x + 750, flight.y - 300, paint);
+            canvas.drawText("Score: "+theScore, screenX / 2 - 300, flight.y - 300, paint);
             canvas.drawBitmap(flight.getFlight(), flight.x, flight.y, paint);
 
             if (theBullet.x > 100) {
