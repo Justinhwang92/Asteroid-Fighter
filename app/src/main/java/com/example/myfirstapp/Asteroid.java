@@ -13,13 +13,15 @@ public class Asteroid {
 
     public int speed = 8;
     public boolean wasShot = true;
+    public boolean bossStageBegins = false;
     int x = 0, y, width, height, asteroidCounter = 1;
-    Bitmap ship, destroyed;
+    Bitmap ship, destroyed, boss;
     public boolean crashed = false;
 
     Asteroid (Resources res) {
         ship = BitmapFactory.decodeResource(res, R.drawable.one);
         destroyed = BitmapFactory.decodeResource(res, R.drawable.explosion);
+        boss = BitmapFactory.decodeResource(res, R.drawable.boss1a);
 
         width = ship.getWidth() / 2;
         height = ship.getHeight() / 6;
@@ -34,13 +36,22 @@ public class Asteroid {
     Bitmap getAsteroid() {
         asteroidCounter = 1;
         if (crashed) {
-            x = x + 49;
-            return destroyed;
+            if (!bossStageBegins) {
+                x = x + 49;
+                return destroyed;
+            } else {
+                x = x + 100;
+                return boss;
+            }
+        }
+        if (bossStageBegins) {
+            return boss;
         }
         return ship;
     }
 
     Rect getCollisionShape () {
-        return new Rect(x, y, x + width, y + height);
+        //return new Rect(x, y, x + width, y + height);
+        return new Rect(x, y - 2000, x + width, y + 3000);
     }
 }

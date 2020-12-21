@@ -1,4 +1,4 @@
-/**
+/*
  * This class represents the display of the game
  */
 package com.example.myfirstapp;
@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
@@ -16,16 +17,17 @@ import static java.lang.Thread.*;
 public class Display extends SurfaceView implements Runnable {
 
     private Thread thread;
-    private boolean isPlaying, isGameOver = false;
+    private boolean isPlaying, isGameOver, isBossMusic = false;
     private int screenX, screenY;
     public static float screenRatioX, screenRatioY;
     private Paint paint;
     private Asteroid asteroid;
-    private Flight flight;
+    private Flight flight; // ship
     private Activity activity;
     private Background background1, background2;
     private Heart heart;
     private Bullet theBullet;
+    public int theScore;
 
     // initializes fields
     public Display(Activity activity, int screenX, int screenY) {
@@ -48,6 +50,8 @@ public class Display extends SurfaceView implements Runnable {
         paint.setColor(Color.WHITE);
         asteroid = new Asteroid(getResources());
         theBullet = new Bullet(getResources());
+
+        theScore = 0;
 }
     // summary method
     @Override
@@ -65,6 +69,19 @@ public class Display extends SurfaceView implements Runnable {
 
     // allows movements of the ship, background, bullet, and asteroids
     private void update () {
+        // if score reaches 10, end asteroids, begin boss stage
+        if (theScore == 10) {
+            asteroid.bossStageBegins = true;
+            asteroid.y = (screenY - asteroid.height) / 2 - 250; //adjust boss to center
+        }
+
+        if(theScore >= 10)
+        {
+            if(!isBossMusic)
+            {
+                playBossMusic();
+            }
+        }
         asteroid.crashed = false;
         background1.x -= 10 * screenRatioX;
         background2.x -= 10 * screenRatioX;
@@ -85,9 +102,15 @@ public class Display extends SurfaceView implements Runnable {
         if (Math.abs(asteroid.x - theBullet.x) < 302) {
             asteroid.crashed = true;
         }
+
         if (Rect.intersects(asteroid.getCollisionShape(), theBullet.getCollisionShape())) {
-            asteroid.x = -500;  // asteroid regenerates on the right
-            theBullet.x = 0;   // stops bullet from continuing
+            if (!asteroid.bossStageBegins) {
+                MediaPlayer asteroidCrashPlayer = MediaPlayer.create(activity, R.raw.basic_explosion);
+                asteroidCrashPlayer.start();
+                asteroid.x = -500;  // asteroid regenerates on the right
+            }
+            theScore++;
+            theBullet.x = 0;   // stops bullet from continuing, goes back to left screen
             flight.hasShot = false;
         }
 
@@ -108,8 +131,16 @@ public class Display extends SurfaceView implements Runnable {
             asteroid.crashed = true;
             asteroid.x = -500;
             heart.lives--;
+            //plays heart is lost sound
+            MediaPlayer heartLostPlayer = MediaPlayer.create(activity, R.raw.spaceship_lost_life);
+            heartLostPlayer.start();
+
+            theScore--;
         }
         if (heart.lives == 0) {
+            //plays all lives lost sound
+            MediaPlayer deadPlayer = MediaPlayer.create(activity, R.raw.lost_all_lives);
+            deadPlayer.start();
             isGameOver = true;
             return;
         }
@@ -121,15 +152,20 @@ public class Display extends SurfaceView implements Runnable {
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
+            canvas.drawText("Score: "+theScore, flight.x + 750, flight.y - 300, paint);
+            canvas.drawBitmap(flight.getFlight(), flight.x, flight.y, paint);
+
+            if (theBullet.x > 100) {
+                canvas.drawBitmap(theBullet.getBullet(), theBullet.x, theBullet.y, paint);
+            }
             canvas.drawBitmap(asteroid.getAsteroid(), asteroid.x, asteroid.y, paint);
-            canvas.drawBitmap(theBullet.getBullet(), theBullet.x, theBullet.y, paint);
 
             if (isGameOver) {
                 isPlaying = false;
                 goBack();
                 return;
             }
-            canvas.drawBitmap(flight.getFlight(), flight.x, flight.y, paint);
+
             drawLives(canvas);
             getHolder().unlockCanvasAndPost(canvas);
         }
@@ -147,6 +183,10 @@ public class Display extends SurfaceView implements Runnable {
         } else if (heart.lives == 1) {
             canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 450, paint);
         }
+    }
+
+    private void disableAsteroids() {
+
     }
 
     // goes back to main menu
@@ -169,12 +209,28 @@ public class Display extends SurfaceView implements Runnable {
             e.printStackTrace();
         }
     }
+    //start playing the boss music instead of regular
+    public void playBossMusic()
+    {
+        isBossMusic = true;
+        //stop regular music
+        activity.getMyConstantSong().stop();
+        //begin boss music
+        MediaPlayer bossPlayer = MediaPlayer.create(activity, R.raw.boss_ibragame);
+        bossPlayer.setLooping(true);
+        bossPlayer.start();
+    }
 
     // where the user should touch to shoot
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getX() > 0)
+        //plays lazer sound whenever lazer is shot
+        MediaPlayer lazerPlayer = MediaPlayer.create(activity, R.raw.spaceship_lazer);
+        lazerPlayer.start();
+
+        if (event.getX() > 0) {
             flight.hasShot = true;
+        }
         return true;
     }
 }
