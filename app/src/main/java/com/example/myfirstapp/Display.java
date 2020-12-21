@@ -153,7 +153,7 @@ public class Display extends SurfaceView implements Runnable {
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
             //canvas.drawText("Score: "+theScore, flight.x + 750, flight.y - 300, paint);
-            canvas.drawText("Score: "+theScore, screenX / 2 - 300, flight.y - 300, paint);
+            canvas.drawText("Score: "+theScore, flight.x + 850, flight.y - 300, paint);
             canvas.drawBitmap(flight.getFlight(), flight.x, flight.y, paint);
 
             if (theBullet.x > 100) {
