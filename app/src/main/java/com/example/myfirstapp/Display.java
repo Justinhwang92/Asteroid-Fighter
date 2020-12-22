@@ -192,8 +192,9 @@ public class Display extends SurfaceView implements Runnable {
 
     // goes back to main menu
     private void goBack() {
-        activity.startActivity(new Intent(activity, MainActivity.class));
-        activity.finish();
+        activity.onStop();
+        activity.onRestart();
+        activity.onStart();
     }
 
     public void resume() {

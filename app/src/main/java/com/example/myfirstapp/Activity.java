@@ -46,4 +46,22 @@ public class Activity extends AppCompatActivity {
         display.resume();
         myConstantSong.start();
     }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        display.donePlaying();
+        myConstantSong.stop();
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        myConstantSong.start();
+    }
 }
