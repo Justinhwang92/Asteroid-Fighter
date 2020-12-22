@@ -1,6 +1,10 @@
 package com.example.myfirstapp;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -160,7 +164,7 @@ public class MathProblems {
     }
 
 
-    private class SqProb
+    class SqProb
     {
         private int myNum;
         private int mySolution;
@@ -191,23 +195,132 @@ public class MathProblems {
         public String toString()
         {
             //superscript the square?
-            return myNum + " ^ 2";
+            return myNum + "² = ?";
         }
     }
 
-    private class SqrtProb
+    class SqrtProb
     {
         //whole numbers?
+        //unicode for square root function \u221A
+        private int myNum;
+        private int mySolution;
+        private List<Integer> myAllOption;
+
+        public SqrtProb(boolean theBoss)
+        {
+            myNum = (int) Math.pow(myRandom.nextInt(19) + 1, 2) ;
+            initializeSolutions(myNum);
+        }
+
+        private void initializeSolutions(int theNum)
+        {
+            mySolution = (int)Math.sqrt(myNum);
+            myAllOption = new ArrayList<>();
+            myAllOption.add(mySolution);
+
+            while(myAllOption.size() < 4)
+            {
+                int n = myRandom.nextInt(mySolution+5)+1;
+                if(!myAllOption.contains(new Integer(n)))
+                    myAllOption.add(n);
+            }
+
+            Collections.shuffle(myAllOption);
+        }
+
+        public List<Integer> getListofOption(){
+            return myAllOption;
+        }
+
+        public String toString()
+        {
+            return "\u221A" + myNum + " = ?";
+        }
     }
 
-    private class IneqProb
+    class IneqProb
     {
+        private int mySolution;
+        private List<Integer> myAllOption;
+        private String myEquation;
+        private int Xcoefficient;
+        private int LeftConstant;
+        private int rightConstant;
 
+        public IneqProb(boolean theBoss){
+            Xcoefficient = myRandom.nextInt(9)+1;
+            LeftConstant = myRandom.nextInt(5)+1;
+            rightConstant = (myRandom.nextInt(Xcoefficient)+1)*Xcoefficient + LeftConstant;
+            initializeSolutions();
+        }
+
+        private void initializeSolutions()
+        {
+            mySolution = (rightConstant-LeftConstant)/Xcoefficient;
+            myAllOption = new ArrayList<>();
+            myAllOption.add(mySolution);
+
+            while(myAllOption.size() < 4)
+            {
+                int n = myRandom.nextInt(mySolution+3)+1;
+                if(!myAllOption.contains(new Integer(n)))
+                    myAllOption.add(n);
+            }
+
+            Collections.shuffle(myAllOption);
+        }
+
+        public List<Integer> getListofOption(){
+            return myAllOption;
+        }
+
+        public String toString(){
+            myEquation = Xcoefficient+"x + "+LeftConstant+" < "+rightConstant + "; then x < ?";
+            return myEquation;
+        }
     }
 
-    private class AlgProb
+    class AlgProb
     {
+        private int mySolution;
+        private List<Integer> myAllOption;
+        private String myEquation;
+        private int Xcoefficient;
+        private int LeftConstant;
+        private int rightConstant;
 
+        public AlgProb(boolean theBoss){
+            Xcoefficient = myRandom.nextInt(9)+1;
+            LeftConstant = myRandom.nextInt(5)+1;
+            rightConstant = (myRandom.nextInt(Xcoefficient)+1)*Xcoefficient + LeftConstant;
+            initializeSolutions();
+        }
+
+        private void initializeSolutions()
+        {
+            mySolution = (rightConstant-LeftConstant)/Xcoefficient;
+            myAllOption = new ArrayList<>();
+            myAllOption.add(mySolution);
+
+            while(myAllOption.size() < 4)
+            {
+                int n = myRandom.nextInt(mySolution+3)+1;
+                if(!myAllOption.contains(new Integer(n)))
+                    myAllOption.add(n);
+            }
+
+            Collections.shuffle(myAllOption);
+        }
+
+        public List<Integer> getListofOption(){
+            return myAllOption;
+        }
+
+        public String toString(){
+            myEquation = Xcoefficient+"x + "+LeftConstant+" = "+rightConstant;
+            return myEquation;
+        }
     }
 
 }
