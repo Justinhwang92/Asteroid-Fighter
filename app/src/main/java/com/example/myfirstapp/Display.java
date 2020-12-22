@@ -52,7 +52,7 @@ public class Display extends SurfaceView implements Runnable {
         theBullet = new Bullet(getResources());
 
         theScore = -1;
-}
+    }
     // summary method
     @Override
     public void run() {
@@ -70,9 +70,9 @@ public class Display extends SurfaceView implements Runnable {
     // allows movements of the ship, background, bullet, and asteroids
     private void update () {
         // if score reaches 10, end asteroids, begin boss stage
-        if (theScore == 10) {
+        if (theScore >= 10) {
             asteroid.bossStageBegins = true;
-            asteroid.y = (screenY - asteroid.height) / 2 - 250; //adjust boss to center
+            adjustBossToCenter();
         }
 
         if(theScore >= 10)
@@ -108,6 +108,8 @@ public class Display extends SurfaceView implements Runnable {
                 MediaPlayer asteroidCrashPlayer = MediaPlayer.create(activity, R.raw.basic_explosion);
                 asteroidCrashPlayer.start();
                 asteroid.x = -500;  // asteroid regenerates on the right
+            } else {
+                asteroid.bossLife--;
             }
             theScore++;
             theBullet.x = 0;   // stops bullet from continuing, goes back to left screen
@@ -124,25 +126,44 @@ public class Display extends SurfaceView implements Runnable {
                 asteroid.speed = (int) (10 * screenRatioX);
             asteroid.x = screenX - 5000;
             asteroid.y = (screenY - asteroid.height) / 2;
-            asteroid.wasShot = false;
+            //asteroid.wasShot = false;
         }
         // if asteroid hits the ship
         if (Rect.intersects(asteroid.getCollisionShape(), flight.getCollisionShape())) {
             asteroid.crashed = true;
             asteroid.x = -500;
-            heart.lives--;
+            //heart.lives--;
             //plays heart is lost sound
             MediaPlayer heartLostPlayer = MediaPlayer.create(activity, R.raw.spaceship_lost_life);
             heartLostPlayer.start();
 
+            if (asteroid.bossStageBegins) {
+                heart.lives = 0;
+            } else {
+                heart.lives--;
+            }
             theScore--;
         }
-        if (heart.lives == 0) {
+        if (heart.lives == 0 || asteroid.bossLife <= 0) {
             //plays all lives lost sound
             MediaPlayer deadPlayer = MediaPlayer.create(activity, R.raw.lost_all_lives);
             deadPlayer.start();
             isGameOver = true;
             return;
+        }
+    }
+
+    private void adjustBossToCenter() {
+        if (asteroid.bossLife == 5) {
+            asteroid.y = (screenY - asteroid.height) / 2 - (300);
+        } else if (asteroid.bossLife == 4) {
+            asteroid.y = (screenY - asteroid.height) / 2 - (250);
+        } else if (asteroid.bossLife == 3) {
+            asteroid.y = (screenY - asteroid.height) / 2 - (200);
+        } else if (asteroid.bossLife == 2) {
+            asteroid.y = (screenY - asteroid.height) / 2 - (150);
+        } else if (asteroid.bossLife == 1) {
+            asteroid.y = (screenY - asteroid.height) / 2 - (100);
         }
     }
 
@@ -192,8 +213,9 @@ public class Display extends SurfaceView implements Runnable {
 
     // goes back to main menu
     private void goBack() {
-        activity.startActivity(new Intent(activity, MainActivity.class));
-        activity.finish();
+        activity.onStop();
+        activity.onRestart();
+        activity.onStart();
     }
 
     public void resume() {
