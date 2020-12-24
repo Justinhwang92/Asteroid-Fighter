@@ -28,6 +28,7 @@ public class Display extends SurfaceView implements Runnable {
     private Heart heart;
     private Bullet theBullet;
     public int theScore;
+    private static final int SCORE_TILL_BOSS = 10;  // score that must be reached until boss appears
 
     // initializes fields
     public Display(Activity activity, int screenX, int screenY) {
@@ -70,12 +71,12 @@ public class Display extends SurfaceView implements Runnable {
     // allows movements of the ship, background, bullet, and asteroids
     private void update () {
         // if score reaches 10, end asteroids, begin boss stage
-        if (theScore >= 10) {
+        if (theScore >= SCORE_TILL_BOSS) {
             asteroid.bossStageBegins = true;
             adjustBossToCenter();
         }
 
-        if(theScore >= 10)
+        if(theScore >= SCORE_TILL_BOSS)
         {
             if(!isBossMusic)
             {
