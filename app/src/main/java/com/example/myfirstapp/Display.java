@@ -3,7 +3,6 @@
  */
 package com.example.myfirstapp;
 
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,7 +13,11 @@ import android.view.SurfaceView;
 
 import static java.lang.Thread.*;
 
+/*
+ * main visual display class used for updating the main gameplay screen
+ */
 public class Display extends SurfaceView implements Runnable {
+
 
     private Thread thread;
     private boolean isPlaying, isGameOver, isBossMusic = false;
@@ -51,7 +54,7 @@ public class Display extends SurfaceView implements Runnable {
         paint.setColor(Color.WHITE);
         asteroid = new Asteroid(getResources());
         theBullet = new Bullet(getResources());
-
+        //clicking play shoots, we need to fix that so we don't have to start score at -1
         theScore = -1;
     }
     // summary method

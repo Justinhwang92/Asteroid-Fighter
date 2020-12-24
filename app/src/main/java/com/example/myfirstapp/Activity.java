@@ -4,7 +4,6 @@
 package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;

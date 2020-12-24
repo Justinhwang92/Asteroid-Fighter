@@ -1,16 +1,16 @@
 package com.example.myfirstapp;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
 public class MathProblems {
     boolean myBoss;
-    Random myRandom;
+    private static Random myRandom;
 
     public MathProblems(boolean theBoss)
     {
@@ -18,13 +18,12 @@ public class MathProblems {
         myRandom = new Random();
     }
 
-
     public void setBoss(boolean theState)
     {
         myBoss = theState;
     }
 
-    private class BasicOps
+    public static class BasicOps extends MathProblems
     {
         private char myOp;
         private int myOperand1;
@@ -35,8 +34,9 @@ public class MathProblems {
         private int myWrong2;
         private int myWrong3;
 
-        private BasicOps(char theOp, int theDigits, boolean theBoss)
+        public BasicOps(char theOp, int theDigits, boolean theBoss)
         {
+            super(theBoss);
             char op = theOp;
             if(theOp == 'x' || theOp == '*')
             {
@@ -83,7 +83,8 @@ public class MathProblems {
                                          int theOperand1, int theOperand2, int theDigits)
         {
             myWrongs = new HashSet<Integer>();
-            //reduce usage of iterator()
+            Iterator<Integer> wrongIterator;
+
             switch(theOp)
             {
                 case '+':
@@ -92,9 +93,12 @@ public class MathProblems {
                     {
                         myWrongs.add(myRandom.nextInt(17) + 2);
                     }
-                    myWrong1 = myWrongs.iterator().next();
-                    myWrong2 = myWrongs.iterator().next();
-                    myWrong3 = myWrongs.iterator().next();
+                    wrongIterator = myWrongs.iterator();
+                    myWrong1 = wrongIterator.next();
+                    myWrong2 = wrongIterator.next();
+                    myWrong3 = wrongIterator.next();
+
+
                     break;
 
                 case '-':
@@ -109,9 +113,10 @@ public class MathProblems {
                         }
                         myWrongs.add(nextWrong);
                     }
-                    myWrong1 = myWrongs.iterator().next();
-                    myWrong2 = myWrongs.iterator().next();
-                    myWrong3 = myWrongs.iterator().next();
+                    wrongIterator = myWrongs.iterator();
+                    myWrong1 = wrongIterator.next();
+                    myWrong2 = wrongIterator.next();
+                    myWrong3 = wrongIterator.next();
                     break;
 
                 case 'X':
@@ -120,13 +125,14 @@ public class MathProblems {
                     {
                         myWrongs.add(myRandom.nextInt(82));
                     }
-                    myWrong1 = myWrongs.iterator().next();
-                    myWrong2 = myWrongs.iterator().next();
-                    myWrong3 = myWrongs.iterator().next();
+                    wrongIterator = myWrongs.iterator();
+                    myWrong1 = wrongIterator.next();
+                    myWrong2 = wrongIterator.next();
+                    myWrong3 = wrongIterator.next();
                     break;
 
                 case '/':
-                    //need to make it divide cleanly? (or decimals/fractions)
+                    //make it divide cleanly
                     int divOp2 = myRandom.nextInt(9) + 1;
                     mySolution = myOperand1 / divOp2;
 
@@ -134,9 +140,10 @@ public class MathProblems {
                     {
                         myWrongs.add(myRandom.nextInt(9) + 1);
                     }
-                    myWrong1 = myWrongs.iterator().next();
-                    myWrong2 = myWrongs.iterator().next();
-                    myWrong3 = myWrongs.iterator().next();
+                    wrongIterator = myWrongs.iterator();
+                    myWrong1 = wrongIterator.next();
+                    myWrong2 = wrongIterator.next();
+                    myWrong3 = wrongIterator.next();
                     break;
 
                 default:
@@ -164,7 +171,7 @@ public class MathProblems {
     }
 
 
-    class SqProb
+    class SqProb extends MathProblems
     {
         private int myNum;
         private int mySolution;
@@ -175,6 +182,7 @@ public class MathProblems {
 
         public SqProb(boolean theBoss)
         {
+            super(theBoss);
             myNum = myRandom.nextInt(9) + 1;
             initializeSolutions(myNum);
         }
@@ -194,14 +202,13 @@ public class MathProblems {
 
         public String toString()
         {
-            //superscript the square?
             return myNum + "² = ?";
         }
     }
 
-    class SqrtProb
+    class SqrtProb extends MathProblems
     {
-        //whole numbers?
+        //whole numbers
         //unicode for square root function \u221A
         private int myNum;
         private int mySolution;
@@ -209,6 +216,7 @@ public class MathProblems {
 
         public SqrtProb(boolean theBoss)
         {
+            super(theBoss);
             myNum = (int) Math.pow(myRandom.nextInt(19) + 1, 2) ;
             initializeSolutions(myNum);
         }
@@ -239,7 +247,7 @@ public class MathProblems {
         }
     }
 
-    class IneqProb
+    class IneqProb extends MathProblems
     {
         private int mySolution;
         private List<Integer> myAllOption;
@@ -249,6 +257,7 @@ public class MathProblems {
         private int rightConstant;
 
         public IneqProb(boolean theBoss){
+            super(theBoss);
             Xcoefficient = myRandom.nextInt(9)+1;
             LeftConstant = myRandom.nextInt(5)+1;
             rightConstant = (myRandom.nextInt(Xcoefficient)+1)*Xcoefficient + LeftConstant;
@@ -281,7 +290,7 @@ public class MathProblems {
         }
     }
 
-    class AlgProb
+    class AlgProb extends MathProblems
     {
         private int mySolution;
         private List<Integer> myAllOption;
@@ -291,6 +300,7 @@ public class MathProblems {
         private int rightConstant;
 
         public AlgProb(boolean theBoss){
+            super(theBoss);
             Xcoefficient = myRandom.nextInt(9)+1;
             LeftConstant = myRandom.nextInt(5)+1;
             rightConstant = (myRandom.nextInt(Xcoefficient)+1)*Xcoefficient + LeftConstant;
