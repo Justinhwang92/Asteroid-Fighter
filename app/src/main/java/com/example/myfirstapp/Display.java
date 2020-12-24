@@ -86,12 +86,14 @@ public class Display extends SurfaceView implements Runnable {
         asteroid.crashed = false;
         background1.x -= 10 * screenRatioX;
         background2.x -= 10 * screenRatioX;
-        if (background1.x + background1.background.getWidth() < 0) {
+
+        if (background1.x + background1.background.getWidth() < 700) {
             background1.x = screenX;
         }
-        if (background2.x + background2.background.getWidth() < 0) {
+        if (background2.x + background2.background.getWidth() < 700) {
             background2.x = screenX;
         }
+
 
         flight.y = (screenY / 2) - 100;    // put spaceship to center
         theBullet.y = (screenY / 2);      // bullet shoots from the center
