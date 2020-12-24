@@ -44,5 +44,6 @@ public class Flight {
 
     Rect getCollisionShape() {
         return new Rect(x, y, x + width, y + height);
+        //return new Rect(x, y - 2000, x + width, y + height);
     }
 }
