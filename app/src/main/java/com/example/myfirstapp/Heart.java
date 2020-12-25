@@ -10,7 +10,7 @@ public class Heart {
     int x, y, width, height;
     Bitmap heart;
     private Display display;
-    public static int lives;
+    public int lives;
 
     Heart(Display display, int screenY, Resources res) {
         lives = 3;
