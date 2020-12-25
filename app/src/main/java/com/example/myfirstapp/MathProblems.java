@@ -1,16 +1,12 @@
 package com.example.myfirstapp;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class MathProblems {
-    boolean myBoss;
-    Random myRandom;
+public abstract class MathProblems {
+    private boolean myBoss;
+    private static Random myRandom;
 
     public MathProblems(boolean theBoss)
     {
@@ -18,25 +14,22 @@ public class MathProblems {
         myRandom = new Random();
     }
 
-
     public void setBoss(boolean theState)
     {
         myBoss = theState;
     }
 
-    private class BasicOps
+    public static class BasicOps extends MathProblems
     {
         private char myOp;
         private int myOperand1;
         private int myOperand2;
         private int mySolution;
         private Set<Integer> myWrongs;
-        private int myWrong1;
-        private int myWrong2;
-        private int myWrong3;
 
-        private BasicOps(char theOp, int theDigits, boolean theBoss)
+        public BasicOps(char theOp, int theDigits, boolean theBoss)
         {
+            super(theBoss);
             char op = theOp;
             if(theOp == 'x' || theOp == '*')
             {
@@ -45,7 +38,7 @@ public class MathProblems {
 
             myOp = op;
             initializeOperands(theDigits, theBoss);
-            initializeSolutions(myOp, myOperand1, myOperand2, theDigits);
+            initializeSolutions(myOp);
         }
 
         private void initializeOperands(int theDigits, boolean theBoss)
@@ -56,10 +49,12 @@ public class MathProblems {
 
                 case 1:
                     myOperand1 = myRandom.nextInt(10);
+                    myOperand2 = myRandom.nextInt(10);
                     break;
 
                 case 2:
-                    myOperand2 = myRandom.nextInt(10);
+                    myOperand1 = myRandom.nextInt(100);
+                    myOperand2 = myRandom.nextInt(100);
                     break;
 
                 default:
@@ -79,22 +74,22 @@ public class MathProblems {
 
         }
 
-        private void initializeSolutions(char theOp,
-                                         int theOperand1, int theOperand2, int theDigits)
+        private void initializeSolutions(char theOp)
         {
-            myWrongs = new HashSet<Integer>();
-            //reduce usage of iterator()
+            myWrongs = new HashSet<>();
+
             switch(theOp)
             {
                 case '+':
                     mySolution = myOperand1 + myOperand2;
                     while(myWrongs.size() < 3)
                     {
-                        myWrongs.add(myRandom.nextInt(17) + 2);
+                        int nextWrong = myRandom.nextInt(17) + 2;
+                        if(nextWrong != mySolution)
+                        {
+                            myWrongs.add(nextWrong);
+                        }
                     }
-                    myWrong1 = myWrongs.iterator().next();
-                    myWrong2 = myWrongs.iterator().next();
-                    myWrong3 = myWrongs.iterator().next();
                     break;
 
                 case '-':
@@ -107,36 +102,42 @@ public class MathProblems {
                         {
                             nextWrong *= -1;
                         }
-                        myWrongs.add(nextWrong);
+                        if(nextWrong != mySolution)
+                        {
+                            myWrongs.add(nextWrong);
+                        }
                     }
-                    myWrong1 = myWrongs.iterator().next();
-                    myWrong2 = myWrongs.iterator().next();
-                    myWrong3 = myWrongs.iterator().next();
                     break;
 
                 case 'X':
                     mySolution = myOperand1 * myOperand2;
                     while(myWrongs.size() < 3)
                     {
-                        myWrongs.add(myRandom.nextInt(82));
+                        int nextWrong = myRandom.nextInt(82);
+                        if(nextWrong != mySolution)
+                        {
+                            myWrongs.add(nextWrong);
+                        }
                     }
-                    myWrong1 = myWrongs.iterator().next();
-                    myWrong2 = myWrongs.iterator().next();
-                    myWrong3 = myWrongs.iterator().next();
                     break;
 
                 case '/':
-                    //need to make it divide cleanly? (or decimals/fractions)
-                    int divOp2 = myRandom.nextInt(9) + 1;
+                    //whole numbers
+                    int divOp2 = myRandom.nextInt(20) + 1;
+                    while(myOperand1 % divOp2 != 0)
+                    {
+                        divOp2 = myRandom.nextInt(20) + 1;
+                    }
                     mySolution = myOperand1 / divOp2;
 
                     while(myWrongs.size() < 3)
                     {
-                        myWrongs.add(myRandom.nextInt(9) + 1);
+                        int nextWrong = myRandom.nextInt(20) + 1;
+                        if(nextWrong != mySolution)
+                        {
+                            myWrongs.add(nextWrong);
+                        }
                     }
-                    myWrong1 = myWrongs.iterator().next();
-                    myWrong2 = myWrongs.iterator().next();
-                    myWrong3 = myWrongs.iterator().next();
                     break;
 
                 default:
@@ -155,7 +156,16 @@ public class MathProblems {
 
         }
 
-        @Override
+        public int getSolution()
+        {
+            return mySolution;
+        }
+
+        public Set<Integer> getWrongs()
+        {
+            return myWrongs;
+        }
+
         public String toString()
         {
             return myOperand1 + " " + myOp + " " + myOperand2 + " = ?";
@@ -164,162 +174,190 @@ public class MathProblems {
     }
 
 
-    class SqProb
+    public static class SqProb extends MathProblems
     {
-        private int myNum;
+        private int myOperand;
         private int mySolution;
         private Set<Integer> myWrongs;
-        private int myWrong1;
-        private int myWrong2;
-        private int myWrong3;
 
         public SqProb(boolean theBoss)
         {
-            myNum = myRandom.nextInt(9) + 1;
-            initializeSolutions(myNum);
+            super(theBoss);
+            myOperand = myRandom.nextInt(9) + 1;
+            initializeSolutions();
         }
 
-        private void initializeSolutions(int theNum)
+        private void initializeSolutions()
         {
-            mySolution = (int)Math.pow(myNum, 2);
-            myWrongs = new HashSet<Integer>();
+            mySolution = (int)Math.pow(myOperand, 2);
+            myWrongs = new HashSet<>();
             while(myWrongs.size() < 3)
             {
-                myWrongs.add(myRandom.nextInt(82));
+                int nextWrong = myRandom.nextInt(82);
+                if(nextWrong != mySolution)
+                {
+                    myWrongs.add(nextWrong);
+                }
             }
-            myWrong1 = myWrongs.iterator().next();
-            myWrong2 = myWrongs.iterator().next();
-            myWrong3 = myWrongs.iterator().next();
         }
 
+        public int getSolution()
+        {
+            return mySolution;
+        }
+
+        public Set<Integer> getWrongs()
+        {
+            return myWrongs;
+        }
+
+        @Override
         public String toString()
         {
-            //superscript the square?
-            return myNum + "² = ?";
+            return myOperand + "² = ?";
         }
     }
 
-    class SqrtProb
+    public static class SqrtProb extends MathProblems
     {
-        //whole numbers?
+        //whole numbers
         //unicode for square root function \u221A
-        private int myNum;
+        private final int myOperand;
         private int mySolution;
-        private List<Integer> myAllOption;
+        private Set<Integer> myWrongs;
 
         public SqrtProb(boolean theBoss)
         {
-            myNum = (int) Math.pow(myRandom.nextInt(19) + 1, 2) ;
-            initializeSolutions(myNum);
+            super(theBoss);
+            myOperand = (int) Math.pow(myRandom.nextInt(19) + 1, 2) ;
+            initializeSolutions();
         }
 
-        private void initializeSolutions(int theNum)
+        private void initializeSolutions()
         {
-            mySolution = (int)Math.sqrt(myNum);
-            myAllOption = new ArrayList<>();
-            myAllOption.add(mySolution);
+            mySolution = (int)Math.sqrt(myOperand);
+            myWrongs = new HashSet<>();
 
-            while(myAllOption.size() < 4)
+            while(myWrongs.size() < 3)
             {
-                int n = myRandom.nextInt(mySolution+5)+1;
-                if(!myAllOption.contains(new Integer(n)))
-                    myAllOption.add(n);
+                int nextWrong = myRandom.nextInt(mySolution + 5) + 1;
+                if(nextWrong != mySolution)
+                {
+                    myWrongs.add(nextWrong);
+                }
             }
 
-            Collections.shuffle(myAllOption);
         }
 
-        public List<Integer> getListofOption(){
-            return myAllOption;
+        public Set<Integer> getWrongs()
+        {
+            return myWrongs;
+        }
+
+        public int getSolution()
+        {
+            return mySolution;
         }
 
         public String toString()
         {
-            return "\u221A" + myNum + " = ?";
+            return "\u221A" + myOperand + " = ?";
         }
     }
 
-    class IneqProb
+    //so far only accepts less than inequalities, must extend to greater than
+    public static class IneqProb extends MathProblems
     {
         private int mySolution;
-        private List<Integer> myAllOption;
-        private String myEquation;
-        private int Xcoefficient;
-        private int LeftConstant;
-        private int rightConstant;
+        private Set<Integer> myWrongs;
+        private final int myXCoefficient;
+        private int myLeftConstant;
+        private int myRightConstant;
 
         public IneqProb(boolean theBoss){
-            Xcoefficient = myRandom.nextInt(9)+1;
-            LeftConstant = myRandom.nextInt(5)+1;
-            rightConstant = (myRandom.nextInt(Xcoefficient)+1)*Xcoefficient + LeftConstant;
+            super(theBoss);
+            myXCoefficient = myRandom.nextInt(9) + 1;
+            myLeftConstant = myRandom.nextInt(5) + 1;
+            myRightConstant = (myRandom.nextInt(myXCoefficient)+ 1 ) * myXCoefficient + myLeftConstant;
             initializeSolutions();
         }
 
         private void initializeSolutions()
         {
-            mySolution = (rightConstant-LeftConstant)/Xcoefficient;
-            myAllOption = new ArrayList<>();
-            myAllOption.add(mySolution);
+            mySolution = (myRightConstant - myLeftConstant)/ myXCoefficient;
+            myWrongs = new HashSet<>();
 
-            while(myAllOption.size() < 4)
+            while(myWrongs.size() < 3)
             {
-                int n = myRandom.nextInt(mySolution+3)+1;
-                if(!myAllOption.contains(new Integer(n)))
-                    myAllOption.add(n);
-            }
+                int nextWrong = myRandom.nextInt(mySolution + 3) + 1;
+                if(nextWrong != mySolution)
+                {
+                    myWrongs.add(nextWrong);
+                }
 
-            Collections.shuffle(myAllOption);
+            }
         }
 
-        public List<Integer> getListofOption(){
-            return myAllOption;
+        public Set<Integer> getWrongs()
+        {
+            return myWrongs;
+        }
+
+        public int getSolution()
+        {
+            return mySolution;
         }
 
         public String toString(){
-            myEquation = Xcoefficient+"x + "+LeftConstant+" < "+rightConstant + "; then x < ?";
-            return myEquation;
+            return myXCoefficient +"x + "+ myLeftConstant +" < "+ myRightConstant + "; then x < ?";
+
         }
     }
 
-    class AlgProb
+    public static class AlgProb extends MathProblems
     {
         private int mySolution;
-        private List<Integer> myAllOption;
-        private String myEquation;
-        private int Xcoefficient;
-        private int LeftConstant;
-        private int rightConstant;
+        private Set<Integer> myWrongs;
+        private int myXCoefficient;
+        private int myLeftCoefficient;
+        private int myRightCoefficient;
 
         public AlgProb(boolean theBoss){
-            Xcoefficient = myRandom.nextInt(9)+1;
-            LeftConstant = myRandom.nextInt(5)+1;
-            rightConstant = (myRandom.nextInt(Xcoefficient)+1)*Xcoefficient + LeftConstant;
+            super(theBoss);
+            myXCoefficient = myRandom.nextInt(9) + 1;
+            myLeftCoefficient = myRandom.nextInt(5) + 1;
+            myRightCoefficient = (myRandom.nextInt(myXCoefficient) + 1) * myXCoefficient + myLeftCoefficient;
             initializeSolutions();
         }
 
         private void initializeSolutions()
         {
-            mySolution = (rightConstant-LeftConstant)/Xcoefficient;
-            myAllOption = new ArrayList<>();
-            myAllOption.add(mySolution);
+            mySolution = (myRightCoefficient - myLeftCoefficient) / myXCoefficient;
+            myWrongs = new HashSet<>();
 
-            while(myAllOption.size() < 4)
+            while(myWrongs.size() < 3)
             {
-                int n = myRandom.nextInt(mySolution+3)+1;
-                if(!myAllOption.contains(new Integer(n)))
-                    myAllOption.add(n);
+                int nextWrong = myRandom.nextInt(mySolution+ 3) + 1;
+                if(nextWrong != mySolution)
+                {
+                    myWrongs.add(nextWrong);
+                }
             }
-
-            Collections.shuffle(myAllOption);
         }
 
-        public List<Integer> getListofOption(){
-            return myAllOption;
+        public Set<Integer> getWrongs()
+        {
+            return myWrongs;
         }
 
-        public String toString(){
-            myEquation = Xcoefficient+"x + "+LeftConstant+" = "+rightConstant;
-            return myEquation;
+        public int getSolution()
+        {
+            return mySolution;
+        }
+
+        public String toString()
+        {
+            return myXCoefficient +"x + "+ myLeftCoefficient +" = "+ myRightCoefficient;
         }
     }
 

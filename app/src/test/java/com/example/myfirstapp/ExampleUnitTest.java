@@ -17,23 +17,22 @@ public class ExampleUnitTest {
 
     @Test
     public void testQuestion(){
-        MathProblems m = new MathProblems(false);
-        MathProblems.SqrtProb sq = m. new SqrtProb(false);
+        MathProblems.SqrtProb sq = new MathProblems.SqrtProb(false);
 
         System.out.println(sq);
 //        System.out.println("Options are ");
 //        System.out.println(sq.getListofOption());
 
-        MathProblems.SqProb sqP = m. new SqProb(false);
+        MathProblems.SqProb sqP = new MathProblems.SqProb(false);
         System.out.println(sqP);
 
-        MathProblems.AlgProb Alg = m. new AlgProb(false);
+        MathProblems.AlgProb Alg = new MathProblems.AlgProb(false);
         System.out.println(Alg);
-        System.out.println(Alg.getListofOption());
+        System.out.println(Alg.getWrongs());
 
-        MathProblems.IneqProb Inq = m. new IneqProb(false);
+        MathProblems.IneqProb Inq = new MathProblems.IneqProb(false);
         System.out.println(Inq);
-        System.out.println(Inq.getListofOption());
+        System.out.println(Inq.getWrongs());
 
     }
 }

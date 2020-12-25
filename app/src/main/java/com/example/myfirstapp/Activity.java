@@ -4,7 +4,6 @@
 package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -22,7 +21,7 @@ public class Activity extends AppCompatActivity {
         display = new Display(this, point.x +5000, point.y);
         setContentView(display);
 
-        myConstantSong = MediaPlayer.create(this, R.raw.constant_ibragame);
+        myConstantSong = MediaPlayer.create(this, R.raw.bgm_gameloop);
         myConstantSong.setLooping(true);
         MainActivity.myMenuPlayer.stop();
         myConstantSong.start();

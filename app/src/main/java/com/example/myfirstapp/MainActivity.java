@@ -1,14 +1,15 @@
 package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.view.WindowManager;
 
+/*
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
 
@@ -23,11 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        myMenuPlayer = MediaPlayer.create(this, R.raw.intro_ibragame);
+        myMenuPlayer = MediaPlayer.create(this, R.raw.bgm_menu);
         myMenuPlayer.setLooping(true);
         myMenuPlayer.start();
 
-        final MediaPlayer menuClickPlayer = MediaPlayer.create(this, R.raw.menu_option_clicked);
+        final MediaPlayer menuClickPlayer = MediaPlayer.create(this, R.raw.sfx_menu_option_click);
 
         findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             @Override
