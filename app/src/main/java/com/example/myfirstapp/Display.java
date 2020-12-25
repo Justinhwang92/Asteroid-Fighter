@@ -153,12 +153,12 @@ public class Display extends SurfaceView implements Runnable {
             }
             theScore--;
         }
+        //we need to make a separate condition for victory and loss for sounds
         if (heart.lives == 0 || asteroid.bossLife <= 0) {
             //plays all lives lost sound
             MediaPlayer deadPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_all_lives);
             deadPlayer.start();
             isGameOver = true;
-            return;
         }
     }
 
@@ -256,9 +256,9 @@ public class Display extends SurfaceView implements Runnable {
     // where the user should touch to shoot
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        //plays lazer sound whenever lazer is shot
-        MediaPlayer lazerPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_laser);
-        lazerPlayer.start();
+        //plays laser sound whenever laser is shot
+        MediaPlayer laserPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_laser);
+        laserPlayer.start();
 
         if (event.getX() > 0) {
             flight.hasShot = true;
