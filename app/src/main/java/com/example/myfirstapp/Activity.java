@@ -21,7 +21,7 @@ public class Activity extends AppCompatActivity {
         display = new Display(this, point.x +5000, point.y);
         setContentView(display);
 
-        myConstantSong = MediaPlayer.create(this, R.raw.constant_ibragame);
+        myConstantSong = MediaPlayer.create(this, R.raw.bgm_gameloop);
         myConstantSong.setLooping(true);
         MainActivity.myMenuPlayer.stop();
         myConstantSong.start();
