@@ -18,7 +18,7 @@ public class Asteroid {
     public boolean bossStageBegins = false;
     int x = 0, y, width, height, asteroidCounter = 1;
     Bitmap ship, destroyed;
-    Bitmap boss, boss2, boss3, boss4, boss5;
+    Bitmap boss, boss2, boss3, boss4, boss5, boss6;
     public boolean crashed = false;
 
     Asteroid (Resources res) {
@@ -30,6 +30,7 @@ public class Asteroid {
         boss3 = BitmapFactory.decodeResource(res, R.drawable.boss3b3);
         boss4 = BitmapFactory.decodeResource(res, R.drawable.boss3b4);
         boss5 = BitmapFactory.decodeResource(res, R.drawable.boss3b5);
+        boss6 = BitmapFactory.decodeResource(res, R.drawable.boss3b6);
 
         width = ship.getWidth() / 2;
         height = ship.getHeight() / 6;
@@ -60,17 +61,17 @@ public class Asteroid {
 
     public Bitmap correspondingBossSize() {
         if (bossLife == 5) {
-            return boss;
-        } else if (bossLife == 4){
             return boss2;
-        } else if (bossLife == 3) {
+        } else if (bossLife == 4){
             return boss3;
-        } else if (bossLife == 2) {
+        } else if (bossLife == 3) {
             return boss4;
         } else if (bossLife == 2) {
             return boss5;
+        } else if (bossLife == 2) {
+            return boss6;
         }
-        return boss5;
+        return boss6;
     }
 
     Rect getCollisionShape () {

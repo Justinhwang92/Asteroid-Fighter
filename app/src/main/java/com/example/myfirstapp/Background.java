@@ -10,8 +10,8 @@ public class Background {
     Bitmap background;
 
     Background (int screenX, int screenY, Resources res) {
-        background = BitmapFactory.decodeResource(res, R.drawable.panorama);
-        //background = BitmapFactory.decodeResource(res, R.drawable.panorama_darkness);
+        //background = BitmapFactory.decodeResource(res, R.drawable.panorama);
+        background = BitmapFactory.decodeResource(res, R.drawable.panoramav3);
         background = Bitmap.createScaledBitmap(background, screenX, screenY, false);
     }
 }
