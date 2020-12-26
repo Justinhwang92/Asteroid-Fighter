@@ -77,7 +77,7 @@ public class Display extends SurfaceView implements Runnable {
         // if score reaches 10, end asteroids, begin boss stage
         if (theScore >= SCORE_TILL_BOSS) {
             asteroid.bossStageBegins = true;
-            adjustBossToCenter();
+            asteroid.y = (screenY - asteroid.height) / 2 + (-50);
         }
 
         if(theScore >= SCORE_TILL_BOSS)
@@ -159,20 +159,6 @@ public class Display extends SurfaceView implements Runnable {
             MediaPlayer deadPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_all_lives);
             deadPlayer.start();
             isGameOver = true;
-        }
-    }
-
-    private void adjustBossToCenter() {
-        if (asteroid.bossLife == 5) {
-            asteroid.y = (screenY - asteroid.height) / 2 - (250);
-        } else if (asteroid.bossLife == 4) {
-            asteroid.y = (screenY - asteroid.height) / 2 - (200);
-        } else if (asteroid.bossLife == 3) {
-            asteroid.y = (screenY - asteroid.height) / 2 - (150);
-        } else if (asteroid.bossLife == 2) {
-            asteroid.y = (screenY - asteroid.height) / 2 - (100);
-        } else if (asteroid.bossLife == 1) {
-            asteroid.y = (screenY - asteroid.height) / 2 - (50);
         }
     }
 
