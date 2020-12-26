@@ -64,11 +64,6 @@ public class Display extends SurfaceView implements Runnable {
         while (isPlaying) {
             update();
             draw();
-            try {
-                sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -88,6 +83,7 @@ public class Display extends SurfaceView implements Runnable {
             }
         }
         asteroid.crashed = false;
+
         background1.x -= 10 * screenRatioX;
         background2.x -= 10 * screenRatioX;
 
