@@ -164,15 +164,15 @@ public class Display extends SurfaceView implements Runnable {
 
     private void adjustBossToCenter() {
         if (asteroid.bossLife == 5) {
-            asteroid.y = (screenY - asteroid.height) / 2 - (300);
-        } else if (asteroid.bossLife == 4) {
             asteroid.y = (screenY - asteroid.height) / 2 - (250);
-        } else if (asteroid.bossLife == 3) {
+        } else if (asteroid.bossLife == 4) {
             asteroid.y = (screenY - asteroid.height) / 2 - (200);
-        } else if (asteroid.bossLife == 2) {
+        } else if (asteroid.bossLife == 3) {
             asteroid.y = (screenY - asteroid.height) / 2 - (150);
-        } else if (asteroid.bossLife == 1) {
+        } else if (asteroid.bossLife == 2) {
             asteroid.y = (screenY - asteroid.height) / 2 - (100);
+        } else if (asteroid.bossLife == 1) {
+            asteroid.y = (screenY - asteroid.height) / 2 - (50);
         }
     }
 
@@ -205,14 +205,14 @@ public class Display extends SurfaceView implements Runnable {
     // updates the health bar
     public void drawLives(Canvas canvas) {
         if (heart.lives == 3) {
-            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 450, paint);
-            canvas.drawBitmap(heart.heart, flight.x + 1600, flight.y - 450, paint);
-            canvas.drawBitmap(heart.heart, flight.x + 1400, flight.y - 450, paint);
+            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 350, paint);
+            canvas.drawBitmap(heart.heart, flight.x + 1600, flight.y - 350, paint);
+            canvas.drawBitmap(heart.heart, flight.x + 1400, flight.y - 350, paint);
         } else if (heart.lives == 2) {
-            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 450, paint);
-            canvas.drawBitmap(heart.heart, flight.x + 1600, flight.y - 450, paint);
+            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 350, paint);
+            canvas.drawBitmap(heart.heart, flight.x + 1600, flight.y - 350, paint);
         } else if (heart.lives == 1) {
-            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 450, paint);
+            canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 350, paint);
         }
     }
 
