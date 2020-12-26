@@ -49,29 +49,13 @@ public class Asteroid {
                 return destroyed;
             } else {
                 x = x + 100;
-                //return boss;
-                return correspondingBossSize();
+                return boss4;
             }
         }
         if (bossStageBegins) {
-            return correspondingBossSize();
+            return boss4;
         }
         return ship;
-    }
-
-    public Bitmap correspondingBossSize() {
-        if (bossLife == 5) {
-            return boss2;
-        } else if (bossLife == 4){
-            return boss3;
-        } else if (bossLife == 3) {
-            return boss4;
-        } else if (bossLife == 2) {
-            return boss5;
-        } else if (bossLife == 2) {
-            return boss6;
-        }
-        return boss6;
     }
 
     Rect getCollisionShape () {

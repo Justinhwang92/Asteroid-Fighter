@@ -17,22 +17,31 @@ public class ExampleUnitTest {
 
     @Test
     public void testQuestion(){
-        MathProblems.SqrtProb sq = new MathProblems.SqrtProb(false);
+        MathProblems mt = new MathProblems(false);
 
-        System.out.println(sq);
+//        System.out.println(sq);
 //        System.out.println("Options are ");
 //        System.out.println(sq.getListofOption());
 
-        MathProblems.SqProb sqP = new MathProblems.SqProb(false);
-        System.out.println(sqP);
+//        MathProblems.SqProb sqP = new MathProblems.SqProb(false);
+//        System.out.println(sqP);
+//
+//        MathProblems.AlgProb Alg = new MathProblems.AlgProb(false);
+//        System.out.println(Alg);
+//        System.out.println(Alg.getWrongs());
+//
+//        MathProblems.IneqProb Inq = new MathProblems.IneqProb(false);
+//        System.out.println(Inq);
+//        System.out.println(Inq.getWrongs());
 
-        MathProblems.AlgProb Alg = new MathProblems.AlgProb(false);
-        System.out.println(Alg);
-        System.out.println(Alg.getWrongs());
+        System.out.println(mt.getEasyQuestions());
+        System.out.println(mt.getEasyAnswers());
 
-        MathProblems.IneqProb Inq = new MathProblems.IneqProb(false);
-        System.out.println(Inq);
-        System.out.println(Inq.getWrongs());
+        System.out.println(mt.getMediumQuestions());
+        System.out.println(mt.getMediumAnswers());
+
+        System.out.println(mt.getHardQuestions());
+        System.out.println(mt.getHardQueAnswers());
 
     }
 }
