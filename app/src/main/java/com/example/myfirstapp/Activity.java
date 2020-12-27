@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class Activity extends AppCompatActivity {
     private Display display;
@@ -25,6 +26,9 @@ public class Activity extends AppCompatActivity {
         myConstantSong.setLooping(true);
         MainActivity.myMenuPlayer.stop();
         myConstantSong.start();
+
+        int score = display.theScore;
+        Toast.makeText(Activity.this,"this is a score"+score, Toast.LENGTH_LONG).show();
     }
 
     public MediaPlayer getMyConstantSong()
@@ -51,6 +55,7 @@ public class Activity extends AppCompatActivity {
         super.onStop();
         display.donePlaying();
         myConstantSong.stop();
+
     }
 
     @Override
