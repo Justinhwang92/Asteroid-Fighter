@@ -33,7 +33,7 @@ public class Display extends SurfaceView implements Runnable {
     private Bullet theBullet;
     public int theScore;
     private static final int SCORE_TILL_BOSS = 10;  // score that must be reached until boss appears
-
+    MediaPlayer laserPlayer;
     // initializes fields
     public Display(Activity activity, int screenX, int screenY) {
         super(activity);
@@ -57,6 +57,7 @@ public class Display extends SurfaceView implements Runnable {
         theBullet = new Bullet(getResources());
         //clicking play shoots, we need to fix that so we don't have to start score at -1
         theScore = -1;
+        laserPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_laser);
     }
     // summary method
     @Override
@@ -239,7 +240,7 @@ public class Display extends SurfaceView implements Runnable {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //plays laser sound whenever laser is shot
-        MediaPlayer laserPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_laser);
+
         laserPlayer.start();
 
         if (event.getX() > 0) {
