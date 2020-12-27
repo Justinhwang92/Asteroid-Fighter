@@ -1,9 +1,6 @@
 package com.example.myfirstapp;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -24,7 +21,7 @@ public class MathProblems {
     /**
      * List of arithmetic operands as characters.
      */
-    List<Character> listOfOperator;
+    private static final char[] listOfOperator = {'+', '-', 'X', '/'};
 
     /**
      * BasicsOps class object for easy questions part.
@@ -45,11 +42,6 @@ public class MathProblems {
         myBoss = theBoss;
         myRandom = new Random();
         mySet = new HashSet<>();
-        listOfOperator = new ArrayList<>();
-        listOfOperator.add('+');
-        listOfOperator.add('-');
-        listOfOperator.add('*');
-        listOfOperator.add('/');
     }
 
     /**
@@ -66,9 +58,7 @@ public class MathProblems {
      * @return String representation of the question
      */
     public String getEasyQuestions() {
-
-        Collections.shuffle(listOfOperator);
-        char operator = (listOfOperator).get(0);
+        char operator = listOfOperator[myRandom.nextInt(2)];
 
         //Basic ops
         myBasicOpsObject = new BasicOps(operator, 1, false);
@@ -81,8 +71,7 @@ public class MathProblems {
      * @return Set<Integer> containing 4 different choice to be displayed.
      */
     public Set<Integer> getEasyAnswers(){
-        mySet = new HashSet<>();
-        mySet = myBasicOpsObject.getWrongs();
+        mySet = new HashSet<>(myBasicOpsObject.getWrongs());
         mySet.add(myBasicOpsObject.mySolution);
         return (mySet);
     }
@@ -92,9 +81,7 @@ public class MathProblems {
      * @return String representation of the question.
      */
     public String getMediumQuestions() {
-
-        Collections.shuffle(listOfOperator);
-        char operator = (listOfOperator).get(0);
+        char operator = listOfOperator[myRandom.nextInt(2) + 2];
 
         //Basic ops
         myBasicOpsObject = new BasicOps(operator, 2, false);
@@ -107,8 +94,7 @@ public class MathProblems {
      * @return Set<Integer> containing 4 different choice to be displayed.
      */
     public Set<Integer> getMediumAnswers(){
-        mySet = new HashSet<>();
-        mySet = myBasicOpsObject.getWrongs();
+        mySet = new HashSet<>(myBasicOpsObject.getWrongs());
         mySet.add(myBasicOpsObject.mySolution);
         return (mySet);
     }
@@ -171,7 +157,7 @@ public class MathProblems {
      * To get 4 choices of the answers.
      * @return Set<Integer> containing 4 different choice to be displayed.
      */
-    public Set<Integer> getHardQueAnswers(){
+    public Set<Integer> getHardAnswers(){
         return (mySet);
     }
 
@@ -373,7 +359,6 @@ public class MathProblems {
          * To get string representation of the question.
          * @return String representing the question
          */
-        @Override
         public String toString()
         {
             return myOperand1 + " " + myOp + " " + myOperand2 + " = ?";
@@ -453,7 +438,6 @@ public class MathProblems {
          * To get string representation of the question.
          * @return String representing the question
          */
-        @Override
         public String toString()
         {
             return myOperand + "² = ?";
@@ -534,7 +518,6 @@ public class MathProblems {
          * To get string representation of the question.
          * @return String representing the question
          */
-        @Override
         public String toString()
         {
             return "\u221A" + myOperand + " = ?";
@@ -633,7 +616,6 @@ public class MathProblems {
          * To get string representation of the question.
          * @return String representing the question
          */
-        @Override
         public String toString(){
             return myXCoefficient +"x + "+ myLeftConstant + " " + myConditionalOperator + " "+ myRightConstant + "; then x "+ myConditionalOperator+ " ?";
         }
@@ -714,7 +696,6 @@ public class MathProblems {
          * To get string representation of the question.
          * @return String representing the question
          */
-        @Override
         public String toString()
         {
             return myXCoefficient +"x + "+ myLeftCoefficient +" = "+ myRightCoefficient;
