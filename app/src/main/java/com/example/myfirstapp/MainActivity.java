@@ -6,6 +6,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 
 /*
  *
@@ -14,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     static MediaPlayer myMenuPlayer;
+    private Button buttonInstructions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
         myMenuPlayer.setLooping(true);
         myMenuPlayer.start();
 
+        findViewById(R.id.instruction).setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Instruction();
+            }
+        });
+
+
         final MediaPlayer menuClickPlayer = MediaPlayer.create(this, R.raw.sfx_menu_option_click);
 
         findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
@@ -39,5 +49,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    public void Instruction ()
+    {
+        Intent intent = new Intent(this, Instruction.class);
+        startActivity(intent);
+    }
+
 
 }

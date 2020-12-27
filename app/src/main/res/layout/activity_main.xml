@@ -13,6 +13,17 @@
         android:src="@drawable/panoramav3"/>
 
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Asteroid Fighter"
+        android:textColor="#ffffff"
+        android:textSize="120px"
+        android:gravity="center_horizontal" />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,13 +34,17 @@
         android:layout_centerInParent="true"/>
 
     <TextView
+        android:id="@+id/instruction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Asteroid Fighter"
+        android:layout_above="@+id/play"
+        android:layout_marginTop="150sp"
+        android:layout_marginBottom="-194dp"
+        android:gravity="center_horizontal"
+        android:onClick="clickButton"
+        android:text="How To Play!"
         android:textColor="#ffffff"
-        android:textSize="120px"
-        android:gravity="center_horizontal" />
+        android:textSize="64dp" />
 
 
 </RelativeLayout>
