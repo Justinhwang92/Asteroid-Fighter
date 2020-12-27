@@ -8,11 +8,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
-import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-
-import static java.lang.Thread.*;
 
 /*
  * main visual display class used for updating the main gameplay screen
@@ -99,6 +96,8 @@ public class Display extends SurfaceView implements Runnable {
         theBullet.y = (screenY / 2);      // bullet shoots from the center
 
         if (flight.hasShot) {
+            //plays laser sound whenever laser is shot
+            laserPlayer.start();
             theBullet.x += (theBullet.speed);
         }
         // allows for explosion when bullet and asteroid gets closer
@@ -108,11 +107,11 @@ public class Display extends SurfaceView implements Runnable {
 
         if (Rect.intersects(asteroid.getCollisionShape(), theBullet.getCollisionShape())) {
             if (!asteroid.bossStageBegins) {
-                MediaPlayer asteroidCrashPlayer = MediaPlayer.create(activity, R.raw.sfx_explosion_asteroid);
+                final MediaPlayer asteroidCrashPlayer = MediaPlayer.create(activity, R.raw.sfx_explosion_asteroid);
                 asteroidCrashPlayer.start();
                 asteroid.x = -500;  // asteroid regenerates on the right
             } else {
-                MediaPlayer bossHitPlayer = MediaPlayer.create(activity, R.raw.sfx_boss_hit);
+                final MediaPlayer bossHitPlayer = MediaPlayer.create(activity, R.raw.sfx_boss_hit);
                 bossHitPlayer.start();
                 asteroid.bossLife--;
             }
@@ -139,7 +138,9 @@ public class Display extends SurfaceView implements Runnable {
             asteroid.x = -500;
             //heart.lives--;
             //plays heart is lost sound
-            MediaPlayer heartLostPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_life);
+            final MediaPlayer shipCollisionPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_hit);
+            shipCollisionPlayer.start();
+            final MediaPlayer heartLostPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_life);
             heartLostPlayer.start();
 
             if (asteroid.bossStageBegins) {
@@ -150,10 +151,19 @@ public class Display extends SurfaceView implements Runnable {
             theScore--;
         }
         //we need to make a separate condition for victory and loss for sounds
-        if (heart.lives == 0 || asteroid.bossLife <= 0) {
+        if (heart.lives == 0) {
             //plays all lives lost sound
-            MediaPlayer deadPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_all_lives);
+            final MediaPlayer deadPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_all_lives);
             deadPlayer.start();
+            isGameOver = true;
+        }
+
+        else if(asteroid.bossLife <= 0)
+        {
+            final MediaPlayer bossExplodePlayer = MediaPlayer.create(activity, R.raw.sfx_explosion_boss);
+            bossExplodePlayer.start();
+            final MediaPlayer victoryPlayer = MediaPlayer.create(activity, R.raw.sfx_level_victory);
+            victoryPlayer.start();
             isGameOver = true;
         }
     }
@@ -233,7 +243,7 @@ public class Display extends SurfaceView implements Runnable {
         //stop regular music
         activity.getMyConstantSong().stop();
         //begin boss music
-        MediaPlayer bossPlayer = MediaPlayer.create(activity, R.raw.bgm_boss);
+        final MediaPlayer bossPlayer = MediaPlayer.create(activity, R.raw.bgm_boss);
         bossPlayer.setLooping(true);
         bossPlayer.start();
     }
@@ -241,9 +251,6 @@ public class Display extends SurfaceView implements Runnable {
     // where the user should touch to shoot
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        //plays laser sound whenever laser is shot
-
-        laserPlayer.start();
 
         if (event.getX() > 0) {
             flight.hasShot = true;
