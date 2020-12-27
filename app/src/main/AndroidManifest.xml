@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".result"></activity>
-        <activity android:name=".Instruction" />
+        <activity android:name=".Instruction"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".Activity"
             android:screenOrientation="landscape"
