@@ -3,6 +3,7 @@
  */
 package com.example.myfirstapp;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,6 +11,7 @@ import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.WindowManager;
 
 /*
  * main visual display class used for updating the main gameplay screen
@@ -55,6 +57,7 @@ public class Display extends SurfaceView implements Runnable {
         theScore = -1;
         laserPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_laser);
     }
+
     // summary method
     @Override
     public void run() {
@@ -65,17 +68,15 @@ public class Display extends SurfaceView implements Runnable {
     }
 
     // allows movements of the ship, background, bullet, and asteroids
-    private void update () {
+    private void update() {
         // if score reaches 10, end asteroids, begin boss stage
         if (theScore >= SCORE_TILL_BOSS) {
             asteroid.bossStageBegins = true;
             asteroid.y = (screenY - asteroid.height) / 2 + (-50);
         }
 
-        if(theScore >= SCORE_TILL_BOSS)
-        {
-            if(!isBossMusic)
-            {
+        if (theScore >= SCORE_TILL_BOSS) {
+            if (!isBossMusic) {
                 playBossMusic();
             }
         }
@@ -168,13 +169,14 @@ public class Display extends SurfaceView implements Runnable {
         }
     }
 
+
     // allow for asteroid, bullet, background visibility
     private void draw() {
         if (getHolder().getSurface().isValid()) {
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
-            canvas.drawText("Score: "+theScore, flight.x + 850, flight.y - 300, paint);
+            canvas.drawText("Score: " + theScore, flight.x + 850, flight.y - 300, paint);
             canvas.drawBitmap(flight.getFlight(), flight.x, flight.y, paint);
 
             if (theBullet.x > 100) {
@@ -236,9 +238,9 @@ public class Display extends SurfaceView implements Runnable {
             e.printStackTrace();
         }
     }
+
     //start playing the boss music instead of regular
-    public void playBossMusic()
-    {
+    public void playBossMusic() {
         isBossMusic = true;
         //stop regular music
         activity.getMyConstantSong().stop();
@@ -257,4 +259,5 @@ public class Display extends SurfaceView implements Runnable {
         }
         return true;
     }
+
 }
