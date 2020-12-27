@@ -18,19 +18,15 @@ public class Asteroid {
     public boolean bossStageBegins = false;
     int x = 0, y, width, height, asteroidCounter = 1;
     Bitmap ship, destroyed;
-    Bitmap boss, boss2, boss3, boss4, boss5, boss6;
+    Bitmap boss, minion;
     public boolean crashed = false;
+    public boolean isMinion;
 
-    Asteroid (Resources res) {
+    Asteroid (Resources res, boolean isMinion) {
         ship = BitmapFactory.decodeResource(res, R.drawable.one);
         destroyed = BitmapFactory.decodeResource(res, R.drawable.explosion);
-
-        boss = BitmapFactory.decodeResource(res, R.drawable.boss3a);
-        boss2 = BitmapFactory.decodeResource(res, R.drawable.boss3b2);
-        boss3 = BitmapFactory.decodeResource(res, R.drawable.boss3b3);
-        boss4 = BitmapFactory.decodeResource(res, R.drawable.boss3b4);
-        boss5 = BitmapFactory.decodeResource(res, R.drawable.boss3b5);
-        boss6 = BitmapFactory.decodeResource(res, R.drawable.boss3b6);
+        boss = BitmapFactory.decodeResource(res, R.drawable.boss3b4);
+        minion = BitmapFactory.decodeResource(res, R.drawable.small_minion1);
 
         width = ship.getWidth() / 2;
         height = ship.getHeight() / 6;
@@ -49,11 +45,11 @@ public class Asteroid {
                 return destroyed;
             } else {
                 x = x + 100;
-                return boss4;
+                return boss;
             }
         }
         if (bossStageBegins) {
-            return boss4;
+            return boss;
         }
         return ship;
     }

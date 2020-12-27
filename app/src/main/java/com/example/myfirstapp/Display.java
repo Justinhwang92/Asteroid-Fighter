@@ -19,7 +19,6 @@ import static java.lang.Thread.*;
  */
 public class Display extends SurfaceView implements Runnable {
 
-
     private Thread thread;
     private boolean isPlaying, isGameOver, isBossMusic = false;
     private int screenX, screenY;
@@ -53,7 +52,7 @@ public class Display extends SurfaceView implements Runnable {
         paint = new Paint();
         paint.setTextSize(64);
         paint.setColor(Color.WHITE);
-        asteroid = new Asteroid(getResources());
+        asteroid = new Asteroid(getResources(), false);
         theBullet = new Bullet(getResources());
         //clicking play shoots, we need to fix that so we don't have to start score at -1
         theScore = -1;
@@ -165,7 +164,6 @@ public class Display extends SurfaceView implements Runnable {
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
-            //canvas.drawText("Score: "+theScore, flight.x + 750, flight.y - 300, paint);
             canvas.drawText("Score: "+theScore, flight.x + 850, flight.y - 300, paint);
             canvas.drawBitmap(flight.getFlight(), flight.x, flight.y, paint);
 
@@ -183,6 +181,10 @@ public class Display extends SurfaceView implements Runnable {
             drawLives(canvas);
             getHolder().unlockCanvasAndPost(canvas);
         }
+    }
+
+    private void deployMinions() {
+
     }
 
     // updates the health bar
