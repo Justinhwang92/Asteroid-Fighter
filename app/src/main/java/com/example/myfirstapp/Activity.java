@@ -27,8 +27,8 @@ public class Activity extends AppCompatActivity {
         MainActivity.myMenuPlayer.stop();
         myConstantSong.start();
 
-        int score = display.theScore;
-        Toast.makeText(Activity.this,"this is a score"+score, Toast.LENGTH_LONG).show();
+        //int score = display.theScore;
+        //Toast.makeText(Activity.this,"this is a score"+score, Toast.LENGTH_LONG).show();
     }
 
     public MediaPlayer getMyConstantSong()
