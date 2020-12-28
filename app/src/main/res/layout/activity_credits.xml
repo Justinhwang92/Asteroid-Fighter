@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Credits">
+
+    <ImageView
+        android:id="@+id/Step1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/panorama"
+        android:visibility="visible" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Asteroid Fighter"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="120px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Credits"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="100px"
+        android:layout_marginTop="50dp"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="Arya Rashidian - Lead Director"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:text="Hermie Baylon - Software Developer and Graphical Artist"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="Brandon Lu - Software Developer"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="David Guo - Software Developer"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="210dp"
+        android:text="Justin Hwang - Software Developer"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:text="Bhavesh Joshi - Software Developer"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        android:text="Sai Manchikanti - Software Developer"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:text="Ibraheem Alani - Soundrack Director"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="305dp"
+        android:layout_marginRight="40dp"
+        android:paddingRight="30dp"
+        android:text="BACK"
+        android:textColor="#ffffff"
+        android:textSize="100px" />
+
+</RelativeLayout>
