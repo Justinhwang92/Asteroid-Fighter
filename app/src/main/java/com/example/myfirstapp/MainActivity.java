@@ -62,12 +62,14 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, Instruction.class);
         startActivity(intent);
+        myMenuPlayer.stop();
     }
 
     public void credits()
     {
         Intent intent = new Intent(this,Credits.class);
         startActivity(intent);
+        myMenuPlayer.stop();
     }
 
 

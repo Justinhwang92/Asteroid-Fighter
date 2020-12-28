@@ -154,9 +154,11 @@ public class Display extends SurfaceView implements Runnable {
         //we need to make a separate condition for victory and loss for sounds
         if (heart.lives == 0) {
             //plays all lives lost sound
+
             final MediaPlayer deadPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_all_lives);
             deadPlayer.start();
             isGameOver = true;
+            activity.gameDonePlayAgain();
         }
 
         else if(asteroid.bossLife <= 0)
@@ -166,6 +168,7 @@ public class Display extends SurfaceView implements Runnable {
             final MediaPlayer victoryPlayer = MediaPlayer.create(activity, R.raw.sfx_level_victory);
             victoryPlayer.start();
             isGameOver = true;
+            activity.gameDonePlayAgain();
         }
     }
 
@@ -185,6 +188,7 @@ public class Display extends SurfaceView implements Runnable {
             canvas.drawBitmap(asteroid.getAsteroid(), asteroid.x, asteroid.y, paint);
 
             if (isGameOver) {
+                activity.gameDonePlayAgain();
                 isPlaying = false;
                 goBack();
                 return;
