@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".result"></activity>
-        <activity android:name=".Instruction"
-            android:screenOrientation="landscape"/>
+        <activity android:name=".Credits"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".result" />
+        <activity
+            android:name=".Instruction"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Activity"
             android:screenOrientation="landscape"
