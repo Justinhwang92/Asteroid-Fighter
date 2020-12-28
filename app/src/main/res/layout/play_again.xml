@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".result"
+    tools:context=".PlayAgain"
     android:orientation="horizontal">
 
     <ImageView
@@ -31,7 +31,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:textColor="#ffffff"
-        android:textSize="100px"/>
+        android:textSize="100px"
+        android:id="@+id/gameOverMessage"/>
 
     <TextView
         android:id="@+id/scoreLabel"
@@ -55,7 +56,8 @@
         android:textColor="#ffffff"
         />
 
-    <TextView
+    <Button
+        android:background="?android:attr/selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Try Again"
@@ -64,7 +66,8 @@
         android:layout_marginTop="290dp"
         android:textColor="#ffffff"
         android:textSize="40sp"
-        android:id="@+id/tryAgain"
+        android:id="@+id/playAgainButton"
         />
+
 
 </RelativeLayout>

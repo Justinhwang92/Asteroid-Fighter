@@ -4,6 +4,8 @@
 package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 public class Activity extends AppCompatActivity {
     private Display display;
     private MediaPlayer myConstantSong;
+    private Thread thread;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,4 +71,16 @@ public class Activity extends AppCompatActivity {
         super.onStart();
         myConstantSong.start();
     }
+
+    /**
+     * justin's code
+     */
+    public void gameDonePlayAgain() {
+        Intent intent = new Intent(this, PlayAgain.class);
+        startActivity(intent);
+        finish();
+    }
+    /**
+     *
+     */
 }
