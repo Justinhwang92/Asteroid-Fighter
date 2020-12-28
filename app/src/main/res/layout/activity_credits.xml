@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Instruction">
+    tools:context=".Credits">
 
     <ImageView
         android:id="@+id/Step1"
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="How TO PLAY!"
+        android:text="Credits"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="50px"
@@ -36,10 +36,26 @@
 
     <TextView
 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:text="Arya Rashidian - Lead Director"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="* Shoot the incoming asteroids before it hits the spaceship"
+        android:layout_marginTop="120dp"
+        android:text="Hermie Baylon - Software Developer and Graphical Artist"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="Brandon Lu - Software Developer"
         android:textColor="#ffffff"
         android:textSize="60px" />
 
@@ -47,24 +63,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:text="* In order to shoot, choose the correct answer for the math equation above."
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-    <TextView
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:text="* If you do not answer in time, the asteroid may hit your ship and you lose 1 life"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-    <TextView
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:text="* After reaching (x) points, boss will appear."
+        android:layout_marginTop="180dp"
+        android:text="David Guo - Software Developer"
         android:textColor="#ffffff"
         android:textSize="60px" />
 
@@ -72,8 +72,34 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:text="* It will have 5 lives, so continue choosing the correct answers for the equations above."
+        android:layout_marginTop="210dp"
+        android:text="Justin Hwang - Software Developer"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:text="Bhavesh Joshi - Software Developer"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        android:text="Sai Manchikanti - Software Developer"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:text="Ibraheem Alani - Soundrack Director"
         android:textColor="#ffffff"
         android:textSize="60px" />
 
@@ -82,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="305dp"
         android:layout_marginRight="40dp"
         android:paddingRight="30dp"
         android:text="BACK"

@@ -3,6 +3,7 @@
  */
 package com.example.myfirstapp;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,6 +11,7 @@ import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.WindowManager;
 
 /*
  * main visual display class used for updating the main gameplay screen
@@ -31,16 +33,13 @@ public class Display extends SurfaceView implements Runnable {
     private static final int SCORE_TILL_BOSS = 10;  // score that must be reached until boss appears
     MediaPlayer laserPlayer;
     // initializes fields
-    public Display(final Activity activity, final int screenX, final int screenY) {
+    public Display(Activity activity, int screenX, int screenY) {
         super(activity);
-
         this.activity = activity;
         this.screenX = screenX;
         this.screenY = screenY;
-
         screenRatioX = 1920f / screenX;
         screenRatioY = 1080f / screenY;
-
 
         background1 = new Background(screenX, screenY, getResources());
         background2 = new Background(screenX, screenY, getResources());
@@ -49,38 +48,22 @@ public class Display extends SurfaceView implements Runnable {
         heart = new Heart(this, screenY, getResources());
 
         background2.x = screenX;
-
         paint = new Paint();
         paint.setTextSize(64);
         paint.setColor(Color.WHITE);
         asteroid = new Asteroid(getResources(), false);
         theBullet = new Bullet(getResources());
+        //clicking play shoots, we need to fix that so we don't have to start score at -1
         theScore = -1;
         laserPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_laser);
-
     }
 
-    // updates the display and draws it on the screen
+    // summary method
     @Override
     public void run() {
         while (isPlaying) {
             update();
             draw();
-            sleep();
-        }
-    }
-
-    /**
-     * sleeping for 16 milliseconds allows us to have a refresh rate of 60 Hz (60 FPS)
-     * this reduces power consumption and the amount of updates
-     * *******CAN CHANGE TO LOWER TO MAKE GAME FEEL SMOOTHER********
-     */
-    private void sleep()
-    {
-        try {
-            Thread.sleep(16);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
@@ -99,11 +82,9 @@ public class Display extends SurfaceView implements Runnable {
         }
         asteroid.crashed = false;
 
-        //move the backgrounds
         background1.x -= 10 * screenRatioX;
         background2.x -= 10 * screenRatioX;
 
-        //when the background gets off the screen, reset it
         if (background1.x + background1.background.getWidth() < 700) {
             background1.x = screenX;
         }
@@ -191,16 +172,11 @@ public class Display extends SurfaceView implements Runnable {
 
     // allow for asteroid, bullet, background visibility
     private void draw() {
-        //draw the images on the display
         if (getHolder().getSurface().isValid()) {
-            //canvas to draw things on
             Canvas canvas = getHolder().lockCanvas();
-            //draw the backgrounds
             canvas.drawBitmap(background1.background, background1.x, background1.y, paint);
             canvas.drawBitmap(background2.background, background2.x, background2.y, paint);
-            //draw the score bar
             canvas.drawText("Score: " + theScore, flight.x + 850, flight.y - 300, paint);
-
             canvas.drawBitmap(flight.getFlight(), flight.x, flight.y, paint);
 
             if (theBullet.x > 100) {

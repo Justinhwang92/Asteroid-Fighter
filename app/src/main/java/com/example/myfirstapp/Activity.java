@@ -6,7 +6,6 @@ package com.example.myfirstapp;
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Point;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -17,22 +16,16 @@ public class Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
         display = new Display(this, point.x +5000, point.y);
         setContentView(display);
 
         myConstantSong = MediaPlayer.create(this, R.raw.bgm_gameloop);
-
         myConstantSong.setLooping(true);
         MainActivity.myMenuPlayer.stop();
         myConstantSong.start();
-
-
 
         //int score = display.theScore;
         //Toast.makeText(Activity.this,"this is a score"+score, Toast.LENGTH_LONG).show();
