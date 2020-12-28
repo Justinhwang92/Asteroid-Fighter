@@ -12,8 +12,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/panoramav3"/>
 
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,12 +21,11 @@
         android:textSize="120px"
         android:gravity="center_horizontal" />
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PLAY"
-        android:textSize="64sp"
+        android:textSize="50sp"
         android:textColor="#ffffff"
         android:id="@+id/play"
         android:layout_centerInParent="true"/>
@@ -39,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/play"
         android:layout_marginTop="150sp"
-        android:layout_marginBottom="-152dp"
+        android:layout_marginBottom="-175dp"
         android:gravity="center_horizontal"
         android:onClick="clickButton"
         android:text="How To Play!"
