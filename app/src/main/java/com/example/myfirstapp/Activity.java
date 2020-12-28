@@ -26,6 +26,9 @@ public class Activity extends AppCompatActivity {
         myConstantSong.setLooping(true);
         MainActivity.myMenuPlayer.stop();
         myConstantSong.start();
+
+        //int score = display.theScore;
+        //Toast.makeText(Activity.this,"this is a score"+score, Toast.LENGTH_LONG).show();
     }
 
     public MediaPlayer getMyConstantSong()

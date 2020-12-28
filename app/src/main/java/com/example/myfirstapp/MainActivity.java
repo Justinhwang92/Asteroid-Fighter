@@ -48,25 +48,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.creditsid).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                credits();
-            }
-        });
-
 
 
     }
     public void Instruction ()
     {
         Intent intent = new Intent(this, Instruction.class);
-        startActivity(intent);
-    }
-
-    public void credits()
-    {
-        Intent intent = new Intent(this,Credits.class);
         startActivity(intent);
     }
 

@@ -26,15 +26,26 @@ public class MathProblems {
     /**
      * BasicsOps class object for easy questions part.
      */
-    BasicOps myBasicOpsObject;
+    private BasicOps myBasicOpsObject;
 
     /**
      * Set of Integers to store 4 choices of answers.
      */
-    Set<Integer> mySet;
+    private Set<Integer> mySet;
 
     /**
-     * Base math problem class contructor - contains different classes
+     * number of types of questions for hard questions:
+     * currently includes squares, square roots, inequalities, and algebra problems
+     */
+    public final int NUM_OF_HARD_QUESTION_TYPES = 4;
+
+    /**
+     * number of wrong choices a question can have
+     */
+    public final int NUM_OF_WRONG_ANSWERS = 3;
+
+    /**
+     * Base math problem class constructor - contains different classes
      * @param theBoss flag to notify if it is boss stage.
      */
     public MathProblems(boolean theBoss)
@@ -54,11 +65,30 @@ public class MathProblems {
     }
 
     /**
+     * gets a random 1 digit number
+     * @return a number from 1 to 9 inclusive
+     */
+    public int getRandOneDigitNum()
+    {
+        return myRandom.nextInt(9) + 1;
+    }
+
+    /**
+     * gets a random 2 digit number
+     * @return a number from 10 to 99 inclusive
+     */
+    public int getRandTwoDigitNum()
+    {
+        return myRandom.nextInt(89) + 10;
+    }
+
+    /**
      * To get easy question - 1 digit arithmetic
      * @return String representation of the question
      */
     public String getEasyQuestions() {
-        char operator = listOfOperator[myRandom.nextInt(2)];
+
+        char operator = listOfOperator[myRandom.nextInt(listOfOperator.length)];
 
         //Basic ops
         myBasicOpsObject = new BasicOps(operator, 1, false);
@@ -81,7 +111,8 @@ public class MathProblems {
      * @return String representation of the question.
      */
     public String getMediumQuestions() {
-        char operator = listOfOperator[myRandom.nextInt(2) + 2];
+        //nextInt(2) gets addition or subtraction
+        char operator = listOfOperator[myRandom.nextInt(2)];
 
         //Basic ops
         myBasicOpsObject = new BasicOps(operator, 2, false);
@@ -106,12 +137,13 @@ public class MathProblems {
     public String getHardQuestions(){
 
         String theS = "";
-        int c = myRandom.nextInt(3)+1;
 
-        switch (c){
+        int randomChoice = myRandom.nextInt(NUM_OF_HARD_QUESTION_TYPES);
+
+        switch (randomChoice){
 
             //for square problem
-            case 1:
+            case 0:
                 SqProb sqr = new SqProb(false);
                 theS = sqr.toString();
                 mySet = new HashSet<>();
@@ -120,7 +152,7 @@ public class MathProblems {
                 break;
 
             //For square root problem
-            case 2:
+            case 1:
                 SqrtProb sqrRt = new SqrtProb(false);
                 theS = sqrRt.toString();
                 mySet = new HashSet<>();
@@ -129,7 +161,7 @@ public class MathProblems {
                 break;
 
             //For Inequality part
-            case 3:
+            case 2:
                 IneqProb inqO = new IneqProb(false);
                 theS = inqO.toString();
                 mySet = new HashSet<>();
@@ -138,7 +170,7 @@ public class MathProblems {
                 break;
 
             //For algebra part
-            case 4:
+            case 3:
                 AlgProb algO = new AlgProb(false);
                 theS = algO.toString();
                 mySet = new HashSet<>();
@@ -147,6 +179,14 @@ public class MathProblems {
                 break;
 
             default:
+                try
+                {
+                    throw new Exception();
+                }
+                catch(Exception e)
+                {
+                    System.out.println(e + "\nInvalid hard question");
+                }
                 break;
         }
 
@@ -209,7 +249,7 @@ public class MathProblems {
 
             myOp = op;
             initializeOperands(theDigits, theBoss);
-            initializeSolutions(myOp);
+            initializeSolutions(myOp, theDigits);
         }
 
         /**
@@ -224,13 +264,13 @@ public class MathProblems {
             {
 
                 case 1:
-                    myOperand1 = myRandom.nextInt(9)+1;
-                    myOperand2 = myRandom.nextInt(9)+1;
+                    myOperand1 = getRandOneDigitNum();
+                    myOperand2 = getRandOneDigitNum();
                     break;
 
                 case 2:
-                    myOperand1 = myRandom.nextInt(99)+1;
-                    myOperand2 = myRandom.nextInt(99)+1;
+                    myOperand1 = getRandTwoDigitNum();
+                    myOperand2 = getRandTwoDigitNum();
                     break;
 
                 default:
@@ -254,7 +294,7 @@ public class MathProblems {
          * Method to initialize the solution and the other wrong choices for the question
          * @param theOp the character variable for the operator (+,-,*,/)
          */
-        private void initializeSolutions(char theOp)
+        private void initializeSolutions(char theOp, int theDigits)
         {
             myWrongs = new HashSet<>();
 
@@ -262,9 +302,20 @@ public class MathProblems {
             {
                 case '+':
                     mySolution = myOperand1 + myOperand2;
-                    while(myWrongs.size() < 3)
+                    while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
                     {
-                        int nextWrong = myRandom.nextInt(17) + 2;
+                        //nextInt(17) + 2 yields the range of possible sums of 2 one digit numbers
+                        int nextWrong;
+                        if(theDigits == 1)
+                        {
+                            nextWrong = myRandom.nextInt(17) + 2;
+                        }
+                        //2 digit case yields all possible 2 digit sums
+                        else
+                        {
+                            nextWrong = myRandom.nextInt(178) + 20;
+                        }
+
                         if(nextWrong != mySolution)
                         {
                             myWrongs.add(nextWrong);
@@ -275,9 +326,23 @@ public class MathProblems {
                 case '-':
                     mySolution = myOperand1 - myOperand2;
                     boolean negative = myOperand1 < myOperand2;
-                    while(myWrongs.size() < 3)
+                    while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
                     {
-                        int nextWrong = myRandom.nextInt(17) + 2;
+                        //we do the same random numbers with subtraction
+                        //(subtraction is just addition with negatives)
+                        //but it could be negative too
+                        //so the negative conditional takes care of that
+                        //nextInt(17) + 2 yields the range of possible sums of 2 one digit numbers
+                        int nextWrong;
+                        if(theDigits == 1)
+                        {
+                            nextWrong = myRandom.nextInt(17) + 2;
+                        }
+                        //2 digit case yields all possible 2 digit sums
+                        else
+                        {
+                            nextWrong = myRandom.nextInt(178) + 20;
+                        }
                         if(negative)
                         {
                             nextWrong *= -1;
@@ -291,8 +356,10 @@ public class MathProblems {
 
                 case 'X':
                     mySolution = myOperand1 * myOperand2;
-                    while(myWrongs.size() < 3)
+                    while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
                     {
+                        //nextInt(82) yields 0 to 81
+                        //which is the range of 1 digit times 1 digit products
                         int nextWrong = myRandom.nextInt(82);
                         if(nextWrong != mySolution)
                         {
@@ -302,16 +369,11 @@ public class MathProblems {
                     break;
 
                 case '/':
-                    //whole numbers
-//                    int divOp2 = myRandom.nextInt(20) + 1;
-//                    while(myOperand1 % divOp2 != 0)
-//                    {
-//                        divOp2 = myRandom.nextInt(20) + 1;
-//                    }
-                    myOperand1 = myOperand2*myOperand1;
+                    //will yield whole numbers
+                    myOperand1 = myOperand2 * myOperand1;
                     mySolution = myOperand1 / myOperand2;
 
-                    while(myWrongs.size() < 3)
+                    while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
                     {
                         int nextWrong = myRandom.nextInt(20) + 1;
                         if(nextWrong != mySolution)
@@ -395,7 +457,7 @@ public class MathProblems {
         public SqProb(boolean theBoss)
         {
             super(theBoss);
-            myOperand = myRandom.nextInt(9) + 1;
+            myOperand = getRandOneDigitNum();
             initializeSolutions();
         }
 
@@ -406,8 +468,9 @@ public class MathProblems {
         {
             mySolution = (int)Math.pow(myOperand, 2);
             myWrongs = new HashSet<>();
-            while(myWrongs.size() < 3)
+            while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
             {
+                //we restrict highest answer to be 81 because we only include 1 digit squares
                 int nextWrong = myRandom.nextInt(82);
                 if(nextWrong != mySolution)
                 {
@@ -473,7 +536,7 @@ public class MathProblems {
         public SqrtProb(boolean theBoss)
         {
             super(theBoss);
-            myOperand = (int) Math.pow(myRandom.nextInt(19) + 1, 2) ;
+            myOperand = (int) Math.pow(myRandom.nextInt(21), 2) ;
             initializeSolutions();
         }
 
@@ -485,9 +548,10 @@ public class MathProblems {
             mySolution = (int)Math.sqrt(myOperand);
             myWrongs = new HashSet<>();
 
-            while(myWrongs.size() < 3)
+            while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
             {
-                int nextWrong = myRandom.nextInt(mySolution + 5) + 1;
+                //we set upper bound to 21 to have square roots between 0 and 20
+                int nextWrong = myRandom.nextInt(21);
                 if(nextWrong != mySolution)
                 {
                     myWrongs.add(nextWrong);
@@ -562,7 +626,8 @@ public class MathProblems {
          */
         public IneqProb(boolean theBoss){
             super(theBoss);
-            myXCoefficient = myRandom.nextInt(9) + 1;
+            myXCoefficient = getRandOneDigitNum();
+            //random number from 1 to 5 inclusive
             myLeftConstant = myRandom.nextInt(5) + 1;
             myRightConstant = (myRandom.nextInt(myXCoefficient)+ 1 ) * myXCoefficient + myLeftConstant;
 
@@ -583,7 +648,7 @@ public class MathProblems {
             mySolution = (myRightConstant - myLeftConstant)/ myXCoefficient;
             myWrongs = new HashSet<>();
 
-            while(myWrongs.size() < 3)
+            while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
             {
                 int nextWrong = myRandom.nextInt(mySolution + 3) + 1;
                 if(nextWrong != mySolution)
@@ -650,7 +715,8 @@ public class MathProblems {
          */
         public AlgProb(boolean theBoss){
             super(theBoss);
-            myXCoefficient = myRandom.nextInt(9) + 1;
+            myXCoefficient = getRandOneDigitNum();
+            //random number from 1 to 5 inclusive
             myLeftCoefficient = myRandom.nextInt(5) + 1;
             myRightCoefficient = (myRandom.nextInt(myXCoefficient) + 1) * myXCoefficient + myLeftCoefficient;
             initializeSolutions();
@@ -664,7 +730,7 @@ public class MathProblems {
             mySolution = (myRightCoefficient - myLeftCoefficient) / myXCoefficient;
             myWrongs = new HashSet<>();
 
-            while(myWrongs.size() < 3)
+            while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
             {
                 int nextWrong = myRandom.nextInt(mySolution+ 3) + 1;
                 if(nextWrong != mySolution)
