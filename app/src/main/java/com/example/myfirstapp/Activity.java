@@ -26,8 +26,6 @@ public class Activity extends AppCompatActivity {
         myConstantSong.setLooping(true);
         MainActivity.myMenuPlayer.stop();
         myConstantSong.start();
-
-
     }
 
     public MediaPlayer getMyConstantSong()
