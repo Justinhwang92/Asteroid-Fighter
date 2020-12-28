@@ -54,7 +54,7 @@ public class Display extends SurfaceView implements Runnable {
         asteroid = new Asteroid(getResources(), false);
         theBullet = new Bullet(getResources());
         //clicking play shoots, we need to fix that so we don't have to start score at -1
-        theScore = -1;
+        theScore = 0;
         laserPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_laser);
     }
 
