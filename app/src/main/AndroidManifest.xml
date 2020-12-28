@@ -13,7 +13,7 @@
         <activity android:name=".Credits"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar"></activity>
-        <activity android:name=".result" />
+        <activity android:name=".PlayAgain" />
 
         <activity
             android:name=".Instruction"
