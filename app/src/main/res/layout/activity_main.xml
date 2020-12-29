@@ -21,17 +21,7 @@
         android:textSize="120px"
         android:gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="330dp"
-        android:paddingRight="30dp"
-        android:text="PLAY NOW"
-        android:textColor="#ffffff"
-        android:textSize="100px" />
+    <!--    android:layout_marginRight="330dp"-->
 
 <!--    <TextView-->
 <!--        android:id="@+id/play"-->
@@ -46,18 +36,7 @@
 <!--        android:textSize="100px" />-->
 
 
-    <TextView
-        android:id="@+id/instruction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="150dp"
-        android:layout_marginRight="250dp"
-        android:paddingRight="30dp"
-        android:text="INSTRUCTIONS"
-        android:textColor="#ffffff"
-        android:textSize="100px" />
-<!--    <TextView-->
+    <!--    <TextView-->
 <!--        android:id="@+id/instruction"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
@@ -71,18 +50,45 @@
 
 
     <TextView
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="280dp"
+        android:paddingRight="30dp"
+        android:text="PLAY NOW"
+        android:textColor="#ffffff"
+        android:textSize="100px" />
+
+    <TextView
+        android:id="@+id/instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="224dp"
+        android:paddingRight="30dp"
+        android:text="INSTRUCTIONS"
+        android:textColor="#ffffff"
+        android:textSize="100px" />
+
+    <TextView
         android:id="@+id/creditsid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
-        android:layout_marginRight="300dp"
+        android:layout_marginRight="302dp"
         android:paddingRight="30dp"
         android:text="CREDITS"
         android:textColor="#ffffff"
         android:textSize="100px" />
 
-<!--    <TextView-->
+    <!--    <TextView-->
 <!--        android:id="@+id/creditsid"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
