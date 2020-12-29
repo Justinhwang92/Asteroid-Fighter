@@ -3,7 +3,6 @@
  */
 package com.example.myfirstapp;
 
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,14 +10,13 @@ import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-import android.view.WindowManager;
 
 /*
  * main visual display class used for updating the main gameplay screen
  */
 public class Display extends SurfaceView implements Runnable {
 
-    private Thread thread;
+    private Thread displayThread;
     private boolean isPlaying, isGameOver, isBossMusic = false;
     private int screenX, screenY;
     public static float screenRatioX, screenRatioY;
@@ -31,11 +29,14 @@ public class Display extends SurfaceView implements Runnable {
     private Bullet theBullet;
     public int theScore;
     private static final int SCORE_TILL_BOSS = 10;  // score that must be reached until boss appears
-    MediaPlayer laserPlayer;
+    private ActivityAudio myAudio;
     // initializes fields
-    public Display(Activity activity, int screenX, int screenY) {
+    public Display(Activity activity, int screenX, int screenY, ActivityAudio theAudio) {
         super(activity);
         this.activity = activity;
+
+        myAudio = theAudio;
+
         this.screenX = screenX;
         this.screenY = screenY;
         screenRatioX = 1920f / screenX;
@@ -55,7 +56,6 @@ public class Display extends SurfaceView implements Runnable {
         theBullet = new Bullet(getResources());
         //clicking play shoots, we need to fix that so we don't have to start score at -1
         theScore = -1;
-        laserPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_laser);
     }
 
     // summary method
@@ -64,6 +64,15 @@ public class Display extends SurfaceView implements Runnable {
         while (isPlaying) {
             update();
             draw();
+            sleep();
+        }
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(16);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -98,7 +107,7 @@ public class Display extends SurfaceView implements Runnable {
 
         if (flight.hasShot) {
             //plays laser sound whenever laser is shot
-            laserPlayer.start();
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_ROCKET_LASER);
             theBullet.x += (theBullet.speed);
         }
         // allows for explosion when bullet and asteroid gets closer
@@ -108,12 +117,10 @@ public class Display extends SurfaceView implements Runnable {
 
         if (Rect.intersects(asteroid.getCollisionShape(), theBullet.getCollisionShape())) {
             if (!asteroid.bossStageBegins) {
-                final MediaPlayer asteroidCrashPlayer = MediaPlayer.create(activity, R.raw.sfx_explosion_asteroid);
-                asteroidCrashPlayer.start();
+                myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_EXPLOSION_ASTEROID);
                 asteroid.x = -500;  // asteroid regenerates on the right
             } else {
-                final MediaPlayer bossHitPlayer = MediaPlayer.create(activity, R.raw.sfx_boss_hit);
-                bossHitPlayer.start();
+                myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_BOSS_HIT);
                 asteroid.bossLife--;
             }
             theScore++;
@@ -139,10 +146,8 @@ public class Display extends SurfaceView implements Runnable {
             asteroid.x = -500;
             //heart.lives--;
             //plays heart is lost sound
-            final MediaPlayer shipCollisionPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_hit);
-            shipCollisionPlayer.start();
-            final MediaPlayer heartLostPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_life);
-            heartLostPlayer.start();
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_ROCKET_HIT);
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_ROCKET_LOST_LIFE);
 
             if (asteroid.bossStageBegins) {
                 heart.lives = 0;
@@ -155,18 +160,15 @@ public class Display extends SurfaceView implements Runnable {
         if (heart.lives == 0) {
             //plays all lives lost sound
 
-            final MediaPlayer deadPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_all_lives);
-            deadPlayer.start();
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_ROCKET_LOST_ALL_LIVES);
             isGameOver = true;
             activity.gameDonePlayAgain();
         }
 
         else if(asteroid.bossLife <= 0)
         {
-            final MediaPlayer bossExplodePlayer = MediaPlayer.create(activity, R.raw.sfx_explosion_boss);
-            bossExplodePlayer.start();
-            final MediaPlayer victoryPlayer = MediaPlayer.create(activity, R.raw.sfx_level_victory);
-            victoryPlayer.start();
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_EXPLOSION_BOSS);
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
             isGameOver = true;
             activity.gameDonePlayAgain();
         }
@@ -190,8 +192,8 @@ public class Display extends SurfaceView implements Runnable {
             if (isGameOver) {
                 activity.gameDonePlayAgain();
                 isPlaying = false;
-                goBack();
-                return;
+//                goBack();
+//                return;
             }
 
             drawLives(canvas);
@@ -230,14 +232,14 @@ public class Display extends SurfaceView implements Runnable {
 
     public void resume() {
         isPlaying = true;
-        thread = new Thread(this);
-        thread.start();
+        displayThread = new Thread(this);
+        displayThread.start();
     }
 
     public void donePlaying() {
         try {
             isPlaying = false;
-            thread.join();
+            displayThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -247,11 +249,9 @@ public class Display extends SurfaceView implements Runnable {
     public void playBossMusic() {
         isBossMusic = true;
         //stop regular music
-        activity.getMyConstantSong().stop();
+        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
         //begin boss music
-        final MediaPlayer bossPlayer = MediaPlayer.create(activity, R.raw.bgm_boss);
-        bossPlayer.setLooping(true);
-        bossPlayer.start();
+        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_BOSS);
     }
 
     // where the user should touch to shoot

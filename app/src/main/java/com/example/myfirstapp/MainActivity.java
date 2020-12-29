@@ -2,48 +2,42 @@ package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
 
-/*
- *
+/**
+ * main activity starts when the game starts - the menu
  */
 public class MainActivity extends AppCompatActivity {
 
-
-    static MediaPlayer myMenuPlayer;
-    private Button buttonInstructions;
+    private MainActivityAudio myAudio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
+        myAudio = new MainActivityAudio(this);
+        myAudio.run();
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
 
-        myMenuPlayer = MediaPlayer.create(this, R.raw.bgm_menu);
-        myMenuPlayer.setLooping(true);
-        myMenuPlayer.start();
+        myAudio.playMedia(MainActivityAudio.MEDIA_PLAYERS.BGM_MENU);
 
         findViewById(R.id.instruction).setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Instruction();
+                myAudio.playMedia(MainActivityAudio.MEDIA_PLAYERS.SFX_MENU_CLICK);
+                showInstructions();
             }
         });
-
-
-        final MediaPlayer menuClickPlayer = MediaPlayer.create(this, R.raw.sfx_menu_option_click);
 
         findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                menuClickPlayer.start();
+                myAudio.playMedia(MainActivityAudio.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 startActivity(new Intent(MainActivity.this, Activity.class));
             }
         });
@@ -51,25 +45,26 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.creditsid).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                credits();
+                myAudio.playMedia(MainActivityAudio.MEDIA_PLAYERS.SFX_MENU_CLICK);
+                showCredits();
             }
         });
 
 
 
     }
-    public void Instruction ()
+    public void showInstructions()
     {
-        Intent intent = new Intent(this, Instruction.class);
+        Intent intent = new Intent(this, Instructions.class);
         startActivity(intent);
-        myMenuPlayer.stop();
+        myAudio.stopMedia(MainActivityAudio.MEDIA_PLAYERS.BGM_MENU);
     }
 
-    public void credits()
+    public void showCredits()
     {
         Intent intent = new Intent(this,Credits.class);
         startActivity(intent);
-        myMenuPlayer.stop();
+        myAudio.stopMedia(MainActivityAudio.MEDIA_PLAYERS.BGM_MENU);
     }
 
 

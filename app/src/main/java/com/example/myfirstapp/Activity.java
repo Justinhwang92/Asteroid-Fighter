@@ -10,77 +10,91 @@ import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 public class Activity extends AppCompatActivity {
+
     private Display display;
-    private MediaPlayer myConstantSong;
-    private Thread thread;
+    private ActivityAudio myAudio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
-        display = new Display(this, point.x +5000, point.y);
+
+        myAudio = new ActivityAudio(this);
+        Thread audioThread = new Thread(myAudio);
+        audioThread.start();
+
+        display = new Display(this, point.x +5000, point.y, myAudio);
         setContentView(display);
 
-        myConstantSong = MediaPlayer.create(this, R.raw.bgm_gameloop);
-        myConstantSong.setLooping(true);
-        MainActivity.myMenuPlayer.stop();
-        myConstantSong.start();
+        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
+
+        //stop and release the menu mediaplayer to recoup resources
+        for(MediaPlayer player : MainActivityAudio.myMainActivityPlayers)
+        {
+            if(player!=null) {
+                if(player.isPlaying())
+                    player.stop();
+                player.reset();
+                player.release();
+                player=null;
+            }
+        }
+
 
         //int score = display.theScore;
         //Toast.makeText(Activity.this,"this is a score"+score, Toast.LENGTH_LONG).show();
     }
 
-    public MediaPlayer getMyConstantSong()
+    public ActivityAudio getMyAudio()
     {
-        return myConstantSong;
+        return myAudio;
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         display.donePlaying();
-        myConstantSong.stop();
+        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         display.resume();
-        myConstantSong.start();
+        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
     @Override
     protected void onStop(){
         super.onStop();
         display.donePlaying();
-        myConstantSong.stop();
+        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
 
     }
 
     @Override
     protected void onRestart(){
         super.onRestart();
+
     }
 
     @Override
     protected void onStart(){
         super.onStart();
-        myConstantSong.start();
+        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
-    /**
-     * justin's code
-     */
+
     public void gameDonePlayAgain() {
+        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_BOSS);
+//        ActivityAudio.myActivityPlayers[ActivityAudio.MEDIA_PLAYERS.BGM_BOSS.ordinal()].release();
         Intent intent = new Intent(this, PlayAgain.class);
         startActivity(intent);
         finish();
     }
-    /**
-     *
-     */
+
 }
