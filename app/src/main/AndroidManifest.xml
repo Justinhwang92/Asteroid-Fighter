@@ -15,7 +15,7 @@
             android:theme="@style/AppTheme.noActionBar"></activity>
 
         <activity
-            android:name=".Instruction"
+            android:name=".Instructions"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar"/>
 

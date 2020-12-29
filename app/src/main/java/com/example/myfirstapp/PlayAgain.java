@@ -3,6 +3,7 @@ package com.example.myfirstapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,6 +28,18 @@ public class PlayAgain extends Activity {
         playAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //stop and release all mediaplayers to recoup resources
+                for(MediaPlayer player : ActivityAudio.myActivityPlayers)
+                {
+                    if(player!=null) {
+                        if(player.isPlaying())
+                            player.stop();
+                        player.reset();
+                        player.release();
+                        player=null;
+                    }
+                }
+
                 Intent intent = new Intent(PlayAgain.this, MainActivity.class);
                 startActivity(intent);
                 finish();
