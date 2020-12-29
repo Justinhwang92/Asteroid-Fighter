@@ -29,7 +29,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginRight="330dp"
         android:paddingRight="30dp"
-        android:text="PLAY"
+        android:text="PLAY NOW"
         android:textColor="#ffffff"
         android:textSize="100px" />
 
@@ -54,7 +54,7 @@
         android:layout_marginTop="150dp"
         android:layout_marginRight="250dp"
         android:paddingRight="30dp"
-        android:text="HOW TO PLAY"
+        android:text="INSTRUCTIONS"
         android:textColor="#ffffff"
         android:textSize="100px" />
 <!--    <TextView-->
