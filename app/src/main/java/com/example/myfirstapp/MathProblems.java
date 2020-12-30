@@ -13,6 +13,12 @@ public class MathProblems {
      * Boolean flag for boss stage
      */
     private boolean myBoss;
+
+    /**
+     * int answer of a specific question.
+     */
+    private int myAns;
+
     /**
      * Random class object.
      */
@@ -83,6 +89,12 @@ public class MathProblems {
     }
 
     /**
+     * method to get the answer of a specific question
+     * @return int the answer
+     */
+    public int getAnswer(){  return myAns; }
+
+    /**
      * To get easy question - 1 digit arithmetic
      * @return String representation of the question
      */
@@ -102,7 +114,8 @@ public class MathProblems {
      */
     public Set<Integer> getEasyAnswers(){
         mySet = new HashSet<>(myBasicOpsObject.getWrongs());
-        mySet.add(myBasicOpsObject.mySolution);
+        myAns = myBasicOpsObject.mySolution;
+        mySet.add(myAns);
         return (mySet);
     }
 
@@ -126,7 +139,8 @@ public class MathProblems {
      */
     public Set<Integer> getMediumAnswers(){
         mySet = new HashSet<>(myBasicOpsObject.getWrongs());
-        mySet.add(myBasicOpsObject.mySolution);
+        myAns = myBasicOpsObject.mySolution;
+        mySet.add(myAns);
         return (mySet);
     }
 
@@ -148,7 +162,8 @@ public class MathProblems {
                 theS = sqr.toString();
                 mySet = new HashSet<>();
                 mySet = sqr.getWrongs();
-                mySet.add(sqr.mySolution);
+                myAns = sqr.mySolution;
+                mySet.add(myAns);
                 break;
 
             //For square root problem
@@ -157,7 +172,9 @@ public class MathProblems {
                 theS = sqrRt.toString();
                 mySet = new HashSet<>();
                 mySet = sqrRt.getWrongs();
-                mySet.add(sqrRt.mySolution);
+                myAns = sqrRt.mySolution;
+                mySet.add(myAns);
+//                mySet.add(sqrRt.mySolution);
                 break;
 
             //For Inequality part
@@ -166,7 +183,9 @@ public class MathProblems {
                 theS = inqO.toString();
                 mySet = new HashSet<>();
                 mySet = inqO.getWrongs();
-                mySet.add(inqO.mySolution);
+                myAns = inqO.mySolution;
+                mySet.add(myAns);
+//                mySet.add(inqO.mySolution);
                 break;
 
             //For algebra part
@@ -175,7 +194,9 @@ public class MathProblems {
                 theS = algO.toString();
                 mySet = new HashSet<>();
                 mySet = algO.getWrongs();
-                mySet.add(algO.mySolution);
+                myAns = algO.mySolution;
+                mySet.add(myAns);
+//                mySet.add(algO.mySolution);
                 break;
 
             default:
@@ -764,7 +785,7 @@ public class MathProblems {
          */
         public String toString()
         {
-            return myXCoefficient +"x + "+ myLeftCoefficient +" = "+ myRightCoefficient;
+            return myXCoefficient +"x + "+ myLeftCoefficient +" = "+ myRightCoefficient + ", then x = ?";
         }
     }
 

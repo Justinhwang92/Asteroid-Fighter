@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        android:text="Brandon Lu - Software Developer"
+        android:text="Brandon Lu - Software Developer and Soundtrack Director"
         android:textColor="#ffffff"
         android:textSize="60px" />
 
@@ -79,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
-        android:text="Ibraheem Alani - Soundrack Director"
+        android:text="Ibraheem Alani - Soundrack Producer"
         android:textColor="#ffffff"
         android:textSize="60px" />
 

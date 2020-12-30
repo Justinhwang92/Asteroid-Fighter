@@ -11,6 +11,11 @@ import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+import java.util.Random;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 /*
  * main visual display class used for updating the main gameplay screen
  */
@@ -20,6 +25,7 @@ public class Display extends SurfaceView implements Runnable {
     private boolean isPlaying, isGameOver, isBossMusic = false;
     private int screenX, screenY;
     public static float screenRatioX, screenRatioY;
+    public boolean isBossStage = false;
     private Paint paint;
     private Asteroid asteroid;
     private Flight flight; // ship
@@ -29,7 +35,11 @@ public class Display extends SurfaceView implements Runnable {
     private Bullet theBullet;
     public int theScore;
     private static final int SCORE_TILL_BOSS = 10;  // score that must be reached until boss appears
+    private static final int NUMBER_OF_MINIONS = 20;
     private ActivityAudio myAudio;
+    ArrayList<Asteroid> allMinions;
+
+
     // initializes fields
     public Display(Activity activity, int screenX, int screenY, ActivityAudio theAudio) {
         super(activity);
@@ -56,6 +66,12 @@ public class Display extends SurfaceView implements Runnable {
         theBullet = new Bullet(getResources());
         //clicking play shoots, we need to fix that so we don't have to start score at -1
         theScore = -1;
+
+        allMinions = new ArrayList<Asteroid>();
+        for (int i = 0; i < NUMBER_OF_MINIONS; i++) {
+            Asteroid minion = new Asteroid(getResources(), true);
+            allMinions.add(minion);
+        }
     }
 
     // summary method
@@ -82,6 +98,7 @@ public class Display extends SurfaceView implements Runnable {
         if (theScore >= SCORE_TILL_BOSS) {
             asteroid.bossStageBegins = true;
             asteroid.y = (screenY - asteroid.height) / 2 + (-50);
+            isBossStage = true;
         }
 
         if (theScore >= SCORE_TILL_BOSS) {
@@ -129,6 +146,15 @@ public class Display extends SurfaceView implements Runnable {
         }
 
         asteroid.x -= (asteroid.speed); // asteroid moves
+
+        // 4 (bossLife) is just an arbitrary point in the boss stage to deploy minions
+        if (asteroid.bossLife < 4) {
+            for (Asteroid minion : allMinions) {
+                minion.x -= (asteroid.speed + 4);
+            }
+        }
+
+
         if (asteroid.x + asteroid.width < 0) {
             if (heart.lives == 0) {
                 isGameOver = true;
@@ -138,6 +164,13 @@ public class Display extends SurfaceView implements Runnable {
                 asteroid.speed = (int) (10 * screenRatioX);
             asteroid.x = screenX - 5000;
             asteroid.y = (screenY - asteroid.height) / 2;
+
+
+            for (Asteroid minion : allMinions) {
+                minion.x =produceRandomXCoordinate();
+                minion.y = produceRandomYCoordinate();
+            }
+
             //asteroid.wasShot = false;
         }
         // if asteroid hits the ship
@@ -174,6 +207,22 @@ public class Display extends SurfaceView implements Runnable {
         }
     }
 
+    // produces random y coordinate for the minions
+    public int produceRandomYCoordinate() {
+        Random rand = new Random();
+        int random = rand.nextInt(350 + 350) - 350;
+        int yCoordinate = (screenY - asteroid.height) / 2 + random;
+        return yCoordinate;
+    }
+
+    // produce random x coordinate for the minions
+    public int produceRandomXCoordinate() {
+        Random rand = new Random();
+        int random = rand.nextInt(2000 - 0) + 0;
+        int xCoordinate = screenX - 5000 + random;
+        return xCoordinate;
+    }
+
 
     // allow for asteroid, bullet, background visibility
     private void draw() {
@@ -196,13 +245,23 @@ public class Display extends SurfaceView implements Runnable {
 //                return;
             }
 
+
             drawLives(canvas);
+
+            if (asteroid.bossLife < 4) {
+                deployMinions(canvas);
+            }
+
+
             getHolder().unlockCanvasAndPost(canvas);
         }
     }
 
-    private void deployMinions() {
-
+    // Display all minions
+    private void deployMinions(Canvas canvas) {
+        for (Asteroid minion : allMinions) {
+            canvas.drawBitmap(minion.minion, minion.x, minion.y, paint);
+        }
     }
 
     // updates the health bar
@@ -217,10 +276,6 @@ public class Display extends SurfaceView implements Runnable {
         } else if (heart.lives == 1) {
             canvas.drawBitmap(heart.heart, flight.x + 1800, flight.y - 350, paint);
         }
-    }
-
-    private void disableAsteroids() {
-
     }
 
     // goes back to main menu
@@ -245,6 +300,10 @@ public class Display extends SurfaceView implements Runnable {
         }
     }
 
+    public Flight getFlightObj(){
+        return flight;
+    }
+
     //start playing the boss music instead of regular
     public void playBossMusic() {
         isBossMusic = true;
@@ -255,13 +314,13 @@ public class Display extends SurfaceView implements Runnable {
     }
 
     // where the user should touch to shoot
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        if (event.getX() > 0) {
-            flight.hasShot = true;
-        }
-        return true;
-    }
+////    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//
+//        if (event.getX() > 0) {
+//            flight.hasShot = true;
+//        }
+//        return true;
+//    }
 
 }
