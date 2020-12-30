@@ -13,6 +13,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 /*
  * main visual display class used for updating the main gameplay screen
  */
@@ -22,6 +24,7 @@ public class Display extends SurfaceView implements Runnable {
     private boolean isPlaying, isGameOver, isBossMusic = false;
     private int screenX, screenY;
     public static float screenRatioX, screenRatioY;
+    public boolean isBossStage = false;
     private Paint paint;
     private Asteroid asteroid;
     private Flight flight; // ship
@@ -73,6 +76,7 @@ public class Display extends SurfaceView implements Runnable {
         if (theScore >= SCORE_TILL_BOSS) {
             asteroid.bossStageBegins = true;
             asteroid.y = (screenY - asteroid.height) / 2 + (-50);
+            isBossStage = true;
         }
 
         if (theScore >= SCORE_TILL_BOSS) {
@@ -243,6 +247,10 @@ public class Display extends SurfaceView implements Runnable {
         }
     }
 
+    public Flight getFlightObj(){
+        return flight;
+    }
+
     //start playing the boss music instead of regular
     public void playBossMusic() {
         isBossMusic = true;
@@ -255,13 +263,13 @@ public class Display extends SurfaceView implements Runnable {
     }
 
     // where the user should touch to shoot
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        if (event.getX() > 0) {
-            flight.hasShot = true;
-        }
-        return true;
-    }
+////    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//
+//        if (event.getX() > 0) {
+//            flight.hasShot = true;
+//        }
+//        return true;
+//    }
 
 }

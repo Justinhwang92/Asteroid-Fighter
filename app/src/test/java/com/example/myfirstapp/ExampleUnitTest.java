@@ -41,7 +41,7 @@ public class ExampleUnitTest {
         System.out.println(mt.getMediumAnswers());
 
         System.out.println(mt.getHardQuestions());
-        System.out.println(mt.getHardQueAnswers());
+        System.out.println(mt.getHardAnswers());
 
     }
 }
