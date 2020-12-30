@@ -6,6 +6,7 @@ package com.example.myfirstapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -171,9 +172,18 @@ public class Activity extends AppCompatActivity {
     public void gameDonePlayAgain() {
         myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_BOSS);
 //        ActivityAudio.myActivityPlayers[ActivityAudio.MEDIA_PLAYERS.BGM_BOSS.ordinal()].release();
+        SharedPreferences preferences = getSharedPreferences("PREFS",0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("lastScore",display.theScore);
+        editor.commit();
+
         Intent intent = new Intent(this, PlayAgain.class);
+        Bundle bundle = new Bundle();
+        String points;
+        points = Integer.toString(display.theScore);
+        bundle.putString("Score",points);
+        intent.putExtras(bundle);
         startActivity(intent);
-        finish();
     }
 
 
