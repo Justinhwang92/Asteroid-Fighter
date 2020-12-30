@@ -3,7 +3,6 @@
  */
 package com.example.myfirstapp;
 
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,7 +10,9 @@ import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-import android.view.WindowManager;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class Display extends SurfaceView implements Runnable {
 
-    private Thread thread;
+    private Thread displayThread;
     private boolean isPlaying, isGameOver, isBossMusic = false;
     private int screenX, screenY;
     public static float screenRatioX, screenRatioY;
@@ -34,11 +35,18 @@ public class Display extends SurfaceView implements Runnable {
     private Bullet theBullet;
     public int theScore;
     private static final int SCORE_TILL_BOSS = 10;  // score that must be reached until boss appears
-    MediaPlayer laserPlayer;
+    private static final int NUMBER_OF_MINIONS = 20;
+    private ActivityAudio myAudio;
+    ArrayList<Asteroid> allMinions;
+
+
     // initializes fields
-    public Display(Activity activity, int screenX, int screenY) {
+    public Display(Activity activity, int screenX, int screenY, ActivityAudio theAudio) {
         super(activity);
         this.activity = activity;
+
+        myAudio = theAudio;
+
         this.screenX = screenX;
         this.screenY = screenY;
         screenRatioX = 1920f / screenX;
@@ -58,7 +66,12 @@ public class Display extends SurfaceView implements Runnable {
         theBullet = new Bullet(getResources());
         //clicking play shoots, we need to fix that so we don't have to start score at -1
         theScore = -1;
-        laserPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_laser);
+
+        allMinions = new ArrayList<Asteroid>();
+        for (int i = 0; i < NUMBER_OF_MINIONS; i++) {
+            Asteroid minion = new Asteroid(getResources(), true);
+            allMinions.add(minion);
+        }
     }
 
     // summary method
@@ -67,6 +80,15 @@ public class Display extends SurfaceView implements Runnable {
         while (isPlaying) {
             update();
             draw();
+            sleep();
+        }
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(16);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -102,7 +124,7 @@ public class Display extends SurfaceView implements Runnable {
 
         if (flight.hasShot) {
             //plays laser sound whenever laser is shot
-            laserPlayer.start();
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_ROCKET_LASER);
             theBullet.x += (theBullet.speed);
         }
         // allows for explosion when bullet and asteroid gets closer
@@ -112,12 +134,10 @@ public class Display extends SurfaceView implements Runnable {
 
         if (Rect.intersects(asteroid.getCollisionShape(), theBullet.getCollisionShape())) {
             if (!asteroid.bossStageBegins) {
-                final MediaPlayer asteroidCrashPlayer = MediaPlayer.create(activity, R.raw.sfx_explosion_asteroid);
-                asteroidCrashPlayer.start();
+                myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_EXPLOSION_ASTEROID);
                 asteroid.x = -500;  // asteroid regenerates on the right
             } else {
-                final MediaPlayer bossHitPlayer = MediaPlayer.create(activity, R.raw.sfx_boss_hit);
-                bossHitPlayer.start();
+                myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_BOSS_HIT);
                 asteroid.bossLife--;
             }
             theScore++;
@@ -126,6 +146,15 @@ public class Display extends SurfaceView implements Runnable {
         }
 
         asteroid.x -= (asteroid.speed); // asteroid moves
+
+        // 4 (bossLife) is just an arbitrary point in the boss stage to deploy minions
+        if (asteroid.bossLife < 4) {
+            for (Asteroid minion : allMinions) {
+                minion.x -= (asteroid.speed + 4);
+            }
+        }
+
+
         if (asteroid.x + asteroid.width < 0) {
             if (heart.lives == 0) {
                 isGameOver = true;
@@ -135,6 +164,13 @@ public class Display extends SurfaceView implements Runnable {
                 asteroid.speed = (int) (10 * screenRatioX);
             asteroid.x = screenX - 5000;
             asteroid.y = (screenY - asteroid.height) / 2;
+
+
+            for (Asteroid minion : allMinions) {
+                minion.x =produceRandomXCoordinate();
+                minion.y = produceRandomYCoordinate();
+            }
+
             //asteroid.wasShot = false;
         }
         // if asteroid hits the ship
@@ -143,10 +179,8 @@ public class Display extends SurfaceView implements Runnable {
             asteroid.x = -500;
             //heart.lives--;
             //plays heart is lost sound
-            final MediaPlayer shipCollisionPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_hit);
-            shipCollisionPlayer.start();
-            final MediaPlayer heartLostPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_life);
-            heartLostPlayer.start();
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_ROCKET_HIT);
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_ROCKET_LOST_LIFE);
 
             if (asteroid.bossStageBegins) {
                 heart.lives = 0;
@@ -159,21 +193,34 @@ public class Display extends SurfaceView implements Runnable {
         if (heart.lives == 0) {
             //plays all lives lost sound
 
-            final MediaPlayer deadPlayer = MediaPlayer.create(activity, R.raw.sfx_rocket_lost_all_lives);
-            deadPlayer.start();
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_ROCKET_LOST_ALL_LIVES);
             isGameOver = true;
             activity.gameDonePlayAgain();
         }
 
         else if(asteroid.bossLife <= 0)
         {
-            final MediaPlayer bossExplodePlayer = MediaPlayer.create(activity, R.raw.sfx_explosion_boss);
-            bossExplodePlayer.start();
-            final MediaPlayer victoryPlayer = MediaPlayer.create(activity, R.raw.sfx_level_victory);
-            victoryPlayer.start();
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_EXPLOSION_BOSS);
+            myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
             isGameOver = true;
             activity.gameDonePlayAgain();
         }
+    }
+
+    // produces random y coordinate for the minions
+    public int produceRandomYCoordinate() {
+        Random rand = new Random();
+        int random = rand.nextInt(350 + 350) - 350;
+        int yCoordinate = (screenY - asteroid.height) / 2 + random;
+        return yCoordinate;
+    }
+
+    // produce random x coordinate for the minions
+    public int produceRandomXCoordinate() {
+        Random rand = new Random();
+        int random = rand.nextInt(2000 - 0) + 0;
+        int xCoordinate = screenX - 5000 + random;
+        return xCoordinate;
     }
 
 
@@ -194,17 +241,27 @@ public class Display extends SurfaceView implements Runnable {
             if (isGameOver) {
                 activity.gameDonePlayAgain();
                 isPlaying = false;
-                goBack();
-                return;
+//                goBack();
+//                return;
             }
 
+
             drawLives(canvas);
+
+            if (asteroid.bossLife < 4) {
+                deployMinions(canvas);
+            }
+
+
             getHolder().unlockCanvasAndPost(canvas);
         }
     }
 
-    private void deployMinions() {
-
+    // Display all minions
+    private void deployMinions(Canvas canvas) {
+        for (Asteroid minion : allMinions) {
+            canvas.drawBitmap(minion.minion, minion.x, minion.y, paint);
+        }
     }
 
     // updates the health bar
@@ -221,10 +278,6 @@ public class Display extends SurfaceView implements Runnable {
         }
     }
 
-    private void disableAsteroids() {
-
-    }
-
     // goes back to main menu
     private void goBack() {
         activity.onStop();
@@ -234,14 +287,14 @@ public class Display extends SurfaceView implements Runnable {
 
     public void resume() {
         isPlaying = true;
-        thread = new Thread(this);
-        thread.start();
+        displayThread = new Thread(this);
+        displayThread.start();
     }
 
     public void donePlaying() {
         try {
             isPlaying = false;
-            thread.join();
+            displayThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -255,11 +308,9 @@ public class Display extends SurfaceView implements Runnable {
     public void playBossMusic() {
         isBossMusic = true;
         //stop regular music
-        activity.getMyConstantSong().stop();
+        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
         //begin boss music
-        final MediaPlayer bossPlayer = MediaPlayer.create(activity, R.raw.bgm_boss);
-        bossPlayer.setLooping(true);
-        bossPlayer.start();
+        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_BOSS);
     }
 
     // where the user should touch to shoot

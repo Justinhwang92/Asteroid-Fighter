@@ -26,7 +26,7 @@ public class Asteroid {
         ship = BitmapFactory.decodeResource(res, R.drawable.one);
         destroyed = BitmapFactory.decodeResource(res, R.drawable.explosion);
         boss = BitmapFactory.decodeResource(res, R.drawable.boss3b4);
-        minion = BitmapFactory.decodeResource(res, R.drawable.small_minion1);
+        minion = BitmapFactory.decodeResource(res, R.drawable.small_minion4);
 
         width = ship.getWidth() / 2;
         height = ship.getHeight() / 6;
@@ -37,6 +37,8 @@ public class Asteroid {
         ship = Bitmap.createScaledBitmap(ship, width, height, false);
 
         y = -height;
+
+        this.isMinion = isMinion;
     }
     Bitmap getAsteroid() {
         asteroidCounter = 1;
@@ -49,6 +51,9 @@ public class Asteroid {
             }
         }
         if (bossStageBegins) {
+            if (isMinion) {
+                return minion;
+            }
             return boss;
         }
         return ship;

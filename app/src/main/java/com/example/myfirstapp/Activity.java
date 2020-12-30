@@ -26,6 +26,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class Activity extends AppCompatActivity {
+
     private Display display;
     private MediaPlayer myConstantSong;
     private Thread thread;
@@ -44,6 +45,8 @@ public class Activity extends AppCompatActivity {
     Button mybutton4;
 
 
+    private ActivityAudio myAudio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +56,27 @@ public class Activity extends AppCompatActivity {
 
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
-        display = new Display(this, point.x +5000, point.y);
+
+        myAudio = new ActivityAudio(this);
+        Thread audioThread = new Thread(myAudio);
+        audioThread.start();
+
+        display = new Display(this, point.x +5000, point.y, myAudio);
         setContentView(display);
+
+        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
+
+        //stop and release the menu mediaplayer to recoup resources
+        for(MediaPlayer player : MainActivityAudio.myMainActivityPlayers)
+        {
+            if(player!=null) {
+                if(player.isPlaying())
+                    player.stop();
+                player.reset();
+                player.release();
+                player=null;
+            }
+        }
 
         //Layout on top of surface view
         ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -64,11 +86,6 @@ public class Activity extends AppCompatActivity {
         //For math problem class
         //starts with easy questions
         setQuestionAnswerOnDisplay();
-
-        myConstantSong = MediaPlayer.create(this, R.raw.bgm_gameloop);
-        myConstantSong.setLooping(true);
-        MainActivity.myMenuPlayer.stop();
-        myConstantSong.start();
 
         //int score = display.theScore;
         //Toast.makeText(Activity.this,"this is a score"+score, Toast.LENGTH_LONG).show();
@@ -111,30 +128,30 @@ public class Activity extends AppCompatActivity {
         mybutton4.setText(myChoices.get(3)+"");
     }
 
-    public MediaPlayer getMyConstantSong()
+    public ActivityAudio getMyAudio()
     {
-        return myConstantSong;
+        return myAudio;
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         display.donePlaying();
-        myConstantSong.stop();
+        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         display.resume();
-        myConstantSong.start();
+        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
     @Override
     protected void onStop(){
         super.onStop();
         display.donePlaying();
-        myConstantSong.stop();
+        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
 
     }
 
@@ -146,13 +163,13 @@ public class Activity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        myConstantSong.start();
+        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
-    /**
-     * justin's code
-     */
+
     public void gameDonePlayAgain() {
+        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_BOSS);
+//        ActivityAudio.myActivityPlayers[ActivityAudio.MEDIA_PLAYERS.BGM_BOSS.ordinal()].release();
         Intent intent = new Intent(this, PlayAgain.class);
         startActivity(intent);
         finish();
@@ -206,4 +223,5 @@ public class Activity extends AppCompatActivity {
     /**
      *
      */
+
 }
