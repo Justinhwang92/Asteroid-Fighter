@@ -184,6 +184,7 @@ public class Activity extends AppCompatActivity {
         bundle.putString("Score",points);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 
 
