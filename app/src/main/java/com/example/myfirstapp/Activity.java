@@ -37,6 +37,7 @@ public class Activity extends AppCompatActivity {
     private int myAns;
     private List<Integer> myChoices;
     private boolean isBossStage = false;
+    private int score = 0;
 
     //Buttons
     Button mybutton1;

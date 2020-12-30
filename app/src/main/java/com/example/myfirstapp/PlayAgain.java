@@ -15,11 +15,17 @@ public class PlayAgain extends Activity {
 
     Button playAgain;
     TextView gameOverText;
+    TextView scoreLabel;
+    int score = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_again);
+
+
+       // scorelabel.setText
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         playAgain = (Button) findViewById(R.id.playAgainButton);
         gameOverText = (TextView)findViewById(R.id.gameOverMessage);
@@ -46,10 +52,14 @@ public class PlayAgain extends Activity {
             }
         });
 
-
+        int x = 1;
         Typeface typeface =  Typeface.DEFAULT;
         playAgain.setTypeface(typeface);
         gameOverText.setTypeface(typeface);
+
+        scoreLabel = (TextView)findViewById(R.id.scoreLabel);
+
+        scoreLabel.setText("SCORE: "+ score);
     }
 
     @Override
