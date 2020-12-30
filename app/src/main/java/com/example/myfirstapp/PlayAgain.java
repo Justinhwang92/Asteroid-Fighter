@@ -2,6 +2,7 @@ package com.example.myfirstapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -16,7 +17,10 @@ public class PlayAgain extends Activity {
     Button playAgain;
     TextView gameOverText;
     TextView scoreLabel;
-    int score = 0;
+    TextView score;
+    TextView highScore;
+    int lastScore;
+    int best;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,33 @@ public class PlayAgain extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         playAgain = (Button) findViewById(R.id.playAgainButton);
         gameOverText = (TextView)findViewById(R.id.gameOverMessage);
+
+
+        score = (TextView)findViewById(R.id.scoreLabel);
+        Bundle bundle = getIntent().getExtras();
+
+        //Extract the data…
+        String text = bundle.getString("Score");
+        score.setText(text);
+
+        highScore = (TextView)findViewById(R.id.highScoreLabel);
+
+        SharedPreferences preferences= getSharedPreferences("PREFS",0);
+        lastScore = preferences.getInt("best",0);
+        best=preferences.getInt("best",0);
+
+        if(lastScore > best)
+        {
+            best =lastScore;
+            SharedPreferences.Editor editor =preferences.edit();
+            editor.putInt("best",best);
+            editor.apply();
+        }
+
+        highScore.setText("High Score: "+best);
+
+
+
 
         //play again button onclick listener
         playAgain.setOnClickListener(new View.OnClickListener() {
@@ -57,9 +88,9 @@ public class PlayAgain extends Activity {
         playAgain.setTypeface(typeface);
         gameOverText.setTypeface(typeface);
 
-        scoreLabel = (TextView)findViewById(R.id.scoreLabel);
+        //scoreLabel = (TextView)findViewById(R.id.scoreLabel);
 
-        scoreLabel.setText("SCORE: "+ score);
+        //scoreLabel.setText("SCORE: "+ score);
     }
 
     @Override
