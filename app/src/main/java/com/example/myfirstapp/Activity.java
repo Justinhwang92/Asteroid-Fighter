@@ -172,10 +172,10 @@ public class Activity extends AppCompatActivity {
     public void gameDonePlayAgain() {
         myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_BOSS);
 //        ActivityAudio.myActivityPlayers[ActivityAudio.MEDIA_PLAYERS.BGM_BOSS.ordinal()].release();
-        SharedPreferences preferences = getSharedPreferences("PREFS",0);
+        /*SharedPreferences preferences = getSharedPreferences("PREFS",0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("lastScore",display.theScore);
-        editor.commit();
+        editor.commit();*/
 
         Intent intent = new Intent(this, PlayAgain.class);
         Bundle bundle = new Bundle();

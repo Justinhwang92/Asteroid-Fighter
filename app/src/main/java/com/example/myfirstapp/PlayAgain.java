@@ -27,7 +27,6 @@ public class PlayAgain extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_again);
 
-
        // scorelabel.setText
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -43,22 +42,37 @@ public class PlayAgain extends Activity {
         score.setText(text);
 
         highScore = (TextView)findViewById(R.id.highScoreLabel);
+        int scoreNum = Integer.parseInt(text);
 
+        SharedPreferences mypref = getPreferences(MODE_PRIVATE);
+        int highestScore = mypref.getInt("highscore",0);
+        if(highestScore > scoreNum)
+        {
+            highScore.setText("High Score: "+highestScore);
+        }
+        else{
+            highScore.setText("New High score :"+ scoreNum);
+            SharedPreferences.Editor editor = mypref.edit();
+            editor.putInt("highscore",scoreNum);
+            editor.commit();
+        }
+
+        /*
         SharedPreferences preferences= getSharedPreferences("PREFS",0);
-        lastScore = preferences.getInt("best",0);
-        best=preferences.getInt("best",0);
+        lastScore = preferences.getInt("lastScore",0);
+        best=preferences.getInt("lastScore",0);
 
         if(lastScore > best)
         {
-            best =lastScore;
-            SharedPreferences.Editor editor =preferences.edit();
-            editor.putInt("best",best);
+            best = lastScore;
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("lastScore",best);
             editor.apply();
         }
 
         highScore.setText("High Score: "+best);
 
-
+*/
 
 
         //play again button onclick listener
