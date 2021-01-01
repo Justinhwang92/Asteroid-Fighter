@@ -81,7 +81,7 @@ public class Activity_Game_Over extends Activity {
                 //stop and release all mediaplayers to recoup resources
                 Audio_Activity_Game.releasePlayers();
 
-                Intent intent = new Intent(Activity_Game_Over.this, Activity_Main_Menu.class);
+                Intent intent = new Intent(Activity_Game_Over.this, Activity_Menu_Main.class);
                 startActivity(intent);
                 finish();
             }
