@@ -72,7 +72,7 @@ public class Activity_Game extends AppCompatActivity {
         //int score = display.theScore;
         //Toast.makeText(Activity.this,"this is a score"+score, Toast.LENGTH_LONG).show();
 
-        Audio_Activity_Main_Menu.releasePlayers();
+        Audio_Activity_Menu_Main.releasePlayers();
     }
 
     public void setQuestionAnswerOnDisplay(){

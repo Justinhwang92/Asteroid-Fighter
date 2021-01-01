@@ -3,11 +3,11 @@ package com.example.myfirstapp;
 import android.content.Context;
 import android.media.MediaPlayer;
 
-public class Audio_Activity_Main_Menu {
+public class Audio_Activity_Menu_Main {
     private Context myContext;
     public static MediaPlayer[] myMainActivityPlayers;
 
-    public Audio_Activity_Main_Menu(Context theContext)
+    public Audio_Activity_Menu_Main(Context theContext)
     {
         myContext = theContext;
         MediaPlayer BGM_MENU = MediaPlayer.create(myContext, R.raw.bgm_menu_loop);
@@ -72,7 +72,7 @@ public class Audio_Activity_Main_Menu {
 
     public static void releasePlayers()
     {
-        for(MediaPlayer player : Audio_Activity_Main_Menu.myMainActivityPlayers)
+        for(MediaPlayer player : Audio_Activity_Menu_Main.myMainActivityPlayers)
         {
             if(player!=null) {
                 if(player.isPlaying())

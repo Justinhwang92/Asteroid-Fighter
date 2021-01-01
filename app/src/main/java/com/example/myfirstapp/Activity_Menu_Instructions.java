@@ -30,8 +30,8 @@ public class Activity_Menu_Instructions extends AppCompatActivity {
                     myBGM.release();
                     myBGM=null;
                 }
-                Activity_Main_Menu.myAudio.playMedia(Audio_Activity_Main_Menu.MEDIA_PLAYERS.SFX_MENU_CLICK);
-                startActivity(new Intent(Activity_Menu_Instructions.this, Activity_Main_Menu.class));
+                Activity_Menu_Main.myAudio.playMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
+                startActivity(new Intent(Activity_Menu_Instructions.this, Activity_Menu_Main.class));
             }
         });
 

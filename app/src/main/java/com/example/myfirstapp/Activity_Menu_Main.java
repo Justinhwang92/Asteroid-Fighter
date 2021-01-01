@@ -9,9 +9,9 @@ import android.view.WindowManager;
 /**
  * main activity starts when the game starts - the menu
  */
-public class Activity_Main_Menu extends AppCompatActivity {
+public class Activity_Menu_Main extends AppCompatActivity {
 
-    public Audio_Activity_Main_Menu myAudio;
+    public static Audio_Activity_Menu_Main myAudio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +23,11 @@ public class Activity_Main_Menu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
 
-        myAudio = new Audio_Activity_Main_Menu(this);
+        myAudio = new Audio_Activity_Menu_Main(this);
 
         findViewById(R.id.instruction).setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                myAudio.playMedia(Audio_Activity_Main_Menu.MEDIA_PLAYERS.SFX_MENU_CLICK);
+                myAudio.playMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 showInstructions();
             }
         });
@@ -35,7 +35,7 @@ public class Activity_Main_Menu extends AppCompatActivity {
         findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.playMedia(Audio_Activity_Main_Menu.MEDIA_PLAYERS.SFX_MENU_CLICK);
+                myAudio.playMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 showGame();
             }
         });
@@ -43,18 +43,18 @@ public class Activity_Main_Menu extends AppCompatActivity {
         findViewById(R.id.creditsid).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.playMedia(Audio_Activity_Main_Menu.MEDIA_PLAYERS.SFX_MENU_CLICK);
+                myAudio.playMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 showCredits();
             }
         });
 
-        myAudio.playMedia(Audio_Activity_Main_Menu.MEDIA_PLAYERS.BGM_MENU);
+        myAudio.playMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
     }
     public void showInstructions()
     {
         Intent intent = new Intent(this, Activity_Menu_Instructions.class);
         startActivity(intent);
-        myAudio.stopMedia(Audio_Activity_Main_Menu.MEDIA_PLAYERS.BGM_MENU);
+        myAudio.stopMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
 
     }
 
@@ -62,13 +62,13 @@ public class Activity_Main_Menu extends AppCompatActivity {
     {
         Intent intent = new Intent(this, Activity_Menu_Credits.class);
         startActivity(intent);
-        myAudio.stopMedia(Audio_Activity_Main_Menu.MEDIA_PLAYERS.BGM_MENU);
+        myAudio.stopMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
 
     }
 
     public void showGame()
     {
-        startActivity(new Intent(Activity_Main_Menu.this, Activity_Game.class));
+        startActivity(new Intent(Activity_Menu_Main.this, Activity_Game.class));
     }
 
 
