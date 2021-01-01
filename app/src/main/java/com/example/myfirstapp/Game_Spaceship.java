@@ -8,18 +8,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
-import static com.example.myfirstapp.Display.screenRatioX;
+import static com.example.myfirstapp.Game_Display.screenRatioX;
 
-public class Flight {
+public class Game_Spaceship {
 
     boolean hasShot = false;
     int x, y, width, height;
     Bitmap flight, shoot;
-    private Display display;
+    private Game_Display gameDisplay;
 
     // initializes the image and size for the spaceship,
-    Flight (Display display, int screenY, Resources res) {
-        this.display = display;
+    Game_Spaceship(Game_Display gameDisplay, int screenY, Resources res) {
+        this.gameDisplay = gameDisplay;
 
         flight = BitmapFactory.decodeResource(res, R.drawable.ufo);
 

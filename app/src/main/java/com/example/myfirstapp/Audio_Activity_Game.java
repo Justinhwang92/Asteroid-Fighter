@@ -3,13 +3,32 @@ package com.example.myfirstapp;
 import android.content.Context;
 import android.media.MediaPlayer;
 
-public class ActivityAudio implements Runnable{
-    private static Context myActivity;
+public class Audio_Activity_Game {
+    private Context myContext;
     public static MediaPlayer[] myActivityPlayers;
 
-    public ActivityAudio(Context theActivity)
+    public Audio_Activity_Game(Context theContext)
     {
-        myActivity = theActivity;
+        myContext = theContext;
+        MediaPlayer BGM_BOSS = MediaPlayer.create(myContext, R.raw.bgm_boss_loop);
+        BGM_BOSS.setLooping(true);
+        MediaPlayer BGM_GAME_LOOP = MediaPlayer.create(myContext, R.raw.bgm_game_loop);
+        BGM_GAME_LOOP.setLooping(true);
+
+        myActivityPlayers = new MediaPlayer[]{
+                BGM_BOSS,
+                BGM_GAME_LOOP,
+                MediaPlayer.create(myContext, R.raw.sfx_boss_hit),
+                MediaPlayer.create(myContext, R.raw.sfx_explosion_asteroid),
+                MediaPlayer.create(myContext, R.raw.sfx_explosion_boss),
+                MediaPlayer.create(myContext, R.raw.sfx_level_victory),
+                MediaPlayer.create(myContext, R.raw.sfx_problem_correct),
+                MediaPlayer.create(myContext, R.raw.sfx_problem_incorrect),
+                MediaPlayer.create(myContext, R.raw.sfx_rocket_hit),
+                MediaPlayer.create(myContext, R.raw.sfx_rocket_laser),
+                MediaPlayer.create(myContext, R.raw.sfx_rocket_lost_all_lives),
+                MediaPlayer.create(myContext, R.raw.sfx_rocket_lost_life)
+        };
     }
 
     public enum MEDIA_PLAYERS
@@ -27,28 +46,7 @@ public class ActivityAudio implements Runnable{
         SFX_ROCKET_LOST_ALL_LIVES,
         SFX_ROCKET_LOST_LIFE
     }
-    public void run()
-    {
-        MediaPlayer BGM_BOSS = MediaPlayer.create(myActivity, R.raw.bgm_boss_loop);
-        BGM_BOSS.setLooping(true);
-        MediaPlayer BGM_GAME_LOOP = MediaPlayer.create(myActivity, R.raw.bgm_game_loop);
-        BGM_GAME_LOOP.setLooping(true);
 
-        myActivityPlayers = new MediaPlayer[]{
-                BGM_BOSS,
-                BGM_GAME_LOOP,
-                MediaPlayer.create(myActivity, R.raw.sfx_boss_hit),
-                MediaPlayer.create(myActivity, R.raw.sfx_explosion_asteroid),
-                MediaPlayer.create(myActivity, R.raw.sfx_explosion_boss),
-                MediaPlayer.create(myActivity, R.raw.sfx_level_victory),
-                MediaPlayer.create(myActivity, R.raw.sfx_problem_correct),
-                MediaPlayer.create(myActivity, R.raw.sfx_problem_incorrect),
-                MediaPlayer.create(myActivity, R.raw.sfx_rocket_hit),
-                MediaPlayer.create(myActivity, R.raw.sfx_rocket_laser),
-                MediaPlayer.create(myActivity, R.raw.sfx_rocket_lost_all_lives),
-                MediaPlayer.create(myActivity, R.raw.sfx_rocket_lost_life)
-        };
-    }
 
     public void playMedia(MEDIA_PLAYERS thePlayer)
     {
@@ -153,4 +151,19 @@ public class ActivityAudio implements Runnable{
 
         }
     }
+
+    public static void releasePlayers()
+    {
+        for(MediaPlayer player : Audio_Activity_Game.myActivityPlayers)
+        {
+            if(player!=null) {
+                if(player.isPlaying())
+                    player.stop();
+                player.reset();
+                player.release();
+                player=null;
+            }
+        }
+    }
+
 }

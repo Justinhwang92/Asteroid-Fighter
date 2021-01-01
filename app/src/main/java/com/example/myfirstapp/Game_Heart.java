@@ -4,17 +4,17 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import static com.example.myfirstapp.Display.screenRatioX;
+import static com.example.myfirstapp.Game_Display.screenRatioX;
 
-public class Heart {
+public class Game_Heart {
     int x, y, width, height;
     Bitmap heart;
-    private Display display;
+    private Game_Display gameDisplay;
     public int lives;
 
-    Heart(Display display, int screenY, Resources res) {
+    Game_Heart(Game_Display gameDisplay, int screenY, Resources res) {
         lives = 3;
-        this.display = display;
+        this.gameDisplay = gameDisplay;
         heart = BitmapFactory.decodeResource(res, R.drawable.heart3);
         width = heart.getWidth();
         height = heart.getHeight();

@@ -6,16 +6,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
-import static com.example.myfirstapp.Display.screenRatioX;
-import static com.example.myfirstapp.Display.screenRatioY;
+import static com.example.myfirstapp.Game_Display.screenRatioX;
+import static com.example.myfirstapp.Game_Display.screenRatioY;
 
-public class Bullet {
+public class Game_Bullet {
 
     int x, y, width, height;
     Bitmap bullet;
     int speed = 150;
 
-    Bullet (Resources res) {
+    Game_Bullet(Resources res) {
         bullet = BitmapFactory.decodeResource(res, R.drawable.bullet2);
 
         width = bullet.getWidth() / 1;

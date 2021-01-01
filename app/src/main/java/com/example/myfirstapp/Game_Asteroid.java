@@ -6,10 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
-import static com.example.myfirstapp.Display.screenRatioX;
-import static com.example.myfirstapp.Display.screenRatioY;
+import static com.example.myfirstapp.Game_Display.screenRatioX;
+import static com.example.myfirstapp.Game_Display.screenRatioY;
 
-public class Asteroid {
+public class Game_Asteroid {
 
     public int speed = 8;
     public int bossLife = 5;
@@ -22,7 +22,7 @@ public class Asteroid {
     public boolean crashed = false;
     public boolean isMinion;
 
-    Asteroid (Resources res, boolean isMinion) {
+    Game_Asteroid(Resources res, boolean isMinion) {
         ship = BitmapFactory.decodeResource(res, R.drawable.one);
         destroyed = BitmapFactory.decodeResource(res, R.drawable.explosion);
         boss = BitmapFactory.decodeResource(res, R.drawable.boss3b4);

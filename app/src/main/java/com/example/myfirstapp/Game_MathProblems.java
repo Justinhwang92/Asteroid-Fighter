@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Generates math problems questions and Answers
  */
-public class MathProblems {
+public class Game_MathProblems {
 
     /**
      * Boolean flag for boss stage
@@ -54,7 +54,7 @@ public class MathProblems {
      * Base math problem class constructor - contains different classes
      * @param theBoss flag to notify if it is boss stage.
      */
-    public MathProblems(boolean theBoss)
+    public Game_MathProblems(boolean theBoss)
     {
         myBoss = theBoss;
         myRandom = new Random();
@@ -226,7 +226,7 @@ public class MathProblems {
      * Class for basic arithmetic operation - 1 digit and 2 digits
      * Extends MathProblem class
      */
-    public static class BasicOps extends MathProblems
+    public static class BasicOps extends Game_MathProblems
     {
         /**
          * character variable for operator
@@ -454,7 +454,7 @@ public class MathProblems {
      * Class for the questions related to square of a number
      * Extends MathProblem class
      */
-    public static class SqProb extends MathProblems
+    public static class SqProb extends Game_MathProblems
     {
         /**
          * int variable for the operands of the square problem.
@@ -532,7 +532,7 @@ public class MathProblems {
      * Class for the questions related to square root of a number
      * Extends MathProblem class
      */
-    public static class SqrtProb extends MathProblems
+    public static class SqrtProb extends Game_MathProblems
     {
         //whole numbers
         //unicode for square root function \u221A
@@ -614,7 +614,7 @@ public class MathProblems {
      * Extends MathProblem class
      * General format is : Ax + B > C or Ax + B < C
      */
-    public static class IneqProb extends MathProblems
+    public static class IneqProb extends Game_MathProblems
     {
         /**
          * private int to store correct solution
@@ -707,7 +707,7 @@ public class MathProblems {
         }
     }
 
-    public static class AlgProb extends MathProblems
+    public static class AlgProb extends Game_MathProblems
     {
         /**
          * private int to store correct solution

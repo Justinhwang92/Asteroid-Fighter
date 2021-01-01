@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Instructions">
+    tools:context=".Activity_Menu_Instructions">
 
     <ImageView
         android:id="@+id/Step1"
@@ -78,7 +78,7 @@
         android:textSize="60px" />
 
     <TextView
-        android:id="@+id/play"
+        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
