@@ -181,6 +181,7 @@ public class Activity_Game extends AppCompatActivity {
                         setQuestionAnswerOnDisplay();
                     }else{
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+                        gameDisplay.deductPoint();
                         break;
                     }
 
@@ -193,6 +194,7 @@ public class Activity_Game extends AppCompatActivity {
                         setQuestionAnswerOnDisplay();
                     }else{
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+                        gameDisplay.deductPoint();
                         break;
                     }
                     break;
@@ -204,6 +206,7 @@ public class Activity_Game extends AppCompatActivity {
                         setQuestionAnswerOnDisplay();
                     }else{
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+                        gameDisplay.deductPoint();
                         break;
                     }
                     break;
@@ -215,6 +218,7 @@ public class Activity_Game extends AppCompatActivity {
                         setQuestionAnswerOnDisplay();
                     }else{
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+                        gameDisplay.deductPoint();
                         break;
                     }
                     break;
