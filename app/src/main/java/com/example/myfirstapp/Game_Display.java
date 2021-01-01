@@ -87,6 +87,14 @@ public class Game_Display extends SurfaceView implements Runnable {
             e.printStackTrace();
         }
     }
+    
+    public void deductPoint(){
+        this.theScore--;
+        if(theScore < 0){
+            gameHeart.lives--;
+            theScore = 0;
+        }
+    }
 
     // allows movements of the ship, background, bullet, and asteroids
     private void update() {
