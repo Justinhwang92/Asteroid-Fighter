@@ -8,20 +8,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-public class Credits extends AppCompatActivity {
+public class Activity_Menu_Instructions extends AppCompatActivity {
     private MediaPlayer myBGM;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_credits);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_instruction);
 
-        myBGM = MediaPlayer.create(this, R.raw.bgm_credits_loop);
+        myBGM = MediaPlayer.create(this, R.raw.bgm_instructions_loop);
         myBGM.setLooping(true);
         myBGM.start();
 
-        findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(myBGM!=null) {
@@ -31,9 +30,11 @@ public class Credits extends AppCompatActivity {
                     myBGM.release();
                     myBGM=null;
                 }
-                startActivity(new Intent(Credits.this, MainActivity.class));
+                Activity_Main_Menu.myAudio.playMedia(Audio_Activity_Main_Menu.MEDIA_PLAYERS.SFX_MENU_CLICK);
+                startActivity(new Intent(Activity_Menu_Instructions.this, Activity_Main_Menu.class));
             }
         });
+
 
     }
 }

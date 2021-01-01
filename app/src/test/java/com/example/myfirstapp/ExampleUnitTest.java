@@ -17,7 +17,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testQuestion(){
-        MathProblems mt = new MathProblems(false);
+        Game_MathProblems mt = new Game_MathProblems(false);
 
 //        System.out.println(sq);
 //        System.out.println("Options are ");

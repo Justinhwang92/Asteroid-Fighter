@@ -6,7 +6,6 @@ package com.example.myfirstapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -15,25 +14,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
-public class Activity extends AppCompatActivity {
+public class Activity_Game extends AppCompatActivity {
 
-    private Display display;
+    private Game_Display gameDisplay;
     private MediaPlayer myConstantSong;
     private Thread thread;
 
     //Question part
-    private MathProblems myMP;
+    private Game_MathProblems myMP;
     private String myQuestion;
     private int myAns;
     private List<Integer> myChoices;
@@ -47,7 +41,7 @@ public class Activity extends AppCompatActivity {
     Button mybutton4;
 
 
-    private ActivityAudio myAudio;
+    public static Audio_Activity_Game myAudio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,30 +53,16 @@ public class Activity extends AppCompatActivity {
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
 
-        myAudio = new ActivityAudio(this);
-        Thread audioThread = new Thread(myAudio);
-        audioThread.start();
+        myAudio = new Audio_Activity_Game(this);
 
-        display = new Display(this, point.x +5000, point.y, myAudio);
-        setContentView(display);
+        gameDisplay = new Game_Display(this, point.x +5000, point.y, myAudio);
+        setContentView(gameDisplay);
 
-        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
-
-        //stop and release the menu mediaplayer to recoup resources
-        for(MediaPlayer player : MainActivityAudio.myMainActivityPlayers)
-        {
-            if(player!=null) {
-                if(player.isPlaying())
-                    player.stop();
-                player.reset();
-                player.release();
-                player=null;
-            }
-        }
+        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
 
         //Layout on top of surface view
         ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        View secondLayerView = LayoutInflater.from(this).inflate(R.layout.activity_flight_button, null, false);
+        View secondLayerView = LayoutInflater.from(this).inflate(R.layout.activity_game, null, false);
         addContentView(secondLayerView, lp);
 
         //For math problem class
@@ -91,13 +71,15 @@ public class Activity extends AppCompatActivity {
 
         //int score = display.theScore;
         //Toast.makeText(Activity.this,"this is a score"+score, Toast.LENGTH_LONG).show();
+
+        Audio_Activity_Main_Menu.releasePlayers();
     }
 
     public void setQuestionAnswerOnDisplay(){
         //Initial question to be displayed
-        myMP = new MathProblems(isBossStage);
+        myMP = new Game_MathProblems(isBossStage);
 
-        if(!display.isBossStage){
+        if(!gameDisplay.isBossStage){
             myQuestion = myMP.getEasyQuestions();
             myChoices = new ArrayList<>(myMP.getEasyAnswers());
         }
@@ -108,10 +90,10 @@ public class Activity extends AppCompatActivity {
         }
 
         myAns = myMP.getAnswer();
-        intitializeQuestionAnswer();
+        initializeQuestionAnswer();
     }
 
-    public void intitializeQuestionAnswer(){
+    public void initializeQuestionAnswer(){
         TextView queText = (TextView) findViewById(R.id.id_question);
         queText.setText(myQuestion);
 
@@ -130,7 +112,7 @@ public class Activity extends AppCompatActivity {
         mybutton4.setText(myChoices.get(3)+"");
     }
 
-    public ActivityAudio getMyAudio()
+    public Audio_Activity_Game getMyAudio()
     {
         return myAudio;
     }
@@ -138,22 +120,22 @@ public class Activity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        display.donePlaying();
-        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        gameDisplay.donePlaying();
+        myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        display.resume();
-        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        gameDisplay.resume();
+        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
     @Override
     protected void onStop(){
         super.onStop();
-        display.donePlaying();
-        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        gameDisplay.donePlaying();
+        myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
 
     }
 
@@ -165,22 +147,22 @@ public class Activity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        myAudio.playMedia(ActivityAudio.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
 
     public void gameDonePlayAgain() {
-        myAudio.stopMedia(ActivityAudio.MEDIA_PLAYERS.BGM_BOSS);
+        myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_BOSS);
 //        ActivityAudio.myActivityPlayers[ActivityAudio.MEDIA_PLAYERS.BGM_BOSS.ordinal()].release();
         /*SharedPreferences preferences = getSharedPreferences("PREFS",0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("lastScore",display.theScore);
         editor.commit();*/
 
-        Intent intent = new Intent(this, PlayAgain.class);
+        Intent intent = new Intent(this, Activity_Game_Over.class);
         Bundle bundle = new Bundle();
         String points;
-        points = Integer.toString(display.theScore);
+        points = Integer.toString(gameDisplay.theScore);
         bundle.putString("Score",points);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -189,13 +171,16 @@ public class Activity extends AppCompatActivity {
 
 
     public void onClick(View view) {
+
             switch (view.getId()){
 
                 case R.id.ans_button1:
                     if(mybutton1.getText().equals(myAns+"")){
-                        display.getFlightObj().hasShot = true;
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
+                        gameDisplay.getFlightObj().hasShot = true;
                         setQuestionAnswerOnDisplay();
                     }else{
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
                         break;
                     }
 
@@ -203,27 +188,33 @@ public class Activity extends AppCompatActivity {
 
                 case R.id.ans_button2:
                     if(mybutton2.getText().equals(myAns+"")){
-                        display.getFlightObj().hasShot = true;
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
+                        gameDisplay.getFlightObj().hasShot = true;
                         setQuestionAnswerOnDisplay();
                     }else{
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
                         break;
                     }
                     break;
 
                 case R.id.ans_button3:
                     if(mybutton3.getText().equals(myAns+"")){
-                        display.getFlightObj().hasShot = true;
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
+                        gameDisplay.getFlightObj().hasShot = true;
                         setQuestionAnswerOnDisplay();
                     }else{
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
                         break;
                     }
                     break;
 
                 case R.id.ans_button4:
                     if(mybutton4.getText().equals(myAns+"")){
-                        display.getFlightObj().hasShot = true;
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
+                        gameDisplay.getFlightObj().hasShot = true;
                         setQuestionAnswerOnDisplay();
                     }else{
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
                         break;
                     }
                     break;
@@ -231,6 +222,7 @@ public class Activity extends AppCompatActivity {
                 default:
                     break;
             }
+
     }
     /**
      *

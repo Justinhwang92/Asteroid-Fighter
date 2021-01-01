@@ -3,32 +3,28 @@ package com.example.myfirstapp;
 import android.content.Context;
 import android.media.MediaPlayer;
 
-public class MainActivityAudio implements Runnable{
-    private static Context myActivity;
+public class Audio_Activity_Main_Menu {
+    private Context myContext;
     public static MediaPlayer[] myMainActivityPlayers;
 
-    public MainActivityAudio(Context theActivity)
+    public Audio_Activity_Main_Menu(Context theContext)
     {
-        myActivity = theActivity;
+        myContext = theContext;
+        MediaPlayer BGM_MENU = MediaPlayer.create(myContext, R.raw.bgm_menu_loop);
+        BGM_MENU.setLooping(true);
+
+        myMainActivityPlayers = new MediaPlayer[]{
+                BGM_MENU,
+                MediaPlayer.create(myContext, R.raw.sfx_menu_click)
+        };
     }
 
     public enum MEDIA_PLAYERS
     {
         BGM_MENU,
         SFX_MENU_CLICK,
-        SFX_MENU_HOVER
     }
-    public void run()
-    {
-        MediaPlayer BGM_MENU = MediaPlayer.create(myActivity, R.raw.bgm_menu_loop);
-        BGM_MENU.setLooping(true);
 
-        myMainActivityPlayers = new MediaPlayer[]{
-                BGM_MENU,
-                MediaPlayer.create(myActivity, R.raw.sfx_menu_click),
-                MediaPlayer.create(myActivity, R.raw.sfx_menu_hover)
-        };
-    }
 
     public void playMedia(MEDIA_PLAYERS thePlayer)
     {
@@ -39,9 +35,6 @@ public class MainActivityAudio implements Runnable{
                 break;
             case SFX_MENU_CLICK:
                 myMainActivityPlayers[MEDIA_PLAYERS.SFX_MENU_CLICK.ordinal()].start();
-                break;
-            case SFX_MENU_HOVER:
-                myMainActivityPlayers[MEDIA_PLAYERS.SFX_MENU_HOVER.ordinal()].start();
                 break;
             default:
                 try
@@ -66,9 +59,6 @@ public class MainActivityAudio implements Runnable{
             case SFX_MENU_CLICK:
                 myMainActivityPlayers[MEDIA_PLAYERS.SFX_MENU_CLICK.ordinal()].stop();
                 break;
-            case SFX_MENU_HOVER:
-                myMainActivityPlayers[MEDIA_PLAYERS.SFX_MENU_HOVER.ordinal()].stop();
-                break;
             default:
                 try {
                     throw new Exception();
@@ -77,6 +67,20 @@ public class MainActivityAudio implements Runnable{
                 }
                 break;
 
+        }
+    }
+
+    public static void releasePlayers()
+    {
+        for(MediaPlayer player : Audio_Activity_Main_Menu.myMainActivityPlayers)
+        {
+            if(player!=null) {
+                if(player.isPlaying())
+                    player.stop();
+                player.reset();
+                player.release();
+                player=null;
+            }
         }
     }
 }

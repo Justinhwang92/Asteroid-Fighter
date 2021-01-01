@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class PlayAgain extends Activity {
+public class Activity_Game_Over extends Activity {
 
     Button playAgain;
     TextView gameOverText;
@@ -25,7 +24,7 @@ public class PlayAgain extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.play_again);
+        setContentView(R.layout.activity_game_over);
 
        // scorelabel.setText
 
@@ -80,18 +79,9 @@ public class PlayAgain extends Activity {
             @Override
             public void onClick(View view) {
                 //stop and release all mediaplayers to recoup resources
-                for(MediaPlayer player : ActivityAudio.myActivityPlayers)
-                {
-                    if(player!=null) {
-                        if(player.isPlaying())
-                            player.stop();
-                        player.reset();
-                        player.release();
-                        player=null;
-                    }
-                }
+                Audio_Activity_Game.releasePlayers();
 
-                Intent intent = new Intent(PlayAgain.this, MainActivity.class);
+                Intent intent = new Intent(Activity_Game_Over.this, Activity_Main_Menu.class);
                 startActivity(intent);
                 finish();
             }
