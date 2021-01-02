@@ -4,85 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_Menu_Credits">
+    tools:context=".Activity_Menu_Backstory3">
 
     <ImageView
         android:id="@+id/Step1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="826dp"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/main_menu_background"
         android:visibility="visible" />
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Backstory"
+        android:textColor="#ffffff"
+        android:textSize="120px"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="a special unit of man-made UFO to protect Planet Earth from"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:text="destruction. YOU are that pilot. Area 51 has instructed you"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:text=" to destroy these incoming asteroids by using Earth's"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        android:text="most powerful tool: Mathematics!"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text=""
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="230dp"
+        android:text=""
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:text=""
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:text=""
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:id="@+id/playNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Arya Rashidian - Lead Director"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Hermie Baylon - Software Developer and Graphical Artist"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:text="Brandon Lu - Software Developer and Soundtrack Director"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="David Guo - Software Developer"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:text="Justin Hwang - Software Developer"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:text="Bhavesh Joshi - Software Developer"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
-        android:text="Sai Manchikanti - Software Developer"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:text="Ibraheem Alani - Soundrack Producer"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
+        android:layout_marginTop="300dp"
+        android:text="PLAY"
+        android:textColor="#00FF00"
+        android:layout_centerHorizontal="true"
+        android:textSize="150px" />
 
     <ImageView
-        android:id="@+id/back"
+        android:id="@+id/previous3"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="300dp"
         android:src="@drawable/previous1" />
+
+
 
 </RelativeLayout>

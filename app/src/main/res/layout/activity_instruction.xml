@@ -14,28 +14,7 @@
         android:src="@drawable/main_menu_background"
         android:visibility="visible" />
 
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:text="Asteroid Fighter"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="#ffffff"-->
-<!--        android:textSize="120px" />-->
-
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:text="How TO PLAY!"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="#ffffff"-->
-<!--        android:textSize="50px"-->
-<!--        android:layout_marginTop="50dp"-->
-<!--        />-->
-
     <TextView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -44,15 +23,14 @@
         android:textSize="60px" />
 
     <TextView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="* In order to shoot, choose the correct answer for the math equation above."
         android:textColor="#ffffff"
         android:textSize="60px" />
-    <TextView
 
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
@@ -60,7 +38,6 @@
         android:textColor="#ffffff"
         android:textSize="60px" />
     <TextView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -69,7 +46,6 @@
         android:textSize="60px" />
 
     <TextView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
@@ -77,16 +53,11 @@
         android:textColor="#ffffff"
         android:textSize="60px" />
 
-    <TextView
+    <ImageView
         android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="250dp"
-        android:layout_marginRight="40dp"
-        android:paddingRight="30dp"
-        android:text="BACK"
-        android:textColor="#ffffff"
-        android:textSize="100px" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="300dp"
+        android:src="@drawable/previous1" />
 
 </RelativeLayout>

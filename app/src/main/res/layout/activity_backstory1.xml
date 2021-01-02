@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_Menu_Backstory1">
+
+    <ImageView
+        android:id="@+id/Step1"
+        android:layout_width="826dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_menu_background"
+        android:visibility="visible" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Backstory"
+        android:textColor="#ffffff"
+        android:textSize="120px"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Long after the dinosaurs died, the world lived in Harmony"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:text="for one hundred thousand years. However, on the year"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:text="of 2020, planet Earth was bombarded by a meteor shower. "
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"
+        android:text="Terrifyingly, in each of these individual meteor hides an"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="alien life form from a faraway planet called Lorgan."
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="230dp"
+        android:text="These aliens arrived for one reason only: To destroy"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:text="planet Earth. However, upon realizing that the human"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:text="planet Earth. However, upon realizing that the human"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="300dp"
+        android:layout_marginRight="40dp"
+        android:paddingRight="30dp"
+        android:text="SKIP"
+        android:textColor="#ffffff"
+        android:textSize="100px" />
+
+    <ImageView
+        android:id="@+id/continue1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="300dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/next1" />
+
+    <ImageView
+        android:id="@+id/previous1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="300dp"
+        android:src="@drawable/previous1" />
+
+</RelativeLayout>

@@ -35,6 +35,22 @@
             android:name=".Activity_Game_Over"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
+        <activity
+            android:name=".Activity_Menu_Modes"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
+        <activity
+            android:name=".Activity_Menu_Backstory1"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
+        <activity
+            android:name=".Activity_Menu_Backstory2"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
+        <activity
+            android:name=".Activity_Menu_Backstory3"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
     </application>
 
 </manifest>

@@ -36,7 +36,7 @@ public class Activity_Menu_Main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myAudio.playMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
-                showGame();
+                showModes();
             }
         });
 
@@ -69,6 +69,12 @@ public class Activity_Menu_Main extends AppCompatActivity {
     public void showGame()
     {
         startActivity(new Intent(Activity_Menu_Main.this, Activity_Game.class));
+    }
+
+    public void showModes() {
+        Intent intent = new Intent(this, Activity_Menu_Modes.class);
+        startActivity(intent);
+        myAudio.stopMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
     }
 
 

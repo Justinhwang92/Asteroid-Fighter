@@ -21,27 +21,12 @@
         android:textSize="120px"
         android:gravity="center_horizontal" />
 
-    <!--    <TextView-->
-<!--        android:id="@+id/play"-->
-<!--        android:layout_width="109dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerInParent="false"-->
-<!--        android:layout_centerVertical="false"-->
-<!--        android:layout_marginTop="100dp"-->
-<!--        android:layout_marginRight="50000dp"-->
-<!--        android:text="PLAY"-->
-<!--        android:textColor="#ffffff"-->
-<!--        android:textSize="100px" />-->
-
-
     <TextView
         android:id="@+id/play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_marginTop="100dp"
-        android:layout_marginRight="327dp"
-        android:paddingRight="30dp"
+        android:layout_centerHorizontal="true"
         android:text="PLAY"
         android:textColor="#ffffff"
         android:textSize="100px" />
@@ -50,50 +35,20 @@
         android:id="@+id/instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_marginTop="150dp"
-        android:layout_marginRight="250dp"
-        android:paddingRight="30dp"
+        android:layout_centerHorizontal="true"
         android:text="HOW TO PLAY"
         android:textColor="#ffffff"
         android:textSize="100px" />
-<!--    <TextView-->
-<!--        android:id="@+id/instruction"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_above="@+id/play"-->
-<!--        android:layout_marginTop="200dp"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:onClick="clickButton"-->
-<!--        android:text="How To Play!"-->
-<!--        android:textColor="#ffffff"-->
-<!--        android:textSize="100px" />-->
-
 
     <TextView
         android:id="@+id/creditsid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_marginTop="200dp"
-        android:layout_marginRight="300dp"
-        android:paddingRight="30dp"
+        android:layout_centerHorizontal="true"
         android:text="CREDITS"
         android:textColor="#ffffff"
         android:textSize="100px" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/creditsid"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_above="@+id/play"-->
-<!--        android:layout_marginTop="180sp"-->
-<!--        android:layout_marginBottom="-252dp"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:onClick="clickButton"-->
-<!--        android:text="Credits"-->
-<!--        android:textColor="#ffffff"-->
-<!--        android:textSize="64dp" />-->
-
 
 </RelativeLayout>
