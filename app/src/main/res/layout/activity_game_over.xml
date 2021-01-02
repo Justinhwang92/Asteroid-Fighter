@@ -11,6 +11,8 @@
         android:id="@+id/Step1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
         android:src="@drawable/panoramav2"
         android:visibility="visible" />
@@ -44,29 +46,70 @@
         android:textColor="#ffffff"
         />
 
+
     <TextView
         android:id="@+id/highScoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="High Score: 300"
-        android:textSize="40sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="79dp"
+        android:text="1st: 300"
         android:textColor="#ffffff"
-        />
+        android:textSize="40sp" />
 
-    <Button
-        android:background="?android:attr/selectableItemBackground"
+    <TextView
+        android:id="@+id/highScoreLabel2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="150dp"
+        android:text="2nd: 300"
+        android:textColor="#ffffff"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/highScoreLabel3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="221dp"
+        android:text="3rd: 300"
+        android:textColor="#ffffff"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/Topscoresl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="16dp"
+        android:text="Top Scores: "
+        android:textColor="#ffffff"
+        android:textSize="40sp" />
+
+    <Button
+        android:id="@+id/playAgainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="290dp"
+        android:background="?android:attr/selectableItemBackground"
         android:text="Try Again"
         android:textAllCaps="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="290dp"
         android:textColor="#ffffff"
-        android:textSize="40sp"
-        android:id="@+id/playAgainButton"
-        />
+        android:textSize="40sp" />
 
 
 </RelativeLayout>

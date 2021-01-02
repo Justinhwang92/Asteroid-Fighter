@@ -18,6 +18,8 @@ public class Activity_Game_Over extends Activity {
     TextView scoreLabel;
     TextView score;
     TextView highScore;
+    TextView highScore2;
+    TextView highScore3;
     int lastScore;
     int best;
 
@@ -41,20 +43,52 @@ public class Activity_Game_Over extends Activity {
         score.setText(text);
 
         highScore = (TextView)findViewById(R.id.highScoreLabel);
+        highScore2 = (TextView)findViewById(R.id.highScoreLabel);
+        highScore3 = (TextView)findViewById(R.id.highScoreLabel);
+
         int scoreNum = Integer.parseInt(text);
 
         SharedPreferences mypref = getPreferences(MODE_PRIVATE);
         int highestScore = mypref.getInt("highscore",0);
+        int highestScore2 = mypref.getInt("highscore2",0);
+        int highestScore3 = mypref.getInt("highscore3",0);
         if(highestScore > scoreNum)
         {
-            highScore.setText("High Score: "+highestScore);
+            highScore.setText("1st: "+highestScore);
         }
         else{
-            highScore.setText("New High score :"+ scoreNum);
+            highScore.setText("1st: "+ scoreNum);
             SharedPreferences.Editor editor = mypref.edit();
             editor.putInt("highscore",scoreNum);
             editor.commit();
         }
+        SharedPreferences mypref2 = getPreferences(MODE_PRIVATE);
+        if(highestScore2 >scoreNum && scoreNum<highestScore)
+        {
+            highScore2.setText("2nd: "+highestScore2);
+        }
+        else{
+            highScore.setText("2nd :"+ scoreNum);
+            SharedPreferences.Editor editor = mypref.edit();
+            editor.putInt("highscore2",scoreNum);
+            editor.commit();
+        }
+
+        SharedPreferences mypref3 = getPreferences(MODE_PRIVATE);
+
+        if(highestScore > scoreNum && highestScore3> scoreNum && highestScore2>scoreNum)
+        {
+            highScore3.setText("3rd: "+highestScore3);
+        }
+        else{
+            highScore.setText("3rd: "+ scoreNum);
+            SharedPreferences.Editor editor = mypref.edit();
+            editor.putInt("highscore3",scoreNum);
+            editor.commit();
+        }
+
+
+
 
         /*
         SharedPreferences preferences= getSharedPreferences("PREFS",0);
