@@ -50,52 +50,56 @@ public class Activity_Game_Over extends Activity {
         boolean changed = false;
 
         SharedPreferences mypref = getPreferences(MODE_PRIVATE);
+        SharedPreferences mypref2 = getPreferences(MODE_PRIVATE);
+        SharedPreferences mypref3 = getPreferences(MODE_PRIVATE);
         int highestScore = mypref.getInt("highscore",0);
         int highestScore2 = mypref.getInt("highscore2",0);
         int highestScore3 = mypref.getInt("highscore3",0);
+
         //highscore1
         if(highestScore > scoreNum)
         {
             highScore.setText("1st: "+highestScore);
         }
         else if(changed==false){
-            highScore3.setText("3rd: "+ highestScore2);
-            highScore2.setText("2nd: "+ highestScore);
-            highScore.setText("1st: "+ scoreNum);
             SharedPreferences.Editor editor = mypref.edit();
             editor.putInt("highscore",scoreNum);
             editor.commit();
             changed=true;
+            highScore3.setText("3rd: "+ highestScore2);
+            highScore2.setText("2nd: "+ highestScore);
+            highScore.setText("1st: "+ scoreNum);
+
         }
         //highscore2
-        SharedPreferences mypref2 = getPreferences(MODE_PRIVATE);
 
         if(highestScore2 > scoreNum )
         {
             highScore2.setText("2nd: "+highestScore2);
         }
         else if(changed==false){
-            highScore3.setText("3rd:" + highestScore2);
-            highScore2.setText("2nd:"+ scoreNum);
             SharedPreferences.Editor editor = mypref.edit();
             editor.putInt("highscore2",scoreNum);
             editor.commit();
             changed=true;
+            highScore3.setText("3rd:" + highestScore2);
+            highScore2.setText("2nd:"+ scoreNum);
+
         }
         //highscore3;
 
-        SharedPreferences mypref3 = getPreferences(MODE_PRIVATE);
 
         if(highestScore3>scoreNum)
         {
             highScore3.setText("3rd: "+highestScore3);
         }
         else if(changed==false){
-            highScore.setText("3rd: "+ scoreNum);
             SharedPreferences.Editor editor = mypref.edit();
             editor.putInt("highscore3",scoreNum);
             editor.commit();
             changed=true;
+            highScore.setText("3rd: "+ scoreNum);
+
         }
 
 
