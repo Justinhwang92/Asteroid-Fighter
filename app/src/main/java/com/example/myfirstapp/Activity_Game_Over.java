@@ -43,8 +43,8 @@ public class Activity_Game_Over extends Activity {
         score.setText(text);
 
         highScore = (TextView)findViewById(R.id.highScoreLabel);
-        highScore2 = (TextView)findViewById(R.id.highScoreLabel);
-        highScore3 = (TextView)findViewById(R.id.highScoreLabel);
+        highScore2 = (TextView)findViewById(R.id.highScoreLabel2);
+        highScore3 = (TextView)findViewById(R.id.highScoreLabel3);
 
         int scoreNum = Integer.parseInt(text);
         boolean changed = false;
