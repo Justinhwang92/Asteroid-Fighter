@@ -17,14 +17,11 @@ public class Activity_Menu_Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_main_menu);
-
-
         myAudio = new Audio_Activity_Menu_Main(this);
 
+        //instructions button
         findViewById(R.id.instruction).setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 myAudio.playMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
@@ -32,6 +29,7 @@ public class Activity_Menu_Main extends AppCompatActivity {
             }
         });
 
+        //play button
         findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +38,7 @@ public class Activity_Menu_Main extends AppCompatActivity {
             }
         });
 
+        //credits button
         findViewById(R.id.creditsid).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,34 +47,27 @@ public class Activity_Menu_Main extends AppCompatActivity {
             }
         });
 
+        //plays menu music
         myAudio.playMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
     }
+
+    //self-explanatory methods to show different screens
+
     public void showInstructions()
     {
-        Intent intent = new Intent(this, Activity_Menu_Instructions.class);
-        startActivity(intent);
+        startActivity(new Intent(this, Activity_Menu_Instructions.class));
         myAudio.stopMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
 
     }
 
     public void showCredits()
     {
-        Intent intent = new Intent(this, Activity_Menu_Credits.class);
-        startActivity(intent);
+        startActivity(new Intent(this, Activity_Menu_Credits.class));
         myAudio.stopMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
-
-    }
-
-    public void showGame()
-    {
-        startActivity(new Intent(Activity_Menu_Main.this, Activity_Game.class));
     }
 
     public void showModes() {
-        Intent intent = new Intent(this, Activity_Menu_Modes.class);
-        startActivity(intent);
+        startActivity(new Intent(this, Activity_Menu_Modes.class));
         myAudio.stopMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
     }
-
-
 }

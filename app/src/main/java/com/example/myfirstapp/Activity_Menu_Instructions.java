@@ -11,6 +11,7 @@ import android.view.WindowManager;
 public class Activity_Menu_Instructions extends AppCompatActivity {
     private MediaPlayer myBGM;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -34,7 +35,5 @@ public class Activity_Menu_Instructions extends AppCompatActivity {
                 startActivity(new Intent(Activity_Menu_Instructions.this, Activity_Menu_Main.class));
             }
         });
-
-
     }
 }
