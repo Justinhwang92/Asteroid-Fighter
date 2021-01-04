@@ -8,7 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
+/**
+ * activity that shows when credits is clicked on main menu
+ */
 public class Activity_Menu_Credits extends AppCompatActivity {
+    /**
+     * for audio
+     */
     private MediaPlayer myBGM;
 
     @Override
