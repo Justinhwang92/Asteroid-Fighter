@@ -1,3 +1,9 @@
+/*
+ ***************************************************
+ * see Activity_Menu_Backstory1 for details
+ ***************************************************
+ */
+
 package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,9 +53,6 @@ public class Activity_Menu_Backstory3 extends AppCompatActivity {
                 startActivity(new Intent(Activity_Menu_Backstory3.this, Activity_Game.class));
             }
         });
-
-
-
     }
 }
 
