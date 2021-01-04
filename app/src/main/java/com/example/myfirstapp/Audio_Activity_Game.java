@@ -3,18 +3,35 @@ package com.example.myfirstapp;
 import android.content.Context;
 import android.media.MediaPlayer;
 
+/**
+ * class that manages all the game audio
+ */
 public class Audio_Activity_Game {
+
+    /**
+     * for determining which activity this plays under
+     */
     private Context myContext;
+
+    /**
+     * list of all MediaPlayers in this class
+     */
     public static MediaPlayer[] myActivityPlayers;
 
+    /**
+     * initializes all the MediaPlayers
+     * @param theContext activity to play audio in
+     */
     public Audio_Activity_Game(Context theContext)
     {
+        //set looping for the media that needs to loop (background music)
         myContext = theContext;
         MediaPlayer BGM_BOSS = MediaPlayer.create(myContext, R.raw.bgm_boss_loop);
         BGM_BOSS.setLooping(true);
         MediaPlayer BGM_GAME_LOOP = MediaPlayer.create(myContext, R.raw.bgm_game_loop);
         BGM_GAME_LOOP.setLooping(true);
 
+        //initialize array of media players
         myActivityPlayers = new MediaPlayer[]{
                 BGM_BOSS,
                 BGM_GAME_LOOP,
@@ -31,6 +48,7 @@ public class Audio_Activity_Game {
         };
     }
 
+    //enumeration of mediaplayers; to easier access mediaplayers from the array
     public enum MEDIA_PLAYERS
     {
         BGM_BOSS,
@@ -47,7 +65,7 @@ public class Audio_Activity_Game {
         SFX_ROCKET_LOST_LIFE
     }
 
-
+    //plays the corresponding media player that is inputted into th method
     public void playMedia(MEDIA_PLAYERS thePlayer)
     {
         switch (thePlayer)
@@ -103,6 +121,7 @@ public class Audio_Activity_Game {
         }
     }
 
+    //stops the corresponding media player that is inputted
     public void stopMedia(MEDIA_PLAYERS thePlayer) {
         switch (thePlayer) {
             case BGM_BOSS:
@@ -152,6 +171,7 @@ public class Audio_Activity_Game {
         }
     }
 
+    //releases the resources associated with all the players
     public static void releasePlayers()
     {
         for(MediaPlayer player : Audio_Activity_Game.myActivityPlayers)
