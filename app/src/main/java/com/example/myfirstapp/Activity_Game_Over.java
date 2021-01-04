@@ -10,41 +10,65 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
-
+/**
+ * class that shows game over screen at end of play
+ */
 public class Activity_Game_Over extends Activity {
 
+    /**
+     * button that brings you back to main menu
+     */
     Button playAgain;
+
+    /**
+     * text: "Game Over"
+     */
     TextView gameOverText;
-    TextView scoreLabel;
+
+    /**
+     * last score
+     */
     TextView score;
+
+    /**
+     * top highscore
+     */
     TextView highScore;
+
+    /**
+     * 2nd top highscore
+     */
     TextView highScore2;
+
+    /**
+     * 3rd top highscore
+     */
     TextView highScore3;
-    int lastScore;
-    int best;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //puts game over screen on the screen
         setContentView(R.layout.activity_game_over);
 
-       // scorelabel.setText
-
+        //gets rid of notification bar on top of phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        playAgain = (Button) findViewById(R.id.playAgainButton);
-        gameOverText = (TextView)findViewById(R.id.gameOverMessage);
 
+        //initialize text based on xml
+        playAgain = findViewById(R.id.playAgainButton);
+        gameOverText = findViewById(R.id.gameOverMessage);
 
-        score = (TextView)findViewById(R.id.scoreLabel);
+        score = findViewById(R.id.scoreLabel);
         Bundle bundle = getIntent().getExtras();
 
         //Extract the data…
         String text = bundle.getString("Score");
         score.setText(text);
 
-        highScore = (TextView)findViewById(R.id.highScoreLabel);
-        highScore2 = (TextView)findViewById(R.id.highScoreLabel2);
-        highScore3 = (TextView)findViewById(R.id.highScoreLabel3);
+        //initialize high scores based on xml
+        highScore = findViewById(R.id.highScoreLabel);
+        highScore2 = findViewById(R.id.highScoreLabel2);
+        highScore3 = findViewById(R.id.highScoreLabel3);
 
         int scoreNum = Integer.parseInt(text);
         boolean changed = false;
@@ -61,7 +85,7 @@ public class Activity_Game_Over extends Activity {
         {
             highScore.setText("1st: "+highestScore);
         }
-        else if(changed==false){
+        else if(!changed){
             SharedPreferences.Editor editor = mypref.edit();
             editor.putInt("highscore",scoreNum);
             editor.commit();
@@ -77,7 +101,7 @@ public class Activity_Game_Over extends Activity {
         {
             highScore2.setText("2nd: "+highestScore2);
         }
-        else if(changed==false){
+        else if(!changed){
             SharedPreferences.Editor editor = mypref.edit();
             editor.putInt("highscore2",scoreNum);
             editor.commit();
@@ -87,8 +111,6 @@ public class Activity_Game_Over extends Activity {
 
         }
         //highscore3;
-
-
         if(highestScore3>scoreNum)
         {
             highScore3.setText("3rd: "+highestScore3);
@@ -101,10 +123,7 @@ public class Activity_Game_Over extends Activity {
             highScore.setText("3rd: "+ scoreNum);
 
         }
-
-
         changed=false;
-
 
         /*
         SharedPreferences preferences= getSharedPreferences("PREFS",0);
@@ -118,12 +137,8 @@ public class Activity_Game_Over extends Activity {
             editor.putInt("lastScore",best);
             editor.apply();
         }
-
         highScore.setText("High Score: "+best);
-
 */
-
-
         //play again button onclick listener
         playAgain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +146,7 @@ public class Activity_Game_Over extends Activity {
                 //stop and release all mediaplayers to recoup resources
                 Audio_Activity_Game.releasePlayers();
 
+                //go back to main menu (start main menu activity)
                 Intent intent = new Intent(Activity_Game_Over.this, Activity_Menu_Main.class);
                 startActivity(intent);
                 finish();
@@ -143,7 +159,6 @@ public class Activity_Game_Over extends Activity {
         gameOverText.setTypeface(typeface);
 
         //scoreLabel = (TextView)findViewById(R.id.scoreLabel);
-
         //scoreLabel.setText("SCORE: "+ score);
     }
 
