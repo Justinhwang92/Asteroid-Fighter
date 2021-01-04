@@ -8,24 +8,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
+/**
+ * shows difficulty levels and endless
+ */
 public class Activity_Menu_Modes extends AppCompatActivity {
     private MediaPlayer myBGM;
     public static String mode = "";
 
-//    public String getMode() {
-//        return mode;
-//    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_credits);
         setContentView(R.layout.activity_modes);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         myBGM = MediaPlayer.create(this, R.raw.bgm_credits_loop);
         myBGM.setLooping(true);
         myBGM.start();
+
+        //below: different onclick listeners for each difficulty/endless
 
         findViewById(R.id.novice).setOnClickListener(new View.OnClickListener() {
             @Override
