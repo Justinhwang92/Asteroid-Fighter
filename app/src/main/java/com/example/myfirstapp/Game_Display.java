@@ -3,6 +3,7 @@
  */
 package com.example.myfirstapp;
 
+import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -22,6 +23,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     private int screenX, screenY;
     public static float screenRatioX, screenRatioY;
     public boolean isBossStage = false;
+    // allows for display of pictures
     private Paint paint;
     private Game_Asteroid gameAsteroid;
     private Game_Spaceship gameSpaceship; // ship
@@ -34,6 +36,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     private static final int NUMBER_OF_MINIONS = 20;
     private Audio_Activity_Game myAudio;
     ArrayList<Game_Asteroid> allMinions;
+    private String mode;
 
 
     // initializes fields
@@ -68,6 +71,9 @@ public class Game_Display extends SurfaceView implements Runnable {
             Game_Asteroid minion = new Game_Asteroid(getResources(), true);
             allMinions.add(minion);
         }
+
+        //Activity_Menu_Modes menuMode = new Activity_Menu_Modes();
+        mode = Activity_Menu_Modes.mode;
     }
 
     // summary method
@@ -99,7 +105,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     // allows movements of the ship, background, bullet, and asteroids
     private void update() {
         // if score reaches 10, end asteroids, begin boss stage
-        if (theScore >= SCORE_TILL_BOSS) {
+        if (theScore >= SCORE_TILL_BOSS && (!mode.equals("endless"))) {
             gameAsteroid.bossStageBegins = true;
             gameAsteroid.y = (screenY - gameAsteroid.height) / 2 + (-50);
             isBossStage = true;
@@ -121,7 +127,6 @@ public class Game_Display extends SurfaceView implements Runnable {
         if (gameBackground2.x + gameBackground2.background.getWidth() < 700) {
             gameBackground2.x = screenX;
         }
-
 
         gameSpaceship.y = (screenY / 2) - 100;    // put spaceship to center
         theGameBullet.y = (screenY / 2);      // bullet shoots from the center
@@ -249,11 +254,12 @@ public class Game_Display extends SurfaceView implements Runnable {
 //                return;
             }
 
-
             drawLives(canvas);
 
-            if (gameAsteroid.bossLife < 4) {
-                deployMinions(canvas);
+            if (mode.equals("advanced")) {
+                if (gameAsteroid.bossLife < 4) {
+                    deployMinions(canvas);
+                }
             }
 
 

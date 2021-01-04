@@ -10,6 +10,12 @@ import android.view.WindowManager;
 
 public class Activity_Menu_Modes extends AppCompatActivity {
     private MediaPlayer myBGM;
+    public static String mode = "";
+
+//    public String getMode() {
+//        return mode;
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +30,7 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         findViewById(R.id.novice).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mode = "novice";
                 if(myBGM!=null) {
                     if(myBGM.isPlaying())
                         myBGM.stop();
@@ -38,6 +45,7 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         findViewById(R.id.intermediate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mode = "intermediate";
                 if(myBGM!=null) {
                     if(myBGM.isPlaying())
                         myBGM.stop();
@@ -52,6 +60,7 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         findViewById(R.id.advanced).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mode = "advanced";
                 if(myBGM!=null) {
                     if(myBGM.isPlaying())
                         myBGM.stop();
@@ -66,6 +75,7 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         findViewById(R.id.endless).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mode = "endless";
                 if(myBGM!=null) {
                     if(myBGM.isPlaying())
                         myBGM.stop();

@@ -23,46 +23,6 @@
         android:textSize="120px"
         android:gravity="center_horizontal" />
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/play"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="100dp"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:text="NOVICE"-->
-    <!--        android:textColor="#ffffff"-->
-    <!--        android:textSize="100px" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/intermediate"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="150dp"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:text="INTERMEDIATE"-->
-    <!--        android:textColor="#ffffff"-->
-    <!--        android:textSize="100px" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/advanced"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="200dp"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:text="ADVANCED"-->
-    <!--        android:textColor="#ffffff"-->
-    <!--        android:textSize="100px" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/endless"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="250dp"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:text="ENDLESS"-->
-    <!--        android:textColor="#ffffff"-->
-    <!--        android:textSize="100px" />-->
-
     <TextView
         android:id="@+id/novice"
         android:layout_width="wrap_content"
