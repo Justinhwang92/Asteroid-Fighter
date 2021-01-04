@@ -1,13 +1,8 @@
-/*
- * this class represents the activities regarding the game.
- */
 package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Point;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,49 +10,80 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
+/**
+ * THIS CLASS CONTAINS THE MAIN GAME ACTIVITY
+ * INCLUDING THE DISPLAY AND MATH PROBLEMS
+ */
 public class Activity_Game extends AppCompatActivity {
 
+    /**
+     * field for display of the game which updates and draws the game state
+     */
     private Game_Display gameDisplay;
-    private MediaPlayer myConstantSong;
-    private Thread thread;
 
-    //Question part
-    private Game_MathProblems myMP;
-    private String myQuestion;
-    private int myAns;
-    private List<Integer> myChoices;
-    private boolean isBossStage = false;
-    private int score = 0;
-
-    //Buttons
-    Button mybutton1;
-    Button mybutton2;
-    Button mybutton3;
-    Button mybutton4;
-
-
+    /**
+     * field that stores and manages audio for game activity
+     */
     public static Audio_Activity_Game myAudio;
 
+    // FIELDS REGARDING MATH PROBLEMS IN THE GAME
+    /**
+     * field for MathProblems class - contains all the logic behind the math problems
+     */
+    private Game_MathProblems myMP;
+
+    /**
+     * field for the equation to be completed at the top of the screen
+     */
+    private String myQuestion;
+
+    /**
+     * the solution to the equation
+     */
+    private int myAns;
+
+    /**
+     * the list of all the solutions (including wrong) that can be selected for the math problem
+     */
+    private ArrayList<Integer> myChoices;
+
+    /**
+     * field that stores whether the boss has spawned or not
+     */
+    private boolean isBossStage = false;
+
+    //BUTTONS FOR MATH PROBLEMS
+    private Button myButton1;
+    private Button myButton2;
+    private Button myButton3;
+    private Button myButton4;
+
+    /**
+     * onCreate is called when this activity is started/made
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_flight_button);
 
+        //gets rid of notification bar for phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
 
+        //initializes MediaPlayer devices for audio
         myAudio = new Audio_Activity_Game(this);
 
+        //initializes the display for the game and starts running it
         gameDisplay = new Game_Display(this, point.x +5000, point.y, myAudio);
+        //puts the display on the screen
         setContentView(gameDisplay);
 
+        //start the game music
         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
 
         //Layout on top of surface view
@@ -69,12 +95,13 @@ public class Activity_Game extends AppCompatActivity {
         //starts with easy questions
         setQuestionAnswerOnDisplay();
 
-        //int score = display.theScore;
-        //Toast.makeText(Activity.this,"this is a score"+score, Toast.LENGTH_LONG).show();
-
+        //releases the MediaPlayers from the main menu to free up resources
         Audio_Activity_Menu_Main.releasePlayers();
     }
 
+    /**
+     * displays the questions and answers on the surface view
+     */
     public void setQuestionAnswerOnDisplay(){
         //Initial question to be displayed
         myMP = new Game_MathProblems(isBossStage);
@@ -88,33 +115,30 @@ public class Activity_Game extends AppCompatActivity {
             myQuestion = myMP.getHardQuestions();
             myChoices = new ArrayList<>(myMP.getHardAnswers());
         }
-
         myAns = myMP.getAnswer();
         initializeQuestionAnswer();
     }
 
+    /**
+     * initializes the buttons and the question
+     */
     public void initializeQuestionAnswer(){
-        TextView queText = (TextView) findViewById(R.id.id_question);
+        TextView queText = findViewById(R.id.id_question);
         queText.setText(myQuestion);
 
         Collections.shuffle(myChoices);
 
-        mybutton1 = (Button) findViewById(R.id.ans_button1);
-        mybutton1.setText(myChoices.get(0)+"");
+        myButton1 = findViewById(R.id.ans_button1);
+        myButton1.setText(myChoices.get(0) + "");
 
-        mybutton2 = (Button) findViewById(R.id.ans_button2);
-        mybutton2.setText(myChoices.get(1)+"");
+        myButton2 = findViewById(R.id.ans_button2);
+        myButton2.setText(myChoices.get(1) + "");
 
-        mybutton3 = (Button) findViewById(R.id.ans_button3);
-        mybutton3.setText(myChoices.get(2)+"");
+        myButton3 = findViewById(R.id.ans_button3);
+        myButton3.setText(myChoices.get(2) + "");
 
-        mybutton4 = (Button) findViewById(R.id.ans_button4);
-        mybutton4.setText(myChoices.get(3)+"");
-    }
-
-    public Audio_Activity_Game getMyAudio()
-    {
-        return myAudio;
+        myButton4 = findViewById(R.id.ans_button4);
+        myButton4.setText(myChoices.get(3) + "");
     }
 
     @Override
@@ -150,14 +174,11 @@ public class Activity_Game extends AppCompatActivity {
         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
-
+    /**
+     * shows play again screen
+     */
     public void gameDonePlayAgain() {
         myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_BOSS);
-//        ActivityAudio.myActivityPlayers[ActivityAudio.MEDIA_PLAYERS.BGM_BOSS.ordinal()].release();
-        /*SharedPreferences preferences = getSharedPreferences("PREFS",0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("lastScore",display.theScore);
-        editor.commit();*/
 
         Intent intent = new Intent(this, Activity_Game_Over.class);
         Bundle bundle = new Bundle();
@@ -172,10 +193,13 @@ public class Activity_Game extends AppCompatActivity {
 
     public void onClick(View view) {
 
+            //determines if the question is correct and executes methods accordingly
+            //i.e. if question is right, shoot and play correct sound and go to next question
+            //if question is wrong, deduct point and play wrong answer sound
             switch (view.getId()){
 
                 case R.id.ans_button1:
-                    if(mybutton1.getText().equals(myAns+"")){
+                    if(myButton1.getText().equals(myAns + "")){
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
                         setQuestionAnswerOnDisplay();
@@ -188,7 +212,7 @@ public class Activity_Game extends AppCompatActivity {
                     break;
 
                 case R.id.ans_button2:
-                    if(mybutton2.getText().equals(myAns+"")){
+                    if(myButton2.getText().equals(myAns+"")){
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
                         setQuestionAnswerOnDisplay();
@@ -200,7 +224,7 @@ public class Activity_Game extends AppCompatActivity {
                     break;
 
                 case R.id.ans_button3:
-                    if(mybutton3.getText().equals(myAns+"")){
+                    if(myButton3.getText().equals(myAns+"")){
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
                         setQuestionAnswerOnDisplay();
@@ -212,7 +236,7 @@ public class Activity_Game extends AppCompatActivity {
                     break;
 
                 case R.id.ans_button4:
-                    if(mybutton4.getText().equals(myAns+"")){
+                    if(myButton4.getText().equals(myAns+"")){
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
                         setQuestionAnswerOnDisplay();
@@ -224,12 +248,16 @@ public class Activity_Game extends AppCompatActivity {
                     break;
 
                 default:
+                    try
+                    {
+                        throw new Exception();
+                    }
+
+                    catch(Exception e)
+                    {
+                        System.out.println(e.getStackTrace() + "\nInvalid button press");
+                    }
                     break;
             }
-
     }
-    /**
-     *
-     */
-
 }
