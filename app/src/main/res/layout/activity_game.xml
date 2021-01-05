@@ -93,9 +93,13 @@
         android:layout_marginBottom="254dp"
         android:gravity="center_horizontal"
         android:text="Check"
+        android:shadowColor="#FFFFFF"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="35"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#ffffff" />
+        android:textColor="#C69BF1" />
 
 
 </RelativeLayout>
