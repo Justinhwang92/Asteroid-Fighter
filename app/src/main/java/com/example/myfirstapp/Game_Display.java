@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.SurfaceView;
-//import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -24,7 +23,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     public boolean isBossStage = false;
     // allows for display of pictures
     private Paint paint;
-    private Game_Asteroid gameAsteroid;
+    private Game_Enemy gameAsteroid;
     private Game_Spaceship gameSpaceship;
     private Activity_Game activityGame;
     private Game_Background gameBackground1, gameBackground2;
@@ -34,8 +33,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     private static final int SCORE_TILL_BOSS = 10;
     private static final int NUMBER_OF_MINIONS = 20;
     private Audio_Activity_Game myAudio;
-    //ArrayList<Game_Asteroid> allMinions;
-    private LinkedList<Game_Asteroid> allMinions;
+    private LinkedList<Game_Enemy> allMinions;
     private String mode;
 
     public Game_Display(Activity_Game activityGame, int screenX, int screenY, Audio_Activity_Game theAudio) {
@@ -59,14 +57,14 @@ public class Game_Display extends SurfaceView implements Runnable {
         paint = new Paint();
         paint.setTextSize(64);
         paint.setColor(Color.WHITE);
-        gameAsteroid = new Game_Asteroid(getResources(), false);
+        gameAsteroid = new Game_Enemy(getResources(), false);
         theGameBullet = new Game_Bullet(getResources());
         //clicking play shoots, we need to fix that so we don't have to start score at -1
         theScore = -1;
 
         allMinions = new LinkedList<>();
         for (int i = 0; i < NUMBER_OF_MINIONS; i++) {
-            Game_Asteroid minion = new Game_Asteroid(getResources(), true);
+            Game_Enemy minion = new Game_Enemy(getResources(), true);
             allMinions.add(minion);
         }
         mode = Activity_Menu_Modes.mode;
@@ -150,7 +148,7 @@ public class Game_Display extends SurfaceView implements Runnable {
 
         // 4 (bossLife) is just an arbitrary point in the boss stage to deploy minions
         if (gameAsteroid.bossLife < 4) {
-            for (Game_Asteroid minion : allMinions) {
+            for (Game_Enemy minion : allMinions) {
                 minion.x -= (gameAsteroid.speed + 4);
             }
         }
@@ -165,7 +163,7 @@ public class Game_Display extends SurfaceView implements Runnable {
             gameAsteroid.x = screenX - 5000;
             gameAsteroid.y = (screenY - gameAsteroid.height) / 2;
 
-            for (Game_Asteroid minion : allMinions) {
+            for (Game_Enemy minion : allMinions) {
                 minion.x =produceRandomXCoordinate();
                 minion.y = produceRandomYCoordinate();
             }
@@ -250,7 +248,7 @@ public class Game_Display extends SurfaceView implements Runnable {
 
     // Display all minions
     private void deployMinions(Canvas canvas) {
-        for (Game_Asteroid minion : allMinions) {
+        for (Game_Enemy minion : allMinions) {
             canvas.drawBitmap(minion.minion, minion.x, minion.y, paint);
         }
     }
