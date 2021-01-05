@@ -28,7 +28,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     private Activity_Game activityGame;
     private Game_Background gameBackground1, gameBackground2;
     private Game_Heart gameHeart;
-    private Game_Bullet theGameBullet;
+    private Game_Laser theGameBullet;
     public int theScore;
     private static final int SCORE_TILL_BOSS = 10;
     private static final int NUMBER_OF_MINIONS = 20;
@@ -58,7 +58,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         paint.setTextSize(64);
         paint.setColor(Color.WHITE);
         gameAsteroid = new Game_Enemy(getResources(), false);
-        theGameBullet = new Game_Bullet(getResources());
+        theGameBullet = new Game_Laser(getResources());
         //clicking play shoots, we need to fix that so we don't have to start score at -1
         theScore = -1;
 
