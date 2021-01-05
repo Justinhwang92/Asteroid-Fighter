@@ -4,9 +4,13 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+/**
+ * extracts and provides background image
+ */
 public class Game_Background {
 
     int x = 0, y = 0;
+    //stores background bitmap image
     Bitmap background;
 
     /**
@@ -15,8 +19,8 @@ public class Game_Background {
      * @param screenY screen's y dimension
      * @param res resources used to decode image in raw
      */
-    Game_Background(int screenX, int screenY, Resources res) {
-        //background = BitmapFactory.decodeResource(res, R.drawable.panorama);
+    public Game_Background(int screenX, int screenY, Resources res) {
+        //extracts and decodes image to put into game
         background = BitmapFactory.decodeResource(res, R.drawable.panoramav3);
         background = Bitmap.createScaledBitmap(background, screenX, screenY, false);
     }
