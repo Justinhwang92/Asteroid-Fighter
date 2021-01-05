@@ -11,40 +11,67 @@ import static com.example.myfirstapp.Game_Display.screenRatioY;
 
 public class Game_Enemy {
 
+    /**
+     * speed of enemy
+     */
     public int speed = 8;
+
+    /**
+     * amount of life boss has
+     */
     public int bossLife = 5;
-    // not necessary
-   // public boolean wasShot = true;
+
+    /**
+     * if the boss stage has begun or not
+     */
     public boolean bossStageBegins = false;
+
     int x = 0, y, width, height, asteroidCounter = 1;
-    Bitmap ship, destroyed;
+
+    /**
+     * bitmaps for the asteroid and the explosion
+     */
+    Bitmap asteroid, explosion;
+
+    /**
+     * bitmaps for the boss and minions
+     */
     Bitmap boss, minion;
+
+    /**
+     * boolean for if the enemy has collided with an object
+     */
     public boolean crashed = false;
+
+    /**
+     * if the enemy is a minion
+     */
     public boolean isMinion;
 
-    Game_Enemy(Resources res, boolean isMinion) {
-        ship = BitmapFactory.decodeResource(res, R.drawable.one);
-        destroyed = BitmapFactory.decodeResource(res, R.drawable.explosion);
+    public Game_Enemy(Resources res, boolean isMinion) {
+        asteroid = BitmapFactory.decodeResource(res, R.drawable.one);
+        explosion = BitmapFactory.decodeResource(res, R.drawable.explosion);
         boss = BitmapFactory.decodeResource(res, R.drawable.boss3b4);
         minion = BitmapFactory.decodeResource(res, R.drawable.small_minion4);
 
-        width = ship.getWidth() / 2;
-        height = ship.getHeight() / 6;
+        width = asteroid.getWidth() / 2;
+        height = asteroid.getHeight() / 6;
 
         width = (int) (width * screenRatioX);
         height = (int) (height * screenRatioY);
 
-        ship = Bitmap.createScaledBitmap(ship, width, height, false);
+        asteroid = Bitmap.createScaledBitmap(asteroid, width, height, false);
 
         y = -height;
 
         this.isMinion = isMinion;
     }
-    Bitmap getAsteroid() {
+
+    public Bitmap getAsteroid() {
         asteroidCounter = 1;
         if (crashed) {
             if (!bossStageBegins) {
-                return destroyed;
+                return explosion;
             } else {
                 x = x + 100;
                 return boss;
@@ -56,11 +83,11 @@ public class Game_Enemy {
             }
             return boss;
         }
-        return ship;
+        return asteroid;
     }
 
-    Rect getCollisionShape () {
-        //return new Rect(x, y, x + width, y + height);
+    //get hitbox
+    public Rect getCollisionShape () {
         return new Rect(x, y - 2000, x + width, y + 3000);
     }
 }
