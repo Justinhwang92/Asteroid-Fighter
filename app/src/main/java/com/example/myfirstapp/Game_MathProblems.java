@@ -174,7 +174,6 @@ public class Game_MathProblems {
                 mySet = sqrRt.getWrongs();
                 myAns = sqrRt.mySolution;
                 mySet.add(myAns);
-//                mySet.add(sqrRt.mySolution);
                 break;
 
             //For Inequality part
@@ -185,7 +184,6 @@ public class Game_MathProblems {
                 mySet = inqO.getWrongs();
                 myAns = inqO.mySolution;
                 mySet.add(myAns);
-//                mySet.add(inqO.mySolution);
                 break;
 
             //For algebra part
@@ -196,7 +194,6 @@ public class Game_MathProblems {
                 mySet = algO.getWrongs();
                 myAns = algO.mySolution;
                 mySet.add(myAns);
-//                mySet.add(algO.mySolution);
                 break;
 
             default:
@@ -206,7 +203,7 @@ public class Game_MathProblems {
                 }
                 catch(Exception e)
                 {
-                    System.out.println(e + "\nInvalid hard question");
+                    System.out.println(e.getStackTrace() + "\nInvalid hard question");
                 }
                 break;
         }
@@ -303,7 +300,7 @@ public class Game_MathProblems {
 
                     catch(Exception e)
                     {
-                        System.out.println(e + "\nInvalid amount of digits in "
+                        System.out.println(e.getStackTrace() + "\nInvalid amount of digits in "
                                 + "math problem");
                     }
                     break;
@@ -412,7 +409,7 @@ public class Game_MathProblems {
 
                     catch(Exception e)
                     {
-                        System.out.println(e + "\nInvalid operation in "
+                        System.out.println(e.getStackTrace() + "\nInvalid operation in "
                                 + "math problem");
                     }
 
