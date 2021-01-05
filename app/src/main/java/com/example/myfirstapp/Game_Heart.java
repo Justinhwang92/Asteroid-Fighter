@@ -6,15 +6,17 @@ import android.graphics.BitmapFactory;
 
 import static com.example.myfirstapp.Game_Display.screenRatioX;
 
+/**
+ * drawing of life/heart
+ */
 public class Game_Heart {
     int x, y, width, height;
     Bitmap heart;
-    private Game_Display gameDisplay;
     public int lives;
 
-    Game_Heart(Game_Display gameDisplay, int screenY, Resources res) {
+    //initializes and decodes resources
+    public Game_Heart(Game_Display gameDisplay, int screenY, Resources res) {
         lives = 3;
-        this.gameDisplay = gameDisplay;
         heart = BitmapFactory.decodeResource(res, R.drawable.heart3);
         width = heart.getWidth();
         height = heart.getHeight();
@@ -27,5 +29,4 @@ public class Game_Heart {
         y = screenY / 2;
         x = (int) (64 * screenRatioX);
     }
-
 }
