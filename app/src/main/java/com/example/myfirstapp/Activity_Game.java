@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -68,7 +70,7 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Audio_Activity_Menu_Main.releasePlayers();
         //gets rid of notification bar for phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -96,7 +98,7 @@ public class Activity_Game extends AppCompatActivity {
         setQuestionAnswerOnDisplay();
 
         //releases the MediaPlayers from the main menu to free up resources
-        Audio_Activity_Menu_Main.releasePlayers();
+
     }
 
     /**
@@ -141,13 +143,14 @@ public class Activity_Game extends AppCompatActivity {
         myButton4.setText(myChoices.get(3) + "");
     }
 
+    //called when application stops
     @Override
     protected void onPause() {
         super.onPause();
         gameDisplay.donePlaying();
         myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
-
+    //called when application starts/resumes
     @Override
     protected void onResume() {
         super.onResume();
@@ -155,19 +158,25 @@ public class Activity_Game extends AppCompatActivity {
         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
+    //called when application stops
     @Override
     protected void onStop(){
         super.onStop();
         gameDisplay.donePlaying();
         myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
-
     }
 
+    //i think this is called when display turns back on.
+    //if you press the power button and turn the emulator off and press again to start
+    //it calls this method. not sure if power button on emulator just turns off screen or turns
+    //off emulator
     @Override
     protected void onRestart(){
         super.onRestart();
+        myAudio.releasePlayers();
+        myAudio = new Audio_Activity_Game(this);
     }
-
+    //called when application starts/resumes
     @Override
     protected void onStart(){
         super.onStart();
