@@ -51,6 +51,10 @@
             android:name=".Activity_Menu_Backstory3"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
