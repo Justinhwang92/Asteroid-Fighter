@@ -104,11 +104,10 @@ public class Game_Display extends SurfaceView implements Runnable {
             gameAsteroid.y = (screenY - gameAsteroid.height) / 2 + (-50);
             isBossStage = true;
         }
-        if (theScore >= SCORE_TILL_BOSS) {
-            if (!isBossMusic) {
-                playBossMusic();
-            }
+        if (isBossStage) {
+            playBossMusic();
         }
+
         gameAsteroid.crashed = false;
 
         gameBackground1.x -= 10 * screenRatioX;
