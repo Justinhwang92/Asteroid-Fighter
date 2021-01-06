@@ -91,6 +91,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         this.theScore--;
         if(theScore < 0){
             gameHeart.lives--;
+            myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_LIFE);
             theScore = 0;
         }
     }
@@ -164,7 +165,7 @@ public class Game_Display extends SurfaceView implements Runnable {
             gameAsteroid.y = (screenY - gameAsteroid.height) / 2;
 
             for (Game_Enemy minion : allMinions) {
-                minion.x =produceRandomXCoordinate();
+                minion.x = produceRandomXCoordinate();
                 minion.y = produceRandomYCoordinate();
             }
         }
