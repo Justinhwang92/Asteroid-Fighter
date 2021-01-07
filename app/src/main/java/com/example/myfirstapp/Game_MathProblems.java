@@ -1152,6 +1152,125 @@ public class Game_MathProblems {
     }
 
 
+    public static class AddingFraction extends Game_MathProblems
+    {
+        private Fraction mySolution;
+
+        private Set<Fraction> myWrongs;
+
+        // U00F7
+        private Fraction firstFraction;
+        private Fraction secondFraction;
+
+        public AddingFraction(boolean theBoss) {
+            super(theBoss);
+            firstFraction = new Fraction(myRandom.nextInt(9) + 1, myRandom.nextInt(9) + 1);
+            secondFraction = new Fraction(myRandom.nextInt(9) + 1, myRandom.nextInt(9) + 1);
+            initializeSolutions();
+        }
+
+        private void initializeSolutions()
+        {
+            mySolution = firstFraction.add(secondFraction);
+            myWrongs = new HashSet<>();
+
+            while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
+            {
+                Fraction nextWrong = new Fraction(myRandom.nextInt(9) + 1, myRandom.nextInt(9) + 1);
+                if(nextWrong.toString().equals(mySolution.toString()))
+                {
+                    myWrongs.add(nextWrong);
+                }
+            }
+        }
+
+        public Set<Fraction> getWrongs()
+        {
+            return myWrongs;
+        }
+
+        public Fraction getSolution()
+        {
+            return mySolution;
+        }
+    }
+
+    public static class Fraction{
+        private int numerator;
+        private int denominator;
+        public Fraction(int numr, int denr) {
+            numerator = numr;
+            denominator = denr;
+            reduce();
+        }
+
+        public int getNumerator() {
+            return numerator;
+        }
+
+        public void setNumerator(int numerator) {
+            this.numerator = numerator;
+        }
+
+        public int getDenominator() {
+            return denominator;
+        }
+
+        public void setDenominator(int denominator) {
+            this.denominator = denominator;
+        }
+
+        public int calculateGCD(int numerator, int denominator) {
+            if (numerator % denominator == 0) {
+                return denominator;
+            }
+            return calculateGCD(denominator, numerator % denominator);
+        }
+
+        void reduce() {
+            int gcd = calculateGCD(numerator, denominator);
+            numerator /= gcd;
+            denominator /= gcd;
+        }
+
+        public Fraction add(Fraction fractionTwo) {
+            int numer = (numerator * fractionTwo.getDenominator()) +
+                    (fractionTwo.getNumerator() * denominator);
+            int denr = denominator * fractionTwo.getDenominator();
+            return new Fraction(numer, denr);
+        }
+
+        public Fraction subtract(Fraction fractionTwo) {
+            int newNumerator = (numerator * fractionTwo.denominator) -
+                    (fractionTwo.numerator * denominator);
+            int newDenominator = denominator * fractionTwo.denominator;
+            Fraction result = new Fraction(newNumerator, newDenominator);
+            return result;
+        }
+
+        public Fraction multiply(Fraction fractionTwo) {
+            int newNumerator = numerator * fractionTwo.numerator;
+            int newDenominator = denominator * fractionTwo.denominator;
+            Fraction result = new Fraction(newNumerator, newDenominator);
+            return result;
+        }
+
+        public Fraction divide(Fraction fractionTwo) {
+            int newNumerator = numerator * fractionTwo.getDenominator();
+            int newDenominator = denominator * fractionTwo.numerator;
+            Fraction result = new Fraction(newNumerator, newDenominator);
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return this.numerator + "/" + this.denominator;
+        }
+    }
+
+
+
+
 //    static class trigProb {
 //
 ////        private static DecimalFormat df2 = new DecimalFormat("#.##");
