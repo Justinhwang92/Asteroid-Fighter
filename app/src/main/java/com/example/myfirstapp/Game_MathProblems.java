@@ -17,7 +17,7 @@ public class Game_MathProblems {
     /**
      * int answer of a specific question.
      */
-    private int myAns;
+    private String myAns;
 
     /**
      * Random class object.
@@ -37,7 +37,7 @@ public class Game_MathProblems {
     /**
      * Set of Integers to store 4 choices of answers.
      */
-    private Set<Integer> mySet;
+    private Set<String> mySet;
 
     /**
      * number of types of questions for hard questions:
@@ -92,7 +92,7 @@ public class Game_MathProblems {
      * method to get the answer of a specific question
      * @return int the answer
      */
-    public int getAnswer(){  return myAns; }
+    public String getAnswer(){  return myAns; }
 
     /**
      * To get easy question - 1 digit arithmetic
@@ -112,10 +112,10 @@ public class Game_MathProblems {
      * To get 4 choices of the answers.
      * @return Set<Integer> containing 4 different choice to be displayed.
      */
-    public Set<Integer> getEasyAnswers(){
+    public Set<String> getEasyAnswers(){
         mySet = new HashSet<>(myBasicOpsObject.getWrongs());
-        myAns = myBasicOpsObject.mySolution;
-        mySet.add(myAns);
+        myAns = myBasicOpsObject.mySolution+"";
+        mySet.add(myAns+"");
         return (mySet);
     }
 
@@ -137,11 +137,70 @@ public class Game_MathProblems {
      * To get 4 choices of the answers.
      * @return Set<Integer> containing 4 different choice to be displayed.
      */
-    public Set<Integer> getMediumAnswers(){
+    public Set<String> getMediumAnswers(){
         mySet = new HashSet<>(myBasicOpsObject.getWrongs());
-        myAns = myBasicOpsObject.mySolution;
-        mySet.add(myAns);
+        myAns = myBasicOpsObject.mySolution + "";
+        mySet.add(myAns+"");
         return (mySet);
+    }
+
+    /**
+     * Method for the intermediate mode
+     * Needed fraction part to be implemented for this method
+     * @return
+     */
+    public String getIntermediateQuestion(){
+        String theS = "";
+
+        int randomChoice = myRandom.nextInt(2);
+
+        switch (randomChoice){
+
+            //for square problem
+            case 0:
+                SqProb sqr = new SqProb(false);
+                theS = sqr.toString();
+                mySet = new HashSet<>();
+                mySet = sqr.getWrongs();
+                myAns = sqr.mySolution + "";
+                mySet.add(myAns+"");
+                break;
+
+            //For square root problem
+            case 1:
+                SqrtProb sqrRt = new SqrtProb(false);
+                theS = sqrRt.toString();
+                mySet = new HashSet<>();
+                mySet = sqrRt.getWrongs();
+                myAns = sqrRt.mySolution + "";
+                mySet.add(myAns+"");
+//                mySet.add(sqrRt.mySolution);
+                break;
+
+            //For medium question part
+            case 2:
+                theS = getMediumQuestions();
+                mySet = new HashSet<>();
+                mySet = getMediumAnswers();
+                break;
+
+            default:
+                try
+                {
+                    throw new Exception();
+                }
+                catch(Exception e)
+                {
+                    System.out.println(e + "\nInvalid hard question");
+                }
+                break;
+        }
+
+        return theS;
+    }
+
+    public Set<String> getIntermediateQuestionAnswer(){
+        return mySet;
     }
 
     /**
@@ -162,8 +221,8 @@ public class Game_MathProblems {
                 theS = sqr.toString();
                 mySet = new HashSet<>();
                 mySet = sqr.getWrongs();
-                myAns = sqr.mySolution;
-                mySet.add(myAns);
+                myAns = sqr.mySolution + "";
+                mySet.add(myAns+"");
                 break;
 
             //For square root problem
@@ -172,8 +231,9 @@ public class Game_MathProblems {
                 theS = sqrRt.toString();
                 mySet = new HashSet<>();
                 mySet = sqrRt.getWrongs();
-                myAns = sqrRt.mySolution;
-                mySet.add(myAns);
+                myAns = sqrRt.mySolution + "";
+                mySet.add(myAns+"");
+//                mySet.add(sqrRt.mySolution);
                 break;
 
             //For Inequality part
@@ -182,8 +242,9 @@ public class Game_MathProblems {
                 theS = inqO.toString();
                 mySet = new HashSet<>();
                 mySet = inqO.getWrongs();
-                myAns = inqO.mySolution;
-                mySet.add(myAns);
+                myAns = inqO.mySolution + "";
+                mySet.add(myAns+"");
+//                mySet.add(inqO.mySolution);
                 break;
 
             //For algebra part
@@ -192,8 +253,9 @@ public class Game_MathProblems {
                 theS = algO.toString();
                 mySet = new HashSet<>();
                 mySet = algO.getWrongs();
-                myAns = algO.mySolution;
-                mySet.add(myAns);
+                myAns = algO.mySolution + "";
+                mySet.add(myAns+"");
+//                mySet.add(algO.mySolution);
                 break;
 
             default:
@@ -203,7 +265,7 @@ public class Game_MathProblems {
                 }
                 catch(Exception e)
                 {
-                    System.out.println(e.getStackTrace() + "\nInvalid hard question");
+                    System.out.println(e + "\nInvalid hard question");
                 }
                 break;
         }
@@ -215,9 +277,80 @@ public class Game_MathProblems {
      * To get 4 choices of the answers.
      * @return Set<Integer> containing 4 different choice to be displayed.
      */
-    public Set<Integer> getHardAnswers(){
+    public Set<String> getHardAnswers(){
         return (mySet);
     }
+
+    /**
+     * To get hard question - Problems related to square, square root, inequality, algebra
+     * @return String representation of the question.
+     */
+    public String getExtrHardQuestions(){
+
+        String theS = "";
+
+        int randomChoice = myRandom.nextInt(2);
+
+        //for testing purpose
+//        randomChoice = 1;
+
+        switch (randomChoice){
+
+            //for square problem
+            case 0:
+                CubeProb cube = new CubeProb(false);
+                theS = cube.toString();
+                mySet = new HashSet<>();
+                mySet = cube.getWrongs();
+                myAns = cube.mySolution + "";
+                mySet.add(myAns+"");
+                break;
+
+            //For square root problem
+            case 1:
+                CubeRtProb cubRt = new CubeRtProb(false);
+                theS = cubRt.toString();
+                mySet = new HashSet<>();
+                mySet = cubRt.getWrongs();
+                myAns = cubRt.mySolution + "";
+                mySet.add(myAns+"");
+//                mySet.add(sqrRt.mySolution);
+                break;
+
+            case 2:
+                Factorial fact = new Factorial();
+                theS = fact.toString();
+                mySet = new HashSet<>();
+                mySet = fact.getMyWrongs();
+                myAns = fact.mySolution + "";
+                mySet.add(myAns+"");
+//                mySet.add(algO.mySolution);
+                break;
+
+            default:
+                try
+                {
+                    throw new Exception();
+                }
+                catch(Exception e)
+                {
+                    System.out.println(e + "\nInvalid hard question");
+                }
+                break;
+        }
+
+        return theS;
+    }
+
+    /**
+     * To get 4 choices of the answers.
+     * @return Set<Integer> containing 4 different choice to be displayed.
+     */
+    public Set<String> getExtrHardAnswers(){
+        return (mySet);
+    }
+
+
 
     /**
      * Class for basic arithmetic operation - 1 digit and 2 digits
@@ -248,7 +381,7 @@ public class Game_MathProblems {
         /**
          * Set of Integer to store wrong choices for the question.
          */
-        private Set<Integer> myWrongs;
+        private Set<String> myWrongs;
 
         /**
          * Contructor for basic operation class
@@ -300,7 +433,7 @@ public class Game_MathProblems {
 
                     catch(Exception e)
                     {
-                        System.out.println(e.getStackTrace() + "\nInvalid amount of digits in "
+                        System.out.println(e + "\nInvalid amount of digits in "
                                 + "math problem");
                     }
                     break;
@@ -336,7 +469,7 @@ public class Game_MathProblems {
 
                         if(nextWrong != mySolution)
                         {
-                            myWrongs.add(nextWrong);
+                            myWrongs.add(nextWrong+"");
                         }
                     }
                     break;
@@ -367,7 +500,7 @@ public class Game_MathProblems {
                         }
                         if(nextWrong != mySolution)
                         {
-                            myWrongs.add(nextWrong);
+                            myWrongs.add(nextWrong+"");
                         }
                     }
                     break;
@@ -381,7 +514,7 @@ public class Game_MathProblems {
                         int nextWrong = myRandom.nextInt(82);
                         if(nextWrong != mySolution)
                         {
-                            myWrongs.add(nextWrong);
+                            myWrongs.add(nextWrong+"");
                         }
                     }
                     break;
@@ -396,7 +529,7 @@ public class Game_MathProblems {
                         int nextWrong = myRandom.nextInt(20) + 1;
                         if(nextWrong != mySolution)
                         {
-                            myWrongs.add(nextWrong);
+                            myWrongs.add(nextWrong+"");
                         }
                     }
                     break;
@@ -430,7 +563,7 @@ public class Game_MathProblems {
          * Method to get set of wrong answer choices for the questions.
          * @return set<Integer> containing incorrect answers
          */
-        public Set<Integer> getWrongs()
+        public Set<String> getWrongs()
         {
             return myWrongs;
         }
@@ -466,7 +599,7 @@ public class Game_MathProblems {
         /**
          * Set of Integer to store wrong choices for the question.
          */
-        private Set<Integer> myWrongs;
+        private Set<String> myWrongs;
 
         /**
          * Constructor for SquareProblem class
@@ -492,7 +625,7 @@ public class Game_MathProblems {
                 int nextWrong = myRandom.nextInt(82);
                 if(nextWrong != mySolution)
                 {
-                    myWrongs.add(nextWrong);
+                    myWrongs.add(nextWrong+"");
                 }
             }
         }
@@ -510,7 +643,7 @@ public class Game_MathProblems {
          * Method to get set of wrong answer choices for the questions.
          * @return set<Integer> containing incorrect answers
          */
-        public Set<Integer> getWrongs()
+        public Set<String> getWrongs()
         {
             return myWrongs;
         }
@@ -545,7 +678,7 @@ public class Game_MathProblems {
         /**
          * Set of Integer to store wrong choices for the question.
          */
-        private Set<Integer> myWrongs;
+        private Set<String> myWrongs;
 
         /**
          * Constructor for SquareRootProblem class
@@ -572,7 +705,7 @@ public class Game_MathProblems {
                 int nextWrong = myRandom.nextInt(21);
                 if(nextWrong != mySolution)
                 {
-                    myWrongs.add(nextWrong);
+                    myWrongs.add(nextWrong+"");
                 }
             }
 
@@ -582,7 +715,7 @@ public class Game_MathProblems {
          * Method to get set of wrong answer choices for the questions.
          * @return set<Integer> containing incorrect answers
          */
-        public Set<Integer> getWrongs()
+        public Set<String> getWrongs()
         {
             return myWrongs;
         }
@@ -620,7 +753,7 @@ public class Game_MathProblems {
         /**
          * Set of Integer to store wrong choices for the question.
          */
-        private Set<Integer> myWrongs;
+        private Set<String> myWrongs;
         /**
          * Int variable for the x coefficient (A)
          */
@@ -669,9 +802,20 @@ public class Game_MathProblems {
             while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
             {
                 int nextWrong = myRandom.nextInt(mySolution + 3) + 1;
+
+                if(myConditionalOperator == '<' && nextWrong < mySolution){
+                    nextWrong = nextWrong + mySolution;
+                }
+
+                if(myConditionalOperator == '>' && nextWrong > mySolution){
+                    nextWrong = nextWrong - mySolution - 3;
+                }
+
+//                System.out.println(nextWrong);
+
                 if(nextWrong != mySolution)
                 {
-                    myWrongs.add(nextWrong);
+                    myWrongs.add(nextWrong+"");
                 }
 
             }
@@ -681,7 +825,7 @@ public class Game_MathProblems {
          * Method to get set of wrong answer choices for the questions.
          * @return set<Integer> containing incorrect answers
          */
-        public Set<Integer> getWrongs()
+        public Set<String> getWrongs()
         {
             return myWrongs;
         }
@@ -700,6 +844,10 @@ public class Game_MathProblems {
          * @return String representing the question
          */
         public String toString(){
+
+            if(myXCoefficient==1)
+                return "x + "+ myLeftConstant +" "+myConditionalOperator+ " "+ myRightConstant + "; then x "+ myConditionalOperator +" ?";
+
             return myXCoefficient +"x + "+ myLeftConstant + " " + myConditionalOperator + " "+ myRightConstant + "; then x "+ myConditionalOperator+ " ?";
         }
     }
@@ -713,7 +861,7 @@ public class Game_MathProblems {
         /**
          * Set of Integer to store wrong choices for the question.
          */
-        private Set<Integer> myWrongs;
+        private Set<String> myWrongs;
         /**
          * Int variable for the x coefficient (A)
          */
@@ -753,7 +901,7 @@ public class Game_MathProblems {
                 int nextWrong = myRandom.nextInt(mySolution+ 3) + 1;
                 if(nextWrong != mySolution)
                 {
-                    myWrongs.add(nextWrong);
+                    myWrongs.add(nextWrong+"");
                 }
             }
         }
@@ -762,7 +910,7 @@ public class Game_MathProblems {
          * Method to get set of wrong answer choices for the questions.
          * @return set<Integer> containing incorrect answers
          */
-        public Set<Integer> getWrongs()
+        public Set<String> getWrongs()
         {
             return myWrongs;
         }
@@ -782,8 +930,306 @@ public class Game_MathProblems {
          */
         public String toString()
         {
+            if(myXCoefficient==1)
+                return "x + "+ myLeftCoefficient +" = "+ myRightCoefficient + ", then x = ?";
+
             return myXCoefficient +"x + "+ myLeftCoefficient +" = "+ myRightCoefficient + ", then x = ?";
         }
     }
+
+
+    public static class Factorial{
+
+        int mySolution;
+        private Set<String> myWrongs;
+        private String myQuestion;
+        private int myNumber;
+
+        public Factorial(){
+
+            myNumber = myRandom.nextInt(8);
+            mySolution = getFactorial(myNumber);
+        }
+
+        /**
+         * To avoid the running time of the loop to calculate the factorial number and also the limitation of the displaying
+         * large numbers on scree, the numbers are restricted from 0 to 8;
+         */
+        private int getFactorial(int theN){
+            int ans = 1;
+            int temp = myNumber;
+
+            while(temp > 0){
+                ans = ans * temp;
+                temp--;
+            }
+            return ans;
+        }
+
+        public String toString(){
+            return myNumber + "! = ?";
+        }
+
+        public Set<String> getMyWrongs(){
+            myWrongs = new HashSet<>();
+            if(myNumber == 0 || myNumber == 1){
+                myWrongs.add(0+"");
+                myWrongs.add(2+"");
+                myWrongs.add(10+"");
+                return myWrongs;
+            }
+            while(myWrongs.size() < 3){
+                int wrong = 0;
+                wrong = myRandom.nextInt(myNumber) + mySolution;
+
+                if(wrong != mySolution){
+                    myWrongs.add(wrong+"");
+                }
+            }
+
+            return myWrongs;
+        }
+    }
+
+    /**
+     * Class for the questions related to cube of a number
+     * Extends MathProblem class
+     */
+    public static class CubeProb extends Game_MathProblems
+    {
+        /**
+         * int variable for the operands of the square problem.
+         */
+        private int myOperand;
+
+        /**
+         * private int to store correct solution
+         */
+        private int mySolution;
+
+        /**
+         * Set of Integer to store wrong choices for the question.
+         */
+        private Set<String> myWrongs;
+
+        /**
+         * Constructor for CubeProblem class
+         * @param theBoss boolean flag to notify it its boss stage
+         */
+        public CubeProb(boolean theBoss)
+        {
+            super(theBoss);
+            myOperand = getRandOneDigitNum();
+            initializeSolutions();
+        }
+
+        /**
+         * Method to initialize the solution and the other wrong choices for the question.
+         */
+        private void initializeSolutions()
+        {
+            mySolution = (int)Math.pow(myOperand, 3);
+            myWrongs = new HashSet<>();
+            while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
+            {
+                //we restrict highest answer to be 81 because we only include 1 digit squares
+                int nextWrong = myRandom.nextInt(82);
+                if(nextWrong != mySolution)
+                {
+                    myWrongs.add(nextWrong+"");
+                }
+            }
+        }
+
+        /**
+         * Method to get correct solution for the question
+         * @return int right solution
+         */
+        public int getSolution()
+        {
+            return mySolution;
+        }
+
+        /**
+         * Method to get set of wrong answer choices for the questions.
+         * @return set<Integer> containing incorrect answers
+         */
+        public Set<String> getWrongs()
+        {
+            return myWrongs;
+        }
+
+        /**
+         * To get string representation of the question.
+         * @return String representing the question
+         */
+        public String toString()
+        {
+            return myOperand + "³ = ?";
+        }
+    }
+
+    /**
+     * Class for the questions related to cube root of a number
+     * Extends MathProblem class
+     */
+    public static class CubeRtProb extends Game_MathProblems
+    {
+        //whole numbers
+        //unicode for square root function \u221A
+
+        /**
+         * int variable for the operands of the square problem.
+         */
+        private final int myOperand;
+        /**
+         * private int to store correct solution
+         */
+        private int mySolution;
+        /**
+         * Set of Integer to store wrong choices for the question.
+         */
+        private Set<String> myWrongs;
+
+        /**
+         * Constructor for SquareRootProblem class
+         * @param theBoss boolean flag to notify it its boss stage
+         */
+        public CubeRtProb(boolean theBoss)
+        {
+            super(theBoss);
+            mySolution = myRandom.nextInt(10);
+            myOperand = (int) Math.pow(mySolution, 3) ;
+            initializeSolutions();
+        }
+
+        /**
+         * Method to initialize the solution and the other wrong choices for the question.
+         */
+        private void initializeSolutions()
+        {
+//            mySolution = (int)Math.cbrt(myOperand);
+            myWrongs = new HashSet<>();
+
+            while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
+            {
+                //we set upper bound to 21 to have square roots between 0 and 20
+                int nextWrong = myRandom.nextInt(21);
+                if(nextWrong != mySolution)
+                {
+                    myWrongs.add(nextWrong+"");
+                }
+            }
+
+        }
+
+        /**
+         * Method to get set of wrong answer choices for the questions.
+         * @return set<Integer> containing incorrect answers
+         */
+        public Set<String> getWrongs()
+        {
+            return myWrongs;
+        }
+
+        /**
+         * Method to get correct solution for the question
+         * @return int right solution
+         */
+        public int getSolution()
+        {
+            return mySolution;
+        }
+
+        /**
+         * To get string representation of the question.
+         * @return String representing the question
+         */
+        public String toString()
+        {
+            return "\u221B" + myOperand + " = ?";
+        }
+    }
+
+
+//    static class trigProb {
+//
+////        private static DecimalFormat df2 = new DecimalFormat("#.##");
+//
+//        public enum problemType{
+//            sin, cos, tan;
+//            public problemType randomType() {
+//                Random random = new Random();
+//                return values()[random.nextInt(values().length)];
+//            }
+//        };
+//
+//        int degree;
+//        problemType type;
+//        double answer;
+//        double[] wrongAnswers;
+////    static private float[] allAnswers =
+//
+//
+//        trigProb(){
+//            Random rand = new Random();
+//            type = problemType.randomType();
+//
+//            if(rand.nextInt() % 2 == 0)
+//                degree = 45 * rand.nextInt(13);
+//            else
+//                degree = 30 * rand.nextInt(13);
+//
+//            answer = getAnswer(type, degree);
+//
+//
+//            wrongAnswers = new double[3];
+////        for(double x : wrongAnswers){
+////
+////        }
+//
+//
+//
+//
+//        }
+//
+//
+//
+//        public double getAnswer(problemType type, int degree){
+//            double radians = Math.toRadians(degree);
+//            double answer = 0;
+//
+//            switch (type){
+//                case sin -> answer = Math.sin(radians);
+//                case cos -> answer = Math.cos(radians);
+//                case tan -> answer = Math.tan(radians);
+//            }
+//
+//            if(Math.abs(answer) > 2)
+//                answer = Double.POSITIVE_INFINITY;
+//
+//            if(Math.abs(answer) < 0.01)
+//                answer = 0;
+//
+//            return answer;
+//        }
+//
+//        public String toString(){
+////        return type.toString() ;
+//
+//            return type.toString() + '(' + degree + ')' + " = ?";
+//
+//        }
+//
+//
+//
+//
+//
+//
+//    }
+
+
+
+
 
 }
