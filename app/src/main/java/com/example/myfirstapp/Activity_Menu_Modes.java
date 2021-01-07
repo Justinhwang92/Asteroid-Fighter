@@ -100,7 +100,6 @@ public class Activity_Menu_Modes extends AppCompatActivity {
                 startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Main.class));
             }
         });
-
     }
 }
 

@@ -34,14 +34,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        android:text="* If you do not answer in time, the asteroid may hit your ship and you lose 1 life"
+        android:text="* If you do not answer in time, the asteroid may hit your ship and you lose"
         android:textColor="#ffffff"
         android:textSize="60px" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="* After reaching (x) points, boss will appear."
+        android:text="  1 Life"
         android:textColor="#ffffff"
         android:textSize="60px" />
 
@@ -49,6 +50,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
+        android:text="* After reaching (x) points, boss will appear."
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
         android:text="* It will have 5 lives, so continue choosing the correct answers for the equations above."
         android:textColor="#ffffff"
         android:textSize="60px" />
