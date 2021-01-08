@@ -1255,8 +1255,6 @@ public class Game_MathProblems {
          * @return
          */
         public Set<String> getWrongs(){ return  wrongAnswers;}
-
-
     }
 
 
