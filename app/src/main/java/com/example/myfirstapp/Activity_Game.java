@@ -45,17 +45,21 @@ public class Activity_Game extends AppCompatActivity {
     /**
      * the solution to the equation
      */
-    private int myAns;
+    private String myAns;
 
     /**
      * the list of all the solutions (including wrong) that can be selected for the math problem
      */
-    private ArrayList<Integer> myChoices;
+    private ArrayList<String> myChoices;
 
     /**
      * field that stores whether the boss has spawned or not
      */
     private boolean isBossStage = false;
+
+    private Activity_Menu_Modes myMode;
+
+    private String myTypeOfMode = "";
 
     //BUTTONS FOR MATH PROBLEMS
     private Button myButton1;
@@ -93,20 +97,79 @@ public class Activity_Game extends AppCompatActivity {
         View secondLayerView = LayoutInflater.from(this).inflate(R.layout.activity_game, null, false);
         addContentView(secondLayerView, lp);
 
+        //To determine what mode is selected
+        myMode = new Activity_Menu_Modes();
+        myTypeOfMode = myMode.mode;
+
         //For math problem class
         //starts with easy questions
-        setQuestionAnswerOnDisplay();
+        //Initial question to be displayed
+        myMP = new Game_MathProblems(isBossStage);
+//        setQuestionAnswerOnDisplay();
+        questionBasedOnGameMode();
+
 
         //releases the MediaPlayers from the main menu to free up resources
 
     }
 
+    void questionBasedOnGameMode(){
+        if(myTypeOfMode.equals("novice")){
+            setQuestionAnswerOnDisplay();
+        }
+        else if(myTypeOfMode.equals("intermediate")){
+            if(!gameDisplay.isBossStage){
+                myQuestion = myMP.getIntermediateQuestion();
+                myChoices = new ArrayList<>(myMP.getIntermediateQuestionAnswer());
+            }
+            //else means its boss stage
+            else{
+                myQuestion = myMP.getHardQuestions();
+                myChoices = new ArrayList<>(myMP.getHardAnswers());
+            }
+            myAns = myMP.getAnswer();
+            initializeQuestionAnswer();
+        }
+        else if(myTypeOfMode.equals("advanced")){
+            if(!gameDisplay.isBossStage){
+                myQuestion = myMP.getHardQuestions();
+                myChoices = new ArrayList<>(myMP.getHardAnswers());
+            }
+            //else means its boss stage
+            else{
+                myQuestion = myMP.getExtrHardQuestions();
+                myChoices = new ArrayList<>(myMP.getExtrHardAnswers());
+            }
+            myAns = myMP.getAnswer();
+            initializeQuestionAnswer();
+        }
+        else if(myTypeOfMode.equals("endless")){
+            if(gameDisplay.theScore <= 10){
+                myQuestion = myMP.getEasyQuestions();
+                myChoices = new ArrayList<>(myMP.getEasyAnswers());
+            }
+            else if(gameDisplay.theScore > 10 && gameDisplay.theScore <= 25){
+                myQuestion = myMP.getIntermediateQuestion();
+                myChoices = new ArrayList<>(myMP.getIntermediateQuestionAnswer());
+            }
+            else if(gameDisplay.theScore > 25 && gameDisplay.theScore <= 40){
+                myQuestion = myMP.getHardQuestions();
+                myChoices = new ArrayList<>(myMP.getHardAnswers());
+            }
+            else if(gameDisplay.theScore > 40){
+                myQuestion = myMP.getExtrHardQuestions();
+                myChoices = new ArrayList<>(myMP.getExtrHardAnswers());
+            }
+            myAns = myMP.getAnswer();
+            initializeQuestionAnswer();
+        }
+    }
+
+
     /**
      * displays the questions and answers on the surface view
      */
     public void setQuestionAnswerOnDisplay(){
-        //Initial question to be displayed
-        myMP = new Game_MathProblems(isBossStage);
 
         if(!gameDisplay.isBossStage){
             myQuestion = myMP.getEasyQuestions();
@@ -211,10 +274,12 @@ public class Activity_Game extends AppCompatActivity {
                     if(myButton1.getText().equals(myAns + "")){
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
-                        setQuestionAnswerOnDisplay();
+//                        setQuestionAnswerOnDisplay();
+                        questionBasedOnGameMode();
                     }else{
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
                         gameDisplay.deductPoint();
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+//                        gameDisplay.deductPoint();
                         break;
                     }
 
@@ -224,10 +289,12 @@ public class Activity_Game extends AppCompatActivity {
                     if(myButton2.getText().equals(myAns+"")){
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
-                        setQuestionAnswerOnDisplay();
+//                        setQuestionAnswerOnDisplay();
+                        questionBasedOnGameMode();
                     }else{
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
                         gameDisplay.deductPoint();
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+//                        gameDisplay.deductPoint();
                         break;
                     }
                     break;
@@ -236,10 +303,12 @@ public class Activity_Game extends AppCompatActivity {
                     if(myButton3.getText().equals(myAns+"")){
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
-                        setQuestionAnswerOnDisplay();
+//                        setQuestionAnswerOnDisplay();
+                        questionBasedOnGameMode();
                     }else{
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
                         gameDisplay.deductPoint();
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+//                        gameDisplay.deductPoint();
                         break;
                     }
                     break;
@@ -248,10 +317,12 @@ public class Activity_Game extends AppCompatActivity {
                     if(myButton4.getText().equals(myAns+"")){
                         myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
-                        setQuestionAnswerOnDisplay();
+//                        setQuestionAnswerOnDisplay();
+                        questionBasedOnGameMode();
                     }else{
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
                         gameDisplay.deductPoint();
+                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+//                        gameDisplay.deductPoint();
                         break;
                     }
                     break;
