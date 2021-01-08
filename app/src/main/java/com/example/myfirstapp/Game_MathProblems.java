@@ -1164,8 +1164,10 @@ public class Game_MathProblems {
 
         public AddingFraction(boolean theBoss) {
             super(theBoss);
-            firstFraction = new Fraction(myRandom.nextInt(9) + 1, myRandom.nextInt(9) + 1);
-            secondFraction = new Fraction(myRandom.nextInt(9) + 1, myRandom.nextInt(9) + 1);
+            firstFraction = new Fraction(myRandom.nextInt(9) + 1,
+                    myRandom.nextInt(9) + 1);
+            secondFraction = new Fraction(myRandom.nextInt(9) + 1,
+                    myRandom.nextInt(9) + 1);
             initializeSolutions();
         }
 
@@ -1176,7 +1178,8 @@ public class Game_MathProblems {
 
             while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
             {
-                Fraction nextWrong = new Fraction(myRandom.nextInt(9) + 1, myRandom.nextInt(9) + 1);
+                Fraction nextWrong = new Fraction(myRandom.nextInt(9) + 1,
+                        myRandom.nextInt(9) + 1);
                 if(nextWrong.toString().equals(mySolution.toString()))
                 {
                     myWrongs.add(nextWrong);
@@ -1221,9 +1224,7 @@ public class Game_MathProblems {
         }
 
         public int calculateGCD(int numerator, int denominator) {
-            if (numerator % denominator == 0) {
-                return denominator;
-            }
+            if (numerator % denominator == 0) { return denominator; }
             return calculateGCD(denominator, numerator % denominator);
         }
 
