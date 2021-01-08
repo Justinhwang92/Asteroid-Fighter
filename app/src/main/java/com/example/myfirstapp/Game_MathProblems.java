@@ -1,5 +1,6 @@
 package com.example.myfirstapp;
 
+import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -1152,81 +1153,111 @@ public class Game_MathProblems {
     }
 
 
-//    static class trigProb {
-//
-////        private static DecimalFormat df2 = new DecimalFormat("#.##");
-//
-//        public enum problemType{
-//            sin, cos, tan;
-//            public problemType randomType() {
-//                Random random = new Random();
-//                return values()[random.nextInt(values().length)];
-//            }
-//        };
-//
-//        int degree;
-//        problemType type;
-//        double answer;
-//        double[] wrongAnswers;
-////    static private float[] allAnswers =
-//
-//
-//        trigProb(){
-//            Random rand = new Random();
-//            type = problemType.randomType();
-//
-//            if(rand.nextInt() % 2 == 0)
-//                degree = 45 * rand.nextInt(13);
-//            else
-//                degree = 30 * rand.nextInt(13);
-//
-//            answer = getAnswer(type, degree);
-//
-//
-//            wrongAnswers = new double[3];
-////        for(double x : wrongAnswers){
-////
-////        }
-//
-//
-//
-//
-//        }
-//
-//
-//
-//        public double getAnswer(problemType type, int degree){
-//            double radians = Math.toRadians(degree);
-//            double answer = 0;
-//
-//            switch (type){
-//                case sin -> answer = Math.sin(radians);
-//                case cos -> answer = Math.cos(radians);
-//                case tan -> answer = Math.tan(radians);
-//            }
-//
-//            if(Math.abs(answer) > 2)
-//                answer = Double.POSITIVE_INFINITY;
-//
-//            if(Math.abs(answer) < 0.01)
-//                answer = 0;
-//
-//            return answer;
-//        }
-//
-//        public String toString(){
-////        return type.toString() ;
-//
-//            return type.toString() + '(' + degree + ')' + " = ?";
-//
-//        }
-//
-//
-//
-//
-//
-//
-//    }
+    /***
+     * Implement trig problems to increase level of difficulties
+     */
+    static public class trigProb extends Game_MathProblems {
+        public static DecimalFormat df2 = new DecimalFormat("#.##");
+
+        /***
+         * Create a enum type, easy to work with and clear
+         */
+        public enum problemType{
+            sin, cos, tan;
+            static public problemType randomType() {
+                Random random = new Random();
+                return values()[myRandom.nextInt(values().length)];
+            }
+        };
+
+        /***
+         * Names of fields are self explanatory, one right answer and three wrong ones
+         */
+        private int degree;
+        private problemType type;
+        private String answer;
+        private Set<String> wrongAnswers;
+
+        public trigProb(boolean isBoss){
+            super(isBoss);
+            type = problemType.randomType();
+            degree = randomDegree();
+            answer = calculate(this.type, this.degree);
+            wrongAnswers = new HashSet<String>();
+
+            while(wrongAnswers.size() < NUM_OF_WRONG_ANSWERS){
+                String wrongAnswer = calculate(problemType.randomType(), randomDegree());
+                if(wrongAnswer != answer)
+                    wrongAnswers.add(wrongAnswer);
+            }
+
+        }
+
+        /***
+         * Generate a random degrees that are easy to calculate
+         * @return
+         */
+        private int randomDegree(){
+            if(myRandom.nextInt() % 2 == 0)
+                return 45 * myRandom.nextInt(13);
+            else
+                return  30 * myRandom.nextInt(13);
+        }
+
+        /***
+         * Calculate the according to the given degree and type.
+         * @param type
+         * @param degree
+         * @return
+         */
+        public String calculate(problemType type, int degree){
+            double radians = Math.toRadians(degree);
+            double answer = 0;
+
+            switch (type){
+                case sin:
+                    answer = Math.sin(radians);
+                    break;
+                case cos:
+                    answer = Math.cos(radians);
+                    break;
+                case tan:
+                    answer = Math.tan(radians);
+                    break;
+
+            }
+
+            if(Math.abs(answer) > 2)
+                answer = Double.POSITIVE_INFINITY;
+
+            if(Math.abs(answer) < 0.01)
+                answer = 0;
+
+            return df2.format(answer);
+        }
+
+        /***
+         * Present the question
+         * @return
+         */
+        public String toString(){
+            return type.toString() + '(' + degree + ')' + " = ?";
+        }
+
+        /**
+         * return the correct answer
+         * @return
+         */
+        public String getAnswer(){ return  answer;}
+
+        /***
+         * return the wrong answers as a set
+         * @return
+         */
+        public Set<String> getWrongs(){ return  wrongAnswers;}
+
+
+    }
 
 
 
