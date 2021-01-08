@@ -1,5 +1,4 @@
 package com.example.myfirstapp;
-
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -19,6 +18,8 @@ public class ExampleUnitTest {
     public void testQuestion(){
         Game_MathProblems mt = new Game_MathProblems(false);
 
+
+
 //        System.out.println(sq);
 //        System.out.println("Options are ");
 //        System.out.println(sq.getListofOption());
@@ -34,14 +35,24 @@ public class ExampleUnitTest {
 //        System.out.println(Inq);
 //        System.out.println(Inq.getWrongs());
 
-        System.out.println(mt.getEasyQuestions());
-        System.out.println(mt.getEasyAnswers());
 
-        System.out.println(mt.getMediumQuestions());
-        System.out.println(mt.getMediumAnswers());
 
-        System.out.println(mt.getHardQuestions());
-        System.out.println(mt.getHardAnswers());
+
+        for (int i = 0; i < 100; i++) {
+            Game_MathProblems.trigProb tp = new Game_MathProblems.trigProb(false);
+            System.out.println(tp.toString() + '\n' + "Answer: " + tp.getAnswer());
+            System.out.println("Wrongs: " + tp.getWrongs().toString());
+        }
+
+
+//        System.out.println(mt.getEasyQuestions());
+//        System.out.println(mt.getEasyAnswers());
+//
+//        System.out.println(mt.getMediumQuestions());
+//        System.out.println(mt.getMediumAnswers());
+//
+//        System.out.println(mt.getHardQuestions());
+//        System.out.println(mt.getHardAnswers());
 
     }
 }
