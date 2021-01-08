@@ -74,6 +74,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
+        android:text="Swift Sheng - Software Developer"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
         android:text="Ibraheem Alani - Soundrack Producer"
         android:textColor="#ffffff"
         android:textSize="60px" />
