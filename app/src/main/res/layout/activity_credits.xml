@@ -20,70 +20,79 @@
         android:layout_marginTop="10dp"
         android:text="Arya Rashidian - Lead Director"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:textSize="60px" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Hermie Baylon - Software Developer and Graphical Artist"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:textSize="60px" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:text="Brandon Lu - Software Developer and Soundtrack Director"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:textSize="60px" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="David Guo - Software Developer"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:textSize="60px" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
         android:text="Justin Hwang - Software Developer"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:textSize="60px" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="160dp"
         android:text="Bhavesh Joshi - Software Developer"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:textSize="60px" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="190dp"
         android:text="Sai Manchikanti - Software Developer"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:textSize="60px" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
         android:text="Swift Sheng - Software Developer"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:textSize="60px" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
         android:text="Ibraheem Alani - Soundrack Producer"
         android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:textSize="60px" />
 
     <ImageView
