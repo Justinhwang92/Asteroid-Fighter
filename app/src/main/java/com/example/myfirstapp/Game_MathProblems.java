@@ -1,5 +1,6 @@
 package com.example.myfirstapp;
 
+import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -1152,81 +1153,226 @@ public class Game_MathProblems {
     }
 
 
-//    static class trigProb {
-//
-////        private static DecimalFormat df2 = new DecimalFormat("#.##");
-//
-//        public enum problemType{
-//            sin, cos, tan;
-//            public problemType randomType() {
-//                Random random = new Random();
-//                return values()[random.nextInt(values().length)];
-//            }
-//        };
-//
-//        int degree;
-//        problemType type;
-//        double answer;
-//        double[] wrongAnswers;
-////    static private float[] allAnswers =
-//
-//
-//        trigProb(){
-//            Random rand = new Random();
-//            type = problemType.randomType();
-//
-//            if(rand.nextInt() % 2 == 0)
-//                degree = 45 * rand.nextInt(13);
-//            else
-//                degree = 30 * rand.nextInt(13);
-//
-//            answer = getAnswer(type, degree);
-//
-//
-//            wrongAnswers = new double[3];
-////        for(double x : wrongAnswers){
-////
-////        }
-//
-//
-//
-//
-//        }
-//
-//
-//
-//        public double getAnswer(problemType type, int degree){
-//            double radians = Math.toRadians(degree);
-//            double answer = 0;
-//
-//            switch (type){
-//                case sin -> answer = Math.sin(radians);
-//                case cos -> answer = Math.cos(radians);
-//                case tan -> answer = Math.tan(radians);
-//            }
-//
-//            if(Math.abs(answer) > 2)
-//                answer = Double.POSITIVE_INFINITY;
-//
-//            if(Math.abs(answer) < 0.01)
-//                answer = 0;
-//
-//            return answer;
-//        }
-//
-//        public String toString(){
-////        return type.toString() ;
-//
-//            return type.toString() + '(' + degree + ')' + " = ?";
-//
-//        }
-//
-//
-//
-//
-//
-//
-//    }
+    /***
+     * Implement trig problems to increase level of difficulties
+     */
+    static public class trigProb extends Game_MathProblems {
+        public static DecimalFormat df2 = new DecimalFormat("#.##");
+
+        /***
+         * Create a enum type, easy to work with and clear
+         */
+        public enum problemType{
+            sin, cos, tan;
+            static public problemType randomType() {
+                Random random = new Random();
+                return values()[myRandom.nextInt(values().length)];
+            }
+        };
+
+        /***
+         * Names of fields are self explanatory, one right answer and three wrong ones
+         */
+        private int degree;
+        private problemType type;
+        private String answer;
+        private Set<String> wrongAnswers;
+
+        public trigProb(boolean isBoss){
+            super(isBoss);
+            type = problemType.randomType();
+            degree = randomDegree();
+            answer = calculate(this.type, this.degree);
+            wrongAnswers = new HashSet<String>();
+
+            while(wrongAnswers.size() < NUM_OF_WRONG_ANSWERS){
+                String wrongAnswer = calculate(problemType.randomType(), randomDegree());
+                if(wrongAnswer != answer)
+                    wrongAnswers.add(wrongAnswer);
+            }
+
+        }
+
+        /***
+         * Generate a random degrees that are easy to calculate
+         * @return
+         */
+        private int randomDegree(){
+            if(myRandom.nextInt() % 2 == 0)
+                return 45 * myRandom.nextInt(13);
+            else
+                return  30 * myRandom.nextInt(13);
+        }
+
+        /***
+         * Calculate the according to the given degree and type.
+         * @param type
+         * @param degree
+         * @return
+         */
+        public String calculate(problemType type, int degree){
+            double radians = Math.toRadians(degree);
+            double answer = 0;
+
+            switch (type){
+                case sin:
+                    answer = Math.sin(radians);
+                    break;
+                case cos:
+                    answer = Math.cos(radians);
+                    break;
+                case tan:
+                    answer = Math.tan(radians);
+                    break;
+
+            }
+
+            if(Math.abs(answer) > 2)
+                answer = Double.POSITIVE_INFINITY;
+
+            if(Math.abs(answer) < 0.01)
+                answer = 0;
+
+            return df2.format(answer);
+        }
+
+        /***
+         * Present the question
+         * @return
+         */
+        public String toString(){
+            return type.toString() + '(' + degree + ')' + " = ?";
+        }
+
+        /**
+         * return the correct answer
+         * @return
+         */
+        public String getAnswer(){ return  answer;}
+
+        /***
+         * return the wrong answers as a set
+         * @return
+         */
+        public Set<String> getWrongs(){ return  wrongAnswers;}
+    }
+
+    public static class AddingFraction extends Game_MathProblems
+    {
+        private Fraction mySolution;
+
+        private Set<Fraction> myWrongs;
+
+        // U00F7
+        private Fraction firstFraction;
+        private Fraction secondFraction;
+
+        public AddingFraction(boolean theBoss) {
+            super(theBoss);
+            firstFraction = new Fraction(myRandom.nextInt(9) + 1,
+                    myRandom.nextInt(9) + 1);
+            secondFraction = new Fraction(myRandom.nextInt(9) + 1,
+                    myRandom.nextInt(9) + 1);
+            initializeSolutions();
+        }
+
+        private void initializeSolutions()
+        {
+            mySolution = firstFraction.add(secondFraction);
+            myWrongs = new HashSet<>();
+
+            while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
+            {
+                Fraction nextWrong = new Fraction(myRandom.nextInt(9) + 1,
+                        myRandom.nextInt(9) + 1);
+                if(nextWrong.toString().equals(mySolution.toString()))
+                {
+                    myWrongs.add(nextWrong);
+                }
+            }
+        }
+
+        public Set<Fraction> getWrongs()
+        {
+            return myWrongs;
+        }
+
+        public Fraction getSolution()
+        {
+            return mySolution;
+        }
+    }
+
+    public static class Fraction{
+        private int numerator;
+        private int denominator;
+        public Fraction(int numr, int denr) {
+            numerator = numr;
+            denominator = denr;
+            reduce();
+        }
+
+        public int getNumerator() {
+            return numerator;
+        }
+
+        public void setNumerator(int numerator) {
+            this.numerator = numerator;
+        }
+
+        public int getDenominator() {
+            return denominator;
+        }
+
+        public void setDenominator(int denominator) {
+            this.denominator = denominator;
+        }
+
+        public int calculateGCD(int numerator, int denominator) {
+            if (numerator % denominator == 0) { return denominator; }
+            return calculateGCD(denominator, numerator % denominator);
+        }
+
+        void reduce() {
+            int gcd = calculateGCD(numerator, denominator);
+            numerator /= gcd;
+            denominator /= gcd;
+        }
+
+        public Fraction add(Fraction fractionTwo) {
+            int numer = (numerator * fractionTwo.getDenominator()) +
+                    (fractionTwo.getNumerator() * denominator);
+            int denr = denominator * fractionTwo.getDenominator();
+            return new Fraction(numer, denr);
+        }
+
+        public Fraction subtract(Fraction fractionTwo) {
+            int newNumerator = (numerator * fractionTwo.denominator) -
+                    (fractionTwo.numerator * denominator);
+            int newDenominator = denominator * fractionTwo.denominator;
+            Fraction result = new Fraction(newNumerator, newDenominator);
+            return result;
+        }
+
+        public Fraction multiply(Fraction fractionTwo) {
+            int newNumerator = numerator * fractionTwo.numerator;
+            int newDenominator = denominator * fractionTwo.denominator;
+            Fraction result = new Fraction(newNumerator, newDenominator);
+            return result;
+        }
+
+        public Fraction divide(Fraction fractionTwo) {
+            int newNumerator = numerator * fractionTwo.getDenominator();
+            int newDenominator = denominator * fractionTwo.numerator;
+            Fraction result = new Fraction(newNumerator, newDenominator);
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return this.numerator + "/" + this.denominator;
+        }
+    }
 
 
 
