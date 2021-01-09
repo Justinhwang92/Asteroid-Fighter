@@ -1,10 +1,12 @@
 package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 /**
  * main activity starts when the game starts - the menu
@@ -47,6 +49,24 @@ public class Activity_Menu_Main extends AppCompatActivity {
             }
         });
 
+        //mute/unmute
+        findViewById(R.id.mainaudio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView audio = findViewById(R.id.mainaudio);
+                if(Audio_Master_Control.myMuted)
+                {
+                    audio.setImageResource(R.drawable.unmuted_audio);
+                    unmuteAudio();
+                }
+                else
+                {
+                    audio.setImageResource(R.drawable.muted_audio);
+                    muteAudio();
+                }
+            }
+        });
+
         //plays menu music
         myAudio.playMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
     }
@@ -57,7 +77,6 @@ public class Activity_Menu_Main extends AppCompatActivity {
     {
         startActivity(new Intent(this, Activity_Menu_Instructions.class));
         myAudio.stopMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
-
     }
 
     public void showCredits()
@@ -69,5 +88,15 @@ public class Activity_Menu_Main extends AppCompatActivity {
     public void showModes() {
         startActivity(new Intent(this, Activity_Menu_Modes.class));
         myAudio.stopMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
+    }
+
+    public void muteAudio()
+    {
+        Audio_Master_Control.muteAllPlayers(this);
+    }
+
+    public void unmuteAudio()
+    {
+        Audio_Master_Control.unmuteAllPlayers(this);
     }
 }

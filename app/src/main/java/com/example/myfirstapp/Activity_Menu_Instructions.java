@@ -18,6 +18,14 @@ public class Activity_Menu_Instructions extends AppCompatActivity {
         setContentView(R.layout.activity_instruction);
 
         myBGM = MediaPlayer.create(this, R.raw.bgm_instructions_loop);
+        if(Audio_Master_Control.myMuted)
+        {
+            myBGM.setVolume(0, 0);
+        }
+        else
+        {
+            myBGM.setVolume(1, 1);
+        }
         myBGM.setLooping(true);
         myBGM.start();
 

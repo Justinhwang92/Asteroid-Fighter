@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/panoramav3" />
+        android:src="@drawable/game_background" />
 
     <TextView
         android:layout_width="match_parent"
@@ -50,5 +50,20 @@
         android:text="CREDITS"
         android:textColor="#ffffff"
         android:textSize="100px" />
+
+    <ImageView
+        android:id="@+id/mainaudio"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        app:srcCompat="@drawable/unmuted_audio" />
+
 
 </RelativeLayout>
