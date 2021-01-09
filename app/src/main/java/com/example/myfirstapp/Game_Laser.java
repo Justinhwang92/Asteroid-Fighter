@@ -21,7 +21,7 @@ public class Game_Laser {
 
     public Game_Laser(Resources res) {
         //initializes dimensions of the laser
-        bullet = BitmapFactory.decodeResource(res, R.drawable.bullet2);
+        bullet = BitmapFactory.decodeResource(res, R.drawable.laser);
 
         width = bullet.getWidth() / 1;
         height = bullet.getHeight() / 4;

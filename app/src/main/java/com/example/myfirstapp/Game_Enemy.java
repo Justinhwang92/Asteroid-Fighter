@@ -49,10 +49,10 @@ public class Game_Enemy {
     public boolean isMinion;
 
     public Game_Enemy(Resources res, boolean isMinion) {
-        asteroid = BitmapFactory.decodeResource(res, R.drawable.one);
-        explosion = BitmapFactory.decodeResource(res, R.drawable.explosion);
-        boss = BitmapFactory.decodeResource(res, R.drawable.boss3b4);
-        minion = BitmapFactory.decodeResource(res, R.drawable.small_minion4);
+        asteroid = BitmapFactory.decodeResource(res, R.drawable.asteroid);
+        explosion = BitmapFactory.decodeResource(res, R.drawable.asteroid_explosion);
+        boss = BitmapFactory.decodeResource(res, R.drawable.big_boss);
+        minion = BitmapFactory.decodeResource(res, R.drawable.small_minion);
 
         width = asteroid.getWidth() / 2;
         height = asteroid.getHeight() / 6;

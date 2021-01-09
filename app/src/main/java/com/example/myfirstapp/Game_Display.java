@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import java.util.LinkedList;
 import java.util.Random;
@@ -17,7 +18,7 @@ import java.util.Random;
 public class Game_Display extends SurfaceView implements Runnable {
 
     private Thread displayThread;
-    private boolean isPlaying, isGameOver, isBossMusic = false;
+    public boolean isPlaying, isGameOver, isBossMusic = false;
     private int screenX, screenY;
     public static float screenRatioX, screenRatioY;
     public boolean isBossStage = false;
@@ -51,7 +52,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         gameBackground2 = new Game_Background(screenX, screenY, getResources());
 
         gameSpaceship = new Game_Spaceship(this, screenY, getResources());
-        gameHeart = new Game_Heart(this, screenY, getResources());
+        gameHeart = new Game_Heart(screenY, getResources());
 
         gameBackground2.x = screenX;
         paint = new Paint();
@@ -98,6 +99,7 @@ public class Game_Display extends SurfaceView implements Runnable {
 
     // allows movements of the ship, background, bullet, and asteroids
     private void update() {
+
         // if score reaches 10, end asteroids, begin boss stage
         if (theScore >= SCORE_TILL_BOSS && (!mode.equals("endless"))) {
             gameAsteroid.bossStageBegins = true;
@@ -134,7 +136,7 @@ public class Game_Display extends SurfaceView implements Runnable {
 
         if (Rect.intersects(gameAsteroid.getCollisionShape(), theGameBullet.getCollisionShape())) {
             if (!gameAsteroid.bossStageBegins) {
-                myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_ASTEROID);
+//                myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_ASTEROID);
                 gameAsteroid.x = -500;  // asteroid regenerates on the right
             } else {
                 myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_BOSS_HIT);

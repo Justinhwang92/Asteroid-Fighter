@@ -15,9 +15,9 @@ public class Game_Heart {
     public int lives;
 
     //initializes and decodes resources
-    public Game_Heart(Game_Display gameDisplay, int screenY, Resources res) {
+    public Game_Heart(int screenY, Resources res) {
         lives = 3;
-        heart = BitmapFactory.decodeResource(res, R.drawable.heart3);
+        heart = BitmapFactory.decodeResource(res, R.drawable.game_heart);
         width = heart.getWidth();
         height = heart.getHeight();
 

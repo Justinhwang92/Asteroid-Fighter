@@ -2,16 +2,18 @@ package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -24,7 +26,7 @@ public class Activity_Game extends AppCompatActivity {
     /**
      * field for display of the game which updates and draws the game state
      */
-    private Game_Display gameDisplay;
+    public static Game_Display gameDisplay;
 
     /**
      * field that stores and manages audio for game activity
@@ -74,24 +76,23 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //releases the MediaPlayers from the main menu to free up resources
         Audio_Activity_Menu_Main.releasePlayers();
         //gets rid of notification bar for phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        //initializes MediaPlayer devices for audio
+        myAudio = new Audio_Activity_Game(this);
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
 
-        //initializes MediaPlayer devices for audio
-        myAudio = new Audio_Activity_Game(this);
+        new DecodeBitmapTask().execute(this);
+
+        //start the game music
 
         //initializes the display for the game and starts running it
         gameDisplay = new Game_Display(this, point.x +5000, point.y, myAudio);
-        //puts the display on the screen
         setContentView(gameDisplay);
-
-        //start the game music
-        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
-
         //Layout on top of surface view
         ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         View secondLayerView = LayoutInflater.from(this).inflate(R.layout.activity_game, null, false);
@@ -104,13 +105,63 @@ public class Activity_Game extends AppCompatActivity {
         //For math problem class
         //starts with easy questions
         //Initial question to be displayed
+
+
         myMP = new Game_MathProblems(isBossStage);
-//        setQuestionAnswerOnDisplay();
         questionBasedOnGameMode();
 
 
-        //releases the MediaPlayers from the main menu to free up resources
+        findViewById(R.id.gameaudio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView audio = findViewById(R.id.gameaudio);
+                if(Audio_Master_Control.myMuted)
+                {
+                    audio.setImageResource(R.drawable.unmuted_audio);
+                    unmuteAudio();
+                }
+                else
+                {
+                    audio.setImageResource(R.drawable.muted_audio);
+                    muteAudio();
+                }
+            }
+        });
+    }
+    //for loading screen
+    private class DecodeBitmapTask extends AsyncTask<Object, Integer, Void>
+    {
+        private Activity_Game myActivity;
+        private Point myPoint;
+        private ProgressBar myProgress;
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            System.out.println("onpreexecute");
+
+        }
+
+        @Override
+        protected Void doInBackground(Object... theObjects) {
+            System.out.println("DOINBACKGROUND");
+            myActivity = (Activity_Game)theObjects[0];
+            myProgress = new ProgressBar(myActivity);
+            myProgress.setIndeterminate(true);
+            setContentView(myProgress);
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void bitmap) {
+            super.onPostExecute(bitmap);
+            System.out.println("onpostexecute");
+            myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+            //puts the display on the screen
+
+
+        }
     }
 
     void questionBasedOnGameMode(){
@@ -339,5 +390,14 @@ public class Activity_Game extends AppCompatActivity {
                     }
                     break;
             }
+    }
+    public void muteAudio()
+    {
+        Audio_Master_Control.muteAllPlayers(this);
+    }
+
+    public void unmuteAudio()
+    {
+        Audio_Master_Control.unmuteAllPlayers(this);
     }
 }
