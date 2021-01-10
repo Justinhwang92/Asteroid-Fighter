@@ -29,7 +29,14 @@
         <item name="android:fontFamily">casual</item>
         <item name="android:textSize">60px</item>
         <item name="android:textColor">#ffffff</item>
-        <item name="android:maxLines">10</item>
+    </style>
+
+    <style name="InstructionStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:fontFamily">casual</item>
+        <item name="android:textSize">60px</item>
+        <item name="android:textColor">#ffffff</item>
     </style>
 
     <style name="AppTheme.noActionBar">
