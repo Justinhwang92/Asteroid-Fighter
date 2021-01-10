@@ -104,6 +104,3 @@
         app:srcCompat="@drawable/unmuted_audio" />
 
 </RelativeLayout>
-
-
-
