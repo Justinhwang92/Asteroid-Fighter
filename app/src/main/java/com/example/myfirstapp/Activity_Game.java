@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,8 +89,6 @@ public class Activity_Game extends AppCompatActivity {
 
         new DecodeBitmapTask().execute(this);
 
-        //start the game music
-
         //initializes the display for the game and starts running it
         gameDisplay = new Game_Display(this, point.x +5000, point.y, myAudio);
         setContentView(gameDisplay);
@@ -135,6 +134,9 @@ public class Activity_Game extends AppCompatActivity {
         private Point myPoint;
         private ProgressBar myProgress;
 
+
+
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -149,6 +151,7 @@ public class Activity_Game extends AppCompatActivity {
             myProgress = new ProgressBar(myActivity);
             myProgress.setIndeterminate(true);
             setContentView(myProgress);
+
             return null;
         }
 
