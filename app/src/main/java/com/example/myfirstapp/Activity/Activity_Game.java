@@ -83,8 +83,6 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //releases the MediaPlayers from the main menu to free up resources
-        Audio_Activity_Menu_Main.releasePlayers();
         //gets rid of notification bar for phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -167,7 +165,7 @@ public class Activity_Game extends AppCompatActivity {
             super.onPostExecute(bitmap);
             System.out.println("onpostexecute");
 
-            myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
             //puts the display on the screen
             if(Audio_Master_Control.myMuted)
             {
@@ -284,7 +282,7 @@ public class Activity_Game extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         gameDisplay.resume();
-        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
     //called when application stops
@@ -302,14 +300,14 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        myAudio.releasePlayers();
+        myAudio.releasePlayers(this);
         myAudio = new Audio_Activity_Game(this);
     }
     //called when application starts/resumes
     @Override
     protected void onStart(){
         super.onStart();
-        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
     }
 
     /**
@@ -338,13 +336,13 @@ public class Activity_Game extends AppCompatActivity {
 
                 case R.id.ans_button1:
                     if(myButton1.getText().equals(myAns + "")){
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
+                        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
 //                        setQuestionAnswerOnDisplay();
                         questionBasedOnGameMode();
                     }else{
                         gameDisplay.deductPoint();
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+                        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
 //                        gameDisplay.deductPoint();
                         break;
                     }
@@ -353,13 +351,13 @@ public class Activity_Game extends AppCompatActivity {
 
                 case R.id.ans_button2:
                     if(myButton2.getText().equals(myAns+"")){
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
+                        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
 //                        setQuestionAnswerOnDisplay();
                         questionBasedOnGameMode();
                     }else{
                         gameDisplay.deductPoint();
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+                        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
 //                        gameDisplay.deductPoint();
                         break;
                     }
@@ -367,13 +365,13 @@ public class Activity_Game extends AppCompatActivity {
 
                 case R.id.ans_button3:
                     if(myButton3.getText().equals(myAns+"")){
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
+                        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
 //                        setQuestionAnswerOnDisplay();
                         questionBasedOnGameMode();
                     }else{
                         gameDisplay.deductPoint();
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+                        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
 //                        gameDisplay.deductPoint();
                         break;
                     }
@@ -381,13 +379,13 @@ public class Activity_Game extends AppCompatActivity {
 
                 case R.id.ans_button4:
                     if(myButton4.getText().equals(myAns+"")){
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
+                        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_CORRECT);
                         gameDisplay.getFlightObj().hasShot = true;
 //                        setQuestionAnswerOnDisplay();
                         questionBasedOnGameMode();
                     }else{
                         gameDisplay.deductPoint();
-                        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
+                        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
 //                        gameDisplay.deductPoint();
                         break;
                     }
