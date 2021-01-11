@@ -1,14 +1,17 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.Audio;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+
+import com.example.myfirstapp.Activity.Activity_Game;
+import com.example.myfirstapp.Activity.Activity_Menu_Main;
 
 /**
  * class for controlling all audio in the game
  */
 public class Audio_Master_Control {
 
-    static boolean myMuted = false;
+    public static boolean myMuted = false;
 
     public static void muteAllPlayers(Context theContext)
     {

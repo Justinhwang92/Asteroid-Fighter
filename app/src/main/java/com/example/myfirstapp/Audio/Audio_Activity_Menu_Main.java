@@ -1,7 +1,9 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.Audio;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+
+import com.example.myfirstapp.R;
 
 public class Audio_Activity_Menu_Main {
     private Context myContext;

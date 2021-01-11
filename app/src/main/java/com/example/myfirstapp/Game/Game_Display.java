@@ -1,14 +1,18 @@
 /*
  * This class represents the display of the game
  */
-package com.example.myfirstapp;
+package com.example.myfirstapp.Game;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.view.MotionEvent;
 import android.view.SurfaceView;
+
+import com.example.myfirstapp.Activity.Activity_Game;
+import com.example.myfirstapp.Activity.Activity_Menu_Modes;
+import com.example.myfirstapp.Audio.Audio_Activity_Game;
+
 import java.util.LinkedList;
 import java.util.Random;
 

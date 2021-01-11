@@ -1,14 +1,16 @@
 /**
  * Represents the flight class
  */
-package com.example.myfirstapp;
+package com.example.myfirstapp.Game;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
-import static com.example.myfirstapp.Game_Display.screenRatioX;
+import com.example.myfirstapp.R;
+
+import static com.example.myfirstapp.Game.Game_Display.screenRatioX;
 
 /**
  * spaceship bitmap
@@ -16,7 +18,7 @@ import static com.example.myfirstapp.Game_Display.screenRatioX;
 public class Game_Spaceship {
 
     //self explanatory fields
-    boolean hasShot = false;
+    public boolean hasShot = false;
     int x, y, width, height;
     Bitmap spaceship, laser;
     private Game_Display gameDisplay;

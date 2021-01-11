@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import com.example.myfirstapp.Audio.Audio_Activity_Menu_Main;
+import com.example.myfirstapp.Audio.Audio_Master_Control;
+import com.example.myfirstapp.R;
 
 /**
  * main activity starts when the game starts - the menu

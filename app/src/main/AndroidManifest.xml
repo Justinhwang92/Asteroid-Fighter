@@ -10,19 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity_Menu_Credits"
+            android:name=".Activity.Activity_Menu_Credits"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity_Menu_Instructions"
+            android:name=".Activity.Activity_Menu_Instructions"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity_Game"
+            android:name=".Activity.Activity_Game"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity_Menu_Main"
+            android:name=".Activity.Activity_Menu_Main"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar">
             <intent-filter>
@@ -32,23 +32,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity_Game_Over"
+            android:name=".Activity.Activity_Game_Over"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity_Menu_Modes"
+            android:name=".Activity.Activity_Menu_Modes"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity_Menu_Backstory1"
+            android:name=".Activity.Activity_Menu_Backstory1"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity_Menu_Backstory2"
+            android:name=".Activity.Activity_Menu_Backstory2"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity_Menu_Backstory3"
+            android:name=".Activity.Activity_Menu_Backstory3"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
 

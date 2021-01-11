@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.Game;
 
 import java.text.DecimalFormat;
 import java.util.HashSet;

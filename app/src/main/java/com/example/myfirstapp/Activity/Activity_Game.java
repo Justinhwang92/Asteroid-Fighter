@@ -1,12 +1,10 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.example.myfirstapp.Audio.Audio_Activity_Game;
+import com.example.myfirstapp.Audio.Audio_Activity_Menu_Main;
+import com.example.myfirstapp.Audio.Audio_Master_Control;
+import com.example.myfirstapp.Game.Game_Display;
+import com.example.myfirstapp.Game.Game_MathProblems;
+import com.example.myfirstapp.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -160,9 +166,15 @@ public class Activity_Game extends AppCompatActivity {
         protected void onPostExecute(Void bitmap) {
             super.onPostExecute(bitmap);
             System.out.println("onpostexecute");
+
             myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
             //puts the display on the screen
-
+            if(Audio_Master_Control.myMuted)
+            {
+                muteAudio();
+                ImageView audio = findViewById(R.id.gameaudio);
+                audio.setImageResource(R.drawable.muted_audio);
+            }
 
         }
     }

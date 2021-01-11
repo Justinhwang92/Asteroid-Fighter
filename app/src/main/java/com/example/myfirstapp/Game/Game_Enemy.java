@@ -1,13 +1,15 @@
 
-package com.example.myfirstapp;
+package com.example.myfirstapp.Game;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
-import static com.example.myfirstapp.Game_Display.screenRatioX;
-import static com.example.myfirstapp.Game_Display.screenRatioY;
+import com.example.myfirstapp.R;
+
+import static com.example.myfirstapp.Game.Game_Display.screenRatioX;
+import static com.example.myfirstapp.Game.Game_Display.screenRatioY;
 
 public class Game_Enemy {
 

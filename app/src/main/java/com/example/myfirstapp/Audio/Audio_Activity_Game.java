@@ -1,7 +1,9 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.Audio;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+
+import com.example.myfirstapp.R;
 
 /**
  * class that manages all the game audio

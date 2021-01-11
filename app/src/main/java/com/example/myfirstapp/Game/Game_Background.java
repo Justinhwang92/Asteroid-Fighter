@@ -1,8 +1,10 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.Game;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import com.example.myfirstapp.R;
 
 /**
  * extracts and provides background image
