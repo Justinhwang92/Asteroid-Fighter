@@ -21,7 +21,7 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
         setContentView(R.layout.activity_backstory2);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        myBGM = MediaPlayer.create(this, R.raw.bgm_credits_loop);
+        myBGM = MediaPlayer.create(this, R.raw.backstory2);
         if(Audio_Master_Control.myMuted)
         {
             myBGM.setVolume(0, 0);
@@ -30,7 +30,6 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
         {
             myBGM.setVolume(1, 1);
         }
-        myBGM.setLooping(true);
         myBGM.start();
 
 

@@ -21,7 +21,7 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         setContentView(R.layout.activity_modes);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        myBGM = MediaPlayer.create(this, R.raw.bgm_credits_loop);
+        myBGM = MediaPlayer.create(this, R.raw.bgm_modes_loop);
         if(Audio_Master_Control.myMuted)
         {
             myBGM.setVolume(0, 0);
