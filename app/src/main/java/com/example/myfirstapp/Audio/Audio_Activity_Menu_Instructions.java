@@ -5,18 +5,17 @@ import android.media.MediaPlayer;
 
 import com.example.myfirstapp.R;
 
-public class Audio_Activity_Menu_Main extends Audio_Abstract_Class{
-
+public class Audio_Activity_Menu_Instructions extends Audio_Abstract_Class{
     public enum MEDIA_PLAYERS
     {
-        BGM_MENU,
+        BGM_INSTRUCTIONS,
         SFX_MENU_CLICK,
     }
 
-    public Audio_Activity_Menu_Main(Context theContext)
+    public Audio_Activity_Menu_Instructions(Context theContext)
     {
         super(theContext, 1,
-                R.raw.bgm_menu_loop,
+                R.raw.bgm_instructions_loop,
                 R.raw.sfx_menu_click);
     }
 
@@ -34,5 +33,4 @@ public class Audio_Activity_Menu_Main extends Audio_Abstract_Class{
     public void stopMedia(Object thePlayer) {
         getMediaPlayer(thePlayer).stop();
     }
-
 }

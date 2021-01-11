@@ -96,7 +96,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         this.theScore--;
         if(theScore < 0){
             gameHeart.lives--;
-            myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_LIFE);
+            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_LIFE);
             theScore = 0;
         }
     }
@@ -131,7 +131,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         if (gameSpaceship.hasShot) {
             //plays laser sound whenever laser is shot
             theGameBullet.x += (theGameBullet.speed);
-            myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LASER);
+            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LASER);
         }
         // allows for explosion when bullet and asteroid gets closer
         if (Math.abs(gameAsteroid.x - theGameBullet.x) < 300) {
@@ -140,10 +140,10 @@ public class Game_Display extends SurfaceView implements Runnable {
 
         if (Rect.intersects(gameAsteroid.getCollisionShape(), theGameBullet.getCollisionShape())) {
             if (!gameAsteroid.bossStageBegins) {
-//                myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_ASTEROID);
+                myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_ASTEROID);
                 gameAsteroid.x = -500;  // asteroid regenerates on the right
             } else {
-                myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_BOSS_HIT);
+                myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_BOSS_HIT);
                 gameAsteroid.bossLife--;
             }
             theScore++;
@@ -180,8 +180,8 @@ public class Game_Display extends SurfaceView implements Runnable {
             gameAsteroid.x = -500;
 
             //plays heart is lost sound
-            myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_HIT);
-            myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_LIFE);
+            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_HIT);
+            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_LIFE);
 
             if (gameAsteroid.bossStageBegins) {
                 gameHeart.lives = 0;
@@ -192,15 +192,15 @@ public class Game_Display extends SurfaceView implements Runnable {
         }
         if (gameHeart.lives == 0) {
             //plays all lives lost sound
-            myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_ALL_LIVES);
+            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_ALL_LIVES);
             isGameOver = true;
             activityGame.gameDonePlayAgain();
         }
 
         else if(gameAsteroid.bossLife <= 0)
         {
-            myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_BOSS);
-            myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
+            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_BOSS);
+            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
             isGameOver = true;
             activityGame.gameDonePlayAgain();
         }
@@ -298,6 +298,6 @@ public class Game_Display extends SurfaceView implements Runnable {
         //stop regular music
         myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
         //begin boss music
-        myAudio.playMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_BOSS);
+        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_BOSS);
     }
 }

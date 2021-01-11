@@ -1,6 +1,7 @@
 package com.example.myfirstapp.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myfirstapp.Audio.Audio_Activity_Game;
+import com.example.myfirstapp.Audio.Audio_Master_Control;
 import com.example.myfirstapp.R;
 
 /**
@@ -79,8 +81,8 @@ public class Activity_Game_Over extends Activity {
             @Override
             public void onClick(View view) {
                 //stop and release all mediaplayers to recoup resources
+                releasePlayers();
                 //go back to main menu (start main menu activity)
-                Audio_Activity_Game.releasePlayers();
                 Intent intent = new Intent(Activity_Game_Over.this, Activity_Menu_Main.class);
                 startActivity(intent);
                 finish();
@@ -100,5 +102,10 @@ public class Activity_Game_Over extends Activity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    private void releasePlayers()
+    {
+        Audio_Activity_Game.releasePlayers(this);
     }
 }
