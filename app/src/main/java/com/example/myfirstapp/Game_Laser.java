@@ -24,7 +24,7 @@ public class Game_Laser {
         bullet = BitmapFactory.decodeResource(res, R.drawable.laser);
 
         width = bullet.getWidth() / 1;
-        height = bullet.getHeight() / 4;
+        height = bullet.getHeight() / 8;
 
         width = (int) (width * screenRatioX);
         height = (int) (height * screenRatioY);

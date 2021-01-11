@@ -1,72 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/main_menu_background"
     tools:context=".Activity_Menu_Instructions">
 
-    <ImageView
-        android:id="@+id/Step1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/main_menu_background"
-        android:visibility="visible" />
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="* Shoot the incoming asteroids before it hits the spaceship"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
+        <TextView
+            style="@style/InstructionStyle"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:text=
+"1. Shoot the incoming asteroids before it hits the spaceship \n
+2. To shoot, choose the correct answer for the math equation above. \n
+3. If you do not answer in time, the asteroid may hit your ship and you lose 1 Life \n
+4. After reaching (x) points, boss will appear. \n
+5. It will have 5 lives, so continue choosing the correct answers for the equations above." />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="* In order to shoot, choose the correct answer for the math equation above."
-        android:textColor="#ffffff"
-        android:textSize="60px" />
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="300dp"
+            android:src="@drawable/previous1" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:text="* If you do not answer in time, the asteroid may hit your ship and you lose"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
+    </RelativeLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="  1 Life"
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:text="* After reaching (x) points, boss will appear."
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        android:text="* It will have 5 lives, so continue choosing the correct answers for the equations above."
-        android:textColor="#ffffff"
-        android:textSize="60px" />
-
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="300dp"
-        android:src="@drawable/previous1" />
-
-</RelativeLayout>
+</LinearLayout>
