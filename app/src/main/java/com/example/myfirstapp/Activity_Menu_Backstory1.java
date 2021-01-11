@@ -12,6 +12,7 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
     /**
      * to play audio
      */
+    private MediaPlayer myNarration;
     private MediaPlayer myBGM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,28 +23,38 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //initialize audio
-        myBGM = MediaPlayer.create(this, R.raw.backstory1);
+        myNarration = MediaPlayer.create(this, R.raw.backstory1);
+        myBGM = MediaPlayer.create(this, R.raw.bgm_modes_loop);
         if(Audio_Master_Control.myMuted)
         {
+            myNarration.setVolume(0, 0);
             myBGM.setVolume(0, 0);
         }
         else
         {
-            myBGM.setVolume(1, 1);
+            myNarration.setVolume(1, 1);
+            myBGM.setVolume((float)0.5, (float)0.5);
         }
+        myNarration.start();
         myBGM.start();
-
         //onclick listener for skip (go straight to play)
         findViewById(R.id.skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //release the resources associated with this audio player
-                if(myBGM!=null) {
+                if(myNarration !=null) {
+                    if(myNarration.isPlaying())
+                        myNarration.stop();
+                    myNarration.reset();
+                    myNarration.release();
+                    myNarration =null;
+                }
+                if(myBGM !=null) {
                     if(myBGM.isPlaying())
                         myBGM.stop();
                     myBGM.reset();
                     myBGM.release();
-                    myBGM=null;
+                    myBGM =null;
                 }
                 //show main game activity
                 startActivity(new Intent(Activity_Menu_Backstory1.this, Activity_Game.class));
@@ -55,12 +66,19 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //release the resources associated with this audio player
-                if(myBGM!=null) {
+                if(myNarration !=null) {
+                    if(myNarration.isPlaying())
+                        myNarration.stop();
+                    myNarration.reset();
+                    myNarration.release();
+                    myNarration =null;
+                }
+                if(myBGM !=null) {
                     if(myBGM.isPlaying())
                         myBGM.stop();
                     myBGM.reset();
                     myBGM.release();
-                    myBGM=null;
+                    myBGM =null;
                 }
                 //show main game activity
                 startActivity(new Intent(Activity_Menu_Backstory1.this, Activity_Menu_Backstory2.class));
@@ -71,12 +89,19 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
         findViewById(R.id.previous1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(myBGM!=null) {
+                if(myNarration !=null) {
+                    if(myNarration.isPlaying())
+                        myNarration.stop();
+                    myNarration.reset();
+                    myNarration.release();
+                    myNarration =null;
+                }
+                if(myBGM !=null) {
                     if(myBGM.isPlaying())
                         myBGM.stop();
                     myBGM.reset();
                     myBGM.release();
-                    myBGM=null;
+                    myBGM =null;
                 }
                 startActivity(new Intent(Activity_Menu_Backstory1.this, Activity_Menu_Modes.class));
             }

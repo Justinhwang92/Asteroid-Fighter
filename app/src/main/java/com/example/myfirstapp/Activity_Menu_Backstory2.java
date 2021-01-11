@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 public class Activity_Menu_Backstory2 extends AppCompatActivity {
+    private MediaPlayer myNarration;
     private MediaPlayer myBGM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,27 +22,38 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
         setContentView(R.layout.activity_backstory2);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        myBGM = MediaPlayer.create(this, R.raw.backstory2);
+        myNarration = MediaPlayer.create(this, R.raw.backstory1);
+        myBGM = MediaPlayer.create(this, R.raw.bgm_modes_loop);
         if(Audio_Master_Control.myMuted)
         {
+            myNarration.setVolume(0, 0);
             myBGM.setVolume(0, 0);
         }
         else
         {
-            myBGM.setVolume(1, 1);
+            myNarration.setVolume(1, 1);
+            myBGM.setVolume((float)0.5, (float)0.5);
         }
+        myNarration.start();
         myBGM.start();
 
 
         findViewById(R.id.skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(myBGM!=null) {
+                if(myNarration !=null) {
+                    if(myNarration.isPlaying())
+                        myNarration.stop();
+                    myNarration.reset();
+                    myNarration.release();
+                    myNarration =null;
+                }
+                if(myBGM !=null) {
                     if(myBGM.isPlaying())
                         myBGM.stop();
                     myBGM.reset();
                     myBGM.release();
-                    myBGM=null;
+                    myBGM =null;
                 }
                 startActivity(new Intent(Activity_Menu_Backstory2.this, Activity_Game.class));
             }
@@ -50,12 +62,19 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
         findViewById(R.id.previous2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(myBGM!=null) {
+                if(myNarration !=null) {
+                    if(myNarration.isPlaying())
+                        myNarration.stop();
+                    myNarration.reset();
+                    myNarration.release();
+                    myNarration =null;
+                }
+                if(myBGM !=null) {
                     if(myBGM.isPlaying())
                         myBGM.stop();
                     myBGM.reset();
                     myBGM.release();
-                    myBGM=null;
+                    myBGM =null;
                 }
                 startActivity(new Intent(Activity_Menu_Backstory2.this, Activity_Menu_Backstory1.class));
             }
@@ -64,12 +83,19 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
         findViewById(R.id.continue2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(myBGM!=null) {
+                if(myNarration !=null) {
+                    if(myNarration.isPlaying())
+                        myNarration.stop();
+                    myNarration.reset();
+                    myNarration.release();
+                    myNarration =null;
+                }
+                if(myBGM !=null) {
                     if(myBGM.isPlaying())
                         myBGM.stop();
                     myBGM.reset();
                     myBGM.release();
-                    myBGM=null;
+                    myBGM =null;
                 }
                 startActivity(new Intent(Activity_Menu_Backstory2.this, Activity_Menu_Backstory3.class));
             }
