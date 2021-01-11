@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import com.example.myfirstapp.Audio.Audio_Master_Control;
+import com.example.myfirstapp.R;
 
 /**
  * shows difficulty levels and endless

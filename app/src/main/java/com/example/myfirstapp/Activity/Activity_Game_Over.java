@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package com.example.myfirstapp.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.myfirstapp.Audio.Audio_Activity_Game;
+import com.example.myfirstapp.R;
 
 /**
  * class that shows game over screen at end of play

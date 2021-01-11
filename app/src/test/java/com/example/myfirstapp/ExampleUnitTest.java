@@ -1,4 +1,6 @@
 package com.example.myfirstapp;
+import com.example.myfirstapp.Game.Game_MathProblems;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
