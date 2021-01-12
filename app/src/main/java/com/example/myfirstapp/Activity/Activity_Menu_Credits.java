@@ -29,15 +29,7 @@ public class Activity_Menu_Credits extends AppCompatActivity {
 
         myAudio = new Audio_Activity_Menu_Credits(this);
 
-        if(Audio_Master_Control.myMuted)
-        {
-            Audio_Master_Control.muteAllPlayers(this);
-        }
-        else
-        {
-            Audio_Master_Control.unmuteAllPlayers(this);
-        }
-
+        Audio_Master_Control.checkMuteStatus(this);
         myAudio.startMedia(Audio_Activity_Menu_Credits.MEDIA_PLAYERS.BGM_CREDITS);
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {

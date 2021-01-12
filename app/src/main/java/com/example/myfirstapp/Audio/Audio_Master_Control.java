@@ -102,6 +102,19 @@ public class Audio_Master_Control {
         }
     }
 
+    public static void checkMuteStatus(Context theContext)
+    {
+        if(myMuted)
+        {
+            muteAllPlayers(theContext);
+        }
+
+        else
+        {
+            unmuteAllPlayers(theContext);
+        }
+    }
+
     public static void setAllVolume()
     {
         //for more precise audio adjustment

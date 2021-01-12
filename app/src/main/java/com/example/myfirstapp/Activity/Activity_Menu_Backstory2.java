@@ -27,16 +27,8 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         myAudio = new Audio_Activity_Menu_Backstory2(this);
-        if(Audio_Master_Control.myMuted)
-        {
-            Audio_Master_Control.muteAllPlayers(this);
-        }
-        else
-        {
-            Audio_Master_Control.unmuteAllPlayers(this);
-            myAudio.getMediaPlayer(Audio_Activity_Menu_Backstory2.MEDIA_PLAYERS.BGM_MODES).setVolume((float).5, (float).5);
-        }
-
+        Audio_Master_Control.checkMuteStatus(this);
+        myAudio.getMediaPlayer(Audio_Activity_Menu_Backstory2.MEDIA_PLAYERS.BGM_MODES).setVolume((float).5, (float).5);
         myAudio.startMedia(Audio_Activity_Menu_Backstory2.MEDIA_PLAYERS.BGM_MODES);
         myAudio.startMedia((Audio_Activity_Menu_Backstory2.MEDIA_PLAYERS.BACKSTORY2));
 

@@ -27,14 +27,7 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         myAudio = new Audio_Activity_Menu_Modes(this);
-        if(Audio_Master_Control.myMuted)
-        {
-            Audio_Master_Control.muteAllPlayers(this);
-        }
-        else
-        {
-            Audio_Master_Control.unmuteAllPlayers(this);
-        }
+        Audio_Master_Control.checkMuteStatus(this);
 
         myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.BGM_MODES);
 
