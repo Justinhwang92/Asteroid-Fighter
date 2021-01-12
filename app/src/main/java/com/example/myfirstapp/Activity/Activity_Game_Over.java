@@ -75,6 +75,7 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
                 break;
             case R.id.okButton:
                 try {
+                    releasePlayers();
                     saveScore();
                     finish();
                     startActivity(j);
