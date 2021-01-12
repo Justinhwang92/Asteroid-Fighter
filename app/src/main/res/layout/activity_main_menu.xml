@@ -32,10 +32,21 @@
         android:textSize="100px" />
 
     <TextView
+        android:id="@+id/HighScoresButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/play"
+        android:layout_centerInParent="true"
+        android:text="HIGHSCORES"
+        android:background="@android:color/transparent"
+        android:textColor="#ffffff"
+        android:textSize="100px" />
+
+    <TextView
         android:id="@+id/instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_below="@+id/HighScoresButton"
         android:layout_centerHorizontal="true"
         android:text="INSTRUCTIONS"
         android:textColor="#ffffff"
@@ -45,7 +56,7 @@
         android:id="@+id/creditsid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_below="@+id/instruction"
         android:layout_centerHorizontal="true"
         android:text="CREDITS"
         android:textColor="#ffffff"

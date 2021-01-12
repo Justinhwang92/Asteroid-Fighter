@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Main;
 import com.example.myfirstapp.Audio.Audio_Master_Control;
+import com.example.myfirstapp.Database.HighScores;
 import com.example.myfirstapp.R;
 
 /**
@@ -71,6 +73,16 @@ public class Activity_Menu_Main extends AppCompatActivity {
             }
         });
 
+        // high score
+        findViewById(R.id.HighScoresButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
+                showHighScores();
+            }
+        });
+
+
         //plays menu music
         myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
 
@@ -98,6 +110,11 @@ public class Activity_Menu_Main extends AppCompatActivity {
 
     public void showModes() {
         startActivity(new Intent(this, Activity_Menu_Modes.class));
+        releasePlayers();
+    }
+
+    public void showHighScores() {
+        startActivity(new Intent(this, HighScores.class));
         releasePlayers();
     }
 
