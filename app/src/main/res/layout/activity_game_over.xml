@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_below="@+id/textView2"
+            android:layout_below="@+id/askUserName"
             android:ems="10"
             android:inputType="textCapWords" />
 
