@@ -21,14 +21,7 @@ public class Activity_Menu_Instructions extends AppCompatActivity {
         setContentView(R.layout.activity_instruction);
 
         myAudio = new Audio_Activity_Menu_Instructions(this);
-        if(Audio_Master_Control.myMuted)
-        {
-            Audio_Master_Control.muteAllPlayers(this);
-        }
-        else
-        {
-            Audio_Master_Control.unmuteAllPlayers(this);
-        }
+        Audio_Master_Control.checkMuteStatus(this);
 
         myAudio.startMedia(Audio_Activity_Menu_Instructions.MEDIA_PLAYERS.BGM_INSTRUCTIONS);
 
