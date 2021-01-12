@@ -10,8 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myfirstapp.Activity.Activity_Menu_Main;
 import com.example.myfirstapp.R;
-import com.example.myfirstapp.Activity.Activity_Game;
 import com.example.myfirstapp.Database.UserContract.UserEntry;
 
 public class HighScores extends AppCompatActivity implements View.OnClickListener, LoaderManager.LoaderCallbacks<Cursor> {
@@ -41,7 +42,7 @@ public class HighScores extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         Intent i;
-        i = new Intent(this, Activity_Game.class);
+        i = new Intent(this, Activity_Menu_Main.class);
         finish();
         startActivity(i);
     }
