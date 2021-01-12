@@ -76,6 +76,9 @@ public class Activity_Game extends AppCompatActivity {
     private Button myButton3;
     private Button myButton4;
 
+    // high score
+    public static int HIGH_SCORE = 0;
+
     /**
      * onCreate is called when this activity is started/made
      * @param savedInstanceState
@@ -318,6 +321,7 @@ public class Activity_Game extends AppCompatActivity {
 
         Intent intent = new Intent(this, Activity_Game_Over.class);
         Bundle bundle = new Bundle();
+        HIGH_SCORE = gameDisplay.theScore;
         String points;
         points = Integer.toString(gameDisplay.theScore);
         bundle.putString("Score",points);
