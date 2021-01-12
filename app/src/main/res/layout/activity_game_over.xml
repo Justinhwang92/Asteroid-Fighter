@@ -87,6 +87,8 @@
             android:layout_centerVertical="true"
             android:layout_below="@+id/askUserName"
             android:ems="10"
+            android:textColor="#ffffff"
+            android:backgroundTint="#ffffff"
             android:inputType="textCapWords" />
 
         <Button
