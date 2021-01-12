@@ -54,6 +54,9 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
         Bundle bundle = getIntent().getExtras();
         String text = bundle.getString("Score");
         score.setText(text);
+
+        playAgainButton.setOnClickListener(this);
+        okButton.setOnClickListener(this);
     }
 
     @Override
