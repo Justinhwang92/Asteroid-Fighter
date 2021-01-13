@@ -73,6 +73,7 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
                 finish();
                 startActivity(i);
                 break;
+
             case R.id.okButton:
                 try {
                     releasePlayers();
@@ -82,6 +83,12 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                break;
+
+            case R.id.myWebSearch_bt:
+                Uri uri = Uri.parse("https://www.tutordudes.com/"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
                 break;
         }
     }
@@ -117,4 +124,5 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
     {
         Audio_Activity_Game.releasePlayers(this);
     }
+
 }
