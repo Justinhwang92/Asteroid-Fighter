@@ -33,8 +33,7 @@ public class HighScores extends AppCompatActivity implements View.OnClickListene
         HighScoresList.setAdapter(mUserCursorAdapter);
 
         // go back to main menu
-        final Button MainMenuButton = findViewById(R.id.MainMenuButton);
-        MainMenuButton.setOnClickListener(this);
+        findViewById(R.id.MainMenuButton).setOnClickListener(this);
 
         // loader
         getLoaderManager().initLoader(USER_LOADER, null, this);
