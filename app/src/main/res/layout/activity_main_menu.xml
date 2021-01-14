@@ -12,14 +12,50 @@
         android:scaleType="centerCrop"
         android:src="@drawable/game_background" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Asteroid Fighter"
-        android:textColor="#ffffff"
-        android:textSize="120px"
-        android:gravity="center_horizontal" />
+    <LinearLayout
+        android:id="@+id/gameName1"
+        android:layout_width="424dp"
+
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:rotationX="4"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            app:srcCompat="@mipmap/ic_launcher_round_new_logo" />
+
+        <TextView
+            android:id="@+id/Name1"
+            android:layout_width="346dp"
+            android:layout_height="wrap_content"
+            android:cursorVisible="true"
+            android:ellipsize="marquee"
+            android:gravity="center_horizontal"
+            android:linksClickable="false"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="Asteroid Fighter"
+            android:textColor="#ffffff"
+            android:textSize="120px" />
+
+
+    </LinearLayout>
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textAlignment="center"-->
+<!--        android:text="Asteroid Fighter"-->
+<!--        android:textColor="#ffffff"-->
+<!--        android:textSize="120px"-->
+<!--        android:gravity="center_horizontal" />-->
 
     <TextView
         android:id="@+id/play"
@@ -28,27 +64,70 @@
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
         android:text="PLAY"
-        android:textColor="#ffffff"
+        android:clickable="true"
+        android:textColor="@color/text_color"
+        android:enabled="true"
+        android:focusable="auto"
+        android:saveEnabled="true"
+        android:state_enabled="true"
+        android:focusableInTouchMode="true"
+        android:state_focused="true"
+        android:state_pressed="true"
+        android:textSize="100px" />
+
+    <TextView
+        android:id="@+id/HighScoresButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/play"
+        android:layout_centerInParent="true"
+        android:text="HIGHSCORES"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:textColor="@color/text_color"
+        android:enabled="true"
+        android:focusable="auto"
+        android:saveEnabled="true"
+        android:state_enabled="true"
+        android:state_focused="true"
+        android:focusableInTouchMode="true"
+        android:state_pressed="true"
         android:textSize="100px" />
 
     <TextView
         android:id="@+id/instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_below="@+id/HighScoresButton"
         android:layout_centerHorizontal="true"
         android:text="INSTRUCTIONS"
-        android:textColor="#ffffff"
+        android:clickable="true"
+        android:textColor="@color/text_color"
+        android:enabled="true"
+        android:focusable="auto"
+        android:saveEnabled="true"
+        android:focusableInTouchMode="true"
+        android:state_enabled="true"
+        android:state_focused="true"
+        android:state_pressed="true"
         android:textSize="100px" />
 
     <TextView
         android:id="@+id/creditsid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_below="@+id/instruction"
         android:layout_centerHorizontal="true"
         android:text="CREDITS"
-        android:textColor="#ffffff"
+        android:clickable="true"
+        android:textColor="@color/text_color"
+        android:enabled="true"
+        android:focusable="auto"
+        android:saveEnabled="true"
+        android:focusableInTouchMode="true"
+        android:state_enabled="true"
+        android:state_focused="true"
+        android:state_pressed="true"
         android:textSize="100px" />
 
     <ImageView

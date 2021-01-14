@@ -42,7 +42,7 @@
         <Button
             style="@style/ButtonStyle"
             android:id="@+id/ans_button1"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="@drawable/my_button_bg"
             android:onClick="onClick"
             android:text="B" />
 
@@ -54,7 +54,7 @@
         <Button
             style="@style/ButtonStyle"
             android:id="@+id/ans_button2"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="@drawable/my_button_bg"
             android:onClick="onClick"
             android:text="B" />
 
@@ -66,7 +66,7 @@
         <Button
             style="@style/ButtonStyle"
             android:id="@+id/ans_button3"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="@drawable/my_button_bg"
             android:onClick="onClick"
             android:text="B" />
 
@@ -78,7 +78,7 @@
         <Button
             style="@style/ButtonStyle"
             android:id="@+id/ans_button4"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="@drawable/my_button_bg"
             android:onClick="onClick"
             android:text="B" />
 

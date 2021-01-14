@@ -30,8 +30,16 @@
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
         android:text="NOVICE"
-        android:textColor="#ffffff"
-        android:textSize="100px" />
+        android:textSize="100px"
+        android:clickable="true"
+        android:textColor="@color/text_color"
+        android:enabled="true"
+        android:focusableInTouchMode="true"
+        android:focusable="auto"
+        android:saveEnabled="true"
+        android:state_enabled="true"
+        android:state_focused="true"
+        android:state_pressed="true"/>
 
     <TextView
         android:id="@+id/intermediate"
@@ -40,7 +48,15 @@
         android:layout_marginTop="150dp"
         android:layout_centerHorizontal="true"
         android:text="INTERMEDIATE"
-        android:textColor="#ffffff"
+        android:clickable="true"
+        android:textColor="@color/text_color"
+        android:enabled="true"
+        android:focusable="auto"
+        android:saveEnabled="true"
+        android:state_enabled="true"
+        android:state_focused="true"
+        android:focusableInTouchMode="true"
+        android:state_pressed="true"
         android:textSize="100px" />
 
     <TextView
@@ -50,7 +66,15 @@
         android:layout_marginTop="200dp"
         android:layout_centerHorizontal="true"
         android:text="ADVANCED"
-        android:textColor="#ffffff"
+        android:clickable="true"
+        android:textColor="@color/text_color"
+        android:enabled="true"
+        android:focusable="auto"
+        android:saveEnabled="true"
+        android:state_enabled="true"
+        android:focusableInTouchMode="true"
+        android:state_focused="true"
+        android:state_pressed="true"
         android:textSize="100px" />
 
     <TextView
@@ -60,7 +84,15 @@
         android:layout_marginTop="250dp"
         android:layout_centerHorizontal="true"
         android:text="ENDLESS"
-        android:textColor="#ffffff"
+        android:clickable="true"
+        android:textColor="@color/text_color"
+        android:enabled="true"
+        android:focusable="auto"
+        android:saveEnabled="true"
+        android:focusableInTouchMode="true"
+        android:state_enabled="true"
+        android:state_focused="true"
+        android:state_pressed="true"
         android:textSize="100px" />
 
     <ImageView

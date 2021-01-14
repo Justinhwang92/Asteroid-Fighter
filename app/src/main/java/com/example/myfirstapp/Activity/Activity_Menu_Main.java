@@ -2,14 +2,18 @@ package com.example.myfirstapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Main;
 import com.example.myfirstapp.Audio.Audio_Master_Control;
+import com.example.myfirstapp.Database.HighScores;
 import com.example.myfirstapp.R;
 
 /**
@@ -26,6 +30,16 @@ public class Activity_Menu_Main extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main_menu);
         myAudio = new Audio_Activity_Menu_Main(this);
+
+
+        //Movement of the logo with name
+        final LinearLayout gamename = (LinearLayout) findViewById(R.id.gameName1);
+        gamename.setSelected(true);
+
+        //moves only once
+        ObjectAnimator animator = ObjectAnimator.ofFloat(gamename, "translationX",420f);
+        animator.setDuration(4000);
+        animator.start();
 
         //instructions button
         findViewById(R.id.instruction).setOnClickListener(new View.OnClickListener(){
@@ -71,6 +85,16 @@ public class Activity_Menu_Main extends AppCompatActivity {
             }
         });
 
+        // high score
+        findViewById(R.id.HighScoresButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
+                showHighScores();
+            }
+        });
+
+
         //plays menu music
         myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
 
@@ -98,6 +122,11 @@ public class Activity_Menu_Main extends AppCompatActivity {
 
     public void showModes() {
         startActivity(new Intent(this, Activity_Menu_Modes.class));
+        releasePlayers();
+    }
+
+    public void showHighScores() {
+        startActivity(new Intent(this, HighScores.class));
         releasePlayers();
     }
 

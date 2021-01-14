@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/game_over_background"
+    android:background="@drawable/main_menu_background"
     tools:context=".Activity.Activity_Game_Over"
     android:orientation="vertical">
 
@@ -21,7 +21,7 @@
             android:fontFamily="casual"
             android:textStyle="bold"
             android:textColor="#ffffff"
-            android:textSize="120px"
+            android:textSize="40sp"
             android:layout_centerHorizontal="true"/>
 
         <TextView
@@ -33,7 +33,7 @@
             android:fontFamily="casual"
             android:textStyle="bold"
             android:textColor="#ffffff"
-            android:textSize="100px"
+            android:textSize="30sp"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
@@ -48,59 +48,81 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:text="Score: 00"
             android:fontFamily="casual"
             android:textStyle="bold"
             android:textColor="#ffffff"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/highScoreLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/playAgainButton"
-            android:text="High Score: 300"
-            android:fontFamily="casual"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:textSize="40sp"
-            android:layout_centerHorizontal="true" />
-
-<!--Will use below for storing user's name in our database-->
 <!--        <TextView-->
-<!--            android:id="@+id/textView2"-->
+<!--            android:id="@+id/highScoreLabel"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            android:layout_above="@+id/playAgainButton"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:text="Please enter your name:"-->
+<!--            android:layout_below="@id/scoreLabel"-->
+<!--            android:text="High Score: 300"-->
 <!--            android:fontFamily="casual"-->
 <!--            android:textStyle="bold"-->
 <!--            android:textColor="#ffffff"-->
-<!--            android:textSize="40sp" />-->
+<!--            android:textSize="40sp"-->
+<!--            android:layout_centerHorizontal="true" />-->
 
-<!--        <EditText-->
-<!--            android:id="@+id/PlayerName"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_centerVertical="true"-->
-<!--            android:layout_below="@+id/textView2"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="textCapWords" />-->
+        <TextView
+            android:id="@+id/askUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scoreLabel"
+            android:layout_centerHorizontal="true"
+            android:text="Please enter your name:"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/playAgainButton"
-            android:background="?android:attr/selectableItemBackground"
+        <EditText
+            android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="Try Again"
-            android:fontFamily="casual"
-            android:textStyle="bold"
+            android:layout_below="@+id/askUserName"
+            android:ems="10"
             android:textColor="#ffffff"
-            android:textSize="40sp" />
+            android:backgroundTint="#ffffff"
+            android:inputType="textCapWords" />
+
+        <Button
+            android:id="@+id/okButton"
+            style="@style/ButtonStyle"
+            android:layout_below="@+id/userName"
+            android:layout_centerHorizontal="true"
+            android:text="OK" />
+
+        <Button
+            android:id="@+id/playAgainButton"
+            style="@style/ButtonStyle"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/okButton"
+            android:layout_centerHorizontal="true"
+            android:text="Try Again" />
+
+        <Button
+            android:id="@+id/myWebSearch_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="11dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="onClick"
+            android:text="Visit Us!"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
 
     </RelativeLayout>
 
