@@ -101,7 +101,7 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
         values.put(UserEntry.COLUMN_HIGH_SCORE, userHighScore);
 
         // for the future use
-        //values.put(UserEntry.COLUMN_LAST_GAME_SCORE, userHighScore);
+        values.put(UserEntry.COLUMN_LAST_GAME_SCORE, userHighScore);
 
         // user details
         Uri newUri = getContentResolver().insert(UserEntry.CONTENT_URI, values);
