@@ -56,6 +56,7 @@
         <item name="android:fontFamily">casual</item>
         <item name="android:textSize">21dp</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">#ffffff</item>
     </style>
 
 
