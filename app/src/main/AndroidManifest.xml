@@ -58,6 +58,11 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <provider
+            android:authorities="com.example.myfirstapp"
+            android:name=".Database.UserProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>
