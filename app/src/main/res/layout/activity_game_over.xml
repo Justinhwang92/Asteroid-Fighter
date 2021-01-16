@@ -96,6 +96,7 @@
             style="@style/ButtonStyle"
             android:layout_below="@+id/userName"
             android:layout_centerHorizontal="true"
+            android:onClick="onClick"
             android:text="OK" />
 
         <Button
