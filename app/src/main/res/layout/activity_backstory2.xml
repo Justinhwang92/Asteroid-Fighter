@@ -21,6 +21,7 @@
         android:text="Backstory"
         android:textColor="#ffffff"
         android:textSize="120px"
+        android:fontFamily="casual"
         android:gravity="center_horizontal" />
 
     <TextView
@@ -29,6 +30,7 @@
         android:layout_marginTop="80dp"
         android:text="civilization was sophisticated enough to defend themselves,"
         android:textColor="#ffffff"
+        android:fontFamily="casual"
         android:textSize="60px" />
 
     <TextView
@@ -37,6 +39,7 @@
         android:layout_marginTop="110dp"
         android:text="they retreated. Implementing their plan B, the Lorgians used an"
         android:textColor="#ffffff"
+        android:fontFamily="casual"
         android:textSize="60px" />
 
     <TextView
@@ -45,6 +48,7 @@
         android:layout_marginTop="140dp"
         android:text="anti-gravitational technology to pull and gather massive asteroids"
         android:textColor="#ffffff"
+        android:fontFamily="casual"
         android:textSize="60px" />
 
     <TextView
@@ -53,6 +57,7 @@
         android:layout_marginTop="170dp"
         android:text="and hurdle them towards Earth, hoping to destroy it without having"
         android:textColor="#ffffff"
+        android:fontFamily="casual"
         android:textSize="60px" />
 
     <TextView
@@ -61,6 +66,7 @@
         android:layout_marginTop="200dp"
         android:text="direct confrontations. Little did they know, Area 51 of Earth"
         android:textColor="#ffffff"
+        android:fontFamily="casual"
         android:textSize="60px" />
 
     <TextView
@@ -69,6 +75,7 @@
         android:layout_marginTop="230dp"
         android:text="has been keeping track of their suspicious activity. Soon"
         android:textColor="#ffffff"
+        android:fontFamily="casual"
         android:textSize="60px" />
 
     <TextView
@@ -77,6 +84,7 @@
         android:layout_marginTop="260dp"
         android:text="enough, Area 51 dispatched their best pilot armed with"
         android:textColor="#ffffff"
+        android:fontFamily="casual"
         android:textSize="60px" />
 
     <TextView
@@ -88,6 +96,7 @@
         android:layout_marginRight="40dp"
         android:paddingRight="30dp"
         android:text="SKIP"
+        android:fontFamily="casual"
         android:textColor="#ffffff"
         android:textSize="100px" />
 

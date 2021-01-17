@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="Backstory"
+        android:fontFamily="casual"
         android:textColor="#ffffff"
         android:textSize="120px"
         android:gravity="center_horizontal" />
@@ -27,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
+        android:fontFamily="casual"
         android:text="Long after the dinosaurs died, the world lived in Harmony"
         android:textColor="#ffffff"
         android:textSize="60px" />
@@ -35,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="110dp"
+        android:fontFamily="casual"
         android:text="for one hundred thousand years. However, on the year"
         android:textColor="#ffffff"
         android:textSize="60px" />
@@ -43,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
+        android:fontFamily="casual"
         android:text="of 2020, planet Earth was bombarded by a meteor shower. "
         android:textColor="#ffffff"
         android:textSize="60px" />
@@ -51,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="170dp"
+        android:fontFamily="casual"
         android:text="Terrifyingly, in each of these individual meteor hides an"
         android:textColor="#ffffff"
         android:textSize="60px" />
@@ -59,6 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
+        android:fontFamily="casual"
         android:text="alien life form from a faraway planet called Lorgan."
         android:textColor="#ffffff"
         android:textSize="60px" />
@@ -69,6 +75,7 @@
         android:layout_marginTop="230dp"
         android:text="These aliens arrived for one reason only: To destroy"
         android:textColor="#ffffff"
+        android:fontFamily="casual"
         android:textSize="60px" />
 
     <TextView
@@ -77,12 +84,14 @@
         android:layout_marginTop="260dp"
         android:text="planet Earth. However, upon realizing that the human"
         android:textColor="#ffffff"
+        android:fontFamily="casual"
         android:textSize="60px" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="260dp"
+        android:fontFamily="casual"
         android:text="planet Earth. However, upon realizing that the human"
         android:textColor="#ffffff"
         android:textSize="60px" />
@@ -95,6 +104,7 @@
         android:layout_marginTop="300dp"
         android:layout_marginRight="40dp"
         android:paddingRight="30dp"
+        android:fontFamily="casual"
         android:text="SKIP"
         android:textColor="#ffffff"
         android:textSize="100px" />

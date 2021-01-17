@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
+        android:fontFamily="casual"
         android:text="a special unit of man-made UFO to protect Planet Earth from"
         android:textColor="#ffffff"
         android:textSize="60px" />
@@ -35,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="110dp"
+        android:fontFamily="casual"
         android:text="destruction. YOU are that pilot. Area 51 has instructed you"
         android:textColor="#ffffff"
         android:textSize="60px" />
@@ -43,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
+        android:fontFamily="casual"
         android:text=" to destroy these incoming asteroids by using Earth's"
         android:textColor="#ffffff"
         android:textSize="60px" />
@@ -51,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="170dp"
+        android:fontFamily="casual"
         android:text="most powerful tool: Arithmetic!"
         android:textColor="#ffffff"
         android:textSize="60px" />
@@ -92,6 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
+        android:fontFamily="casual"
         android:text="PLAY"
         android:textColor="#00FF00"
         android:layout_centerHorizontal="true"
