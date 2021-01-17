@@ -10,8 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.myfirstapp.Audio.Audio_Activity_Game;
@@ -96,13 +100,16 @@ public class Activity_Game extends AppCompatActivity {
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
 
-        gameDisplay = new Game_Display(this, point.x +5000, point.y, myAudio);
+        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        View loadingScreenView = LayoutInflater.from(this).inflate(R.layout.view_loading_screen, null, false);
+
+        gameDisplay = new Game_Display(this, point.x +5000, point.y, myAudio, loadingScreenView);
         setContentView(gameDisplay);
         //Layout on top of surface view
         lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         secondLayerView = LayoutInflater.from(this).inflate(R.layout.activity_game, null, false);
         addContentView(secondLayerView, lp);
-
+        addContentView(loadingScreenView, lp);
         //initializes the display for the game and starts running it
         //To determine what mode is selected
         myMode = new Activity_Menu_Modes();
