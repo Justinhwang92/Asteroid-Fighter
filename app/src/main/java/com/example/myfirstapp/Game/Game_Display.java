@@ -213,10 +213,11 @@ public class Game_Display extends SurfaceView implements Runnable {
         while (isPlaying) {
             if(doneLoading1 && doneLoading2 && doneLoading3 && doneLoading4 && doneLoading5 && doneLoading6)
             {
-                if(!(activityGame.myAudio.getMediaPlayer(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP).isPlaying()))
-                {
+                if(!(activityGame.myAudio.getMediaPlayer(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP).isPlaying())) {
                     myLoadingScreen.setVisibility(INVISIBLE);
-                    myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+                    if (!isBossMusic) {
+                        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+                    }
                 }
 
                 update();
@@ -302,7 +303,7 @@ public class Game_Display extends SurfaceView implements Runnable {
             }
         }
 
-        if (gameAsteroid.x + gameAsteroid.width < 0) {
+        if (gameAsteroid.x + gameAsteroid.width < 500) {
             if (gameHeart.lives == 0) {
                 isGameOver = true;
                 return;

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.example.myfirstapp.Audio.Audio_Activity_Menu_Backstory1;
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Backstory3;
 import com.example.myfirstapp.Audio.Audio_Master_Control;
 import com.example.myfirstapp.R;
@@ -28,7 +29,10 @@ public class Activity_Menu_Backstory3 extends AppCompatActivity {
 
         myAudio = new Audio_Activity_Menu_Backstory3(this);
         Audio_Master_Control.checkMuteStatus(this);
-        myAudio.getMediaPlayer(Audio_Activity_Menu_Backstory3.MEDIA_PLAYERS.BGM_MODES).setVolume((float).5, (float).5);
+        if(!(Audio_Master_Control.myMuted))
+        {
+            myAudio.getMediaPlayer(Audio_Activity_Menu_Backstory3.MEDIA_PLAYERS.BGM_MODES).setVolume((float).5, (float).5);
+        }
         myAudio.startMedia(Audio_Activity_Menu_Backstory3.MEDIA_PLAYERS.BGM_MODES);
         myAudio.startMedia((Audio_Activity_Menu_Backstory3.MEDIA_PLAYERS.BACKSTORY3));
 
