@@ -8,11 +8,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.myfirstapp.Activity.Activity_Game;
 import com.example.myfirstapp.Activity.Activity_Menu_Modes;
 import com.example.myfirstapp.Audio.Audio_Activity_Game;
+import com.example.myfirstapp.R;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -48,8 +52,9 @@ public class Game_Display extends SurfaceView implements Runnable {
     private boolean doneLoading4;
     private boolean doneLoading5;
     private boolean doneLoading6;
+    View myLoadingScreen;
 
-    public Game_Display(Activity_Game activityGame, int screenX, int screenY, Audio_Activity_Game theAudio) {
+    public Game_Display(Activity_Game activityGame, int screenX, int screenY, Audio_Activity_Game theAudio, View theLoadingScreen) {
         super(activityGame);
         this.activityGame = activityGame;
 
@@ -58,6 +63,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         screenRatioX = 1920f / myScreenX;
         screenRatioY = 1080f / myScreenY;
 
+        myLoadingScreen = theLoadingScreen;
 
         doneLoading1 = false;
         doneLoading2 = false;
@@ -105,7 +111,6 @@ public class Game_Display extends SurfaceView implements Runnable {
         protected void onPostExecute(Void bitmap) {
             super.onPostExecute(bitmap);
             doneLoading1 = true;
-            System.out.println("loading is done 1");
         }
     }
 
@@ -126,7 +131,6 @@ public class Game_Display extends SurfaceView implements Runnable {
         protected void onPostExecute(Void bitmap) {
             super.onPostExecute(bitmap);
             doneLoading2 = true;
-            System.out.println("loading is done 2");
         }
     }
 
@@ -146,7 +150,6 @@ public class Game_Display extends SurfaceView implements Runnable {
         protected void onPostExecute(Void bitmap) {
             super.onPostExecute(bitmap);
             doneLoading3 = true;
-            System.out.println("loading is done 3");
         }
     }
 
@@ -166,7 +169,6 @@ public class Game_Display extends SurfaceView implements Runnable {
         protected void onPostExecute(Void bitmap) {
             super.onPostExecute(bitmap);
             doneLoading4 = true;
-            System.out.println("loading is done 4");
         }
     }
 
@@ -186,7 +188,6 @@ public class Game_Display extends SurfaceView implements Runnable {
         protected void onPostExecute(Void bitmap) {
             super.onPostExecute(bitmap);
             doneLoading5 = true;
-            System.out.println("loading is done 5");
         }
     }
 
@@ -204,7 +205,6 @@ public class Game_Display extends SurfaceView implements Runnable {
         protected void onPostExecute(Void bitmap) {
             super.onPostExecute(bitmap);
             doneLoading6 = true;
-            System.out.println("loading is done 6");
         }
     }
     @Override
@@ -214,7 +214,11 @@ public class Game_Display extends SurfaceView implements Runnable {
             if(doneLoading1 && doneLoading2 && doneLoading3 && doneLoading4 && doneLoading5 && doneLoading6)
             {
                 if(!(activityGame.myAudio.getMediaPlayer(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP).isPlaying()))
-                myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+                {
+                    myLoadingScreen.setVisibility(INVISIBLE);
+                    myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+                }
+
                 update();
                 draw();
                 sleep();
