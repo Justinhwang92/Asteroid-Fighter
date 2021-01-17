@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.AsyncTask;
 import android.view.SurfaceView;
 
 import com.example.myfirstapp.Activity.Activity_Game;
@@ -23,7 +24,7 @@ public class Game_Display extends SurfaceView implements Runnable {
 
     private Thread displayThread;
     public boolean isPlaying, isGameOver, isBossMusic = false;
-    private int screenX, screenY;
+    int myScreenX, myScreenY;
     public static float screenRatioX, screenRatioY;
     public boolean isBossStage = false;
     // allows for display of pictures
@@ -38,49 +39,187 @@ public class Game_Display extends SurfaceView implements Runnable {
     private static final int SCORE_TILL_BOSS = 10;
     private static final int NUMBER_OF_MINIONS = 20;
     private Audio_Activity_Game myAudio;
-    private LinkedList<Game_Enemy> allMinions;
+    private final LinkedList<Game_Enemy> allMinions = new LinkedList<>();
     private String mode;
+
+    private boolean doneLoading1;
+    private boolean doneLoading2;
+    private boolean doneLoading3;
+    private boolean doneLoading4;
+    private boolean doneLoading5;
+    private boolean doneLoading6;
 
     public Game_Display(Activity_Game activityGame, int screenX, int screenY, Audio_Activity_Game theAudio) {
         super(activityGame);
         this.activityGame = activityGame;
 
+        this.myScreenX = screenX;
+        this.myScreenY = screenY;
+        screenRatioX = 1920f / myScreenX;
+        screenRatioY = 1080f / myScreenY;
+
+
+        doneLoading1 = false;
+        doneLoading2 = false;
+        doneLoading3 = false;
+        doneLoading4 = false;
+        doneLoading5 = false;
+        doneLoading6 = false;
+
+        new Loading1().execute();
+        new Loading2().execute();
+        new Loading3().execute(this, screenX, screenY);
+        new Loading4().execute();
+        new Loading5().execute();
+        new Loading6().execute();
+
         myAudio = theAudio;
 
-        this.screenX = screenX;
-        this.screenY = screenY;
-        screenRatioX = 1920f / screenX;
-        screenRatioY = 1080f / screenY;
 
-        gameBackground1 = new Game_Background(screenX, screenY, getResources());
-        gameBackground2 = new Game_Background(screenX, screenY, getResources());
-
-        gameSpaceship = new Game_Spaceship(this, screenY, getResources());
-        gameHeart = new Game_Heart(screenY, getResources());
-
-        gameBackground2.x = screenX;
         paint = new Paint();
         paint.setTextSize(64);
         paint.setColor(Color.WHITE);
-        gameAsteroid = new Game_Enemy(getResources(), false);
-        theGameBullet = new Game_Laser(getResources());
+
         //clicking play shoots, we need to fix that so we don't have to start score at -1
         theScore = -1;
 
-        allMinions = new LinkedList<>();
-        for (int i = 0; i < NUMBER_OF_MINIONS; i++) {
-            Game_Enemy minion = new Game_Enemy(getResources(), true);
-            allMinions.add(minion);
-        }
         mode = Activity_Menu_Modes.mode;
+
     }
 
+
+    //loading thread
+    private class Loading1 extends AsyncTask<Object, Integer, Void> {
+        @Override
+        protected Void doInBackground(Object... theObjects) {
+
+            for (int i = 0; i < NUMBER_OF_MINIONS / 4; i++) {
+                allMinions.add(new Game_Enemy(getResources(), true));
+            }
+            gameBackground1 = new Game_Background(myScreenX, myScreenY, getResources());
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void bitmap) {
+            super.onPostExecute(bitmap);
+            doneLoading1 = true;
+            System.out.println("loading is done 1");
+        }
+    }
+
+
+    //loading thread
+    private class Loading2 extends AsyncTask<Object, Integer, Void> {
+        @Override
+        protected Void doInBackground(Object... theObjects) {
+
+            for (int i = 0; i < NUMBER_OF_MINIONS / 4; i++) {
+                allMinions.add(new Game_Enemy(getResources(), true));
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void bitmap) {
+            super.onPostExecute(bitmap);
+            doneLoading2 = true;
+            System.out.println("loading is done 2");
+        }
+    }
+
+    //loading thread
+    private class Loading3 extends AsyncTask<Object, Integer, Void> {
+        @Override
+        protected Void doInBackground(Object... theObjects) {
+            gameAsteroid = new Game_Enemy(getResources(), false);
+            theGameBullet = new Game_Laser(getResources());
+            gameHeart = new Game_Heart(((int)theObjects[2]), getResources());
+            gameSpaceship = new Game_Spaceship((Game_Display)theObjects[0], myScreenY, getResources());
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void bitmap) {
+            super.onPostExecute(bitmap);
+            doneLoading3 = true;
+            System.out.println("loading is done 3");
+        }
+    }
+
+    //loading thread
+    private class Loading4 extends AsyncTask<Object, Integer, Void> {
+        @Override
+        protected Void doInBackground(Object... theObjects) {
+
+            for (int i = 0; i < NUMBER_OF_MINIONS / 4; i++) {
+                allMinions.add(new Game_Enemy(getResources(), true));
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void bitmap) {
+            super.onPostExecute(bitmap);
+            doneLoading4 = true;
+            System.out.println("loading is done 4");
+        }
+    }
+
+    //loading thread
+    private class Loading5 extends AsyncTask<Object, Integer, Void> {
+        @Override
+        protected Void doInBackground(Object... theObjects) {
+
+            for (int i = 0; i < NUMBER_OF_MINIONS / 4; i++) {
+                allMinions.add(new Game_Enemy(getResources(), true));
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void bitmap) {
+            super.onPostExecute(bitmap);
+            doneLoading5 = true;
+            System.out.println("loading is done 5");
+        }
+    }
+
+    //loading thread
+    private class Loading6 extends AsyncTask<Object, Integer, Void> {
+        @Override
+        protected Void doInBackground(Object... theObjects) {
+            gameBackground2 = new Game_Background(myScreenX, myScreenY, getResources());
+            gameBackground2.x = myScreenX;
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void bitmap) {
+            super.onPostExecute(bitmap);
+            doneLoading6 = true;
+            System.out.println("loading is done 6");
+        }
+    }
     @Override
     public void run() {
+
         while (isPlaying) {
-            update();
-            draw();
-            sleep();
+            if(doneLoading1 && doneLoading2 && doneLoading3 && doneLoading4 && doneLoading5 && doneLoading6)
+            {
+                if(!(activityGame.myAudio.getMediaPlayer(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP).isPlaying()))
+                myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+                update();
+                draw();
+                sleep();
+            }
+
         }
     }
 
@@ -107,7 +246,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         // if score reaches 10, end asteroids, begin boss stage
         if (theScore >= SCORE_TILL_BOSS && (!mode.equals("endless"))) {
             gameAsteroid.bossStageBegins = true;
-            gameAsteroid.y = (screenY - gameAsteroid.height) / 2 + (-50);
+            gameAsteroid.y = (myScreenY - gameAsteroid.height) / 2 + (-50);
             isBossStage = true;
         }
         if (isBossStage) {
@@ -120,13 +259,13 @@ public class Game_Display extends SurfaceView implements Runnable {
         gameBackground2.x -= 10 * screenRatioX;
 
         if (gameBackground1.x + gameBackground1.background.getWidth() < 700) {
-            gameBackground1.x = screenX;
+            gameBackground1.x = myScreenX;
         }
         if (gameBackground2.x + gameBackground2.background.getWidth() < 700) {
-            gameBackground2.x = screenX;
+            gameBackground2.x = myScreenX;
         }
-        gameSpaceship.y = (screenY / 2) - 100;    // put spaceship to center
-        theGameBullet.y = (screenY / 2);      // bullet shoots from the center
+        gameSpaceship.y = (myScreenY / 2) - 100;    // put spaceship to center
+        theGameBullet.y = (myScreenY / 2);      // bullet shoots from the center
 
         if (gameSpaceship.hasShot) {
             //plays laser sound whenever laser is shot
@@ -166,8 +305,8 @@ public class Game_Display extends SurfaceView implements Runnable {
             }
             if (gameAsteroid.speed < 10 * screenRatioX)
                 gameAsteroid.speed = (int) (10 * screenRatioX);
-            gameAsteroid.x = screenX - 5000;
-            gameAsteroid.y = (screenY - gameAsteroid.height) / 2;
+            gameAsteroid.x = myScreenX - 5000;
+            gameAsteroid.y = (myScreenY - gameAsteroid.height) / 2;
 
             for (Game_Enemy minion : allMinions) {
                 minion.x = produceRandomXCoordinate();
@@ -210,7 +349,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     public int produceRandomYCoordinate() {
         Random rand = new Random();
         int random = rand.nextInt(350 + 350) - 350;
-        int yCoordinate = (screenY - gameAsteroid.height) / 2 + random;
+        int yCoordinate = (myScreenY - gameAsteroid.height) / 2 + random;
         return yCoordinate;
     }
 
@@ -218,7 +357,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     public int produceRandomXCoordinate() {
         Random rand = new Random();
         int random = rand.nextInt(2000 - 0) + 0;
-        int xCoordinate = screenX - 5000 + random;
+        int xCoordinate = myScreenX - 5000 + random;
         return xCoordinate;
     }
 

@@ -1,6 +1,7 @@
 package com.example.myfirstapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.AsyncTask;
@@ -11,11 +12,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.myfirstapp.Audio.Audio_Activity_Game;
-import com.example.myfirstapp.Audio.Audio_Activity_Menu_Main;
 import com.example.myfirstapp.Audio.Audio_Master_Control;
 import com.example.myfirstapp.Game.Game_Display;
 import com.example.myfirstapp.Game.Game_MathProblems;
@@ -41,6 +40,9 @@ public class Activity_Game extends AppCompatActivity {
     public static Audio_Activity_Game myAudio;
 
     // FIELDS REGARDING MATH PROBLEMS IN THE GAME
+    public ViewGroup.LayoutParams lp;
+    public View secondLayerView;
+
     /**
      * field for MathProblems class - contains all the logic behind the math problems
      */
@@ -94,16 +96,14 @@ public class Activity_Game extends AppCompatActivity {
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
 
-        new DecodeBitmapTask().execute(this);
-
-        //initializes the display for the game and starts running it
         gameDisplay = new Game_Display(this, point.x +5000, point.y, myAudio);
         setContentView(gameDisplay);
         //Layout on top of surface view
-        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        View secondLayerView = LayoutInflater.from(this).inflate(R.layout.activity_game, null, false);
+        lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        secondLayerView = LayoutInflater.from(this).inflate(R.layout.activity_game, null, false);
         addContentView(secondLayerView, lp);
 
+        //initializes the display for the game and starts running it
         //To determine what mode is selected
         myMode = new Activity_Menu_Modes();
         myTypeOfMode = myMode.mode;
@@ -112,9 +112,15 @@ public class Activity_Game extends AppCompatActivity {
         //starts with easy questions
         //Initial question to be displayed
 
-
         myMP = new Game_MathProblems(isBossStage);
         questionBasedOnGameMode();
+
+        if(Audio_Master_Control.myMuted)
+        {
+            muteAudio();
+            ImageView audio = findViewById(R.id.gameaudio);
+            audio.setImageResource(R.drawable.muted_audio);
+        }
 
 
         findViewById(R.id.gameaudio).setOnClickListener(new View.OnClickListener() {
@@ -134,53 +140,9 @@ public class Activity_Game extends AppCompatActivity {
             }
         });
     }
-    //for loading screen
-    private class DecodeBitmapTask extends AsyncTask<Object, Integer, Void>
-    {
-        private Activity_Game myActivity;
-        private Point myPoint;
-        private ProgressBar myProgress;
 
 
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            System.out.println("onpreexecute");
-
-        }
-
-        @Override
-        protected Void doInBackground(Object... theObjects) {
-            System.out.println("DOINBACKGROUND");
-            myActivity = (Activity_Game)theObjects[0];
-            myProgress = new ProgressBar(myActivity);
-            myProgress.setIndeterminate(true);
-            setContentView(myProgress);
-
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(Void bitmap) {
-            super.onPostExecute(bitmap);
-            System.out.println("onpostexecute");
-
-            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
-            //puts the display on the screen
-            if(Audio_Master_Control.myMuted)
-            {
-                muteAudio();
-                ImageView audio = findViewById(R.id.gameaudio);
-                audio.setImageResource(R.drawable.muted_audio);
-            }
-
-        }
-    }
-
-    void questionBasedOnGameMode(){
+        void questionBasedOnGameMode(){
         if(myTypeOfMode.equals("novice")){
             setQuestionAnswerOnDisplay();
         }
@@ -277,23 +239,33 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        gameDisplay.donePlaying();
-        myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        if(gameDisplay != null)
+        {
+            gameDisplay.donePlaying();
+            myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        }
     }
     //called when application starts/resumes
     @Override
     protected void onResume() {
         super.onResume();
-        gameDisplay.resume();
-        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        if(gameDisplay != null)
+        {
+            gameDisplay.resume();
+//            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        }
+
     }
 
     //called when application stops
     @Override
     protected void onStop(){
         super.onStop();
-        gameDisplay.donePlaying();
-        myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        if(gameDisplay != null)
+        {
+            gameDisplay.donePlaying();
+            myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        }
     }
 
     //i think this is called when display turns back on.
@@ -303,14 +275,21 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        myAudio.releasePlayers(this);
-        myAudio = new Audio_Activity_Game(this);
+        if(gameDisplay != null)
+        {
+            myAudio.releasePlayers(this);
+            myAudio = new Audio_Activity_Game(this);
+        }
     }
     //called when application starts/resumes
     @Override
     protected void onStart(){
         super.onStart();
-        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        if(gameDisplay != null)
+        {
+//            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+        }
+
     }
 
     /**

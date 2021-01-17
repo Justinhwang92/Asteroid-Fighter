@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.Activity_Menu_Main"
+        <activity
+            android:name=".Activity.Activity_Menu_Main"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
-        <activity android:name=".Database.HighScores"
+        <activity
+            android:name=".Database.HighScores"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
@@ -63,9 +65,9 @@
             android:resource="@array/preloaded_fonts" />
 
         <provider
-            android:authorities="com.example.myfirstapp"
             android:name=".Database.UserProvider"
-            android:exported="false"/>
+            android:authorities="com.example.myfirstapp"
+            android:exported="false" />
     </application>
 
 </manifest>
