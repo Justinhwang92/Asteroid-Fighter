@@ -15,7 +15,7 @@ import com.example.myfirstapp.R;
 public class Activity_Splash extends Activity {
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 6500;
+    private final int SPLASH_DISPLAY_LENGTH = 5000;
 
     /** Called when the activity is first created. */
     @Override
@@ -27,6 +27,8 @@ public class Activity_Splash extends Activity {
         //gets rid of notification bar on top of phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate);
+
         final RelativeLayout animationlogo = (RelativeLayout) findViewById(R.id.Namelogo);
         animationlogo.setSelected(true);
 
@@ -35,7 +37,6 @@ public class Activity_Splash extends Activity {
 //        animator.setDuration(4000);
 //        animator.start();
 
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate);
         animationlogo.startAnimation(animation);
 
         /* New Handler to start the Menu-Activity

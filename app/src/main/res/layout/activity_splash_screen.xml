@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scaleType="centerCrop"
-    android:background="@drawable/game_background">
+    android:background="#050000">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/game_background" />
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        android:src="@drawable/game_background" />-->
 
 <!--    <LinearLayout-->
 <!--        android:id="@+id/gameName1"-->
@@ -54,37 +54,36 @@
 
     <RelativeLayout
         android:id="@+id/Namelogo"
-        android:layout_width="165dp"
-        android:layout_height="75dp"
-        android:layout_marginLeft="400dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginRight="200dp"
+        android:layout_width="576dp"
+        android:layout_height="196dp"
+        android:layout_centerInParent="true"
         android:layout_weight="1"
-        >
+        android:gravity="center">
 
-        <TextView
-            android:id="@+id/textViewNombreVideo"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="48dp"
-            android:fontFamily="casual"
-            android:gravity="center_horizontal"
-            android:lines="2"
-            android:scrollHorizontally="false"
-            android:text="Asteroid Fighter"
-            android:textAppearance="?android:attr/textAppearance"
-            android:textColor="@android:color/white"
-            android:textColorLink="@android:color/white"
-            android:textSize="30px"
-            android:textStyle="bold" />
+<!--        <TextView-->
+<!--            android:id="@+id/textViewNombreVideo"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="45dp"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_marginTop="159dp"-->
+<!--            android:fontFamily="casual"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:lines="2"-->
+<!--            android:scrollHorizontally="false"-->
+<!--            android:text="Asteroid Fighter"-->
+<!--            android:textAppearance="?android:attr/textAppearance"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textColorLink="@android:color/white"-->
+<!--            android:textSize="70px"-->
+<!--            android:textStyle="bold" />-->
 
         <ImageView
             android:id="@+id/imageViewLogo"
 
+            android:layout_width="match_parent"
+            android:layout_height="136dp"
             android:layout_alignParentTop="true"
-            android:layout_width="155dp"
-            android:layout_height="44dp"
+            android:layout_marginTop="0dp"
             android:adjustViewBounds="true"
             android:src="@drawable/tdlogo" />
 
