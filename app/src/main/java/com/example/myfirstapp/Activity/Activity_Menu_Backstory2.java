@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.example.myfirstapp.Audio.Audio_Activity_Menu_Backstory1;
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Backstory2;
 import com.example.myfirstapp.Audio.Audio_Master_Control;
 import com.example.myfirstapp.R;
@@ -64,5 +63,7 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
     {
         Audio_Activity_Menu_Backstory2.releasePlayers(this);
     }
+
+
 }
 

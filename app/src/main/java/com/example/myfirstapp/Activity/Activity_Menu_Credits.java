@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.example.myfirstapp.Audio.Audio_Activity_Menu_Backstory3;
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Credits;
 import com.example.myfirstapp.Audio.Audio_Master_Control;
 import com.example.myfirstapp.R;

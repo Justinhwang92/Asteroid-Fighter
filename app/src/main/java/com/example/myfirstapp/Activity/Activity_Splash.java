@@ -15,9 +15,7 @@ import com.example.myfirstapp.R;
 public class Activity_Splash extends Activity {
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 8000;
-
-    public static Audio_Activity_Menu_Main myAudio;
+    private final int SPLASH_DISPLAY_LENGTH = 6500;
 
     /** Called when the activity is first created. */
     @Override
@@ -25,12 +23,6 @@ public class Activity_Splash extends Activity {
 
         super.onCreate(icicle);
         setContentView(R.layout.activity_splash_screen);
-        myAudio = new Audio_Activity_Menu_Main(this);
-
-//        releasePlayers();
-
-        //plays menu music
-        myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
 
         //gets rid of notification bar on top of phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -39,7 +31,7 @@ public class Activity_Splash extends Activity {
         animationlogo.setSelected(true);
 
         //moves only once
-//        ObjectAnimator animator = ObjectAnimator.ofFloat(animationlogo, "translationX",420f);
+//        ObjectAnimator animator = Objectnimator.ofFloat(animationlogo, "translationX",420f);
 //        animator.setDuration(4000);
 //        animator.start();
 
@@ -53,7 +45,6 @@ public class Activity_Splash extends Activity {
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
                 Intent mainIntent = new Intent(Activity_Splash.this, Activity_Menu_Main.class);
-                myAudio.stopMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
                 Activity_Splash.this.startActivity(mainIntent);
                 Activity_Splash.this.finish();
             }
