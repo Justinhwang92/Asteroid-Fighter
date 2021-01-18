@@ -384,7 +384,8 @@ public class Game_Display extends SurfaceView implements Runnable {
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(gameBackground1.background, gameBackground1.x, gameBackground1.y, paint);
             canvas.drawBitmap(gameBackground2.background, gameBackground2.x, gameBackground2.y, paint);
-            canvas.drawText("Score: " + theScore, gameSpaceship.x + 850, gameSpaceship.y - 300, paint);
+            //canvas.drawText("Score: " + theScore, gameSpaceship.x + 850, gameSpaceship.y - 300, paint);
+            drawScore(canvas);
             canvas.drawBitmap(gameSpaceship.getFlight(), gameSpaceship.x, gameSpaceship.y, paint);
 
             if (theGameBullet.x > 100) {
@@ -416,17 +417,6 @@ public class Game_Display extends SurfaceView implements Runnable {
 
     // updates the health bar
     public void drawLives(Canvas canvas) {
-//        if (gameHeart.lives == 3) {
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1600, gameSpaceship.y - 350, paint);
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1400, gameSpaceship.y - 350, paint);
-//        } else if (gameHeart.lives == 2) {
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1600, gameSpaceship.y - 350, paint);
-//        } else if (gameHeart.lives == 1) {
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
-//        }
-
         int topPadding = gameHeart.height / 4;
         int gap = gameHeart.width;
 
@@ -440,6 +430,11 @@ public class Game_Display extends SurfaceView implements Runnable {
         } else if (gameHeart.lives == 1) {
             canvas.drawBitmap(gameHeart.heart,  screenRatioX, topPadding, paint);
         }
+    }
+
+    public void drawScore(Canvas canvas) {
+        int topPadding = gameHeart.height / 4;
+        canvas.drawText("Score: " + theScore, gameSpaceship.x + 850, topPadding, paint);
     }
 
     public void resume() {
