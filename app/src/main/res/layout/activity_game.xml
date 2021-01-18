@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Check"
+            android:textSize="30dp"
             android:textColor="#C69BF1"
             android:gravity="center"
             android:shadowColor="#FFFFFF"

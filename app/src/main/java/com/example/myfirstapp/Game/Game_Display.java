@@ -7,7 +7,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
@@ -433,8 +435,26 @@ public class Game_Display extends SurfaceView implements Runnable {
     }
 
     public void drawScore(Canvas canvas) {
-        int topPadding = gameHeart.height / 4;
-        canvas.drawText("Score: " + theScore, gameSpaceship.x + 850, topPadding, paint);
+
+        //To get the height and width of the running screen
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int height = displayMetrics.heightPixels;
+//        int width = displayMetrics.widthPixels;
+
+//        paint = new Paint();
+//        paint.setColor(Color.RED);
+        int fontSize = 80;
+        paint.setTextSize(fontSize);
+        Typeface tf = Typeface.create("casual", Typeface.ITALIC);
+        paint.setTypeface(tf);
+//        paint.setTextAlign(Paint.Align.RIGHT);
+
+        int topPadding = gameHeart.height;
+        String textToBe = "Score: " + theScore;
+
+        canvas.drawText(textToBe,this.getWidth()-paint.measureText(textToBe)-40, topPadding-40, paint);
+//        canvas.drawText("Score: " + theScore, gameSpaceship.x + 850, topPadding, paint);
     }
 
     public void resume() {
