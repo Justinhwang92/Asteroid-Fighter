@@ -23,7 +23,7 @@ public class Game_Background {
      */
     public Game_Background(int screenX, int screenY, Resources res) {
         //extracts and decodes image to put into game
-        background = BitmapFactory.decodeResource(res, R.drawable.game_background);
+        background = BitmapFactory.decodeResource(res, R.drawable.game_background2);
         background = Bitmap.createScaledBitmap(background, screenX, screenY, false);
     }
 }
