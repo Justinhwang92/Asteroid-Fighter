@@ -42,7 +42,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     private Game_Heart gameHeart;
     private Game_Laser theGameBullet;
     public int theScore;
-    private static final int SCORE_TILL_BOSS = 10;
+    private static final int SCORE_TILL_BOSS = 100;
     private static final int NUMBER_OF_MINIONS = 20;
     private Audio_Activity_Game myAudio;
     private final LinkedList<Game_Enemy> allMinions = new LinkedList<>();
@@ -90,10 +90,11 @@ public class Game_Display extends SurfaceView implements Runnable {
         paint.setTextSize(64);
         paint.setColor(Color.WHITE);
 
-        //clicking play shoots, we need to fix that so we don't have to start score at -1
-        theScore = -1;
-
         mode = Activity_Menu_Modes.mode;
+
+        // this is just to deal with a bug for now. Game starts with points
+        // -1, -5, -10, -1 to each of the modes respectively.
+        properInitialization();
 
     }
 
@@ -301,7 +302,8 @@ public class Game_Display extends SurfaceView implements Runnable {
                 myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_BOSS_HIT);
                 gameAsteroid.bossLife--;
             }
-            theScore++;
+            //theScore++;
+            incrementScore();
             theGameBullet.x = 0;   // stops bullet from continuing, goes back to left screen
             gameSpaceship.hasShot = false;
         }
@@ -358,6 +360,32 @@ public class Game_Display extends SurfaceView implements Runnable {
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
             isGameOver = true;
             activityGame.gameDonePlayAgain();
+        }
+    }
+
+    public void incrementScore() {
+        if (mode.equals("novice")) {
+            theScore++;
+        } else if (mode.equals("intermediate")) {
+            theScore += 5;
+        } else if (mode.equals("advanced")) {
+            theScore += 10;
+        } else if (mode.equals("endless")) {
+            theScore++;
+        }
+    }
+
+    // this is just to deal with a bug for now. Game starts with points
+    // -1, -5, -10, -1 to each of the modes respectively.
+    public void properInitialization() {
+        if (mode.equals("novice")) {
+            theScore = -1;
+        } else if (mode.equals("intermediate")) {
+            theScore = -5;
+        } else if (mode.equals("advanced")) {
+            theScore = -10;
+        } else if (mode.equals("endless")) {
+            theScore = -1;
         }
     }
 
