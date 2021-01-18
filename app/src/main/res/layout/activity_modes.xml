@@ -24,6 +24,11 @@
         android:textColor="#ffffff"
         android:textSize="120px" />
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
     <TextView
         android:id="@+id/novice"
         android:layout_width="wrap_content"
@@ -98,15 +103,17 @@
         android:state_pressed="true"
         android:text="ENDLESS"
         android:textColor="@color/text_color"
+        android:autoSizeTextType="uniform"
         android:textSize="100px" />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/backToMain"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="300dp"
+        android:layout_width="96dp"
+        android:layout_height="69dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
         android:src="@drawable/previous1" />
-
 
 
 </RelativeLayout>
