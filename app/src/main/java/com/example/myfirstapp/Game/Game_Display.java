@@ -44,7 +44,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     private Game_Heart gameHeart;
     private Game_Laser theGameBullet;
     public int theScore;
-    private static final int SCORE_TILL_BOSS = 100;
+    private static final int SCORE_TILL_BOSS = 50;
     private static final int SCORE_TILL_SPEED_UP = 20;
     private static final int NUMBER_OF_MINIONS = 20;
     private Audio_Activity_Game myAudio;
