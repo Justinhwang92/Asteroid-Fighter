@@ -43,6 +43,7 @@ public class Game_Display extends SurfaceView implements Runnable {
     private Game_Laser theGameBullet;
     public int theScore;
     private static final int SCORE_TILL_BOSS = 100;
+    private static final int SCORE_TILL_SPEED_UP = 20;
     private static final int NUMBER_OF_MINIONS = 20;
     private Audio_Activity_Game myAudio;
     private final LinkedList<Game_Enemy> allMinions = new LinkedList<>();
@@ -260,6 +261,9 @@ public class Game_Display extends SurfaceView implements Runnable {
     // allows movements of the ship, background, bullet, and asteroids
     private void update() {
 
+        // speed increments after every x (20) points
+        increaseDifficulty();
+
         // if score reaches 10, end asteroids, begin boss stage
         if (theScore >= SCORE_TILL_BOSS && (!mode.equals("endless"))) {
             gameAsteroid.bossStageBegins = true;
@@ -360,6 +364,15 @@ public class Game_Display extends SurfaceView implements Runnable {
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
             isGameOver = true;
             activityGame.gameDonePlayAgain();
+        }
+    }
+
+    //increase speed after every x points
+    public void increaseDifficulty() {
+        if (mode.equals("endless")) {
+            if (theScore % SCORE_TILL_SPEED_UP == 0 && theScore > 0) {
+                gameAsteroid.speed++;
+            }
         }
     }
 
