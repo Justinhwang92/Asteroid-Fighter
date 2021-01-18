@@ -77,10 +77,10 @@ public class Activity_Game extends AppCompatActivity {
     private String myTypeOfMode = "";
 
     //BUTTONS FOR MATH PROBLEMS
-    private Button myButton1;
-    private Button myButton2;
-    private Button myButton3;
-    private Button myButton4;
+    public Button myButton1;
+    public Button myButton2;
+    public Button myButton3;
+    public Button myButton4;
 
     // high score
     public static int HIGH_SCORE = 0;
@@ -322,6 +322,8 @@ public class Activity_Game extends AppCompatActivity {
             //determines if the question is correct and executes methods accordingly
             //i.e. if question is right, shoot and play correct sound and go to next question
             //if question is wrong, deduct point and play wrong answer sound
+        if(gameDisplay.doneLoadingAll)
+        {
             switch (view.getId()){
 
                 case R.id.ans_button1:
@@ -393,6 +395,8 @@ public class Activity_Game extends AppCompatActivity {
                     }
                     break;
             }
+        }
+
     }
     public void muteAudio()
     {
