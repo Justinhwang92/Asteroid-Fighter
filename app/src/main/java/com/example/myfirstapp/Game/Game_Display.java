@@ -237,12 +237,13 @@ public class Game_Display extends SurfaceView implements Runnable {
     }
     
     public void deductPoint(){
-        this.theScore--;
-        if(theScore < 0){
+
+        if(theScore == 0){
             gameHeart.lives--;
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_LIFE);
             theScore = 0;
         }
+        this.theScore = 0;
     }
 
     // allows movements of the ship, background, bullet, and asteroids
