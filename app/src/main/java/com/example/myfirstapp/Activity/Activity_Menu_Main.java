@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -35,8 +36,14 @@ public class Activity_Menu_Main extends AppCompatActivity {
         final LinearLayout gamename = (LinearLayout) findViewById(R.id.gameName1);
         gamename.setSelected(true);
 
+        //To get the height and width of the running screen
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+
         //moves only once
-        ObjectAnimator animator = ObjectAnimator.ofFloat(gamename, "translationX",420f);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(gamename, "translationX",width/3);
         animator.setDuration(4000);
         animator.start();
 
