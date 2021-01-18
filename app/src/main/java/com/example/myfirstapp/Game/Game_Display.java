@@ -7,7 +7,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.SurfaceView;
 import android.view.View;
@@ -42,7 +44,8 @@ public class Game_Display extends SurfaceView implements Runnable {
     private Game_Heart gameHeart;
     private Game_Laser theGameBullet;
     public int theScore;
-    private static final int SCORE_TILL_BOSS = 10;
+    private static final int SCORE_TILL_BOSS = 50;
+    private static final int SCORE_TILL_SPEED_UP = 20;
     private static final int NUMBER_OF_MINIONS = 20;
     private Audio_Activity_Game myAudio;
     private final LinkedList<Game_Enemy> allMinions = new LinkedList<>();
@@ -90,10 +93,11 @@ public class Game_Display extends SurfaceView implements Runnable {
         paint.setTextSize(64);
         paint.setColor(Color.WHITE);
 
-        //clicking play shoots, we need to fix that so we don't have to start score at -1
-        theScore = -1;
-
         mode = Activity_Menu_Modes.mode;
+
+        // this is just to deal with a bug for now. Game starts with points
+        // -1, -5, -10, -1 to each of the modes respectively.
+        properInitialization();
 
     }
 
@@ -259,6 +263,9 @@ public class Game_Display extends SurfaceView implements Runnable {
     // allows movements of the ship, background, bullet, and asteroids
     private void update() {
 
+        // speed increments after every x (20) points
+        increaseDifficulty();
+
         // if score reaches 10, end asteroids, begin boss stage
         if (theScore >= SCORE_TILL_BOSS && (!mode.equals("endless"))) {
             gameAsteroid.bossStageBegins = true;
@@ -301,7 +308,8 @@ public class Game_Display extends SurfaceView implements Runnable {
                 myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_BOSS_HIT);
                 gameAsteroid.bossLife--;
             }
-            theScore++;
+            //theScore++;
+            incrementScore();
             theGameBullet.x = 0;   // stops bullet from continuing, goes back to left screen
             gameSpaceship.hasShot = false;
         }
@@ -361,6 +369,41 @@ public class Game_Display extends SurfaceView implements Runnable {
         }
     }
 
+    //increase speed after every x points
+    public void increaseDifficulty() {
+        if (mode.equals("endless")) {
+            if (theScore % SCORE_TILL_SPEED_UP == 0 && theScore > 0) {
+                gameAsteroid.speed++;
+            }
+        }
+    }
+
+    public void incrementScore() {
+        if (mode.equals("novice")) {
+            theScore++;
+        } else if (mode.equals("intermediate")) {
+            theScore += 3;
+        } else if (mode.equals("advanced")) {
+            theScore += 5;
+        } else if (mode.equals("endless")) {
+            theScore++;
+        }
+    }
+
+    // this is just to deal with a bug for now. Game starts with points
+    // -1, -5, -10, -1 to each of the modes respectively.
+    public void properInitialization() {
+        if (mode.equals("novice")) {
+            theScore = -1;
+        } else if (mode.equals("intermediate")) {
+            theScore = -3;
+        } else if (mode.equals("advanced")) {
+            theScore = -5;
+        } else if (mode.equals("endless")) {
+            theScore = -1;
+        }
+    }
+
     // produces random y coordinate for the minions
     public int produceRandomYCoordinate() {
         Random rand = new Random();
@@ -384,7 +427,8 @@ public class Game_Display extends SurfaceView implements Runnable {
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(gameBackground1.background, gameBackground1.x, gameBackground1.y, paint);
             canvas.drawBitmap(gameBackground2.background, gameBackground2.x, gameBackground2.y, paint);
-            canvas.drawText("Score: " + theScore, gameSpaceship.x + 850, gameSpaceship.y - 300, paint);
+            //canvas.drawText("Score: " + theScore, gameSpaceship.x + 850, gameSpaceship.y - 300, paint);
+            drawScore(canvas);
             canvas.drawBitmap(gameSpaceship.getFlight(), gameSpaceship.x, gameSpaceship.y, paint);
 
             if (theGameBullet.x > 100) {
@@ -416,17 +460,6 @@ public class Game_Display extends SurfaceView implements Runnable {
 
     // updates the health bar
     public void drawLives(Canvas canvas) {
-//        if (gameHeart.lives == 3) {
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1600, gameSpaceship.y - 350, paint);
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1400, gameSpaceship.y - 350, paint);
-//        } else if (gameHeart.lives == 2) {
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1600, gameSpaceship.y - 350, paint);
-//        } else if (gameHeart.lives == 1) {
-//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
-//        }
-
         int topPadding = gameHeart.height / 4;
         int gap = gameHeart.width;
 
@@ -440,6 +473,29 @@ public class Game_Display extends SurfaceView implements Runnable {
         } else if (gameHeart.lives == 1) {
             canvas.drawBitmap(gameHeart.heart,  screenRatioX, topPadding, paint);
         }
+    }
+
+    public void drawScore(Canvas canvas) {
+
+        //To get the height and width of the running screen
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int height = displayMetrics.heightPixels;
+//        int width = displayMetrics.widthPixels;
+
+//        paint = new Paint();
+//        paint.setColor(Color.RED);
+        int fontSize = 80;
+        paint.setTextSize(fontSize);
+        Typeface tf = Typeface.create("casual", Typeface.ITALIC);
+        paint.setTypeface(tf);
+//        paint.setTextAlign(Paint.Align.RIGHT);
+
+        int topPadding = gameHeart.height;
+        String textToBe = "Score: " + theScore;
+
+        canvas.drawText(textToBe,this.getWidth()-paint.measureText(textToBe)-40, topPadding-40, paint);
+//        canvas.drawText("Score: " + theScore, gameSpaceship.x + 850, topPadding, paint);
     }
 
     public void resume() {
