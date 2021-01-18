@@ -382,9 +382,9 @@ public class Game_Display extends SurfaceView implements Runnable {
         if (mode.equals("novice")) {
             theScore++;
         } else if (mode.equals("intermediate")) {
-            theScore += 5;
+            theScore += 3;
         } else if (mode.equals("advanced")) {
-            theScore += 10;
+            theScore += 5;
         } else if (mode.equals("endless")) {
             theScore++;
         }
@@ -396,9 +396,9 @@ public class Game_Display extends SurfaceView implements Runnable {
         if (mode.equals("novice")) {
             theScore = -1;
         } else if (mode.equals("intermediate")) {
-            theScore = -5;
+            theScore = -3;
         } else if (mode.equals("advanced")) {
-            theScore = -10;
+            theScore = -5;
         } else if (mode.equals("endless")) {
             theScore = -1;
         }
