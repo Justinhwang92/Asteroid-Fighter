@@ -75,7 +75,7 @@ public class Game_Enemy {
             if (!bossStageBegins) {
                 return explosion;
             } else {
-                x = x + 100;
+                x = x + 120;
                 return boss;
             }
         }
