@@ -416,15 +416,29 @@ public class Game_Display extends SurfaceView implements Runnable {
 
     // updates the health bar
     public void drawLives(Canvas canvas) {
+//        if (gameHeart.lives == 3) {
+//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
+//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1600, gameSpaceship.y - 350, paint);
+//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1400, gameSpaceship.y - 350, paint);
+//        } else if (gameHeart.lives == 2) {
+//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
+//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1600, gameSpaceship.y - 350, paint);
+//        } else if (gameHeart.lives == 1) {
+//            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
+//        }
+
+        int topPadding = gameHeart.height / 4;
+        int gap = gameHeart.width;
+
         if (gameHeart.lives == 3) {
-            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
-            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1600, gameSpaceship.y - 350, paint);
-            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1400, gameSpaceship.y - 350, paint);
+            canvas.drawBitmap(gameHeart.heart,  screenRatioX, topPadding, paint);
+            canvas.drawBitmap(gameHeart.heart,  screenRatioX + gap, topPadding, paint);
+            canvas.drawBitmap(gameHeart.heart,  screenRatioX + 2 * gap, topPadding, paint);
         } else if (gameHeart.lives == 2) {
-            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
-            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1600, gameSpaceship.y - 350, paint);
+            canvas.drawBitmap(gameHeart.heart,  screenRatioX, topPadding, paint);
+            canvas.drawBitmap(gameHeart.heart,  screenRatioX + gap, topPadding, paint);
         } else if (gameHeart.lives == 1) {
-            canvas.drawBitmap(gameHeart.heart, gameSpaceship.x + 1800, gameSpaceship.y - 350, paint);
+            canvas.drawBitmap(gameHeart.heart,  screenRatioX, topPadding, paint);
         }
     }
 
