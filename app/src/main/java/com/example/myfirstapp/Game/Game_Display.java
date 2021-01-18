@@ -52,11 +52,13 @@ public class Game_Display extends SurfaceView implements Runnable {
     private boolean doneLoading4;
     private boolean doneLoading5;
     private boolean doneLoading6;
+    public boolean doneLoadingAll;
     View myLoadingScreen;
 
     public Game_Display(Activity_Game activityGame, int screenX, int screenY, Audio_Activity_Game theAudio, View theLoadingScreen) {
         super(activityGame);
         this.activityGame = activityGame;
+        doneLoadingAll = false;
 
         this.myScreenX = screenX;
         this.myScreenY = screenY;
@@ -211,10 +213,12 @@ public class Game_Display extends SurfaceView implements Runnable {
     public void run() {
 
         while (isPlaying) {
-            if(doneLoading1 && doneLoading2 && doneLoading3 && doneLoading4 && doneLoading5 && doneLoading6)
+            doneLoadingAll = doneLoading1 && doneLoading2 && doneLoading3 && doneLoading4 && doneLoading5 && doneLoading6;
+            if(doneLoadingAll)
             {
                 if(!(activityGame.myAudio.getMediaPlayer(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP).isPlaying())) {
                     myLoadingScreen.setVisibility(INVISIBLE);
+
                     if (!isBossMusic) {
                         myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
                     }
