@@ -13,6 +13,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.UiThread;
+
 import com.example.myfirstapp.Activity.Activity_Game;
 import com.example.myfirstapp.Activity.Activity_Menu_Modes;
 import com.example.myfirstapp.Audio.Audio_Activity_Game;
@@ -217,8 +219,12 @@ public class Game_Display extends SurfaceView implements Runnable {
             if(doneLoadingAll)
             {
                 if(!(activityGame.myAudio.getMediaPlayer(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP).isPlaying())) {
-                    myLoadingScreen.setVisibility(INVISIBLE);
-
+                    activityGame.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            myLoadingScreen.setVisibility(INVISIBLE);
+                        }
+                    });
                     if (!isBossMusic) {
                         myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
                     }

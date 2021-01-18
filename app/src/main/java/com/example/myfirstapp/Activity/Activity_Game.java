@@ -85,6 +85,7 @@ public class Activity_Game extends AppCompatActivity {
     // high score
     public static int HIGH_SCORE = 0;
 
+
     /**
      * onCreate is called when this activity is started/made
      * @param savedInstanceState
