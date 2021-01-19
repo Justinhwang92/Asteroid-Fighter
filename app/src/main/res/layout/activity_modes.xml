@@ -82,7 +82,7 @@
         android:state_enabled="true"
         android:state_focused="true"
         android:state_pressed="true"
-        android:text="Genius"
+        android:text="GENIUS"
         android:textColor="@color/text_color"
         android:textSize="100px" />
 
