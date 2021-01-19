@@ -14,7 +14,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/gameOverTitile"
+            android:id="@+id/gameVictoryTitile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Asteroid Fighter"
@@ -25,11 +25,11 @@
             android:layout_centerHorizontal="true"/>
 
         <TextView
-            android:id="@+id/gameOverMessage"
+            android:id="@+id/gameVictoryMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/gameOverTitile"
-            android:text="Game Over"
+            android:layout_below="@+id/gameVictoryTitile"
+            android:text="Victory!"
             android:fontFamily="casual"
             android:textStyle="bold"
             android:textColor="#ffffff"
@@ -54,6 +54,18 @@
             android:textColor="#ffffff"
             android:textSize="30sp"
             android:layout_centerHorizontal="true" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/highScoreLabel"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@id/scoreLabel"-->
+        <!--            android:text="High Score: 300"-->
+        <!--            android:fontFamily="casual"-->
+        <!--            android:textStyle="bold"-->
+        <!--            android:textColor="#ffffff"-->
+        <!--            android:textSize="40sp"-->
+        <!--            android:layout_centerHorizontal="true" />-->
 
         <TextView
             android:id="@+id/askUserName"

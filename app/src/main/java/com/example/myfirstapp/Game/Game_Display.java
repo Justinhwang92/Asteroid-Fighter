@@ -357,15 +357,15 @@ public class Game_Display extends SurfaceView implements Runnable {
             //plays all lives lost sound
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_ALL_LIVES);
             isGameOver = true;
-            activityGame.gameDonePlayAgain();
+            activityGame.gameDonePlayAgain(isGameOver);
         }
 
         else if(gameAsteroid.bossLife <= 0)
         {
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_BOSS);
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
-            isGameOver = true;
-            activityGame.gameDonePlayAgain();
+            isGameOver = false;
+            activityGame.gameDonePlayAgain(isGameOver);
         }
     }
 
@@ -437,7 +437,7 @@ public class Game_Display extends SurfaceView implements Runnable {
             canvas.drawBitmap(gameAsteroid.getAsteroid(), gameAsteroid.x, gameAsteroid.y, paint);
 
             if (isGameOver) {
-                activityGame.gameDonePlayAgain();
+                activityGame.gameDonePlayAgain(isGameOver);
                 isPlaying = false;
             }
             drawLives(canvas);

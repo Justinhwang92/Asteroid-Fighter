@@ -303,10 +303,18 @@ public class Activity_Game extends AppCompatActivity {
     /**
      * shows play again screen
      */
-    public void gameDonePlayAgain() {
+    public void gameDonePlayAgain(boolean isGameOver) {
         myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_BOSS);
+        Intent intent;
+        // victory
+        if(!isGameOver){
+            intent = new Intent(this, Activity_Game_Victory.class);
+        }
+        // lost
+        else{
+            intent = new Intent(this, Activity_Game_Over.class);
+        }
 
-        Intent intent = new Intent(this, Activity_Game_Over.class);
         Bundle bundle = new Bundle();
         HIGH_SCORE = gameDisplay.theScore;
         String points;
