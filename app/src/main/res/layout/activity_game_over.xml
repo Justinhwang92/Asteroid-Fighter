@@ -121,7 +121,7 @@
             android:layout_marginBottom="11dp"
             android:background="?android:attr/selectableItemBackground"
             android:onClick="onClick"
-            android:text="Visit Us!"
+            android:text="Intern with us!"
             android:textColor="#ffffff"
             android:textSize="15sp" />
 
