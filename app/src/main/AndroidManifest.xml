@@ -59,6 +59,10 @@
             android:name=".Activity.Activity_Menu_Backstory3"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
+        <activity
+            android:name=".Activity.Activity_Game_Victory"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.noActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"
