@@ -86,7 +86,7 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
                 break;
 
             case R.id.myWebSearch_bt:
-                Uri uri = Uri.parse("https://www.tutordudes.com/"); // missing 'http://' will cause crashed
+                Uri uri = Uri.parse("https://www.tutordudes.com/intern"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
                 break;
