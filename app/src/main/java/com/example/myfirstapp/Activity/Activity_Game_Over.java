@@ -22,14 +22,9 @@ import com.example.myfirstapp.R;
  */
 public class Activity_Game_Over extends Activity implements View.OnClickListener {
 
-    String userName;
-    int userHighScore = Activity_Game.HIGH_SCORE;
-
     TextView gameOverTitle;
     TextView gameOverText;
     TextView score;
-    TextView askUserName;
-    EditText userNameEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +39,8 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
         gameOverTitle = findViewById(R.id.gameOverTitile);
         gameOverText = findViewById(R.id.gameOverMessage);
         score = findViewById(R.id.scoreLabel);
-        askUserName = findViewById(R.id.askUserName);
-        userNameEdit = findViewById(R.id.userName);
 
         final Button playAgainButton = findViewById(R.id.playAgainButton);
-        final Button okButton = findViewById(R.id.okButton);
 
         //Extract the data…
         Bundle bundle = getIntent().getExtras();
@@ -56,16 +48,11 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
         score.setText(text);
 
         playAgainButton.setOnClickListener(this);
-        okButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        Intent i;
-        Intent j;
-
-        i = new Intent(this, Activity_Menu_Main.class);
-        j = new Intent(this, HighScores.class);
+        Intent i = new Intent(this, Activity_Menu_Main.class);
 
         switch (view.getId()) {
             case R.id.playAgainButton:
@@ -74,47 +61,12 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
                 startActivity(i);
                 break;
 
-            case R.id.okButton:
-                try {
-                    releasePlayers();
-                    saveScore();
-                    finish();
-                    startActivity(j);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-
             case R.id.myWebSearch_bt:
                 Uri uri = Uri.parse("https://www.tutordudes.com/intern"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
                 break;
         }
-    }
-
-    private void saveScore(){
-        userName = userNameEdit.getText().toString().trim();
-
-        ContentValues values = new ContentValues();
-        values.put(UserEntry.COLUMN_USER_NAME, userName);
-        values.put(UserEntry.COLUMN_HIGH_SCORE, userHighScore);
-
-        // for the future use
-        values.put(UserEntry.COLUMN_LAST_GAME_SCORE, userHighScore);
-
-        // user details
-        Uri newUri = getContentResolver().insert(UserEntry.CONTENT_URI, values);
-
-        // validation
-        if (newUri != null) {
-            // success
-            Toast.makeText(getApplicationContext(), "Thanks, " + userNameEdit.getText().toString() + "!", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(getApplicationContext(), "INVALID", Toast.LENGTH_SHORT).show();
-        }
-
     }
 
     @Override

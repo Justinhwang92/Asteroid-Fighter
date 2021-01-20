@@ -1,69 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_menu_background"
     tools:context=".Activity.Activity_Menu_Main">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/game_background" />
-
-    <LinearLayout
-        android:id="@+id/gameName1"
-        android:layout_width="424dp"
-
-        android:layout_height="wrap_content">
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:ellipsize="marquee"-->
-<!--            android:marqueeRepeatLimit="marquee_forever"-->
-<!--            android:rotationX="4"-->
-<!--            android:scrollHorizontally="true"-->
-<!--            android:singleLine="true"-->
-<!--            app:srcCompat="@mipmap/ic_launcher_round_new_logo" />-->
-
-        <TextView
-            android:id="@+id/Name1"
-            android:layout_width="346dp"
-            android:layout_height="wrap_content"
-            android:cursorVisible="true"
-            android:ellipsize="marquee"
-            android:fontFamily="casual"
-            android:gravity="center_horizontal"
-            android:linksClickable="false"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            android:text="Asteroid Fighter"
-            android:textColor="#ffffff"
-            android:textSize="120px" />
+    <TextView
+        android:id="@+id/Name1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:cursorVisible="true"
+        android:ellipsize="marquee"
+        android:fontFamily="casual"
+        android:gravity="center_horizontal"
+        android:linksClickable="false"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="Asteroid Fighter"
+        android:textColor="#ffffff"
+        android:textSize="120px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-    </LinearLayout>
-
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textAlignment="center"-->
-<!--        android:text="Asteroid Fighter"-->
-<!--        android:textColor="#ffffff"-->
-<!--        android:textSize="120px"-->
-<!--        android:gravity="center_horizontal" />-->
+    <!--    <TextView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:text="Asteroid Fighter"-->
+    <!--        android:textColor="#ffffff"-->
+    <!--        android:textSize="120px"-->
+    <!--        android:gravity="center_horizontal" />-->
 
     <TextView
         android:id="@+id/play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
         android:clickable="true"
         android:enabled="true"
         android:focusable="auto"
@@ -75,14 +56,14 @@
         android:state_pressed="true"
         android:text="PLAY"
         android:textColor="@color/text_color"
-        android:textSize="100px" />
+        android:textSize="100px"
+        app:layout_constraintStart_toStartOf="@+id/Name1"
+        app:layout_constraintTop_toBottomOf="@+id/Name1" />
 
     <TextView
         android:id="@+id/HighScoresButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/play"
-        android:layout_centerInParent="true"
         android:background="@android:color/transparent"
         android:clickable="true"
         android:enabled="true"
@@ -95,14 +76,15 @@
         android:state_pressed="true"
         android:text="HIGHSCORES"
         android:textColor="@color/text_color"
-        android:textSize="100px" />
+        android:textSize="100px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/play" />
 
     <TextView
         android:id="@+id/instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/HighScoresButton"
-        android:layout_centerHorizontal="true"
         android:clickable="true"
         android:enabled="true"
         android:focusable="auto"
@@ -114,14 +96,15 @@
         android:state_pressed="true"
         android:text="INSTRUCTIONS"
         android:textColor="@color/text_color"
-        android:textSize="100px" />
+        android:textSize="100px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HighScoresButton" />
 
     <TextView
         android:id="@+id/creditsid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/instruction"
-        android:layout_centerHorizontal="true"
         android:clickable="true"
         android:enabled="true"
         android:focusable="auto"
@@ -133,22 +116,21 @@
         android:state_pressed="true"
         android:text="CREDITS"
         android:textColor="@color/text_color"
-        android:textSize="100px" />
+        android:textSize="100px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instruction" />
 
     <ImageView
         android:id="@+id/mainaudio"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop=   "0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_width="66dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="84dp"
         android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HighScoresButton"
         app:srcCompat="@drawable/unmuted_audio" />
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

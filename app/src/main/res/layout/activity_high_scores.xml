@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/main_menu_background" >
+    android:background="@drawable/main_menu_background">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:layout_weight="2">
-
-        <TextView
-            android:id="@+id/top_scores"
-            style="@style/ScoreStyle"
-            android:layout_height="wrap_content"
-            android:text="High Scores" />
-
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/top_scores"
+        style="@style/ScoreStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="14dp"
+        android:text="High Scores"
+        app:layout_constraintBottom_toTopOf="@+id/highScoreList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/highScoreList"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:layout_weight="6"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="88dp"
         android:cacheColorHint="#ffffff"
-        android:divider="@android:color/transparent" />
+        android:divider="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_scores" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2" >
-        <ImageView
-            android:id="@+id/MainMenuButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/previous1" />
+    <ImageView
+        android:id="@+id/backToMain"
+        android:layout_width="69dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/previous1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-<!--        <Button-->
-<!--            android:id="@+id/MainMenuButton"-->
-<!--            style="@style/ButtonStyle"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:text="Main Menu" />-->
-
-    </RelativeLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
