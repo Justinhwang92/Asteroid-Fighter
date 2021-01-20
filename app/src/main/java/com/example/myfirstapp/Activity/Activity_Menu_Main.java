@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Main;
 import com.example.myfirstapp.Audio.Audio_Master_Control;
@@ -33,7 +34,7 @@ public class Activity_Menu_Main extends AppCompatActivity {
 
 
         //Movement of the logo with name
-        final LinearLayout gamename = (LinearLayout) findViewById(R.id.gameName1);
+        final TextView gamename = (TextView) findViewById(R.id.Name1);
         gamename.setSelected(true);
 
         //To get the height and width of the running screen
@@ -43,8 +44,8 @@ public class Activity_Menu_Main extends AppCompatActivity {
         int width = displayMetrics.widthPixels;
 
         //moves only once
-        ObjectAnimator animator = ObjectAnimator.ofFloat(gamename, "translationX",width/3);
-        animator.setDuration(4000);
+        ObjectAnimator animator = ObjectAnimator.ofFloat(gamename, "translationX",width/3 - width/24);
+        animator.setDuration(3000);
         animator.start();
 
         //instructions button

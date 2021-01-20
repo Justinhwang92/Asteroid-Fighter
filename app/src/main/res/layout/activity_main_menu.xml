@@ -25,6 +25,7 @@
         android:textColor="#ffffff"
         android:textSize="120px"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,9 +43,9 @@
         android:id="@+id/play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="120dp"
         android:layout_marginLeft="120dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:enabled="true"
         android:focusable="auto"
@@ -57,6 +58,8 @@
         android:text="PLAY"
         android:textColor="@color/text_color"
         android:textSize="100px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="@+id/Name1"
         app:layout_constraintTop_toBottomOf="@+id/Name1" />
 
