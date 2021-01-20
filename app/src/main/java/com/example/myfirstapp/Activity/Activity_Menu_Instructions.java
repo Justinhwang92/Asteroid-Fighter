@@ -25,7 +25,7 @@ public class Activity_Menu_Instructions extends AppCompatActivity {
 
         myAudio.startMedia(Audio_Activity_Menu_Instructions.MEDIA_PLAYERS.BGM_INSTRUCTIONS);
 
-        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.backToMain).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Instructions.MEDIA_PLAYERS.SFX_MENU_CLICK);

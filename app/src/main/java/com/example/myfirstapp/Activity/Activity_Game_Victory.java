@@ -47,7 +47,6 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
         askUserName = findViewById(R.id.askUserName);
         userNameEdit = findViewById(R.id.userName);
 
-        final Button playAgainButton = findViewById(R.id.playAgainButton);
         final Button okButton = findViewById(R.id.okButton);
 
         //Extract the data…
@@ -55,7 +54,6 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
         String text = bundle.getString("Score");
         score.setText(text);
 
-        playAgainButton.setOnClickListener(this);
         okButton.setOnClickListener(this);
     }
 

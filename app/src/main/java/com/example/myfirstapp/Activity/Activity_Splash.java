@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Main;
@@ -29,7 +30,7 @@ public class Activity_Splash extends Activity {
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate);
 
-        final RelativeLayout animationlogo = (RelativeLayout) findViewById(R.id.Namelogo);
+        final ImageView animationlogo = findViewById(R.id.imageViewLogo);
         animationlogo.setSelected(true);
 
         //moves only once
