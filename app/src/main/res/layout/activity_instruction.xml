@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     android:background="@drawable/main_menu_background"
+    android:orientation="horizontal"
     tools:context=".Activity.Activity_Menu_Instructions">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/textView12"
+        style="@style/InstructionStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" >
-
-        <TextView
-            style="@style/InstructionStyle"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            android:text=
-"1. Shoot the incoming asteroids before it hits the spaceship \n
+        android:gravity="center"
+        android:text="1. Shoot the incoming asteroids before it hits the spaceship \n
 2. To shoot, choose the correct answer for the math equation above. \n
 3. If you do not answer in time, the asteroid may hit your ship and you lose 1 Life \n
 4. After reaching (x) points, boss will appear. \n
-5. It will have 5 lives, so continue choosing the correct answers for the equations above." />
+5. It will have 5 lives, so continue choosing the correct answers for the equations above."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="300dp"
-            android:src="@drawable/previous1" />
+    <ImageView
+        android:id="@+id/backToMain"
+        android:layout_width="69dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/previous1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    </RelativeLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

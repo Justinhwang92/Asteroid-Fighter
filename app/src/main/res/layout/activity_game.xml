@@ -1,109 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Activity_Game"
-    android:orientation="horizontal">
+    tools:context=".Activity.Activity_Game">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/id_question"
+        style="@style/QuestionStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="100dp">
-        <TextView
-            android:id="@+id/id_question"
-            style="@style/QuestionStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Check"
-            android:textSize="30dp"
-            android:textColor="#C69BF1"
-            android:gravity="center"
-            android:shadowColor="#FFFFFF"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="35" />
-    </LinearLayout>
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:shadowColor="#FFFFFF"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="35"
+        android:text="Check"
+        android:textColor="#C69BF1"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/ans_button1"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="49dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="300dp"
+        android:background="@drawable/my_button_bg"
+        android:onClick="onClick"
+        android:text="B"
+        app:layout_constraintEnd_toStartOf="@+id/ans_button2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+    <Button
+        android:id="@+id/ans_button2"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/my_button_bg"
+        android:onClick="onClick"
+        android:text="B"
+        app:layout_constraintEnd_toStartOf="@+id/ans_button3"
+        app:layout_constraintStart_toEndOf="@+id/ans_button1"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            style="@style/ButtonStyle"
-            android:id="@+id/ans_button1"
-            android:background="@drawable/my_button_bg"
-            android:onClick="onClick"
-            android:text="B" />
+    <Button
+        android:id="@+id/ans_button3"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/my_button_bg"
+        android:onClick="onClick"
+        android:text="B"
+        app:layout_constraintEnd_toStartOf="@+id/ans_button4"
+        app:layout_constraintStart_toEndOf="@+id/ans_button2"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            style="@style/ButtonStyle"
-            android:id="@+id/ans_button2"
-            android:background="@drawable/my_button_bg"
-            android:onClick="onClick"
-            android:text="B" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            style="@style/ButtonStyle"
-            android:id="@+id/ans_button3"
-            android:background="@drawable/my_button_bg"
-            android:onClick="onClick"
-            android:text="B" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            style="@style/ButtonStyle"
-            android:id="@+id/ans_button4"
-            android:background="@drawable/my_button_bg"
-            android:onClick="onClick"
-            android:text="B" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/ans_button4"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/my_button_bg"
+        android:onClick="onClick"
+        android:text="B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ans_button3"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/gameaudio"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="4dp"
         android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ans_button4"
         app:srcCompat="@drawable/unmuted_audio" />
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
