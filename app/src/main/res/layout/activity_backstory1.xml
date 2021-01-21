@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Activity_Menu_Backstory1">
+    tools:context="ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Backstory1">
 
     <ImageView
         android:id="@+id/Step1"

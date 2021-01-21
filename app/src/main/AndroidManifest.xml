@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myfirstapp">
+    package="ASTEROID_FIGHTER_FREE">
 
     <application
         android:allowBackup="true"
@@ -10,57 +10,60 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity.Activity_Menu_Main"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Main"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Database.HighScores"
+            android:name="ASTEROID_FIGHTER_FREE.Database.HighScores"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity.Activity_Menu_Credits"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Credits"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity.Activity_Menu_Instructions"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Instructions"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity.Activity_Game"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Game"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity.Activity_Splash"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Splash"
+            android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.Activity_Game_Over"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Game_Over"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity.Activity_Menu_Modes"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Modes"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity.Activity_Menu_Backstory1"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Backstory1"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity.Activity_Menu_Backstory2"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Backstory2"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity.Activity_Menu_Backstory3"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Backstory3"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name=".Activity.Activity_Game_Victory"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_Game_Victory"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
 
@@ -69,8 +72,8 @@
             android:resource="@array/preloaded_fonts" />
 
         <provider
-            android:name=".Database.UserProvider"
-            android:authorities="com.example.myfirstapp"
+            android:name="ASTEROID_FIGHTER_FREE.Database.UserProvider"
+            android:authorities="ASTEROID_FIGHTER_FREE"
             android:exported="false" />
     </application>
 

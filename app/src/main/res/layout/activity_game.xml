@@ -6,7 +6,7 @@
     android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Activity_Game">
+    tools:context="ASTEROID_FIGHTER_FREE.Activity.Activity_Game">
 
     <TextView
         android:id="@+id/id_question"
