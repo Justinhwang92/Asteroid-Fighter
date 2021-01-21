@@ -67,14 +67,12 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
 
         switch (view.getId()) {
             case R.id.playAgainButton:
-                releasePlayers();
                 finish();
                 startActivity(i);
                 break;
 
             case R.id.okButton:
                 try {
-                    releasePlayers();
                     saveScore();
                     finish();
                     startActivity(j);
@@ -118,11 +116,6 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         finish();
-    }
-
-    private void releasePlayers()
-    {
-        Audio_Activity_Game.releasePlayers(this);
     }
 
 }

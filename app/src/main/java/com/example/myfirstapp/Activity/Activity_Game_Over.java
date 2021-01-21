@@ -56,7 +56,6 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
 
         switch (view.getId()) {
             case R.id.playAgainButton:
-                releasePlayers();
                 finish();
                 startActivity(i);
                 break;
@@ -74,9 +73,6 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
         finish();
     }
 
-    private void releasePlayers()
-    {
-        Audio_Activity_Game.releasePlayers(this);
-    }
+
 
 }

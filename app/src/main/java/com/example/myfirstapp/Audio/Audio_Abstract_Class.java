@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 
 import com.example.myfirstapp.Activity.Activity_Game;
 import com.example.myfirstapp.Activity.Activity_Game_Over;
+import com.example.myfirstapp.Activity.Activity_Game_Victory;
 
 public abstract class Audio_Abstract_Class {
     //list of media players
@@ -46,69 +47,16 @@ public abstract class Audio_Abstract_Class {
 
     //releases the resources associated with all the players
     public static void releasePlayers(Context theContext) {
-        if(!(theContext instanceof Activity_Game) && !(theContext instanceof Activity_Game_Over))
+        for(int i = 0; i < myPlayers.length; i++)
         {
-            for(int i = 0; i < myPlayers.length - 1; i++)
-            {
-                if (myPlayers[i] != null) {
-                    if (myPlayers[i].isPlaying())
-                        myPlayers[i].stop();
-                    myPlayers[i].reset();
-                    myPlayers[i].release();
-                    myPlayers[i] = null;
-                }
+            if (myPlayers[i] != null) {
+                if (myPlayers[i].isPlaying())
+                    myPlayers[i].stop();
+                myPlayers[i].reset();
+                myPlayers[i].release();
+                myPlayers[i] = null;
             }
-
-            myPlayers[myPlayers.length - 1].setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    if(mp != null)
-                    {
-                        if(mp.isPlaying())
-                            mp.stop();
-                        mp.reset();
-                        mp.release();
-                        mp = null;
-                    }
-                }
-            });
-
         }
-
-        else
-        {
-            if(theContext instanceof Activity_Game)
-            {
-                for(MediaPlayer player : myPlayers)
-                {
-                    if(player != null)
-                    {
-                        if(player.isPlaying())
-                            player.stop();
-                        player.reset();
-                        player.release();
-                        player = null;
-                    }
-                }
-            }
-
-            else if(theContext instanceof Activity_Game_Over)
-            {
-                for(MediaPlayer player : Audio_Activity_Game.myPlayers)
-                {
-                    if(player != null)
-                    {
-                        if(player.isPlaying())
-                            player.stop();
-                        player.reset();
-                        player.release();
-                        player = null;
-                    }
-                }
-            }
-
-        }
-
     }
 
     public static void mutePlayers()

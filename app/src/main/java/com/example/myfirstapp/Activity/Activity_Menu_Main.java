@@ -119,24 +119,24 @@ public class Activity_Menu_Main extends AppCompatActivity {
 
     public void showInstructions()
     {
-        startActivity(new Intent(this, Activity_Menu_Instructions.class));
         releasePlayers();
+        startActivity(new Intent(this, Activity_Menu_Instructions.class));
     }
 
     public void showCredits()
     {
-        startActivity(new Intent(this, Activity_Menu_Credits.class));
         releasePlayers();
+        startActivity(new Intent(this, Activity_Menu_Credits.class));
     }
 
     public void showModes() {
-        startActivity(new Intent(this, Activity_Menu_Modes.class));
         releasePlayers();
+        startActivity(new Intent(this, Activity_Menu_Modes.class));
     }
 
     public void showHighScores() {
-        startActivity(new Intent(this, HighScores.class));
         releasePlayers();
+        startActivity(new Intent(this, HighScores.class));
     }
 
     public void muteAudio()

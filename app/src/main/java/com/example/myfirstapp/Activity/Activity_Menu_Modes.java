@@ -38,8 +38,10 @@ public class Activity_Menu_Modes extends AppCompatActivity {
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 mode = "novice";
-                startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Backstory1.class));
+                //release the resources associated with this audio player
                 releasePlayers();
+                startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Backstory1.class));
+
             }
         });
 
@@ -48,8 +50,10 @@ public class Activity_Menu_Modes extends AppCompatActivity {
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 mode = "intermediate";
-                startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Backstory1.class));
+                //release the resources associated with this audio player
                 releasePlayers();
+                startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Backstory1.class));
+
             }
         });
 
@@ -58,8 +62,10 @@ public class Activity_Menu_Modes extends AppCompatActivity {
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 mode = "advanced";
-                startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Backstory1.class));
+                //release the resources associated with this audio player
                 releasePlayers();
+                startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Backstory1.class));
+
             }
         });
 
@@ -68,8 +74,10 @@ public class Activity_Menu_Modes extends AppCompatActivity {
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 mode = "endless";
-                startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Backstory1.class));
+                //release the resources associated with this audio player
                 releasePlayers();
+                startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Backstory1.class));
+
             }
         });
 
@@ -77,8 +85,10 @@ public class Activity_Menu_Modes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.SFX_MENU_CLICK);
-                startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Main.class));
+                //release the resources associated with this audio player
                 releasePlayers();
+                startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Main.class));
+
             }
         });
     }

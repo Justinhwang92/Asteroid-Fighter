@@ -295,15 +295,18 @@ public class Activity_Game extends AppCompatActivity {
      * shows play again screen
      */
     public void gameDonePlayAgain(boolean isGameOver) {
-        myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_BOSS);
         Intent intent;
         // victory
         if(!isGameOver){
+            releasePlayers();
             intent = new Intent(this, Activity_Game_Victory.class);
+
         }
         // lost
         else{
+            releasePlayers();
             intent = new Intent(this, Activity_Game_Over.class);
+
         }
 
         Bundle bundle = new Bundle();
@@ -407,4 +410,44 @@ public class Activity_Game extends AppCompatActivity {
     {
         Audio_Master_Control.unmuteAllPlayers(this);
     }
+
+    private void releasePlayers()
+    {
+        Audio_Activity_Game.releasePlayers(this);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

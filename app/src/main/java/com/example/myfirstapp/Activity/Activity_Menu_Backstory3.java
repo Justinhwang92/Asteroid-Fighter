@@ -41,8 +41,10 @@ public class Activity_Menu_Backstory3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Backstory3.MEDIA_PLAYERS.SFX_MENU_CLICK);
-                startActivity(new Intent(Activity_Menu_Backstory3.this, Activity_Menu_Backstory2.class));
+                //release the resources associated with this audio player
                 releasePlayers();
+                startActivity(new Intent(Activity_Menu_Backstory3.this, Activity_Menu_Backstory2.class));
+
             }
         });
 
@@ -50,8 +52,10 @@ public class Activity_Menu_Backstory3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Backstory3.MEDIA_PLAYERS.SFX_MENU_CLICK);
-                startActivity(new Intent(Activity_Menu_Backstory3.this, Activity_Game.class));
+                //release the resources associated with this audio player
                 releasePlayers();
+                startActivity(new Intent(Activity_Menu_Backstory3.this, Activity_Game.class));
+
             }
         });
     }

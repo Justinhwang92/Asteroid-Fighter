@@ -222,7 +222,8 @@ public class Game_Display extends SurfaceView implements Runnable {
             doneLoadingAll = doneLoading1 && doneLoading2 && doneLoading3 && doneLoading4 && doneLoading5 && doneLoading6;
             if(doneLoadingAll)
             {
-                if(!(activityGame.myAudio.getMediaPlayer(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP).isPlaying())) {
+                if(activityGame.myAudio.getMediaPlayer(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP) != null &&
+                        !(activityGame.myAudio.getMediaPlayer(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP).isPlaying())) {
                     activityGame.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -230,6 +231,7 @@ public class Game_Display extends SurfaceView implements Runnable {
                         }
                     });
                     if (!isBossMusic) {
+                        if(myAudio.myPlayers[0] != null)
                         myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
                     }
                 }
@@ -254,6 +256,7 @@ public class Game_Display extends SurfaceView implements Runnable {
 
         if(theScore == 0){
             gameHeart.lives--;
+            if(myAudio.myPlayers[0] != null)
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_LIFE);
             theScore = 0;
         }
@@ -293,6 +296,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         if (gameSpaceship.hasShot) {
             //plays laser sound whenever laser is shot
             theGameBullet.x += (theGameBullet.speed);
+            if(myAudio.myPlayers[0] != null)
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LASER);
         }
         // allows for explosion when bullet and asteroid gets closer
@@ -302,9 +306,11 @@ public class Game_Display extends SurfaceView implements Runnable {
 
         if (Rect.intersects(gameAsteroid.getCollisionShape(), theGameBullet.getCollisionShape())) {
             if (!gameAsteroid.bossStageBegins) {
+                if(myAudio.myPlayers[0] != null)
                 myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_ASTEROID);
                 gameAsteroid.x = -500;  // asteroid regenerates on the right
             } else {
+                if(myAudio.myPlayers[0] != null)
                 myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_BOSS_HIT);
                 gameAsteroid.bossLife--;
             }
@@ -343,7 +349,9 @@ public class Game_Display extends SurfaceView implements Runnable {
             gameAsteroid.x = -500;
 
             //plays heart is lost sound
+            if(myAudio.myPlayers[0] != null)
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_HIT);
+            if(myAudio.myPlayers[0] != null)
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_LIFE);
 
             if (gameAsteroid.bossStageBegins) {
@@ -355,6 +363,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         }
         if (gameHeart.lives == 0) {
             //plays all lives lost sound
+            if(myAudio.myPlayers[0] != null)
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_ALL_LIVES);
             isGameOver = true;
             activityGame.gameDonePlayAgain(isGameOver);
@@ -362,7 +371,9 @@ public class Game_Display extends SurfaceView implements Runnable {
 
         else if(gameAsteroid.bossLife <= 0)
         {
+            if(myAudio.myPlayers[0] != null)
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_BOSS);
+            if(myAudio.myPlayers[0] != null)
             myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
             isGameOver = false;
             activityGame.gameDonePlayAgain(isGameOver);
@@ -521,8 +532,12 @@ public class Game_Display extends SurfaceView implements Runnable {
     public void playBossMusic() {
         isBossMusic = true;
         //stop regular music
-        myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
-        //begin boss music
-        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_BOSS);
+        if(activityGame.myAudio.myPlayers[0] != null)
+        {
+            myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+            //begin boss music
+            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_BOSS);
+        }
+
     }
 }

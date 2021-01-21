@@ -36,8 +36,10 @@ public class Activity_Menu_Credits extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Credits.MEDIA_PLAYERS.SFX_MENU_CLICK);
-                startActivity(new Intent(Activity_Menu_Credits.this, Activity_Menu_Main.class));
+                //release the resources associated with this audio player
                 releasePlayers();
+                startActivity(new Intent(Activity_Menu_Credits.this, Activity_Menu_Main.class));
+
             }
         });
 

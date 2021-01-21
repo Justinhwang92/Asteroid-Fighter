@@ -41,11 +41,13 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
         findViewById(R.id.skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 myAudio.startMedia(Audio_Activity_Menu_Backstory1.MEDIA_PLAYERS.SFX_MENU_CLICK);
-                //show main game activity
-                startActivity(new Intent(Activity_Menu_Backstory1.this, Activity_Game.class));
                 //release the resources associated with this audio player
                 releasePlayers();
+                //show main game activity
+                startActivity(new Intent(Activity_Menu_Backstory1.this, Activity_Game.class));
+
             }
         });
 
@@ -54,10 +56,11 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Backstory1.MEDIA_PLAYERS.SFX_MENU_CLICK);
-                //show main game activity
-                startActivity(new Intent(Activity_Menu_Backstory1.this, Activity_Menu_Backstory2.class));
                 //release the resources associated with this audio player
                 releasePlayers();
+                //show main game activity
+                startActivity(new Intent(Activity_Menu_Backstory1.this, Activity_Menu_Backstory2.class));
+
             }
         });
 
@@ -66,8 +69,10 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myAudio.startMedia(Audio_Activity_Menu_Backstory1.MEDIA_PLAYERS.SFX_MENU_CLICK);
-                startActivity(new Intent(Activity_Menu_Backstory1.this, Activity_Menu_Modes.class));
+                //release the resources associated with this audio player
                 releasePlayers();
+                startActivity(new Intent(Activity_Menu_Backstory1.this, Activity_Menu_Modes.class));
+
             }
         });
     }
