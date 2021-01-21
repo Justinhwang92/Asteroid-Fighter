@@ -53,14 +53,4 @@ public class Activity_Splash extends Activity {
         }, SPLASH_DISPLAY_LENGTH);
     }
 
-    private void releasePlayers()
-    {
-        Audio_Activity_Menu_Main.releasePlayers(this);
-    }
-
-    public void muteAudio()
-    {
-        Audio_Master_Control.muteAllPlayers(this);
-    }
-
 }

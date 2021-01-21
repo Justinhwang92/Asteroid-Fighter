@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.myfirstapp.Audio.Audio_Activity_Game;
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Main;
 import com.example.myfirstapp.Audio.Audio_Master_Control;
 import com.example.myfirstapp.Database.HighScores;
@@ -102,8 +103,6 @@ public class Activity_Menu_Main extends AppCompatActivity {
         });
 
 
-        //plays menu music
-        myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
 
         if(Audio_Master_Control.myMuted)
         {
@@ -111,6 +110,9 @@ public class Activity_Menu_Main extends AppCompatActivity {
             ImageView audio = findViewById(R.id.mainaudio);
             audio.setImageResource(R.drawable.muted_audio);
         }
+        //plays menu music
+        myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.BGM_MENU);
+
     }
 
     //self-explanatory methods to show different screens
@@ -152,4 +154,40 @@ public class Activity_Menu_Main extends AppCompatActivity {
         Audio_Activity_Menu_Main.releasePlayers(this);
     }
 
+
+    //called when application stops
+    @Override
+    protected void onPause() {
+        super.onPause();
+        myAudio.pauseLoopers();
+    }
+    //called when application starts/resumes
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myAudio.resumeLoopers();
+    }
+
+    //called when application stops
+    @Override
+    protected void onStop(){
+        super.onStop();
+    }
+
+    //i think this is called when display turns back on.
+    //if you press the power button and turn the emulator off and press again to start
+    //it calls this method. not sure if power button on emulator just turns off screen or turns
+    //off emulator
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        myAudio.releasePlayers(this);
+        myAudio = new Audio_Activity_Menu_Main(this);
+    }
+    //called when application starts/resumes
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+    }
 }
