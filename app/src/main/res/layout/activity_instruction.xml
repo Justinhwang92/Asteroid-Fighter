@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_menu_background"
     android:orientation="horizontal"
-    tools:context=".Activity.Activity_Menu_Instructions">
+    tools:context="ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Instructions">
 
     <TextView
         android:id="@+id/textView12"
