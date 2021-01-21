@@ -115,6 +115,14 @@ public class Audio_Master_Control {
         }
     }
 
+    public static void onPause(Audio_Abstract_Class theAudio, Context theContext)
+    {
+        if(theAudio.myPlayers[0] != null)
+        {
+            theAudio.releasePlayers(theContext);
+        }
+    }
+
     public static void setAllVolume()
     {
         //for more precise audio adjustment

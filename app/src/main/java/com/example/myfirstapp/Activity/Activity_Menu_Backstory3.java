@@ -15,6 +15,7 @@ import android.view.WindowManager;
 
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Backstory1;
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Backstory3;
+import com.example.myfirstapp.Audio.Audio_Activity_Menu_Main;
 import com.example.myfirstapp.Audio.Audio_Master_Control;
 import com.example.myfirstapp.R;
 
@@ -59,7 +60,41 @@ public class Activity_Menu_Backstory3 extends AppCompatActivity {
     {
         Audio_Activity_Menu_Backstory3.releasePlayers(this);
     }
+    //called when application stops
+    @Override
+    protected void onPause() {
+        super.onPause();
+        myAudio.pauseLoopers();
+    }
+    //called when application starts/resumes
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myAudio.resumeLoopers();
+    }
 
+    //called when application stops
+    @Override
+    protected void onStop(){
+        super.onStop();
+    }
+
+    //i think this is called when display turns back on.
+    //if you press the power button and turn the emulator off and press again to start
+    //it calls this method. not sure if power button on emulator just turns off screen or turns
+    //off emulator
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        myAudio.releasePlayers(this);
+        myAudio = new Audio_Activity_Menu_Backstory3(this);
+    }
+    //called when application starts/resumes
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+    }
 
 }
 
