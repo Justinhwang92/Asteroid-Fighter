@@ -104,6 +104,9 @@ public class Activity_Game extends AppCompatActivity {
         ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         View loadingScreenView = LayoutInflater.from(this).inflate(R.layout.view_loading_screen, null, false);
 
+
+
+
         gameDisplay = new Game_Display(this, point.x +5000, point.y, myAudio, loadingScreenView);
         setContentView(gameDisplay);
         //Layout on top of surface view
@@ -111,6 +114,18 @@ public class Activity_Game extends AppCompatActivity {
         secondLayerView = LayoutInflater.from(this).inflate(R.layout.activity_game, null, false);
         addContentView(secondLayerView, lp);
         addContentView(loadingScreenView, lp);
+
+        //flight rotation
+        RotateAnimation anim = new RotateAnimation(0f, 360f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        ImageView ufo = (ImageView)  findViewById(R.id.ufoImage);
+        anim.setFillAfter(true);
+        anim.setInterpolator(new LinearInterpolator());
+        anim.setRepeatCount(Animation.INFINITE);
+        anim.setDuration(5000);
+        ufo.startAnimation(anim);
+
         //initializes the display for the game and starts running it
         //To determine what mode is selected
         myMode = new Activity_Menu_Modes();

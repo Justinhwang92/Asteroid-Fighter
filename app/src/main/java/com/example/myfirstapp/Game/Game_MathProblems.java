@@ -51,6 +51,8 @@ public class Game_MathProblems {
      */
     public final int NUM_OF_WRONG_ANSWERS = 3;
 
+    private Set<Integer> randomNoSet = new HashSet<>();
+
     /**
      * Base math problem class constructor - contains different classes
      * @param theBoss flag to notify if it is boss stage.
@@ -153,7 +155,14 @@ public class Game_MathProblems {
     public String getIntermediateQuestion(){
         String theS = "";
 
+        if(randomNoSet.size() > 2)
+            randomNoSet = new HashSet<>();
+
         int randomChoice = myRandom.nextInt(2);
+//
+//        while(randomNoSet.add(randomChoice)){
+//            randomChoice = myRandom.nextInt(2);
+//        }
 
         switch (randomChoice){
 
@@ -212,7 +221,11 @@ public class Game_MathProblems {
 
         String theS = "";
 
-        int randomChoice = myRandom.nextInt(NUM_OF_HARD_QUESTION_TYPES);
+        int randomChoice = myRandom.nextInt(4);
+
+//        while(randomNoSet.add(randomChoice)){
+//            randomChoice = myRandom.nextInt(3);
+//        }
 
         switch (randomChoice){
 
@@ -237,8 +250,17 @@ public class Game_MathProblems {
 //                mySet.add(sqrRt.mySolution);
                 break;
 
-            //For Inequality part
             case 2:
+                CubeProb cube = new CubeProb(false);
+                theS = cube.toString();
+                mySet = new HashSet<>();
+                mySet = cube.getWrongs();
+                myAns = cube.mySolution + "";
+                mySet.add(myAns+"");
+                break;
+
+            //For Inequality part
+            case 3:
                 IneqProb inqO = new IneqProb(false);
                 theS = inqO.toString();
                 mySet = new HashSet<>();
@@ -249,7 +271,7 @@ public class Game_MathProblems {
                 break;
 
             //For algebra part
-            case 3:
+            case 4:
                 AlgProb algO = new AlgProb(false);
                 theS = algO.toString();
                 mySet = new HashSet<>();
@@ -290,10 +312,17 @@ public class Game_MathProblems {
 
         String theS = "";
 
-        int randomChoice = myRandom.nextInt(2);
+        if(randomNoSet.size() > 3)
+            randomNoSet = new HashSet<>();
+
+        int randomChoice = myRandom.nextInt(4);
+
+//        while(randomNoSet.add(randomChoice)){
+//            randomChoice = myRandom.nextInt(4);
+//        }
 
         //for testing purpose
-//        randomChoice = 1;
+//        randomChoice = 4;
 
         switch (randomChoice){
 
@@ -309,13 +338,13 @@ public class Game_MathProblems {
 
             //For square root problem
             case 1:
-                CubeRtProb cubRt = new CubeRtProb(false);
-                theS = cubRt.toString();
+                AddingFraction Addfract = new AddingFraction(false);
+                theS = Addfract.toString();
                 mySet = new HashSet<>();
-                mySet = cubRt.getWrongs();
-                myAns = cubRt.mySolution + "";
+                mySet = Addfract.getWrongs();
+                myAns = Addfract.mySolution + "";
                 mySet.add(myAns+"");
-//                mySet.add(sqrRt.mySolution);
+    //                mySet.add(algO.mySolution);
                 break;
 
             case 2:
@@ -326,6 +355,25 @@ public class Game_MathProblems {
                 myAns = fact.mySolution + "";
                 mySet.add(myAns+"");
 //                mySet.add(algO.mySolution);
+                break;
+
+            case 3:
+                trigProb trig = new trigProb(false);
+                theS = trig.toString();
+                mySet = new HashSet<>();
+                mySet = trig.getWrongs();
+                myAns = trig.getAnswer();
+                mySet.add(myAns+"");
+                break;
+
+            case 4:
+                CubeRtProb cubRt = new CubeRtProb(false);
+                theS = cubRt.toString();
+                mySet = new HashSet<>();
+                mySet = cubRt.getWrongs();
+                myAns = cubRt.mySolution + "";
+                mySet.add(myAns+"");
+//                mySet.add(sqrRt.mySolution);
                 break;
 
             default:
@@ -1257,11 +1305,12 @@ public class Game_MathProblems {
         public Set<String> getWrongs(){ return  wrongAnswers;}
     }
 
+
     public static class AddingFraction extends Game_MathProblems
     {
         private Fraction mySolution;
 
-        private Set<Fraction> myWrongs;
+        private Set<String> myWrongs;
 
         // U00F7
         private Fraction firstFraction;
@@ -1285,21 +1334,25 @@ public class Game_MathProblems {
             {
                 Fraction nextWrong = new Fraction(myRandom.nextInt(9) + 1,
                         myRandom.nextInt(9) + 1);
-                if(nextWrong.toString().equals(mySolution.toString()))
+                if(!nextWrong.toString().equals(mySolution.toString()))
                 {
-                    myWrongs.add(nextWrong);
+                    myWrongs.add(nextWrong.toString()+"");
                 }
             }
         }
 
-        public Set<Fraction> getWrongs()
+        public Set<String> getWrongs()
         {
             return myWrongs;
         }
 
-        public Fraction getSolution()
+        public String getSolution()
         {
-            return mySolution;
+            return mySolution.toString();
+        }
+
+        public String toString(){
+            return firstFraction.toString() + " + " + secondFraction.toString() + " = ?";
         }
     }
 

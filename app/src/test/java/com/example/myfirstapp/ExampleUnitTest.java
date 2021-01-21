@@ -39,22 +39,28 @@ public class ExampleUnitTest {
 
 
 
+//
+//        for (int i = 0; i < 100; i++) {
+//            Game_MathProblems.trigProb tp = new Game_MathProblems.trigProb(false);
+//            System.out.println(tp.toString() + '\n' + "Answer: " + tp.getAnswer());
+//            System.out.println("Wrongs: " + tp.getWrongs().toString());
+//        }
 
-        for (int i = 0; i < 100; i++) {
-            Game_MathProblems.trigProb tp = new Game_MathProblems.trigProb(false);
-            System.out.println(tp.toString() + '\n' + "Answer: " + tp.getAnswer());
-            System.out.println("Wrongs: " + tp.getWrongs().toString());
+
+        for(int i=0; i<5;i++){
+            System.out.println(mt.getEasyQuestions());
+            System.out.println(mt.getEasyAnswers());
+
+            System.out.println(mt.getMediumQuestions());
+            System.out.println(mt.getMediumAnswers());
+
+            System.out.println(mt.getHardQuestions());
+            System.out.println(mt.getHardAnswers());
+
+            System.out.println(mt.getExtrHardQuestions());
+            System.out.println(mt.getExtrHardAnswers());
         }
 
-
-//        System.out.println(mt.getEasyQuestions());
-//        System.out.println(mt.getEasyAnswers());
-//
-//        System.out.println(mt.getMediumQuestions());
-//        System.out.println(mt.getMediumAnswers());
-//
-//        System.out.println(mt.getHardQuestions());
-//        System.out.println(mt.getHardAnswers());
 
     }
 }

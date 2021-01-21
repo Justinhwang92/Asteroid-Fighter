@@ -30,6 +30,7 @@ public class Activity_Splash extends Activity {
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate);
 
+//        final RelativeLayout animationlogo = findViewById(R.id.imageViewLogo);
         final ImageView animationlogo = findViewById(R.id.imageViewLogo);
         animationlogo.setSelected(true);
 

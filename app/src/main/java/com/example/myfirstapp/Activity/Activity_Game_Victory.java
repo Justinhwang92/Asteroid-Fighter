@@ -3,12 +3,16 @@ package com.example.myfirstapp.Activity;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +43,14 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
 
         //gets rid of notification bar on top of phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.victory_animation);
+
+        final TextView victoryName = findViewById(R.id.gameVictoryMessage);
+        victoryName.setSelected(true);
+
+        victoryName.startAnimation(animation);
 
         //initialize text based on xml
         gameVictoryTitle = findViewById(R.id.gameVictoryTitile);

@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ufoImage"
         android:layout_width="250dp"
         android:layout_height="250dp"
         app:layout_constraintBottom_toTopOf="@+id/loading"
