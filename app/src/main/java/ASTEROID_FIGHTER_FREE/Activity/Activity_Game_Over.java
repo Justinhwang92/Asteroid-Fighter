@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
 import ASTEROID_FIGHTER_FREE.R;
+
 
 /**
  * class that shows game over screen at end of play
@@ -39,8 +41,6 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
         Bundle bundle = getIntent().getExtras();
         String text = bundle.getString("Score");
         score.setText(text);
-
-        playAgainButton.setOnClickListener(this);
     }
 
     @Override

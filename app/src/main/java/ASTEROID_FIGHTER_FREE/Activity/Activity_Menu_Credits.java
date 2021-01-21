@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_Menu_Credits;
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Master_Control;
@@ -25,11 +26,6 @@ public class Activity_Menu_Credits extends AppCompatActivity {
         setContentView(R.layout.activity_credits);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        myAudio = new Audio_Activity_Menu_Credits(this);
-
-        Audio_Master_Control.checkMuteStatus(this);
-        myAudio.startMedia(Audio_Activity_Menu_Credits.MEDIA_PLAYERS.BGM_CREDITS);
-
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,11 +37,49 @@ public class Activity_Menu_Credits extends AppCompatActivity {
             }
         });
 
+        // Audio
+        myAudio = new Audio_Activity_Menu_Credits(this);
+        Audio_Master_Control.checkMuteStatus(this);
+        myAudio.startMedia(Audio_Activity_Menu_Credits.MEDIA_PLAYERS.BGM_CREDITS);
+
+        if(Audio_Master_Control.myMuted)
+        {
+            muteAudio();
+            ImageView audio = findViewById(R.id.gameaudio);
+            audio.setImageResource(R.drawable.muted_audio);
+        }
+
+        findViewById(R.id.gameaudio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView audio = findViewById(R.id.gameaudio);
+                if(Audio_Master_Control.myMuted)
+                {
+                    audio.setImageResource(R.drawable.unmuted_audio);
+                    unmuteAudio();
+                }
+                else
+                {
+                    audio.setImageResource(R.drawable.muted_audio);
+                    muteAudio();
+                }
+            }
+        });
     }
 
     private void releasePlayers()
     {
         Audio_Activity_Menu_Credits.releasePlayers(this);
+    }
+
+    public void muteAudio()
+    {
+        Audio_Master_Control.muteAllPlayers(this);
+    }
+
+    public void unmuteAudio()
+    {
+        Audio_Master_Control.unmuteAllPlayers(this);
     }
 
     //called when application stops
@@ -83,4 +117,5 @@ public class Activity_Menu_Credits extends AppCompatActivity {
         super.onStart();
 
     }
+
 }
