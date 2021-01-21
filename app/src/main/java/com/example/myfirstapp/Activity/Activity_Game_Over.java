@@ -1,19 +1,14 @@
 package com.example.myfirstapp.Activity;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.myfirstapp.Database.HighScores;
-import com.example.myfirstapp.Database.UserContract.UserEntry;
 import com.example.myfirstapp.Audio.Audio_Activity_Game;
 import com.example.myfirstapp.R;
 
@@ -46,8 +41,6 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
         Bundle bundle = getIntent().getExtras();
         String text = bundle.getString("Score");
         score.setText(text);
-
-        playAgainButton.setOnClickListener(this);
     }
 
     @Override

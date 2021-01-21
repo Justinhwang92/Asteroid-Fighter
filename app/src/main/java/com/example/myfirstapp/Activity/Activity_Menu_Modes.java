@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.example.myfirstapp.Audio.Audio_Activity_Menu_Modes;
 import com.example.myfirstapp.Audio.Audio_Master_Control;
@@ -25,10 +26,34 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         setContentView(R.layout.activity_modes);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        // Audio
         myAudio = new Audio_Activity_Menu_Modes(this);
         Audio_Master_Control.checkMuteStatus(this);
-
         myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.BGM_MODES);
+
+        if(Audio_Master_Control.myMuted)
+        {
+            muteAudio();
+            ImageView audio = findViewById(R.id.gameaudio);
+            audio.setImageResource(R.drawable.muted_audio);
+        }
+
+        findViewById(R.id.gameaudio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView audio = findViewById(R.id.gameaudio);
+                if(Audio_Master_Control.myMuted)
+                {
+                    audio.setImageResource(R.drawable.unmuted_audio);
+                    unmuteAudio();
+                }
+                else
+                {
+                    audio.setImageResource(R.drawable.muted_audio);
+                    muteAudio();
+                }
+            }
+        });
 
         //below: different onclick listeners for each difficulty/endless
 
@@ -85,6 +110,16 @@ public class Activity_Menu_Modes extends AppCompatActivity {
     private void releasePlayers()
     {
         Audio_Activity_Menu_Modes.releasePlayers(this);
+    }
+
+    public void muteAudio()
+    {
+        Audio_Master_Control.muteAllPlayers(this);
+    }
+
+    public void unmuteAudio()
+    {
+        Audio_Master_Control.unmuteAllPlayers(this);
     }
 }
 
