@@ -262,11 +262,6 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(gameDisplay != null)
-        {
-            gameDisplay.donePlaying();
-            myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
-        }
     }
     //called when application starts/resumes
     @Override
@@ -275,7 +270,7 @@ public class Activity_Game extends AppCompatActivity {
         if(gameDisplay != null)
         {
             gameDisplay.resume();
-//            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+            myAudio = new Audio_Activity_Game(this);
         }
 
     }
@@ -287,7 +282,7 @@ public class Activity_Game extends AppCompatActivity {
         if(gameDisplay != null)
         {
             gameDisplay.donePlaying();
-            myAudio.stopMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+            myAudio.releasePlayers(this);
         }
     }
 
@@ -308,10 +303,6 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        if(gameDisplay != null)
-        {
-//            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
-        }
 
     }
 

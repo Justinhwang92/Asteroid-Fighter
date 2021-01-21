@@ -9,6 +9,7 @@ import com.example.myfirstapp.Activity.Activity_Game_Over;
 public abstract class Audio_Abstract_Class {
     //list of media players
     public static MediaPlayer[] myPlayers;
+    private static int myLoopers;
 
     /**
      * makes the array of media players and sets the ones that are supposed to loop to loop
@@ -19,6 +20,8 @@ public abstract class Audio_Abstract_Class {
     public Audio_Abstract_Class(Context theContext, int theLoopers, int... theMedia)
     {
         myPlayers = new MediaPlayer[theMedia.length];
+
+        myLoopers = theLoopers;
 
         for(int i = 0; i < theMedia.length; i++)
         {
@@ -124,5 +127,34 @@ public abstract class Audio_Abstract_Class {
         }
     }
 
+    public static void pauseLoopers()
+    {
+        for(int i = 0; i < myLoopers; i++)
+        {
+            if(myPlayers[i] != null)
+            {
+                if(myPlayers[i].isPlaying())
+                {
+                    myPlayers[i].pause();
+                }
+            }
+
+        }
+    }
+
+    public static void resumeLoopers()
+    {
+        for(int i = 0; i < myLoopers; i++)
+        {
+            if(myPlayers[i] != null)
+            {
+                if(!myPlayers[i].isPlaying())
+                {
+                    myPlayers[i].start();
+                }
+            }
+
+        }
+    }
 
 }
