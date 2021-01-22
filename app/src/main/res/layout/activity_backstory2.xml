@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/Step1"
-        android:layout_width="826dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/main_menu_background"
