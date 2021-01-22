@@ -44,12 +44,14 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
         gameOverText = findViewById(R.id.gameOverMessage);
         score = findViewById(R.id.scoreLabel);
 
-        final Button playAgainButton = findViewById(R.id.playAgainButton);
-
         //Extract the data…
         Bundle bundle = getIntent().getExtras();
         String text = bundle.getString("Score");
         score.setText(text);
+
+        //play again
+        final Button playAgainButton = findViewById(R.id.playAgainButton);
+        playAgainButton.setOnClickListener(this);
     }
 
     @Override
