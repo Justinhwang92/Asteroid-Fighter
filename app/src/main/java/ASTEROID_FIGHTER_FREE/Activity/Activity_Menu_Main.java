@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_Menu_Main;
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Master_Control;
-import ASTEROID_FIGHTER_FREE.Database.HighScores;
 import ASTEROID_FIGHTER_FREE.R;
 
 /**
@@ -50,7 +49,6 @@ public class Activity_Menu_Main extends AppCompatActivity {
         //instructions button
         findViewById(R.id.instruction).setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 showInstructions();
             }
         });
@@ -59,7 +57,6 @@ public class Activity_Menu_Main extends AppCompatActivity {
         findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 showModes();
             }
         });
@@ -68,7 +65,6 @@ public class Activity_Menu_Main extends AppCompatActivity {
         findViewById(R.id.creditsid).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 showCredits();
             }
         });
@@ -95,7 +91,6 @@ public class Activity_Menu_Main extends AppCompatActivity {
         findViewById(R.id.HighScoresButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Main.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 showHighScores();
             }
         });
@@ -134,22 +129,22 @@ public class Activity_Menu_Main extends AppCompatActivity {
 
     public void showHighScores() {
         releasePlayers();
-        startActivity(new Intent(this, HighScores.class));
+        startActivity(new Intent(this, Activity_High_Scores.class));
     }
 
     public void muteAudio()
     {
-        Audio_Master_Control.muteAllPlayers(this);
+        Audio_Master_Control.muteAllPlayers(myAudio);
     }
 
     public void unmuteAudio()
     {
-        Audio_Master_Control.unmuteAllPlayers(this);
+        Audio_Master_Control.unmuteAllPlayers(myAudio);
     }
 
     private void releasePlayers()
     {
-        Audio_Activity_Menu_Main.releasePlayers(this);
+        Audio_Activity_Menu_Main.releasePlayers();
     }
 
 
@@ -179,7 +174,7 @@ public class Activity_Menu_Main extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        myAudio.releasePlayers(this);
+        myAudio.releasePlayers();
         myAudio = new Audio_Activity_Menu_Main(this);
     }
     //called when application starts/resumes

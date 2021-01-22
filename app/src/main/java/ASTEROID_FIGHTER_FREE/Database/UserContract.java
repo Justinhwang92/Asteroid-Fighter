@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
 
 public class UserContract {
     private static final String LOG_TAG = UserContract.class.getSimpleName();
-    public static final String CONTENT_AUTHORITY = "ASTEROID_FIGHTER_FREE";
+    public static final String CONTENT_AUTHORITY = "Asteroid_Fighter_Free";
 
     // The base of all uris using the content Authority
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);

@@ -28,7 +28,7 @@ public class Activity_Menu_Modes extends AppCompatActivity {
 
         // Audio
         myAudio = new Audio_Activity_Menu_Modes(this);
-        Audio_Master_Control.checkMuteStatus(this);
+        Audio_Master_Control.checkMuteStatus(myAudio);
         myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.BGM_MODES);
 
         if(Audio_Master_Control.myMuted)
@@ -60,7 +60,6 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         findViewById(R.id.novice).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 mode = "novice";
                 //release the resources associated with this audio player
                 releasePlayers();
@@ -72,7 +71,6 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         findViewById(R.id.intermediate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 mode = "intermediate";
                 //release the resources associated with this audio player
                 releasePlayers();
@@ -84,7 +82,6 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         findViewById(R.id.advanced).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 mode = "advanced";
                 //release the resources associated with this audio player
                 releasePlayers();
@@ -96,7 +93,6 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         findViewById(R.id.endless).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 mode = "endless";
                 //release the resources associated with this audio player
                 releasePlayers();
@@ -108,7 +104,6 @@ public class Activity_Menu_Modes extends AppCompatActivity {
         findViewById(R.id.backToMain).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Modes.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 startActivity(new Intent(Activity_Menu_Modes.this, Activity_Menu_Main.class));
@@ -119,16 +114,16 @@ public class Activity_Menu_Modes extends AppCompatActivity {
 
     private void releasePlayers()
     {
-        Audio_Activity_Menu_Modes.releasePlayers(this);
+        Audio_Activity_Menu_Modes.releasePlayers();
     }
 
     public void muteAudio()
     {
-        Audio_Master_Control.muteAllPlayers(this);
+        Audio_Master_Control.muteAllPlayers(myAudio);
     }
 
     public void unmuteAudio() {
-        Audio_Master_Control.unmuteAllPlayers(this);
+        Audio_Master_Control.unmuteAllPlayers(myAudio);
     }
     //called when application stops
     @Override
@@ -156,7 +151,7 @@ public class Activity_Menu_Modes extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        myAudio.releasePlayers(this);
+        myAudio.releasePlayers();
         myAudio = new Audio_Activity_Menu_Modes(this);
     }
     //called when application starts/resumes

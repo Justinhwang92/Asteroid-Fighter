@@ -8,16 +8,14 @@ public class Audio_Activity_Menu_Backstory2 extends Audio_Abstract_Class{
     public enum MEDIA_PLAYERS
     {
         BACKSTORY2,
-        BGM_MODES,
-        SFX_MENU_CLICK,
+        BGM_MODES
     }
 
     public Audio_Activity_Menu_Backstory2(Context theContext)
     {
         super(theContext, 1,
                 R.raw.bgm_modes_loop,
-                R.raw.backstory2,
-                R.raw.sfx_menu_click);
+                R.raw.backstory2);
     }
 
     @Override

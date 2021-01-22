@@ -29,7 +29,6 @@ public class Activity_Menu_Credits extends AppCompatActivity {
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Credits.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 startActivity(new Intent(Activity_Menu_Credits.this, Activity_Menu_Main.class));
@@ -39,7 +38,7 @@ public class Activity_Menu_Credits extends AppCompatActivity {
 
         // Audio
         myAudio = new Audio_Activity_Menu_Credits(this);
-        Audio_Master_Control.checkMuteStatus(this);
+        Audio_Master_Control.checkMuteStatus(myAudio);
         myAudio.startMedia(Audio_Activity_Menu_Credits.MEDIA_PLAYERS.BGM_CREDITS);
 
         if(Audio_Master_Control.myMuted)
@@ -69,17 +68,17 @@ public class Activity_Menu_Credits extends AppCompatActivity {
 
     private void releasePlayers()
     {
-        Audio_Activity_Menu_Credits.releasePlayers(this);
+        Audio_Activity_Menu_Credits.releasePlayers();
     }
 
     public void muteAudio()
     {
-        Audio_Master_Control.muteAllPlayers(this);
+        Audio_Master_Control.muteAllPlayers(myAudio);
     }
 
     public void unmuteAudio()
     {
-        Audio_Master_Control.unmuteAllPlayers(this);
+        Audio_Master_Control.unmuteAllPlayers(myAudio);
     }
 
     //called when application stops
@@ -108,7 +107,7 @@ public class Activity_Menu_Credits extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        myAudio.releasePlayers(this);
+        myAudio.releasePlayers();
         myAudio = new Audio_Activity_Menu_Credits(this);
     }
     //called when application starts/resumes

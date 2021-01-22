@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.myfirstapp"
+        applicationId "com.td.ASTEROID_FIGHTER_FREE"
         minSdkVersion 17
         targetSdkVersion 30
         versionCode 1

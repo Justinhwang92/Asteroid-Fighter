@@ -28,7 +28,7 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
         //initialize audio
         myAudio = new Audio_Activity_Menu_Backstory1(this);
 
-        Audio_Master_Control.checkMuteStatus(this);
+        Audio_Master_Control.checkMuteStatus(myAudio);
         if(!(Audio_Master_Control.myMuted))
         {
             myAudio.getMediaPlayer(Audio_Activity_Menu_Backstory1.MEDIA_PLAYERS.BGM_MODES).setVolume((float).5, (float).5);
@@ -40,8 +40,6 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
         findViewById(R.id.skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                myAudio.startMedia(Audio_Activity_Menu_Backstory1.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 //show main game activity
@@ -54,7 +52,6 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
         findViewById(R.id.continue1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Backstory1.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 //show main game activity
@@ -67,7 +64,6 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
         findViewById(R.id.previous1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Backstory1.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 startActivity(new Intent(Activity_Menu_Backstory1.this, Activity_Menu_Modes.class));
@@ -78,7 +74,7 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
 
     private void releasePlayers()
     {
-        Audio_Activity_Menu_Backstory1.releasePlayers(this);
+        Audio_Activity_Menu_Backstory1.releasePlayers();
     }
 
     //called when application stops
@@ -107,7 +103,7 @@ public class Activity_Menu_Backstory1 extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        myAudio.releasePlayers(this);
+        myAudio.releasePlayers();
         myAudio = new Audio_Activity_Menu_Backstory1(this);
     }
     //called when application starts/resumes
