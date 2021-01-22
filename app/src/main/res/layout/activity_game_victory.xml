@@ -8,6 +8,28 @@
     android:background="@drawable/main_menu_background"
     tools:context="ASTEROID_FIGHTER_FREE.Activity.Activity_Game_Victory">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif1"
+        android:layout_width="256dp"
+        android:layout_height="369dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/celebration_gif"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif2"
+        android:layout_width="256dp"
+        android:layout_height="369dp"
+        android:layout_marginStart="556dp"
+        android:layout_marginLeft="556dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/celebration_gif"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/gameVictoryTitile"
         android:layout_width="wrap_content"
@@ -49,7 +71,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameVictoryMessage"/>
+        app:layout_constraintTop_toBottomOf="@+id/gameVictoryMessage" />
 
     <TextView
         android:id="@+id/askUserName"
@@ -84,9 +106,9 @@
         android:layout_marginTop="8dp"
         android:onClick="onClick"
         android:text="OK"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
 
     <Button
         android:id="@+id/myWebSearch_bt"
