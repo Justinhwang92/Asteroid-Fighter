@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_menu_background"
-    tools:context=".Activity.Activity_Game_Over">
+    tools:context="ASTEROID_FIGHTER_FREE.Activity.Activity_Game_Over">
 
     <TextView
         android:id="@+id/gameOverTitile"
