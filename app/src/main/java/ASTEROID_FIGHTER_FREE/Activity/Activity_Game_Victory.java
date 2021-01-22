@@ -40,21 +40,21 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //audio
         myAudio = new Audio_Activity_Game_Victory(this);
         Audio_Master_Control.checkMuteStatus(myAudio);
         myAudio.startMedia(Audio_Activity_Game_Victory.MEDIA_PLAYERS.BGM_VICTORY_LOOP);
+
         //puts game over screen on the screen
         setContentView(R.layout.activity_game_victory);
 
         //gets rid of notification bar on top of phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        //victory animation
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.victory_animation);
-
         final TextView victoryName = findViewById(R.id.gameVictoryMessage);
         victoryName.setSelected(true);
-
         victoryName.startAnimation(animation);
 
         //initialize text based on xml
@@ -64,13 +64,13 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
         askUserName = findViewById(R.id.askUserName);
         userNameEdit = findViewById(R.id.userName);
 
-        final Button okButton = findViewById(R.id.okButton);
-
         //Extract the data…
         Bundle bundle = getIntent().getExtras();
         String text = bundle.getString("Score");
         score.setText(text);
 
+        //ok button
+        final Button okButton = findViewById(R.id.okButton);
         okButton.setOnClickListener(this);
     }
 
