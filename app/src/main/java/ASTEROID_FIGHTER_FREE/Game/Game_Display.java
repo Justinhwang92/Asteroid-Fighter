@@ -366,10 +366,12 @@ public class Game_Display extends SurfaceView implements Runnable {
         else if(gameAsteroid.bossLife <= 0)
         {
             if(myAudio.myPlayers[0] != null)
-            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_BOSS);
+                myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_BOSS);
             if(myAudio.myPlayers[0] != null)
-            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
+                myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
+
             isGameOver = false;
+            isPlaying = false;
             activityGame.gameDonePlayAgain(isGameOver);
         }
     }

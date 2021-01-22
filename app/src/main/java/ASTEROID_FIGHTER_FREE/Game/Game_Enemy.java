@@ -32,7 +32,7 @@ public class Game_Enemy {
     /**
      * bitmaps for the asteroid and the explosion
      */
-    Bitmap asteroid, explosion;
+    Bitmap asteroid, asteroid_explosion, boss_explosion;
 
     /**
      * bitmaps for the boss and minions
@@ -51,7 +51,8 @@ public class Game_Enemy {
 
     public Game_Enemy(Resources res, boolean isMinion) {
         asteroid = BitmapFactory.decodeResource(res, R.drawable.asteroid);
-        explosion = BitmapFactory.decodeResource(res, R.drawable.asteroid_explosion);
+        asteroid_explosion = BitmapFactory.decodeResource(res, R.drawable.asteroid_explosion);
+        boss_explosion = BitmapFactory.decodeResource(res, R.drawable.boss_check2);
         boss = BitmapFactory.decodeResource(res, R.drawable.big_boss);
         minion = BitmapFactory.decodeResource(res, R.drawable.small_minion);
 
@@ -72,9 +73,13 @@ public class Game_Enemy {
         asteroidCounter = 1;
         if (crashed) {
             if (!bossStageBegins) {
-                return explosion;
+                return asteroid_explosion;
             } else {
-                x = x + 120;
+                if(bossLife >= 1)
+                    x = x + 120;
+                else{
+                    return boss_explosion;
+                }
                 return boss;
             }
         }
