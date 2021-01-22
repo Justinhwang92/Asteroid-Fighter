@@ -26,7 +26,7 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         myAudio = new Audio_Activity_Menu_Backstory2(this);
-        Audio_Master_Control.checkMuteStatus(this);
+        Audio_Master_Control.checkMuteStatus(myAudio);
         if(!(Audio_Master_Control.myMuted))
         {
             myAudio.getMediaPlayer(Audio_Activity_Menu_Backstory2.MEDIA_PLAYERS.BGM_MODES).setVolume((float).5, (float).5);
@@ -37,7 +37,6 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
         findViewById(R.id.skip).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Backstory2.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 startActivity(new Intent(Activity_Menu_Backstory2.this, Activity_Game.class));
@@ -48,7 +47,6 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
         findViewById(R.id.previous2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Backstory2.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 startActivity(new Intent(Activity_Menu_Backstory2.this, Activity_Menu_Backstory1.class));
@@ -59,7 +57,6 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
         findViewById(R.id.continue2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Backstory2.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 startActivity(new Intent(Activity_Menu_Backstory2.this, Activity_Menu_Backstory3.class));
@@ -70,7 +67,7 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
 
     private void releasePlayers()
     {
-        Audio_Activity_Menu_Backstory2.releasePlayers(this);
+        Audio_Activity_Menu_Backstory2.releasePlayers();
     }
 
     //called when application stops
@@ -99,7 +96,7 @@ public class Activity_Menu_Backstory2 extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        myAudio.releasePlayers(this);
+        myAudio.releasePlayers();
         myAudio = new Audio_Activity_Menu_Backstory2(this);
     }
     //called when application starts/resumes

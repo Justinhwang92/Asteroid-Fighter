@@ -42,7 +42,7 @@ public abstract class Audio_Abstract_Class {
     public abstract void stopMedia(Object thePlayer);
 
     //releases the resources associated with all the players
-    public static void releasePlayers(Context theContext) {
+    public static void releasePlayers() {
         for(int i = 0; i < myPlayers.length; i++)
         {
             if (myPlayers[i] != null) {

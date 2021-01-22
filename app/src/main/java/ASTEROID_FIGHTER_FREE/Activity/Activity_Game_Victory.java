@@ -3,7 +3,6 @@ package ASTEROID_FIGHTER_FREE.Activity;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +11,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ASTEROID_FIGHTER_FREE.Database.HighScores;
+import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_Game_Over;
+import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_Game_Victory;
+import ASTEROID_FIGHTER_FREE.Audio.Audio_Master_Control;
 import ASTEROID_FIGHTER_FREE.Database.UserContract.UserEntry;
 import ASTEROID_FIGHTER_FREE.R;
 
@@ -34,9 +34,15 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
     TextView askUserName;
     EditText userNameEdit;
 
+    Audio_Activity_Game_Victory myAudio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        myAudio = new Audio_Activity_Game_Victory(this);
+        Audio_Master_Control.checkMuteStatus(myAudio);
+        myAudio.startMedia(Audio_Activity_Game_Victory.MEDIA_PLAYERS.BGM_VICTORY_LOOP);
         //puts game over screen on the screen
         setContentView(R.layout.activity_game_victory);
 
@@ -70,11 +76,12 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+
         Intent i;
         Intent j;
 
         i = new Intent(this, Activity_Menu_Main.class);
-        j = new Intent(this, HighScores.class);
+        j = new Intent(this, Activity_High_Scores.class);
 
         switch (view.getId()) {
             case R.id.playAgainButton:
@@ -84,6 +91,7 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
 
             case R.id.okButton:
                 try {
+                    myAudio.releasePlayers();
                     saveScore();
                     finish();
                     startActivity(j);
@@ -129,4 +137,40 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
         finish();
     }
 
+
+    //called when application stops
+    @Override
+    protected void onPause() {
+        super.onPause();
+        myAudio.pauseLoopers();
+    }
+    //called when application starts/resumes
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myAudio.resumeLoopers();
+    }
+
+    //called when application stops
+    @Override
+    protected void onStop(){
+        super.onStop();
+    }
+
+    //i think this is called when display turns back on.
+    //if you press the power button and turn the emulator off and press again to start
+    //it calls this method. not sure if power button on emulator just turns off screen or turns
+    //off emulator
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        myAudio.releasePlayers();
+        myAudio = new Audio_Activity_Game_Victory(this);
+    }
+    //called when application starts/resumes
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+    }
 }

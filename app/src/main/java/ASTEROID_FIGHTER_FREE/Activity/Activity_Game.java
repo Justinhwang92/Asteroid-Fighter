@@ -280,7 +280,7 @@ public class Activity_Game extends AppCompatActivity {
         if(gameDisplay != null)
         {
             gameDisplay.donePlaying();
-            myAudio.releasePlayers(this);
+            myAudio.releasePlayers();
         }
     }
 
@@ -293,7 +293,7 @@ public class Activity_Game extends AppCompatActivity {
         super.onRestart();
         if(gameDisplay != null)
         {
-            myAudio.releasePlayers(this);
+            myAudio.releasePlayers();
             myAudio = new Audio_Activity_Game(this);
         }
     }
@@ -416,17 +416,17 @@ public class Activity_Game extends AppCompatActivity {
     }
     public void muteAudio()
     {
-        Audio_Master_Control.muteAllPlayers(this);
+        Audio_Master_Control.muteAllPlayers(myAudio);
     }
 
     public void unmuteAudio()
     {
-        Audio_Master_Control.unmuteAllPlayers(this);
+        Audio_Master_Control.unmuteAllPlayers(myAudio);
     }
 
     private void releasePlayers()
     {
-        Audio_Activity_Game.releasePlayers(this);
+        Audio_Activity_Game.releasePlayers();
     }
 }
 

@@ -14,7 +14,7 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
-            android:name="ASTEROID_FIGHTER_FREE.Database.HighScores"
+            android:name="ASTEROID_FIGHTER_FREE.Activity.Activity_High_Scores"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.noActionBar" />
         <activity
@@ -73,7 +73,7 @@
 
         <provider
             android:name="ASTEROID_FIGHTER_FREE.Database.UserProvider"
-            android:authorities="ASTEROID_FIGHTER_FREE"
+            android:authorities="Asteroid_Fighter_Free"
             android:exported="false" />
     </application>
 

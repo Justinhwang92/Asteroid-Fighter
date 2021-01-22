@@ -16,13 +16,10 @@ public class Audio_Activity_Game extends Audio_Abstract_Class{
         BGM_GAME_LOOP,
         SFX_BOSS_HIT,
         SFX_EXPLOSION_ASTEROID,
-        SFX_EXPLOSION_BOSS,
-        SFX_LEVEL_VICTORY,
         SFX_PROBLEM_CORRECT,
         SFX_PROBLEM_INCORRECT,
         SFX_ROCKET_HIT,
         SFX_ROCKET_LASER,
-        SFX_ROCKET_LOST_ALL_LIVES,
         SFX_ROCKET_LOST_LIFE
     }
 
@@ -37,13 +34,10 @@ public class Audio_Activity_Game extends Audio_Abstract_Class{
                 R.raw.bgm_game_loop,
                 R.raw.sfx_boss_hit,
                 R.raw.sfx_explosion_asteroid,
-                R.raw.sfx_explosion_boss,
-                R.raw.sfx_level_victory,
                 R.raw.sfx_problem_correct,
                 R.raw.sfx_problem_incorrect,
                 R.raw.sfx_rocket_hit,
                 R.raw.sfx_rocket_laser,
-                R.raw.sfx_rocket_lost_all_lives,
                 R.raw.sfx_rocket_lost_life);
     }
     @Override

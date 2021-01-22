@@ -23,7 +23,7 @@ public class Activity_Menu_Instructions extends AppCompatActivity {
 
         // Audio
         myAudio = new Audio_Activity_Menu_Instructions(this);
-        Audio_Master_Control.checkMuteStatus(this);
+        Audio_Master_Control.checkMuteStatus(myAudio);
         myAudio.startMedia(Audio_Activity_Menu_Instructions.MEDIA_PLAYERS.BGM_INSTRUCTIONS);
 
         if(Audio_Master_Control.myMuted)
@@ -53,7 +53,6 @@ public class Activity_Menu_Instructions extends AppCompatActivity {
         findViewById(R.id.backToMain).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Instructions.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 startActivity(new Intent(Activity_Menu_Instructions.this, Activity_Menu_Main.class));
@@ -64,17 +63,17 @@ public class Activity_Menu_Instructions extends AppCompatActivity {
 
     private void releasePlayers()
     {
-        Audio_Activity_Menu_Instructions.releasePlayers(this);
+        Audio_Activity_Menu_Instructions.releasePlayers();
     }
 
     public void muteAudio()
     {
-        Audio_Master_Control.muteAllPlayers(this);
+        Audio_Master_Control.muteAllPlayers(myAudio);
     }
 
     public void unmuteAudio()
     {
-        Audio_Master_Control.unmuteAllPlayers(this);
+        Audio_Master_Control.unmuteAllPlayers(myAudio);
     }
 
 
@@ -104,7 +103,7 @@ public class Activity_Menu_Instructions extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        myAudio.releasePlayers(this);
+        myAudio.releasePlayers();
         myAudio = new Audio_Activity_Menu_Instructions(this);
     }
     //called when application starts/resumes

@@ -15,6 +15,7 @@ import android.view.View;
 import ASTEROID_FIGHTER_FREE.Activity.Activity_Game;
 import ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Modes;
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_Game;
+import ASTEROID_FIGHTER_FREE.Audio.Audio_Master_Control;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -226,7 +227,11 @@ public class Game_Display extends SurfaceView implements Runnable {
                     });
                     if (!isBossMusic) {
                         if(myAudio.myPlayers[0] != null)
-                        myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+                        {
+                            Audio_Master_Control.checkMuteStatus(myAudio);
+                            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.BGM_GAME_LOOP);
+                        }
+
                     }
                 }
 
@@ -353,22 +358,16 @@ public class Game_Display extends SurfaceView implements Runnable {
             } else {
                 gameHeart.lives--;
             }
-            theScore--;
+
         }
         if (gameHeart.lives == 0) {
-            //plays all lives lost sound
-            if(myAudio.myPlayers[0] != null)
-            myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_ROCKET_LOST_ALL_LIVES);
+
             isGameOver = true;
             activityGame.gameDonePlayAgain(isGameOver);
         }
 
         else if(gameAsteroid.bossLife <= 0)
         {
-            if(myAudio.myPlayers[0] != null)
-                myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_EXPLOSION_BOSS);
-            if(myAudio.myPlayers[0] != null)
-                myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_LEVEL_VICTORY);
 
             isGameOver = false;
             isPlaying = false;

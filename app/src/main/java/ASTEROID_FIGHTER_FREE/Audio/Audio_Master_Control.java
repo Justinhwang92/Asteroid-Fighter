@@ -11,119 +11,29 @@ public class Audio_Master_Control {
 
     public static boolean myMuted = false;
 
-    public static void muteAllPlayers(Context theContext)
+    public static void muteAllPlayers(Audio_Abstract_Class theAudio)
     {
         myMuted = true;
-
-        if(theContext instanceof Activity_Game)
-        {
-            Audio_Activity_Game.mutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Backstory1)
-        {
-            Audio_Activity_Menu_Backstory1.mutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Backstory2)
-        {
-            Audio_Activity_Menu_Backstory2.mutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Backstory3)
-        {
-            Audio_Activity_Menu_Backstory3.mutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Credits)
-        {
-            Audio_Activity_Menu_Credits.mutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Instructions)
-        {
-            Audio_Activity_Menu_Instructions.mutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Main)
-        {
-            Audio_Activity_Menu_Main.mutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Modes)
-        {
-            Audio_Activity_Menu_Modes.mutePlayers();
-        }
+        theAudio.mutePlayers();
     }
 
-    public static void unmuteAllPlayers(Context theContext)
+    public static void unmuteAllPlayers(Audio_Abstract_Class theAudio)
     {
         myMuted = false;
-
-        if(theContext instanceof Activity_Game)
-        {
-            Audio_Activity_Game.unmutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Backstory1)
-        {
-            Audio_Activity_Menu_Backstory1.unmutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Backstory2)
-        {
-            Audio_Activity_Menu_Backstory2.unmutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Backstory3)
-        {
-            Audio_Activity_Menu_Backstory3.unmutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Credits)
-        {
-            Audio_Activity_Menu_Credits.unmutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Instructions)
-        {
-            Audio_Activity_Menu_Instructions.unmutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Main)
-        {
-            Audio_Activity_Menu_Main.unmutePlayers();
-        }
-
-        else if(theContext instanceof Activity_Menu_Modes)
-        {
-            Audio_Activity_Menu_Modes.unmutePlayers();
-        }
+        theAudio.unmutePlayers();
     }
 
-    public static void checkMuteStatus(Context theContext)
+    public static void checkMuteStatus(Audio_Abstract_Class theAudio)
     {
         if(myMuted)
         {
-            muteAllPlayers(theContext);
+            muteAllPlayers(theAudio);
         }
 
         else
         {
-            unmuteAllPlayers(theContext);
+            unmuteAllPlayers(theAudio);
         }
     }
 
-    public static void onPause(Audio_Abstract_Class theAudio, Context theContext)
-    {
-        if(theAudio.myPlayers[0] != null)
-        {
-            theAudio.releasePlayers(theContext);
-        }
-    }
-
-    public static void setAllVolume()
-    {
-        //for more precise audio adjustment
-    }
 }

@@ -7,15 +7,13 @@ import ASTEROID_FIGHTER_FREE.R;
 public class Audio_Activity_Menu_Credits extends Audio_Abstract_Class{
     public enum MEDIA_PLAYERS
     {
-        BGM_CREDITS,
-        SFX_MENU_CLICK,
+        BGM_CREDITS
     }
 
     public Audio_Activity_Menu_Credits(Context theContext)
     {
         super(theContext, 1,
-                R.raw.bgm_credits_loop,
-                R.raw.sfx_menu_click);
+                R.raw.bgm_credits_loop);
     }
 
     @Override

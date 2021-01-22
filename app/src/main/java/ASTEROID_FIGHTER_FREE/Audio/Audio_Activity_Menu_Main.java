@@ -8,15 +8,13 @@ public class Audio_Activity_Menu_Main extends Audio_Abstract_Class{
 
     public enum MEDIA_PLAYERS
     {
-        BGM_MENU,
-        SFX_MENU_CLICK,
+        BGM_MENU
     }
 
     public Audio_Activity_Menu_Main(Context theContext)
     {
         super(theContext, 1,
-                R.raw.bgm_menu_loop,
-                R.raw.sfx_menu_click);
+                R.raw.bgm_menu_loop);
     }
 
     @Override

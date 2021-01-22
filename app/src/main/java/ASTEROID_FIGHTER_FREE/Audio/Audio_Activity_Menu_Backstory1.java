@@ -9,16 +9,14 @@ public class Audio_Activity_Menu_Backstory1 extends Audio_Abstract_Class{
     public enum MEDIA_PLAYERS
     {
         BACKSTORY1,
-        BGM_MODES,
-        SFX_MENU_CLICK,
+        BGM_MODES
     }
 
     public Audio_Activity_Menu_Backstory1(Context theContext)
     {
         super(theContext, 1,
                 R.raw.bgm_modes_loop,
-                R.raw.backstory1,
-                R.raw.sfx_menu_click);
+                R.raw.backstory1);
     }
 
     public MediaPlayer getMediaPlayer(Object thePlayer) {

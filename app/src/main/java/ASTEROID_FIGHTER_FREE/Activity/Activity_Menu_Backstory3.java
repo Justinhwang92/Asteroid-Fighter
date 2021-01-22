@@ -26,7 +26,7 @@ public class Activity_Menu_Backstory3 extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         myAudio = new Audio_Activity_Menu_Backstory3(this);
-        Audio_Master_Control.checkMuteStatus(this);
+        Audio_Master_Control.checkMuteStatus(myAudio);
         if(!(Audio_Master_Control.myMuted))
         {
             myAudio.getMediaPlayer(Audio_Activity_Menu_Backstory3.MEDIA_PLAYERS.BGM_MODES).setVolume((float).5, (float).5);
@@ -37,7 +37,6 @@ public class Activity_Menu_Backstory3 extends AppCompatActivity {
         findViewById(R.id.previous3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Backstory3.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 startActivity(new Intent(Activity_Menu_Backstory3.this, Activity_Menu_Backstory2.class));
@@ -48,7 +47,6 @@ public class Activity_Menu_Backstory3 extends AppCompatActivity {
         findViewById(R.id.playNow).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myAudio.startMedia(Audio_Activity_Menu_Backstory3.MEDIA_PLAYERS.SFX_MENU_CLICK);
                 //release the resources associated with this audio player
                 releasePlayers();
                 startActivity(new Intent(Activity_Menu_Backstory3.this, Activity_Game.class));
@@ -59,7 +57,7 @@ public class Activity_Menu_Backstory3 extends AppCompatActivity {
 
     private void releasePlayers()
     {
-        Audio_Activity_Menu_Backstory3.releasePlayers(this);
+        Audio_Activity_Menu_Backstory3.releasePlayers();
     }
     //called when application stops
     @Override
@@ -87,7 +85,7 @@ public class Activity_Menu_Backstory3 extends AppCompatActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        myAudio.releasePlayers(this);
+        myAudio.releasePlayers();
         myAudio = new Audio_Activity_Menu_Backstory3(this);
     }
     //called when application starts/resumes
