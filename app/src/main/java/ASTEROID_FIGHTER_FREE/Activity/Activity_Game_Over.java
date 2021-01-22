@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_Game_Over;
@@ -29,11 +30,6 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //puts game over screen on the screen
-
-        myAudio = new Audio_Activity_Game_Over(this);
-        Audio_Master_Control.checkMuteStatus(myAudio);
-        myAudio.startMedia(Audio_Activity_Game_Over.MEDIA_PLAYERS.SFX_LOST_ALL_LIVES);
         setContentView(R.layout.activity_game_over);
 
         //gets rid of notification bar on top of phone
@@ -44,12 +40,43 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
         gameOverText = findViewById(R.id.gameOverMessage);
         score = findViewById(R.id.scoreLabel);
 
+        //audio
+        myAudio = new Audio_Activity_Game_Over(this);
+        Audio_Master_Control.checkMuteStatus(myAudio);
+        myAudio.startMedia(Audio_Activity_Game_Over.MEDIA_PLAYERS.SFX_LOST_ALL_LIVES);
+
+
+        //mute button
+        if(Audio_Master_Control.myMuted)
+        {
+            muteAudio();
+            ImageView audio = findViewById(R.id.gameaudio);
+            audio.setImageResource(R.drawable.muted_audio);
+        }
+
+        findViewById(R.id.gameaudio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView audio = findViewById(R.id.gameaudio);
+                if(Audio_Master_Control.myMuted)
+                {
+                    audio.setImageResource(R.drawable.unmuted_audio);
+                    unmuteAudio();
+                }
+                else
+                {
+                    audio.setImageResource(R.drawable.muted_audio);
+                    muteAudio();
+                }
+            }
+        });
+
         //Extract the data…
         Bundle bundle = getIntent().getExtras();
         String text = bundle.getString("Score");
         score.setText(text);
 
-        //play again
+        //play again button
         final Button playAgainButton = findViewById(R.id.playAgainButton);
         playAgainButton.setOnClickListener(this);
     }
@@ -77,7 +104,6 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
     public void onBackPressed() {
         finish();
     }
-
 
     //called when application stops
     @Override
@@ -112,6 +138,15 @@ public class Activity_Game_Over extends Activity implements View.OnClickListener
     @Override
     protected void onStart(){
         super.onStart();
+    }
 
+    public void muteAudio()
+    {
+        Audio_Master_Control.muteAllPlayers(myAudio);
+    }
+
+    public void unmuteAudio()
+    {
+        Audio_Master_Control.unmuteAllPlayers(myAudio);
     }
 }

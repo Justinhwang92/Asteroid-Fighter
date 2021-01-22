@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,23 +40,10 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //audio
-        myAudio = new Audio_Activity_Game_Victory(this);
-        Audio_Master_Control.checkMuteStatus(myAudio);
-        myAudio.startMedia(Audio_Activity_Game_Victory.MEDIA_PLAYERS.BGM_VICTORY_LOOP);
-
-        //puts game over screen on the screen
         setContentView(R.layout.activity_game_victory);
 
         //gets rid of notification bar on top of phone
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        //victory animation
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.victory_animation);
-        final TextView victoryName = findViewById(R.id.gameVictoryMessage);
-        victoryName.setSelected(true);
-        victoryName.startAnimation(animation);
 
         //initialize text based on xml
         gameVictoryTitle = findViewById(R.id.gameVictoryTitile);
@@ -63,6 +51,42 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
         score = findViewById(R.id.scoreLabel);
         askUserName = findViewById(R.id.askUserName);
         userNameEdit = findViewById(R.id.userName);
+
+        //audio
+        myAudio = new Audio_Activity_Game_Victory(this);
+        Audio_Master_Control.checkMuteStatus(myAudio);
+        myAudio.startMedia(Audio_Activity_Game_Victory.MEDIA_PLAYERS.BGM_VICTORY_LOOP);
+
+        //mute button
+        if(Audio_Master_Control.myMuted)
+        {
+            muteAudio();
+            ImageView audio = findViewById(R.id.gameaudio);
+            audio.setImageResource(R.drawable.muted_audio);
+        }
+
+        findViewById(R.id.gameaudio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView audio = findViewById(R.id.gameaudio);
+                if(Audio_Master_Control.myMuted)
+                {
+                    audio.setImageResource(R.drawable.unmuted_audio);
+                    unmuteAudio();
+                }
+                else
+                {
+                    audio.setImageResource(R.drawable.muted_audio);
+                    muteAudio();
+                }
+            }
+        });
+
+        //victory animation
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.victory_animation);
+        final TextView victoryName = findViewById(R.id.gameVictoryMessage);
+        victoryName.setSelected(true);
+        victoryName.startAnimation(animation);
 
         //Extract the data…
         Bundle bundle = getIntent().getExtras();
@@ -129,14 +153,12 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
         else {
             Toast.makeText(getApplicationContext(), "INVALID", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
     public void onBackPressed() {
         finish();
     }
-
 
     //called when application stops
     @Override
@@ -171,6 +193,15 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
     @Override
     protected void onStart(){
         super.onStart();
+    }
 
+    public void muteAudio()
+    {
+        Audio_Master_Control.muteAllPlayers(myAudio);
+    }
+
+    public void unmuteAudio()
+    {
+        Audio_Master_Control.unmuteAllPlayers(myAudio);
     }
 }

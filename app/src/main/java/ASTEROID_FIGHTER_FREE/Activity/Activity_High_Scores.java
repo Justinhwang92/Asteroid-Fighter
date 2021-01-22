@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,12 +29,41 @@ public class Activity_High_Scores extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_high_scores);
+        ListView HighScoresList = findViewById(R.id.highScoreList);
+
+        //gets rid of notification bar on top of phone
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        //audio
         myAudio = new Audio_Activity_High_Scores(this);
         Audio_Master_Control.checkMuteStatus(myAudio);
         myAudio.startMedia(Audio_Activity_High_Scores.MEDIA_PLAYERS.BGM_CREDITS_LOOP);
-        setContentView(R.layout.activity_high_scores);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        ListView HighScoresList = findViewById(R.id.highScoreList);
+
+        //mute button
+        if(Audio_Master_Control.myMuted)
+        {
+            muteAudio();
+            ImageView audio = findViewById(R.id.gameaudio);
+            audio.setImageResource(R.drawable.muted_audio);
+        }
+
+        findViewById(R.id.gameaudio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView audio = findViewById(R.id.gameaudio);
+                if(Audio_Master_Control.myMuted)
+                {
+                    audio.setImageResource(R.drawable.unmuted_audio);
+                    unmuteAudio();
+                }
+                else
+                {
+                    audio.setImageResource(R.drawable.muted_audio);
+                    muteAudio();
+                }
+            }
+        });
 
         // get database
         mUserCursorAdapter = new UserCursorAdapter(this, null);
@@ -125,6 +155,15 @@ public class Activity_High_Scores extends AppCompatActivity implements View.OnCl
     @Override
     protected void onStart(){
         super.onStart();
+    }
 
+    public void muteAudio()
+    {
+        Audio_Master_Control.muteAllPlayers(myAudio);
+    }
+
+    public void unmuteAudio()
+    {
+        Audio_Master_Control.unmuteAllPlayers(myAudio);
     }
 }
