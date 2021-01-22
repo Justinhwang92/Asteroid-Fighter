@@ -1,9 +1,10 @@
 package com.example.myfirstapp;
-import com.example.myfirstapp.Game.Game_MathProblems;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import ASTEROID_FIGHTER_FREE.Game.Game_MathProblems;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -48,14 +49,14 @@ public class ExampleUnitTest {
 
 
         for(int i=0; i<5;i++){
-            System.out.println(mt.getEasyQuestions());
-            System.out.println(mt.getEasyAnswers());
-
-            System.out.println(mt.getMediumQuestions());
-            System.out.println(mt.getMediumAnswers());
-
-            System.out.println(mt.getHardQuestions());
-            System.out.println(mt.getHardAnswers());
+//            System.out.println(mt.getEasyQuestions());
+//            System.out.println(mt.getEasyAnswers());
+//
+//            System.out.println(mt.getMediumQuestions());
+//            System.out.println(mt.getMediumAnswers());
+//
+//            System.out.println(mt.getHardQuestions());
+//            System.out.println(mt.getHardAnswers());
 
             System.out.println(mt.getExtrHardQuestions());
             System.out.println(mt.getExtrHardAnswers());
