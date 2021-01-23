@@ -281,6 +281,17 @@ public class Game_MathProblems {
 //                mySet.add(algO.mySolution);
                 break;
 
+            //For quadratic equations
+            case 5:
+                QuadAlgProb quadAlgProb = new QuadAlgProb(false);
+                theS = quadAlgProb.toString();
+                mySet = new HashSet<>();
+                mySet = quadAlgProb.getWrongs();
+                myAns = quadAlgProb.mySolution1 + ", " + quadAlgProb.mySolution2;
+                mySet.add(myAns+"");
+//                mySet.add(algO.mySolution);
+                break;
+
             default:
                 try
                 {
@@ -986,6 +997,107 @@ public class Game_MathProblems {
         }
     }
 
+    public static class QuadAlgProb extends Game_MathProblems
+    {
+        /**
+         * Set of Integer to store right choices for the question.
+         */
+        private Set<String> mySolutions;
+        /**
+         * private int to store correct solution1
+         */
+        private int mySolution1;
+        /**
+         * private int to store correct solution2
+         */
+        private int mySolution2;
+        /**
+         * Set of Integer to store wrong choices for the question.
+         */
+        private Set<String> myWrongs;
+        /**
+         * Int variable for the x² coefficient (A)
+         */
+        private int myXsqCoefficient;
+        /**
+         * Int variable for the x coefficient (B)
+         */
+        private int myXCoefficient;
+        /**
+         * Int variable for the left hand side constant (C)
+         */
+        private int myLeftCoefficient;
+        /**
+         * Int variable for the Right hand side constant (D)
+         */
+        private int myRightCoefficient;
+
+        /**
+         * Constructor for Algebra problem class
+         * @param theBoss boolean flag to notify it its boss stage
+         */
+        public QuadAlgProb(boolean theBoss){
+            super(theBoss);
+            initializeSolutions();
+            myXsqCoefficient = 1;
+            myXCoefficient = mySolution1 + mySolution2;
+            //random number from 1 to 5 inclusive
+            myLeftCoefficient = mySolution1 * mySolution2;
+            myRightCoefficient = 0;
+
+        }
+
+        /**
+         * Method to initialize the solution and the other wrong choices for the question.
+         */
+        private void initializeSolutions()
+        {
+            mySolution1 = getRandOneDigitNum();
+            mySolution2 = getRandOneDigitNum();
+            mySolutions = new HashSet<>();
+            mySolutions.add(mySolution1+", "+mySolution2);
+            myWrongs = new HashSet<>();
+            while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
+            {
+                int nextWrong1 = myRandom.nextInt(mySolution1+ 3) + 1;
+                int nextWrong2 = myRandom.nextInt(mySolution2+ 3) + 1;
+                if((nextWrong1 != mySolution1 || nextWrong2 != mySolution2) && (nextWrong1 != mySolution2 || nextWrong2 != mySolution1))
+                {
+                    myWrongs.add(nextWrong1+", "+nextWrong2);
+                }
+            }
+        }
+
+        /**
+         * Method to get set of wrong answer choices for the questions.
+         * @return set<Integer> containing incorrect answers
+         */
+        public Set<String> getWrongs()
+        {
+            return myWrongs;
+        }
+
+        /**
+         * Method to get correct solution for the question
+         * @return int right solution
+         */
+        public Set<String> getSolution()
+        {
+            return mySolutions;
+        }
+
+        /**
+         * To get string representation of the question.
+         * @return String representing the question
+         */
+        public String toString()
+        {
+            if(myXCoefficient==1)
+                return "x² -" + "x + "+ myLeftCoefficient +" = "+ myRightCoefficient + ", then x = ?";
+
+            return "x² -" + myXCoefficient +"x + "+ myLeftCoefficient +" = "+ myRightCoefficient + ", then x = ?";
+        }
+    }
 
     public static class Factorial{
 
