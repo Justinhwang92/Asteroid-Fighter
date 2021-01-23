@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import ASTEROID_FIGHTER_FREE.Activity.Activity_Menu_Main;
-import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_Game_Over;
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_High_Scores;
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Master_Control;
 import ASTEROID_FIGHTER_FREE.Database.UserCursorAdapter;

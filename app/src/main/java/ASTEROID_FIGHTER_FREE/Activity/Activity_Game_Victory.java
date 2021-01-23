@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_Game_Over;
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_Game_Victory;
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Master_Control;
 import ASTEROID_FIGHTER_FREE.Database.UserContract.UserEntry;
@@ -100,25 +99,15 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-
-        Intent i;
-        Intent j;
-
-        i = new Intent(this, Activity_Menu_Main.class);
-        j = new Intent(this, Activity_High_Scores.class);
+        Intent i = new Intent(this, Activity_High_Scores.class);
 
         switch (view.getId()) {
-            case R.id.playAgainButton:
-                finish();
-                startActivity(i);
-                break;
-
             case R.id.okButton:
                 try {
                     myAudio.releasePlayers();
                     saveScore();
                     finish();
-                    startActivity(j);
+                    startActivity(i);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
