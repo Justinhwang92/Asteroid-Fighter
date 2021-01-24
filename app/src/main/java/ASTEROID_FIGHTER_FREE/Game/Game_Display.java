@@ -39,9 +39,10 @@ public class Game_Display extends SurfaceView implements Runnable {
     private Game_Heart gameHeart;
     private Game_Laser theGameBullet;
     public int theScore;
-    private static final int SCORE_TILL_BOSS = 50;
+    private static int SCORE_TILL_BOSS = 50;
     private static final int SCORE_TILL_SPEED_UP = 20;
     private static final int NUMBER_OF_MINIONS = 20;
+    private static int BOSS_SPEED_FOR_GENIUS_MODE = 20;
     private Audio_Activity_Game myAudio;
     private final LinkedList<Game_Enemy> allMinions = new LinkedList<>();
     private String mode;
@@ -89,11 +90,31 @@ public class Game_Display extends SurfaceView implements Runnable {
         paint.setColor(Color.WHITE);
 
         mode = Activity_Menu_Modes.mode;
+        adjustScoreTillBoss();
 
         // this is just to deal with a bug for now. Game starts with points
         // -1, -5, -10, -1 to each of the modes respectively.
         properInitialization();
 
+    }
+
+    //Method to determine how many questions should be before boss comes in
+    private void adjustScoreTillBoss(){
+        if(mode.equals("novice")) { //1
+            SCORE_TILL_BOSS = 25;
+            BOSS_SPEED_FOR_GENIUS_MODE = 0;
+        }
+
+        else if(mode.equals("intermediate")) { //3
+            SCORE_TILL_BOSS = 60;
+//            BOSS_SPEED_FOR_GENIUS_MODE = 10;
+        }
+
+        //Genius
+        else if(mode.equals("advanced")) { //5
+            SCORE_TILL_BOSS = 100;
+            BOSS_SPEED_FOR_GENIUS_MODE = 5;
+        }
     }
 
 
@@ -268,7 +289,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         // speed increments after every x (20) points
         increaseDifficulty();
 
-        // if score reaches 10, end asteroids, begin boss stage
+        // if score reaches to certain number of points, end asteroids, begin boss stage
         if (theScore >= SCORE_TILL_BOSS && (!mode.equals("endless"))) {
             gameAsteroid.bossStageBegins = true;
             gameAsteroid.y = (myScreenY - gameAsteroid.height) / 2 + (-50);
@@ -318,8 +339,12 @@ public class Game_Display extends SurfaceView implements Runnable {
             theGameBullet.x = 0;   // stops bullet from continuing, goes back to left screen
             gameSpaceship.hasShot = false;
         }
-        gameAsteroid.x -= (gameAsteroid.speed); // asteroid moves
 
+        if(mode.equals("advanced") && isBossStage){
+            gameAsteroid.x -= (gameAsteroid.speed) - BOSS_SPEED_FOR_GENIUS_MODE; // asteroid moves
+        }else {
+            gameAsteroid.x -= (gameAsteroid.speed); // asteroid moves
+        }
         // 4 (bossLife) is just an arbitrary point in the boss stage to deploy minions
         if (gameAsteroid.bossLife < 4) {
             for (Game_Enemy minion : allMinions) {

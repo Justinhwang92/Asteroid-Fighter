@@ -20,7 +20,7 @@ public class Game_Enemy {
     /**
      * amount of life boss has
      */
-    public int bossLife = 5;
+    public int bossLife = 7;
 
     /**
      * if the boss stage has begun or not

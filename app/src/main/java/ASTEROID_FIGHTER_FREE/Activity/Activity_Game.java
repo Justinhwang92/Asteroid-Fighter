@@ -252,7 +252,7 @@ public class Activity_Game extends AppCompatActivity {
         myButton3 = findViewById(R.id.ans_button3);
         myButton3.setText(myChoices.get(2) + "");
 
-        myButton4 = findViewById(R.id.ans_button4);
+        myButton4 = (Button) findViewById(R.id.ans_button4);
         myButton4.setText(myChoices.get(3) + "");
     }
 

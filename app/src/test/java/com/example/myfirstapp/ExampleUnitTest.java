@@ -55,11 +55,11 @@ public class ExampleUnitTest {
 //            System.out.println(mt.getMediumQuestions());
 //            System.out.println(mt.getMediumAnswers());
 //
-//            System.out.println(mt.getHardQuestions());
-//            System.out.println(mt.getHardAnswers());
+            System.out.println(mt.getHardQuestions());
+            System.out.println(mt.getHardAnswers());
 
-            System.out.println(mt.getExtrHardQuestions());
-            System.out.println(mt.getExtrHardAnswers());
+//            System.out.println(mt.getExtrHardQuestions());
+//            System.out.println(mt.getExtrHardAnswers());
         }
 
 
