@@ -12,7 +12,7 @@
         android:id="@+id/Name1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/_35sdp"
         android:cursorVisible="true"
         android:ellipsize="marquee"
         android:fontFamily="casual"
@@ -23,29 +23,17 @@
         android:singleLine="true"
         android:text="Asteroid Fighter"
         android:textColor="#ffffff"
-        android:textSize="120px"
+        android:textSize="@dimen/_35sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <!--    <TextView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:textAlignment="center"-->
-    <!--        android:text="Asteroid Fighter"-->
-    <!--        android:textColor="#ffffff"-->
-    <!--        android:textSize="120px"-->
-    <!--        android:gravity="center_horizontal" />-->
-
     <TextView
         android:id="@+id/play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/_25sdp"
         android:clickable="true"
         android:enabled="true"
         android:focusable="auto"
@@ -57,10 +45,9 @@
         android:state_pressed="true"
         android:text="PLAY"
         android:textColor="@color/text_color"
-        android:textSize="100px"
+        android:textSize="@dimen/_30sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.39"
-        app:layout_constraintStart_toStartOf="@+id/Name1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Name1" />
 
     <TextView
@@ -79,7 +66,7 @@
         android:state_pressed="true"
         android:text="HIGHSCORES"
         android:textColor="@color/text_color"
-        android:textSize="100px"
+        android:textSize="@dimen/_30sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/play" />
@@ -99,7 +86,7 @@
         android:state_pressed="true"
         android:text="INSTRUCTIONS"
         android:textColor="@color/text_color"
-        android:textSize="100px"
+        android:textSize="@dimen/_30sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HighScoresButton" />
@@ -119,21 +106,20 @@
         android:state_pressed="true"
         android:text="CREDITS"
         android:textColor="@color/text_color"
-        android:textSize="100px"
+        android:textSize="@dimen/_30sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instruction" />
 
     <ImageView
-        android:id="@+id/mainaudio"
-        android:layout_width="66dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="84dp"
+        android:id="@+id/gameaudio"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginRight="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
         android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/HighScoresButton"
         app:srcCompat="@drawable/unmuted_audio" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
