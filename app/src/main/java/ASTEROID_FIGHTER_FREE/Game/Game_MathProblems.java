@@ -221,7 +221,7 @@ public class Game_MathProblems {
 
         String theS = "";
 
-        int randomChoice = myRandom.nextInt(4);
+        int randomChoice = myRandom.nextInt(5);
 
 //        while(randomNoSet.add(randomChoice)){
 //            randomChoice = myRandom.nextInt(3);

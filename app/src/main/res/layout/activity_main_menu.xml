@@ -112,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@+id/instruction" />
 
     <ImageView
-        android:id="@+id/gameaudio"
+        android:id="@+id/mainaudio"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginRight="@dimen/_12sdp"
