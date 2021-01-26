@@ -25,6 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/ans_button1"
         style="@style/ButtonStyle"
@@ -35,6 +36,7 @@
         android:background="@drawable/my_button_bg"
         android:onClick="onClick"
         android:text="B"
+        app:layout_constraintEnd_toStartOf="@+id/ans_button2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -49,6 +51,7 @@
         android:onClick="onClick"
         android:text="B"
         app:layout_constraintStart_toEndOf="@+id/ans_button1"
+        app:layout_constraintEnd_toStartOf="@+id/ans_button3"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
@@ -62,6 +65,7 @@
         android:onClick="onClick"
         android:text="B"
         app:layout_constraintStart_toEndOf="@+id/ans_button2"
+        app:layout_constraintEnd_toStartOf="@+id/ans_button4"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
@@ -71,11 +75,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_60sdp"
         android:layout_marginLeft="@dimen/_60sdp"
+        android:layout_marginRight="@dimen/_60sdp"
         android:background="@drawable/my_button_bg"
         android:onClick="onClick"
         android:text="B"
         app:layout_constraintStart_toEndOf="@+id/ans_button3"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/gameaudio"
