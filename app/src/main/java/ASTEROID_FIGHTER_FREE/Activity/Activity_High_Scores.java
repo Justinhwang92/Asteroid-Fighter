@@ -97,7 +97,7 @@ public class Activity_High_Scores extends AppCompatActivity implements View.OnCl
         };
 
         // sorting order
-        String sortOrder = UserEntry.COLUMN_HIGH_SCORE + " DESC";
+        String sortOrder = UserEntry.COLUMN_HIGH_SCORE + " DESC limit 50";
 
         // loader
         return new CursorLoader(this,
