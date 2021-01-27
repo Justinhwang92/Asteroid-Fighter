@@ -1347,7 +1347,7 @@ public class Game_MathProblems {
 
             while(wrongAnswers.size() < NUM_OF_WRONG_ANSWERS){
                 String wrongAnswer = calculate(problemType.randomType(), randomDegree());
-                if(wrongAnswer != answer)
+                if (!wrongAnswer.equals(answer))
                     wrongAnswers.add(wrongAnswer);
             }
 
