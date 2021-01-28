@@ -1141,7 +1141,7 @@ public class Game_MathProblems {
             }
             while(myWrongs.size() < 3){
                 int wrong = 0;
-                wrong = myRandom.nextInt(myNumber) + mySolution;
+                wrong = myRandom.nextInt(30) + mySolution;
 
                 if(wrong != mySolution){
                     myWrongs.add(wrong+"");
