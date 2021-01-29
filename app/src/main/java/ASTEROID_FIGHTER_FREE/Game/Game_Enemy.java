@@ -145,10 +145,10 @@ public class Game_Enemy {
                 if(bossLife >= 1) {
 //                    x = x + 120;
 
-                    System.out.println(x + boss.getWidth() + " screenW : " + ScreenWidth);
+//                    System.out.println(x + boss.getWidth() + " screenW : " + ScreenWidth);
                     //Inside the screen
                     if(x + boss.getWidth() < ScreenWidth){
-                        System.out.println("1. " + x+120);
+//                        System.out.println("1. " + x+120);
                         if(x+120 > ScreenWidth){
                             x = ScreenWidth - boss.getWidth();
                         }else{
