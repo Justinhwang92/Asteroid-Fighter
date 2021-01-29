@@ -10,17 +10,7 @@
     <TextView
         android:id="@+id/id_question"
         style="@style/QuestionStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_60sdp"
-        android:gravity="center"
-        android:shadowColor="#FFFFFF"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="35"
         android:text="Check"
-        android:textColor="#C69BF1"
-        android:textSize="@dimen/_25sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,12 +18,6 @@
     <Button
         android:id="@+id/ans_button1"
         style="@style/ButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_60sdp"
-        android:layout_marginLeft="@dimen/_60sdp"
-        android:background="@drawable/my_button_bg"
-        android:onClick="onClick"
         android:text="B"
         app:layout_constraintEnd_toStartOf="@+id/ans_button2"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,12 +26,6 @@
     <Button
         android:id="@+id/ans_button2"
         style="@style/ButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_60sdp"
-        android:layout_marginLeft="@dimen/_60sdp"
-        android:background="@drawable/my_button_bg"
-        android:onClick="onClick"
         android:text="B"
         app:layout_constraintStart_toEndOf="@+id/ans_button1"
         app:layout_constraintEnd_toStartOf="@+id/ans_button3"
@@ -56,12 +34,6 @@
     <Button
         android:id="@+id/ans_button3"
         style="@style/ButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_60sdp"
-        android:layout_marginLeft="@dimen/_60sdp"
-        android:background="@drawable/my_button_bg"
-        android:onClick="onClick"
         android:text="B"
         app:layout_constraintStart_toEndOf="@+id/ans_button2"
         app:layout_constraintEnd_toStartOf="@+id/ans_button4"
@@ -70,13 +42,7 @@
     <Button
         android:id="@+id/ans_button4"
         style="@style/ButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_60sdp"
-        android:layout_marginLeft="@dimen/_60sdp"
         android:layout_marginRight="@dimen/_60sdp"
-        android:background="@drawable/my_button_bg"
-        android:onClick="onClick"
         android:text="B"
         app:layout_constraintStart_toEndOf="@+id/ans_button3"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,13 +50,8 @@
 
     <ImageView
         android:id="@+id/gameaudio"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginRight="@dimen/_12sdp"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:background="@android:color/transparent"
+        style="@style/MuteStyle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/unmuted_audio" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
