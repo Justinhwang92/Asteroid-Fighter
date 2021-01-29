@@ -168,7 +168,7 @@ public class Game_MathProblems {
 
             //for square problem
             case 0:
-                SqProb sqr = new SqProb(false);
+                SqProb sqr = new SqProb(false,0,15);
                 theS = sqr.toString();
                 mySet = new HashSet<>();
                 mySet = sqr.getWrongs();
@@ -178,7 +178,7 @@ public class Game_MathProblems {
 
             //For square root problem
             case 1:
-                SqrtProb sqrRt = new SqrtProb(false);
+                SqrtProb sqrRt = new SqrtProb(false,0,20);
                 theS = sqrRt.toString();
                 mySet = new HashSet<>();
                 mySet = sqrRt.getWrongs();
@@ -231,7 +231,7 @@ public class Game_MathProblems {
 
             //for square problem
             case 0:
-                SqProb sqr = new SqProb(false);
+                SqProb sqr = new SqProb(false, 0 , 25);
                 theS = sqr.toString();
                 mySet = new HashSet<>();
                 mySet = sqr.getWrongs();
@@ -241,7 +241,7 @@ public class Game_MathProblems {
 
             //For square root problem
             case 1:
-                SqrtProb sqrRt = new SqrtProb(false);
+                SqrtProb sqrRt = new SqrtProb(false, 0, 30);
                 theS = sqrRt.toString();
                 mySet = new HashSet<>();
                 mySet = sqrRt.getWrongs();
@@ -251,7 +251,7 @@ public class Game_MathProblems {
                 break;
 
             case 2:
-                CubeProb cube = new CubeProb(false);
+                CubeProb cube = new CubeProb(false, 0 , 30);
                 theS = cube.toString();
                 mySet = new HashSet<>();
                 mySet = cube.getWrongs();
@@ -326,7 +326,7 @@ public class Game_MathProblems {
         if(randomNoSet.size() > 3)
             randomNoSet = new HashSet<>();
 
-        int randomChoice = myRandom.nextInt(4);
+        int randomChoice = myRandom.nextInt(5);
 
 //        while(randomNoSet.add(randomChoice)){
 //            randomChoice = myRandom.nextInt(4);
@@ -339,7 +339,7 @@ public class Game_MathProblems {
 
             //for square problem
             case 0:
-                CubeProb cube = new CubeProb(false);
+                CubeProb cube = new CubeProb(false,2,15);
                 theS = cube.toString();
                 mySet = new HashSet<>();
                 mySet = cube.getWrongs();
@@ -367,7 +367,7 @@ public class Game_MathProblems {
                 mySet.add(myAns+"");
 //                mySet.add(algO.mySolution);
                 break;
-
+//
             case 3:
                 trigProb trig = new trigProb(false);
                 theS = trig.toString();
@@ -378,7 +378,7 @@ public class Game_MathProblems {
                 break;
 
             case 4:
-                CubeRtProb cubRt = new CubeRtProb(false);
+                CubeRtProb cubRt = new CubeRtProb(false, 1, 20);
                 theS = cubRt.toString();
                 mySet = new HashSet<>();
                 mySet = cubRt.getWrongs();
@@ -665,10 +665,11 @@ public class Game_MathProblems {
          * Constructor for SquareProblem class
          * @param theBoss boolean flag to notify it its boss stage
          */
-        public SqProb(boolean theBoss)
+        public SqProb(boolean theBoss, int minimum, int maximum)
         {
             super(theBoss);
-            myOperand = getRandOneDigitNum();
+//            myOperand = getRandOneDigitNum();
+            myOperand = minimum+myRandom.nextInt(maximum-minimum);
             initializeSolutions();
         }
 
@@ -744,10 +745,10 @@ public class Game_MathProblems {
          * Constructor for SquareRootProblem class
          * @param theBoss boolean flag to notify it its boss stage
          */
-        public SqrtProb(boolean theBoss)
+        public SqrtProb(boolean theBoss, int minimum, int maximum)
         {
             super(theBoss);
-            myOperand = (int) Math.pow(myRandom.nextInt(21), 2) ;
+            myOperand = (int) Math.pow(minimum+myRandom.nextInt(maximum-minimum), 2) ;
             initializeSolutions();
         }
 
@@ -1141,7 +1142,7 @@ public class Game_MathProblems {
             }
             while(myWrongs.size() < 3){
                 int wrong = 0;
-                wrong = myRandom.nextInt(myNumber) + mySolution;
+                wrong = myRandom.nextInt(30) + mySolution;
 
                 if(wrong != mySolution){
                     myWrongs.add(wrong+"");
@@ -1177,10 +1178,11 @@ public class Game_MathProblems {
          * Constructor for CubeProblem class
          * @param theBoss boolean flag to notify it its boss stage
          */
-        public CubeProb(boolean theBoss)
+        public CubeProb(boolean theBoss, int minimum, int maximum)
         {
             super(theBoss);
-            myOperand = getRandOneDigitNum();
+//            myOperand = getRandOneDigitNum();
+            myOperand = minimum+myRandom.nextInt(maximum-minimum) ;
             initializeSolutions();
         }
 
@@ -1194,7 +1196,7 @@ public class Game_MathProblems {
             while(myWrongs.size() < NUM_OF_WRONG_ANSWERS)
             {
                 //we restrict highest answer to be 81 because we only include 1 digit squares
-                int nextWrong = myRandom.nextInt(82);
+                int nextWrong = myRandom.nextInt(82)+1+mySolution;
                 if(nextWrong != mySolution)
                 {
                     myWrongs.add(nextWrong+"");
@@ -1256,10 +1258,10 @@ public class Game_MathProblems {
          * Constructor for SquareRootProblem class
          * @param theBoss boolean flag to notify it its boss stage
          */
-        public CubeRtProb(boolean theBoss)
+        public CubeRtProb(boolean theBoss,int minimum, int maximum)
         {
             super(theBoss);
-            mySolution = myRandom.nextInt(10);
+            mySolution = minimum+myRandom.nextInt(maximum-minimum);
             myOperand = (int) Math.pow(mySolution, 3) ;
             initializeSolutions();
         }

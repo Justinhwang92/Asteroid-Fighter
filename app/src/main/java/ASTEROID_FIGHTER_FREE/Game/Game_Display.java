@@ -75,6 +75,8 @@ public class Game_Display extends SurfaceView implements Runnable {
         doneLoading5 = false;
         doneLoading6 = false;
 
+        mode = Activity_Menu_Modes.mode;
+
         new Loading1().execute();
         new Loading2().execute();
         new Loading3().execute(this, screenX, screenY);
@@ -89,7 +91,6 @@ public class Game_Display extends SurfaceView implements Runnable {
         paint.setTextSize(64);
         paint.setColor(Color.WHITE);
 
-        mode = Activity_Menu_Modes.mode;
         adjustScoreTillBoss();
 
         // this is just to deal with a bug for now. Game starts with points
@@ -106,13 +107,13 @@ public class Game_Display extends SurfaceView implements Runnable {
         }
 
         else if(mode.equals("intermediate")) { //3
-            SCORE_TILL_BOSS = 60;
+            SCORE_TILL_BOSS = 6;
 //            BOSS_SPEED_FOR_GENIUS_MODE = 10;
         }
 
         //Genius
         else if(mode.equals("advanced")) { //5
-            SCORE_TILL_BOSS = 100;
+            SCORE_TILL_BOSS = 5;
             BOSS_SPEED_FOR_GENIUS_MODE = 5;
         }
     }
@@ -163,6 +164,14 @@ public class Game_Display extends SurfaceView implements Runnable {
         @Override
         protected Void doInBackground(Object... theObjects) {
             gameAsteroid = new Game_Enemy(getResources(), false);
+
+            //Screen width and height
+            gameAsteroid.ScreenWidth = myScreenX;
+            gameAsteroid.ScreenHeight = myScreenY;
+
+            if(mode.equals("endless"))
+                gameAsteroid.isEndlessMode = true;
+
             theGameBullet = new Game_Laser(getResources());
             gameHeart = new Game_Heart(((int)theObjects[2]), getResources());
             gameSpaceship = new Game_Spaceship((Game_Display)theObjects[0], myScreenY, getResources());
@@ -292,6 +301,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         // if score reaches to certain number of points, end asteroids, begin boss stage
         if (theScore >= SCORE_TILL_BOSS && (!mode.equals("endless"))) {
             gameAsteroid.bossStageBegins = true;
+            System.out.println("x: " + gameAsteroid.x);
             gameAsteroid.y = (myScreenY - gameAsteroid.height) / 2 + (-50);
             isBossStage = true;
         }
@@ -352,6 +362,7 @@ public class Game_Display extends SurfaceView implements Runnable {
             }
         }
 
+        //500 should be the x of the flight
         if (gameAsteroid.x + gameAsteroid.width < 500) {
             if (gameHeart.lives == 0) {
                 isGameOver = true;
