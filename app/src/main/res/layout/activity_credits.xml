@@ -11,9 +11,6 @@
     <TextView
         android:id="@+id/textView9"
         style="@style/CreditStyle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
         android:text="Arya Rashidian - Lead Director \n
 Hermie Baylon - Software Developer and Graphical Artist \n
 Brandon Lu - Software Developer and Soundtrack Director \n
@@ -23,29 +20,20 @@ Bhavesh Joshi - Software Developer \n
 Sai Manchikanti - Software Developer \n
 Swift Sheng - Software Developer \n
 Ibraheem Alani - Soundrack Producer"
-        android:textSize="@dimen/_17sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginLeft="@dimen/_12sdp"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:src="@drawable/previous1"
+        style="@style/BackStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/gameaudio"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginRight="@dimen/_12sdp"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:background="@android:color/transparent"
+        style="@style/MuteStyle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/unmuted_audio" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

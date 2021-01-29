@@ -51,39 +51,30 @@
 
     <Button
         android:id="@+id/playAgainButton"
-        style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_35sdp"
         android:background="?android:attr/selectableItemBackground"
         android:text="Try Again"
+        android:fontFamily="casual"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreLabel" />
 
     <Button
         android:id="@+id/myWebSearch_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_12sdp"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:background="?android:attr/selectableItemBackground"
-        android:onClick="onClick"
+        style="@style/InternStyle"
         android:text="Intern with us!"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/_13sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"  />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/gameaudio"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginRight="@dimen/_12sdp"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:background="@android:color/transparent"
+        style="@style/MuteStyle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/unmuted_audio" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
