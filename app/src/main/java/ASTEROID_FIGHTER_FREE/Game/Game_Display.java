@@ -107,13 +107,13 @@ public class Game_Display extends SurfaceView implements Runnable {
         }
 
         else if(mode.equals("intermediate")) { //3
-            SCORE_TILL_BOSS = 6;
+            SCORE_TILL_BOSS = 60;
 //            BOSS_SPEED_FOR_GENIUS_MODE = 10;
         }
 
         //Genius
         else if(mode.equals("advanced")) { //5
-            SCORE_TILL_BOSS = 5;
+            SCORE_TILL_BOSS = 100;
             BOSS_SPEED_FOR_GENIUS_MODE = 5;
         }
     }
