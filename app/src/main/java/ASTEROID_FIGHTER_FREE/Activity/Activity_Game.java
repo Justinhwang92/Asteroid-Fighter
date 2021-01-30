@@ -227,8 +227,8 @@ public class Activity_Game extends AppCompatActivity {
         }
         //else means its boss stage
         else{
-            myQuestion = myMP.getHardQuestions();
-            myChoices = new ArrayList<>(myMP.getHardAnswers());
+            myQuestion = myMP.getMediumQuestions();
+            myChoices = new ArrayList<>(myMP.getMediumAnswers());
         }
         myAns = myMP.getAnswer();
         initializeQuestionAnswer();
