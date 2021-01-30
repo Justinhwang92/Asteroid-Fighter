@@ -29,11 +29,11 @@
         <item name="android:textSize">@dimen/_30sdp</item>
         <item name="android:clickable">true</item>
         <item name="android:enabled">true</item>
-        <item name="android:focusable">auto</item>
-        <item name="android:focusableInTouchMode">true</item>
-        <item name="android:saveEnabled">true</item>
-        <item name="android:state_enabled">true</item>
-        <item name="android:state_focused">true</item>
+<!--        <item name="android:focusable">auto</item>-->
+<!--        <item name="android:focusableInTouchMode">true</item>-->
+<!--        <item name="android:saveEnabled">true</item>-->
+<!--        <item name="android:state_enabled">true</item>-->
+<!--        <item name="android:state_focused">true</item>-->
         <item name="android:state_pressed">true</item>
         <item name="android:textColor">@color/text_color</item>
     </style>
