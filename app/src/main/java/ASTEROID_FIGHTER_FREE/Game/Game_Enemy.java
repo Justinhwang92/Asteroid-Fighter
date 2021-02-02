@@ -91,7 +91,7 @@ public class Game_Enemy {
             width = (int) (width * screenRatioX);
             height = (int) (height * screenRatioY);
 
-            asteroid = Bitmap.createScaledBitmap(asteroid, width, height, false);
+            asteroid = Bitmap.createScaledBitmap(asteroid, width, height+35, false);
 
             /*
             Asteroid 3
@@ -143,21 +143,21 @@ public class Game_Enemy {
                 return asteroid_explosion;
             } else {
                 if(bossLife >= 1) {
-//                    x = x + 120;
+                    x = x + 120;
 
 //                    System.out.println(x + boss.getWidth() + " screenW : " + ScreenWidth);
                     //Inside the screen
-                    if(x + boss.getWidth() < ScreenWidth){
-//                        System.out.println("1. " + x+120);
-                        if(x+120 > ScreenWidth){
-                            x = ScreenWidth - boss.getWidth();
-                        }else{
-                            x = x + 120;
-                        }
-                    }
-                    else{
-                        x = x + 120;
-                    }
+//                    if(x + boss.getWidth() < ScreenWidth){
+////                        System.out.println("1. " + x+120);
+//                        if(x+120 > ScreenWidth){
+//                            x = ScreenWidth - boss.getWidth();
+//                        }else{
+////                            x = x + 120;
+//                        }
+//                    }
+//                    else{
+//                        x = x + 120;
+//                    }
                 }
                 else{
                     return boss_explosion;

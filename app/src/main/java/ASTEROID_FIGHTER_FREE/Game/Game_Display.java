@@ -301,7 +301,7 @@ public class Game_Display extends SurfaceView implements Runnable {
         // if score reaches to certain number of points, end asteroids, begin boss stage
         if (theScore >= SCORE_TILL_BOSS && (!mode.equals("endless"))) {
             gameAsteroid.bossStageBegins = true;
-            System.out.println("x: " + gameAsteroid.x);
+//            System.out.println("x: " + gameAsteroid.x);
             gameAsteroid.y = (myScreenY - gameAsteroid.height) / 2 + (-50);
             isBossStage = true;
         }
@@ -364,7 +364,9 @@ public class Game_Display extends SurfaceView implements Runnable {
 
         //500 should be the x of the flight
         if (gameAsteroid.x + gameAsteroid.width < 500) {
-            if (gameHeart.lives == 0) {
+//            if (Math.abs(gameAsteroid.x - gameSpaceship.x) < 100) {
+
+                if (gameHeart.lives == 0) {
                 isGameOver = true;
                 return;
             }
@@ -378,8 +380,10 @@ public class Game_Display extends SurfaceView implements Runnable {
                 minion.y = produceRandomYCoordinate();
             }
         }
+
+        //changes
         // if asteroid hits the ship
-        if (Rect.intersects(gameAsteroid.getCollisionShape(), gameSpaceship.getCollisionShape())) {
+        if (Rect.intersects(gameAsteroid.getCollisionShape(), gameSpaceship.getCollisionShape()) || gameAsteroid.x - (gameSpaceship.x + gameSpaceship.width) <= 15) {
             gameAsteroid.crashed = true;
             gameAsteroid.x = -500;
 
@@ -476,6 +480,8 @@ public class Game_Display extends SurfaceView implements Runnable {
             if (theGameBullet.x > 100) {
                 canvas.drawBitmap(theGameBullet.getBullet(), theGameBullet.x, theGameBullet.y, paint);
             }
+//            System.out.println("************************************************************************************************");
+
             canvas.drawBitmap(gameAsteroid.getAsteroid(), gameAsteroid.x, gameAsteroid.y, paint);
 
             if (isGameOver) {
