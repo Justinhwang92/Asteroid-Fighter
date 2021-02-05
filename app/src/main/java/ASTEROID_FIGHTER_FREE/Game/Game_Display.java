@@ -470,7 +470,6 @@ public class Game_Display extends SurfaceView implements Runnable {
     // allow for asteroid, bullet, background visibility
     private void draw() {
         if (getHolder().getSurface().isValid()) {
-            try {
             Canvas canvas = getHolder().lockCanvas();
             canvas.drawBitmap(gameBackground1.background, gameBackground1.x, gameBackground1.y, paint);
             canvas.drawBitmap(gameBackground2.background, gameBackground2.x, gameBackground2.y, paint);
@@ -497,9 +496,6 @@ public class Game_Display extends SurfaceView implements Runnable {
                 }
             }
             getHolder().unlockCanvasAndPost(canvas);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 
