@@ -59,7 +59,8 @@ public abstract class Audio_Abstract_Class {
     {
         for(MediaPlayer player : myPlayers)
         {
-            player.setVolume(0, 0);
+            if (player != null)
+                player.setVolume(0, 0);
         }
     }
 
@@ -67,7 +68,8 @@ public abstract class Audio_Abstract_Class {
     {
         for(MediaPlayer player : myPlayers)
         {
-            player.setVolume(1, 1);
+            if (player != null)
+                player.setVolume(1, 1);
         }
     }
 
