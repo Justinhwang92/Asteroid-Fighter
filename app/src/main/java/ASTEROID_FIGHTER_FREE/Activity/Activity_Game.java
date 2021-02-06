@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,8 @@ public class Activity_Game extends AppCompatActivity {
     // FIELDS REGARDING MATH PROBLEMS IN THE GAME
     public ViewGroup.LayoutParams lp;
     public View secondLayerView;
+
+    Vibrator theVibrator;
 
     /**
      * field for MathProblems class - contains all the logic behind the math problems
@@ -103,7 +106,7 @@ public class Activity_Game extends AppCompatActivity {
         View loadingScreenView = LayoutInflater.from(this).inflate(R.layout.view_loading_screen, null, false);
 
 
-
+        theVibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         gameDisplay = new Game_Display(this, point.x +5000, point.y, myAudio, loadingScreenView);
         setContentView(gameDisplay);
@@ -349,6 +352,7 @@ public class Activity_Game extends AppCompatActivity {
 //                        setQuestionAnswerOnDisplay();
                         questionBasedOnGameMode();
                     }else{
+                        theVibrator.vibrate(500);
                         gameDisplay.deductPoint();
                         myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
 //                        gameDisplay.deductPoint();
@@ -364,6 +368,7 @@ public class Activity_Game extends AppCompatActivity {
 //                        setQuestionAnswerOnDisplay();
                         questionBasedOnGameMode();
                     }else{
+                        theVibrator.vibrate(500);
                         gameDisplay.deductPoint();
                         myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
 //                        gameDisplay.deductPoint();
@@ -378,6 +383,7 @@ public class Activity_Game extends AppCompatActivity {
 //                        setQuestionAnswerOnDisplay();
                         questionBasedOnGameMode();
                     }else{
+                        theVibrator.vibrate(500);
                         gameDisplay.deductPoint();
                         myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
 //                        gameDisplay.deductPoint();
@@ -392,6 +398,7 @@ public class Activity_Game extends AppCompatActivity {
 //                        setQuestionAnswerOnDisplay();
                         questionBasedOnGameMode();
                     }else{
+                        theVibrator.vibrate(500);
                         gameDisplay.deductPoint();
                         myAudio.startMedia(Audio_Activity_Game.MEDIA_PLAYERS.SFX_PROBLEM_INCORRECT);
 //                        gameDisplay.deductPoint();
