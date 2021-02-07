@@ -20,6 +20,8 @@ import ASTEROID_FIGHTER_FREE.Audio.Audio_Master_Control;
 import ASTEROID_FIGHTER_FREE.Database.UserContract.UserEntry;
 import ASTEROID_FIGHTER_FREE.R;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * class that shows game victory screen at end of play
  */
@@ -181,6 +183,14 @@ public class Activity_Game_Victory extends Activity implements View.OnClickListe
     //called when application starts/resumes
     @Override
     protected void onStart(){
+
+        //For taking some time to load the victory screen to explosion icon for a bit longer
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        }
+
         super.onStart();
     }
 
