@@ -26,13 +26,12 @@ public class Activity_Menu_Credits extends AppCompatActivity {
         setContentView(R.layout.activity_credits);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.okButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //release the resources associated with this audio player
                 releasePlayers();
-                startActivity(new Intent(Activity_Menu_Credits.this, Activity_Menu_Main.class));
-
+                startActivity(new Intent(Activity_Menu_Credits.this, Activity_Game_Victory.class));
             }
         });
 
@@ -40,30 +39,6 @@ public class Activity_Menu_Credits extends AppCompatActivity {
         myAudio = new Audio_Activity_Menu_Credits(this);
         Audio_Master_Control.checkMuteStatus(myAudio);
         myAudio.startMedia(Audio_Activity_Menu_Credits.MEDIA_PLAYERS.BGM_CREDITS);
-
-        if(Audio_Master_Control.myMuted)
-        {
-            muteAudio();
-            ImageView audio = findViewById(R.id.gameaudio);
-            audio.setImageResource(R.drawable.muted_audio);
-        }
-
-        findViewById(R.id.gameaudio).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageView audio = findViewById(R.id.gameaudio);
-                if(Audio_Master_Control.myMuted)
-                {
-                    audio.setImageResource(R.drawable.unmuted_audio);
-                    unmuteAudio();
-                }
-                else
-                {
-                    audio.setImageResource(R.drawable.muted_audio);
-                    muteAudio();
-                }
-            }
-        });
     }
 
     private void releasePlayers()
