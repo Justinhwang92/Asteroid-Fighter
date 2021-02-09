@@ -53,14 +53,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HighScoresButton" />
 
-    <TextView
-        android:id="@+id/creditsid"
-        style="@style/MenuStyle"
-        android:text="CREDITS"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instruction" />
-
     <ImageView
         android:id="@+id/mainaudio"
         style="@style/MuteStyle"
