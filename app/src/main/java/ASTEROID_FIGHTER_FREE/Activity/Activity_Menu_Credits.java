@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import ASTEROID_FIGHTER_FREE.Audio.Audio_Activity_Menu_Credits;
@@ -14,7 +15,7 @@ import ASTEROID_FIGHTER_FREE.R;
 /**
  * activity that shows when credits is clicked on main menu
  */
-public class Activity_Menu_Credits extends AppCompatActivity {
+public class Activity_Menu_Credits extends AppCompatActivity implements View.OnClickListener {
     /**
      * for audio
      */
@@ -26,34 +27,14 @@ public class Activity_Menu_Credits extends AppCompatActivity {
         setContentView(R.layout.activity_credits);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        findViewById(R.id.okButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //release the resources associated with this audio player
-                releasePlayers();
-                startActivity(new Intent(Activity_Menu_Credits.this, Activity_Game_Victory.class));
-            }
-        });
-
         // Audio
         myAudio = new Audio_Activity_Menu_Credits(this);
         Audio_Master_Control.checkMuteStatus(myAudio);
         myAudio.startMedia(Audio_Activity_Menu_Credits.MEDIA_PLAYERS.BGM_CREDITS);
-    }
 
-    private void releasePlayers()
-    {
-        Audio_Activity_Menu_Credits.releasePlayers();
-    }
-
-    public void muteAudio()
-    {
-        Audio_Master_Control.muteAllPlayers(myAudio);
-    }
-
-    public void unmuteAudio()
-    {
-        Audio_Master_Control.unmuteAllPlayers(myAudio);
+        //ok button
+        final Button okButton = findViewById(R.id.okButton);
+        okButton.setOnClickListener(this);
     }
 
     //called when application stops
@@ -89,7 +70,13 @@ public class Activity_Menu_Credits extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-
     }
 
+    @Override
+    public void onClick(View v) {
+        Intent i = new Intent(this, Activity_Game_Victory.class);
+        myAudio.releasePlayers();
+        finish();
+        startActivity(i);
+    }
 }
