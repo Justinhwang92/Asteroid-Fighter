@@ -61,6 +61,14 @@ public class Activity_Menu_Main extends AppCompatActivity {
             }
         });
 
+        //credits button
+        findViewById(R.id.creditsid).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCredits();
+            }
+        });
+
         //mute/unmute
         findViewById(R.id.mainaudio).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +114,12 @@ public class Activity_Menu_Main extends AppCompatActivity {
     {
         releasePlayers();
         startActivity(new Intent(this, Activity_Menu_Instructions.class));
+    }
+
+    public void showCredits()
+    {
+        releasePlayers();
+        startActivity(new Intent(this, Activity_Menu_Credits.class));
     }
 
     public void showModes() {
